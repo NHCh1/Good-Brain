@@ -1,0 +1,7 @@
+FYPGBU2302ACS001,FYPGBU2302AC,S001,graded,B+,Final Year Project S001,////,"Good, but still can be improved",""
+FYPGBU2302ACS003,FYPGBU2302AC,S003,graded,A,Final Year Project S003,////,"Excellent","Keep going"
+FYPGBU2302ACS004,FYPGBU2302AC,S004,graded,A+,Final Year Project S004,////,"Design is attractive","Good"
+INTGBD2302FNS007,INTGBD2302FN,S007,graded,A,Internship Report S007,////,"You have a amazing internship journey!","I believe you had learn much from your internship journey"
+INTGBD2302FNS005,INTGBD2302FN,S005,graded,A,Internship Report S005,////,"Bravo","I believe you can do it better"
+INTGBD2302FNS009,INTGBD2302FN,S009,graded,A+,Internship Report S009,////,"Good","Keep going!"
+INTGBD2302FNS014,INTGBD2302FN,S014,pending,A,Internship Report S014,////,"Excellent","Nice"
