@@ -30,7 +30,7 @@ public class studentPage extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jLabel1.setText("STUDENT");
+        jLabel1.setText("StudentPageNew");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -39,7 +39,7 @@ public class studentPage extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGap(164, 164, 164)
                 .addComponent(jLabel1)
-                .addContainerGap(186, Short.MAX_VALUE))
+                .addContainerGap(145, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
