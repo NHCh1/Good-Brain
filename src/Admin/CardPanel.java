@@ -12,7 +12,7 @@ public class CardPanel extends PanelShadow {
     }
     
     public void setData(CardModel data){
-        cardIcon.setIcon(data.getIcon());
+//        cardIcon.setIcon(data.getIcon());
         cardLabelName.setText(data.getTitle());
         cardValueLabel.setText(data.getValues());
     }
@@ -30,23 +30,8 @@ public class CardPanel extends PanelShadow {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        panelShadow1 = new adminInterfaces.PanelShadow();
-        cardIcon = new javax.swing.JLabel();
         cardLabelName = new javax.swing.JLabel();
         cardValueLabel = new javax.swing.JLabel();
-
-        panelShadow1.setShadowType(shadow.ShadowBorder.ShadowType.IN_SHADOW);
-
-        javax.swing.GroupLayout panelShadow1Layout = new javax.swing.GroupLayout(panelShadow1);
-        panelShadow1.setLayout(panelShadow1Layout);
-        panelShadow1Layout.setHorizontalGroup(
-            panelShadow1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(cardIcon, javax.swing.GroupLayout.DEFAULT_SIZE, 44, Short.MAX_VALUE)
-        );
-        panelShadow1Layout.setVerticalGroup(
-            panelShadow1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(cardIcon, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-        );
 
         cardLabelName.setFont(new java.awt.Font("Bell MT", 1, 21)); // NOI18N
         cardLabelName.setForeground(new java.awt.Color(0, 51, 51));
@@ -60,9 +45,7 @@ public class CardPanel extends PanelShadow {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(panelShadow1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addGap(70, 70, 70)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(cardLabelName, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -80,15 +63,12 @@ public class CardPanel extends PanelShadow {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(cardValueLabel)
                 .addContainerGap(16, Short.MAX_VALUE))
-            .addComponent(panelShadow1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
     }// </editor-fold>//GEN-END:initComponents
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JLabel cardIcon;
     private javax.swing.JLabel cardLabelName;
     private javax.swing.JLabel cardValueLabel;
-    private adminInterfaces.PanelShadow panelShadow1;
     // End of variables declaration//GEN-END:variables
 }

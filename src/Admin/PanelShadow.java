@@ -4,11 +4,12 @@
  */
 package Admin;
 
+import Shadow.ShadowBorder;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.image.BufferedImage;
 import javax.swing.border.EmptyBorder;
-import Shadow.ShadowBorder;
+
 
 public class PanelShadow extends javax.swing.JPanel{
     public ShadowBorder.ShadowType getShadowType() {
