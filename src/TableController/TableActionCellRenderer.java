@@ -4,8 +4,10 @@
  */
 package TableController;
 
-
-public interface TableActionEvent {
-    public void onEdit(int row);
-    public void onDelete(int row);
+/**
+ *
+ * @author User
+ */
+public class TableActionCellRenderer {
+    
 }
