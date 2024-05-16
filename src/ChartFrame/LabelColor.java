@@ -22,5 +22,4 @@ public class LabelColor extends JLabel{
         g2d.setColor(getBackground());
         g2d.fillOval(x, y, size, size);
     }
-    
 }

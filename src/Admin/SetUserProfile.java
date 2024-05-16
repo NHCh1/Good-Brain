@@ -19,7 +19,7 @@ import javax.swing.ImageIcon;
 import javax.swing.JComponent;
 
 
-public class SetImage extends JComponent{
+public class SetUserProfile extends JComponent{
     public Icon getIcon(){
         return icon;
     }

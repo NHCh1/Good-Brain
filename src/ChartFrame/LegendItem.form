@@ -17,8 +17,7 @@
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" alignment="0" attributes="0">
-              <EmptySpace max="-2" attributes="0"/>
-              <Component id="labelColor1" min="-2" pref="20" max="-2" attributes="0"/>
+              <Component id="labelColor1" min="-2" pref="18" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
               <Component id="labelName" min="-2" max="-2" attributes="0"/>
               <EmptySpace max="32767" attributes="0"/>
@@ -28,8 +27,8 @@
     <DimensionLayout dim="1">
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="103" groupAlignment="3" attributes="0">
-              <Component id="labelColor1" alignment="3" min="-2" max="-2" attributes="0"/>
               <Component id="labelName" alignment="3" min="-2" max="-2" attributes="0"/>
+              <Component id="labelColor1" alignment="3" min="-2" max="-2" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -43,7 +42,7 @@
     <Component class="ChartFrame.LabelColor" name="labelColor1">
       <Properties>
         <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-          <Color blue="ff" green="cc" red="cc" type="rgb"/>
+          <Color blue="99" green="99" red="ff" type="rgb"/>
         </Property>
         <Property name="text" type="java.lang.String" value="labelColor1"/>
       </Properties>

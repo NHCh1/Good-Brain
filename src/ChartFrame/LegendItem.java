@@ -10,7 +10,7 @@ public class LegendItem extends javax.swing.JPanel {
      public LegendItem(ModelLegend data) {
         initComponents();
         setOpaque(false);
-        labelColor1.setBackground(data.getColor());
+//        labelColor1.setBackground(data.getColor());
         labelName.setText(data.getName());
     }
 
@@ -28,7 +28,7 @@ public class LegendItem extends javax.swing.JPanel {
 
         labelName.setText("name");
 
-        labelColor1.setBackground(new java.awt.Color(204, 204, 255));
+        labelColor1.setBackground(new java.awt.Color(255, 153, 153));
         labelColor1.setText("labelColor1");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
@@ -36,8 +36,7 @@ public class LegendItem extends javax.swing.JPanel {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(labelColor1, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(labelColor1, javax.swing.GroupLayout.PREFERRED_SIZE, 18, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(labelName)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -45,8 +44,8 @@ public class LegendItem extends javax.swing.JPanel {
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                .addComponent(labelColor1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addComponent(labelName))
+                .addComponent(labelName)
+                .addComponent(labelColor1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
