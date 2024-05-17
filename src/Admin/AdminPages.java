@@ -10,8 +10,8 @@ import com.formdev.flatlaf.FlatClientProperties;
 import com.formdev.flatlaf.FlatLaf;
 import com.formdev.flatlaf.FlatLightLaf;
 import TableController.TableActionCellRender;
-import TableController.TableActionEvent;
 import TableController.TableActionCellEditor;
+import TableController.TableActionEvent;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
@@ -133,7 +133,7 @@ public class AdminPages extends javax.swing.JFrame {
         DefaultTableModel usertbl = (DefaultTableModel) userTable.getModel();
         
         //Call action button funtion
-        TableActionEvent studentActionEvent = new TableActionEvent() {
+        TableActionEvent studentActionEvent = new TableActionEvent(){
             @Override
             public void onEdit(int row) {
                 Student edit = new Student(table);
@@ -191,7 +191,7 @@ public class AdminPages extends javax.swing.JFrame {
             }
         };
         
-        TableActionEvent lecturerActionEvent = new TableActionEvent() {
+        TableActionEvent lecturerActionEvent = new TableActionEvent(){
             @Override
             public void onEdit(int row) {
                 String id = lecturerTable.getValueAt(lecturerTable.getSelectedRow(), 0).toString();

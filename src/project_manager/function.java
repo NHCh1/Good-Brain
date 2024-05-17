@@ -15,24 +15,27 @@ import java.util.List;
  *
  * @author User
  */
-public class function {
-    public static ArrayList<String[]> readFile (String fileName) {
-        try{
-            FileReader fr = new FileReader(fileName);
-            BufferedReader br = new BufferedReader(fr);
-            
-            List<String[]> dataList = new ArrayList<>();
-            String line;
-            while ((line = br.readLine()) != null){
-                String[] parts = line.split(",");
-                dataList.add(parts);
-            }
-            
-        } catch (FileNotFoundException e){
-            System.out.println("File not found: " + e.getMessage());
-        } catch (IOException e) {
-            System.out.println("Error reading file: " + e.getMessage());
-        }
-        return dataList;
-    }
-}
+//public class function {
+//    public static ArrayList<String[]> readFile (String fileName) {
+//        List<String[]> dataList = new ArrayList<>();
+//        try{
+//            FileReader fr = new FileReader(fileName);
+//            BufferedReader br = new BufferedReader(fr);
+//            
+//            
+//            String line;
+//            while ((line = br.readLine()) != null){
+//                String[] parts = line.split(",");
+//                dataList.add(parts);
+//            }
+//            
+//        } catch (FileNotFoundException e){
+//            System.out.println("File not found: " + e.getMessage());
+//        } catch (IOException e) {
+//            System.out.println("Error reading file: " + e.getMessage());
+//        }
+//        return dataList;
+//    }
+//}
+
+
