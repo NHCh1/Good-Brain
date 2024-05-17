@@ -21,36 +21,6 @@ import javax.swing.table.DefaultTableModel;
 
 
 public class FileHandler {
-    
-//    public void displayData(String fileName, DefaultTableModel table) {
-//    File file = new File(fileName);
-//
-//    if (!file.exists()) {
-//        table.setRowCount(0);
-//        return;
-//    }
-//
-//    try {
-//        BufferedReader reader = new BufferedReader(new FileReader(file));
-//
-//        String line;
-//        while ((line = reader.readLine()) != null) {
-//            if (line.isEmpty()) {
-//                continue;
-//        }
-//
-//        String[] dataRow = line.split(",");
-//            table.addRow(dataRow);
-//        }
-//    }
-//
-//    catch (FileNotFoundException ex) {
-//        JOptionPane.showMessageDialog(null, "File not exist.", "Error", JOptionPane.ERROR_MESSAGE);
-//    } catch (IOException e) {
-//        JOptionPane.showMessageDialog(null, "Error reading file: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
-//    }
-//}
-    
     public FileHandler(){
         
     };

@@ -152,7 +152,7 @@ public class Intake {
         else if(course.contains("Finanace")){
             courseAbbr = "FN";
         }
-                else if(course.equals("FinTech")){
+        else if(course.equals("FinTech")){
             courseAbbr = "FT";
         }
         else if(course.equals("Intelligent System")){
@@ -303,8 +303,8 @@ public class Intake {
                 String line = rows[i].toString();
                 String [] dataRow = line.split(",");
                 String intakeCode = dataRow[0];
-                String rStartDate = dataRow[6];
-                String rEndDate = dataRow[7];
+                String rStartDate = dataRow[5];
+                String rEndDate = dataRow[6];
 
                 DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
                 LocalDate registrationStartDate = LocalDate.parse(rStartDate, formatter);

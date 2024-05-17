@@ -2407,7 +2407,7 @@
                     <StringItem index="0" value="-"/>
                     <StringItem index="1" value="Foundation"/>
                     <StringItem index="2" value="Diploma"/>
-                    <StringItem index="3" value="Bachelor&apos;s Degrees"/>
+                    <StringItem index="3" value="Degree"/>
                     <StringItem index="4" value="Master"/>
                   </StringArray>
                 </Property>

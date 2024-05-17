@@ -71,7 +71,7 @@ public class AdminPages extends javax.swing.JFrame {
         
         //set gradient color to cell
 //        TableGradientCell tableGradient = new TableGradientCell(new Color(23,161,115), new Color(12,12,14));
-//        studentJTable.setDefaultRenderer(Object.class, new TableGradientCell1());
+        studentJTable.setDefaultRenderer(Object.class, new TableGradientCell());
 //        lecturerTable.setDefaultRenderer(Object.class, new TableGradientCell1());
 //        intakeTable.setDefaultRenderer(Object.class, new TableGradientCell1());
 
@@ -151,10 +151,8 @@ public class AdminPages extends javax.swing.JFrame {
                 Intake intakeClass = new Intake();
                 intakeClass.addIntakeIntoComboBox(newIntakeCodeComboBox);
 
-//                studentSetImage1.setIcon(new ImageIcon(getClass().getResource("/image/" + studID + ".jpg")));
                 File imageFile = new File("src/image/" + studID + ".jpg");
-                studentSetImage1.setIcon(new ImageIcon(imageFile.getAbsolutePath()));
-                
+
                  if (imageFile.exists()) {
                     studentSetImage1.setIcon(new ImageIcon(imageFile.getAbsolutePath()));
                 } else {
@@ -1759,7 +1757,7 @@ public class AdminPages extends javax.swing.JFrame {
 
         courseComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "-", "Accounting", "Banking", "Cloud Engineering", "Cyber Security", "Data Analytics", "Design", "Digital Forensic", "Digital Marketing", "Engineering", "Finance", "FinTech", "Intelligent System", "Software Engineering", "Psychology" }));
 
-        studyLevelComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "-", "Foundation", "Diploma", "Bachelor's Degrees", "Master" }));
+        studyLevelComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "-", "Foundation", "Diploma", "Degree", "Master" }));
 
         javax.swing.GroupLayout addIntakeLayout = new javax.swing.GroupLayout(addIntake);
         addIntake.setLayout(addIntakeLayout);
@@ -2167,7 +2165,7 @@ public class AdminPages extends javax.swing.JFrame {
         File sourceFile = openFileChooser.getSelectedFile();
         if (sourceFile != null) {
             try {
-                File destFolder = new File("src/image/");
+                File destFolder = new File("src/Profile/");
                 if (!destFolder.exists()) {
                     destFolder.mkdir();
                 }
