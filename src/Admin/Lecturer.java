@@ -202,7 +202,7 @@ public class Lecturer {
                 List<String> lectureIDs = new ArrayList<>();
                 
                 while ((line = br.readLine()) != null){
-                    String [] data = line.split(",");
+                    String [] data = line.split(";");
                     lectureIDs.add(data[0]);
                 }
                 br.close();
@@ -329,7 +329,7 @@ public class Lecturer {
             String record;
             
             while ((record = br.readLine()) != null){
-                String[] old = record.split(",");
+                String[] old = record.split(";");
                 data.add(old);
             }
             

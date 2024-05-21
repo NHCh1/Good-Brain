@@ -172,7 +172,7 @@ public class Intake {
         String data;
                 
         while ((data = br.readLine()) != null){
-            String [] intakeData = data.split(",");
+            String [] intakeData = data.split(";");
             intakes.add(intakeData);
         }
         br.close();
@@ -301,7 +301,7 @@ public class Intake {
 
             for (int i = 0; i < rows.length; i++){
                 String line = rows[i].toString();
-                String [] dataRow = line.split(",");
+                String [] dataRow = line.split(";");
                 String intakeCode = dataRow[0];
                 String rStartDate = dataRow[5];
                 String rEndDate = dataRow[6];
@@ -326,7 +326,7 @@ public class Intake {
             BufferedReader br = new BufferedReader(new FileReader("intake.txt"))) {
             String line;
             while ((line = br.readLine()) != null) {
-                intakeCodes.add(line.split(",")[0]);
+                intakeCodes.add(line.split(";")[0]);
             }
         } catch (IOException ex) {
             Logger.getLogger(AdminPages.class.getName()).log(Level.SEVERE, null, ex);

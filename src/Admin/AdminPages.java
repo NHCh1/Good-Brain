@@ -2701,7 +2701,6 @@ public class AdminPages extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_printNameListBtnActionPerformed
 
-
      private void filterTable() {
         DefaultTableModel table = (DefaultTableModel) studentJTable.getModel();
         String selectedItem = (String) studentPageFilterBox.getSelectedItem();

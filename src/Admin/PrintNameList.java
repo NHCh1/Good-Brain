@@ -91,7 +91,7 @@ public class PrintNameList extends javax.swing.JFrame {
 
 
                 // Save the printed content to a PDF file
-                File folder = new File("C:/Users/User/Documents/NetBeansProjects/newAGH/NameList/");
+                File folder = new File("C:/Users/User/Documents/NetBeansProjects/newAGH/NameList/" + intakeCode + ".pdf");
                 if (!folder.exists()) {
                     folder.mkdir(); // Create the folder if it doesn't exist
                 }
@@ -113,6 +113,37 @@ public class PrintNameList extends javax.swing.JFrame {
                 ex.printStackTrace();
             }
         }
+    
+//        public void printPanel() {
+//            try {
+//                // Create a new document
+//                Document document = new Document();
+//
+//                // Create a PDF writer instance
+//                String pdfFilePath = "C:/Users/User/Documents/NetBeansProjects/newAGH/NameList/" + intakeCode + ".pdf";
+//                PdfWriter.getInstance(document, new FileOutputStream(pdfFilePath));
+//
+//                // Open the document
+//                document.open();
+//
+//                // Add the JPanel (nameListPanel) to the PDF document
+//                ByteArrayOutputStream baos = new ByteArrayOutputStream();
+//                BufferedImage image = new BufferedImage(nameListPanel.getWidth(), nameListPanel.getHeight(), BufferedImage.TYPE_INT_RGB);
+//                Graphics2D g2d = image.createGraphics();
+//                nameListPanel.printAll(g2d);
+//                g2d.dispose();
+//                ImageIO.write(image, "png", baos);
+//                Image pdfImage = Image.getInstance(baos.toByteArray());
+//                document.add(pdfImage);
+//
+//                // Close the document
+//                document.close();
+//
+//                System.out.println("PDF created successfully at " + pdfFilePath);
+//            } catch (Exception e) {
+//                e.printStackTrace();
+//            }
+//        }
     
     /**
      * This method is called from within the constructor to initialize the form.
@@ -162,33 +193,30 @@ public class PrintNameList extends javax.swing.JFrame {
             .addGroup(nameListPanelLayout.createSequentialGroup()
                 .addGroup(nameListPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(nameListPanelLayout.createSequentialGroup()
+                        .addGap(291, 291, 291)
+                        .addComponent(jLabel1))
+                    .addGroup(nameListPanelLayout.createSequentialGroup()
+                        .addGap(28, 28, 28)
                         .addGroup(nameListPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 623, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(nameListPanelLayout.createSequentialGroup()
-                                .addGap(291, 291, 291)
-                                .addComponent(jLabel1))
-                            .addGroup(nameListPanelLayout.createSequentialGroup()
-                                .addGap(28, 28, 28)
                                 .addComponent(jLabel2)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(intakeCodeLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, nameListPanelLayout.createSequentialGroup()
-                        .addGap(0, 12, Short.MAX_VALUE)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 615, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap())
+                                .addComponent(intakeCodeLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                .addContainerGap(14, Short.MAX_VALUE))
         );
         nameListPanelLayout.setVerticalGroup(
             nameListPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(nameListPanelLayout.createSequentialGroup()
                 .addGap(17, 17, 17)
                 .addComponent(jLabel1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 53, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 47, Short.MAX_VALUE)
                 .addGroup(nameListPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel2)
                     .addComponent(intakeCodeLabel, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 19, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 520, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+                .addGap(12, 12, 12))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
