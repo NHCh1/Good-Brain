@@ -13,6 +13,9 @@ import java.awt.print.PrinterException;
 import java.awt.print.PrinterJob;
 import javax.swing.table.DefaultTableModel;
 import TableController.TableAlignment;
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
 
 
 public class PrintNameList extends javax.swing.JFrame {
@@ -62,9 +65,9 @@ public class PrintNameList extends javax.swing.JFrame {
     }
     
     
-    public void printPanel() {
+        public void printPanel() {
         PrinterJob printer = PrinterJob.getPrinterJob();
-        printer.setJobName("Print Name List");
+        printer.setJobName(intakeCode);
 
         printer.setPrintable(new Printable() {
             @Override
@@ -72,40 +75,44 @@ public class PrintNameList extends javax.swing.JFrame {
                 pf.setOrientation(PageFormat.LANDSCAPE);
 
                 if (pageNum > 0) {
+                    // Handle page numbers greater than 0
                     return Printable.NO_SUCH_PAGE;
                 }
 
-                Graphics2D g2 = (Graphics2D) gr;
-                g2.translate(pf.getImageableX(), pf.getImageableY());
+                Graphics2D g2d = (Graphics2D) gr;
+                g2d.translate(pf.getImageableX(), pf.getImageableY());
 
-                // Set the paper size to A4
-                double paperWidthInches = A4_WIDTH_INCHES;
-                double paperHeightInches = A4_HEIGHT_INCHES;
-                double paperWidthPixels = paperWidthInches * 72; // Assuming 72 DPI
-                double paperHeightPixels = paperHeightInches * 72;
-
-                // Scale the content to fit the A4 paper size
-                double scaleX = paperWidthPixels / nameListPanel.getWidth();
-                double scaleY = paperHeightPixels / nameListPanel.getHeight();
+                // Print the JPanel (nameListPanel) to fit the A4 size
+                double scaleX = pf.getImageableWidth() / nameListPanel.getWidth();
+                double scaleY = pf.getImageableHeight() / nameListPanel.getHeight();
                 double scale = Math.min(scaleX, scaleY);
+                g2d.scale(scale, scale);
+                nameListPanel.print(g2d);
 
-                g2.scale(scale, scale);
 
-                nameListPanel.print(g2);
+                // Save the printed content to a PDF file
+                File folder = new File("C:/Users/User/Documents/NetBeansProjects/newAGH/NameList/");
+                if (!folder.exists()) {
+                    folder.mkdir(); // Create the folder if it doesn't exist
+                }
+
+                File file = new File(folder + intakeCode + ".pdf");
+                try (FileOutputStream fos = new FileOutputStream(file)) {
+                    fos.flush();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
 
                 return Printable.PAGE_EXISTS;
             }
         });
 
-        boolean yes = printer.printDialog();
-        if (yes) {
             try {
                 printer.print();
             } catch (PrinterException ex) {
                 ex.printStackTrace();
             }
         }
-    }
     
     /**
      * This method is called from within the constructor to initialize the form.
@@ -155,29 +162,32 @@ public class PrintNameList extends javax.swing.JFrame {
             .addGroup(nameListPanelLayout.createSequentialGroup()
                 .addGroup(nameListPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(nameListPanelLayout.createSequentialGroup()
-                        .addGap(291, 291, 291)
-                        .addComponent(jLabel1))
-                    .addGroup(nameListPanelLayout.createSequentialGroup()
-                        .addGap(18, 18, 18)
                         .addGroup(nameListPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 680, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(nameListPanelLayout.createSequentialGroup()
+                                .addGap(291, 291, 291)
+                                .addComponent(jLabel1))
+                            .addGroup(nameListPanelLayout.createSequentialGroup()
+                                .addGap(28, 28, 28)
                                 .addComponent(jLabel2)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(intakeCodeLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                .addContainerGap(14, Short.MAX_VALUE))
+                                .addComponent(intakeCodeLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, nameListPanelLayout.createSequentialGroup()
+                        .addGap(0, 12, Short.MAX_VALUE)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 615, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap())
         );
         nameListPanelLayout.setVerticalGroup(
             nameListPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(nameListPanelLayout.createSequentialGroup()
                 .addGap(17, 17, 17)
                 .addComponent(jLabel1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 37, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 53, Short.MAX_VALUE)
                 .addGroup(nameListPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel2)
                     .addComponent(intakeCodeLabel, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 19, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 400, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 520, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
 
@@ -189,7 +199,9 @@ public class PrintNameList extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(nameListPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(nameListPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
 
         pack();
