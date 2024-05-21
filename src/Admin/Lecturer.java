@@ -234,7 +234,7 @@ public class Lecturer {
         if (pm.equals("Yes")){
             try{
                 FileWriter fw = new FileWriter("user.txt", true);
-                fw.write(lectureID + "," + password + "," + "4" + "\n");
+                fw.write(lectureID + ";" + password + ";" + "4" + "\n");
                 fw.close();
         }catch(IOException e){
             JOptionPane.showMessageDialog(null, "Failed to add project manager! ", "Error",
@@ -244,7 +244,7 @@ public class Lecturer {
         else if (pm.equals("No")){
             try{
                 FileWriter fw = new FileWriter("user.txt", true);
-                fw.write(lectureID + "," + password + "," + "2" + "\n");
+                fw.write(lectureID + ";" + password + ";" + "2" + "\n");
                 fw.close();
             }catch(IOException e){
                 JOptionPane.showMessageDialog(null, "Failed to add lecturer! ", "Error",
@@ -259,8 +259,8 @@ public class Lecturer {
         
         try{
             FileWriter fw = new FileWriter("lecturer.txt", true);
-            fw.write(lectureID + "," + name + "," + ic + "," + contact + "," + email + "," + major + "," 
-                    + minorEmpty + "," + projectManager + "\n");
+            fw.write(lectureID + ";" + name + ";" + ic + ";" + contact + ";" + email + ";" + major + ";" 
+                    + minorEmpty + ";" + projectManager + "\n");
             fw.close();
 
             Icon icon = new ImageIcon(getClass().getResource("/Icon/success.png"));
@@ -281,7 +281,7 @@ public class Lecturer {
             String record;
             
             while ((record = br.readLine()) != null){
-                String[] old = record.split(",");
+                String[] old = record.split(";");
                 String[] row = new String[8];
                 System.arraycopy(old, 0, row, 0, 8);
                 data.add(row);
@@ -306,7 +306,7 @@ public class Lecturer {
             
             BufferedWriter bw = new BufferedWriter(new FileWriter("lecturer.txt"));
             for(String[] row : data){
-                String newData = String.join(",", row);
+                String newData = String.join(";", row);
                 bw.write(newData);
                 bw.newLine();
             }
@@ -350,7 +350,7 @@ public class Lecturer {
             
             BufferedWriter bw = new BufferedWriter(new FileWriter("lecturer.txt"));
             for(String[] row : data){
-                String newData = String.join(",", row);
+                String newData = String.join(";", row);
                 bw.write(newData);
                 bw.newLine();
             }
@@ -473,7 +473,7 @@ public class Lecturer {
                 rowBuilder.append(table.getValueAt(i, j));
 
                 if (j != colQty - 2) {
-                    rowBuilder.append(",");
+                    rowBuilder.append(";");
                 }
             }
             tableRows.add(rowBuilder.toString());
@@ -514,7 +514,7 @@ public class Lecturer {
 
             for (int i = 0; i < rows.length; i++){
                 String line = rows[i].toString();
-                String [] dataRow = line.split(",");
+                String [] dataRow = line.split(";");
                 cb.addItem(dataRow[0]);
             }
 

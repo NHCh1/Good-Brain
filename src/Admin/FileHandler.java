@@ -39,7 +39,7 @@ public class FileHandler {
 
             for (int i = 0; i < tableRows.length; i++) {
                 String line = tableRows[i].toString().trim();
-                String[] dataRow = line.split(",");
+                String[] dataRow = line.split(";");
                 table.addRow(dataRow);
             }
 

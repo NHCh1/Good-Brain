@@ -125,7 +125,7 @@ public class Student {
                 List<String> studentIDs = new ArrayList<>();
                 
                 while ((line = br.readLine()) != null){
-                    String [] data = line.split(",");
+                    String [] data = line.split(";");
                     studentIDs.add(data[0]);
                 }
                 br.close();
@@ -226,7 +226,7 @@ public class Student {
     public void addStudent(){
         try{
             FileWriter writer = new FileWriter("student.txt", true);            
-            writer.write(studentID + "," + name + "," + ic + "," + contact + "," + email + "," + intake + "\n");
+            writer.write(studentID + ";" + name + ";" + ic + ";" + contact + ";" + email + ";" + intake + "\n");
             writer.close();
 
             Icon icon = new ImageIcon(getClass().getResource("/Icon/success.png"));
@@ -242,7 +242,7 @@ public class Student {
     public void createStudentAccount(){
         try{
             FileWriter fw = new FileWriter("user.txt", true);
-            fw.write(studentID + "," + password + "," + "3" + "\n");
+            fw.write(studentID + ";" + password + ";" + "3" + "\n");
             fw.close();
         }
         catch(IOException e){
@@ -263,7 +263,7 @@ public class Student {
             String record;
             
             while ((record = br.readLine()) != null){
-                String[] old = record.split(",");
+                String[] old = record.split(";");
                 String[] row = new String[6];
                 System.arraycopy(old, 0, row, 0, 6);
                 data.add(row);
@@ -286,7 +286,7 @@ public class Student {
             
             BufferedWriter bw = new BufferedWriter(new FileWriter("student.txt"));
             for(String[] row : data){
-                String newData = String.join(",", row);
+                String newData = String.join(";", row);
                 bw.write(newData);
                 bw.newLine();
             }
@@ -301,45 +301,6 @@ public class Student {
         }
     }
     
-    
-//    public void deleteStudent(){
-//        int rowQty = table.getRowCount();
-//        int colQty = table.getColumnCount();
-//        
-//        ArrayList<String> tableRows = new ArrayList<String>();
-//        for(int i = 0; i < rowQty; i++){
-//            StringBuilder rowBuilder = new StringBuilder();
-//            
-//            for (int j = 0; j < colQty - 1; j++) {
-//                rowBuilder.append(table.getValueAt(i, j));
-//                
-//                if (j != colQty - 2) {
-//                    rowBuilder.append(",");
-//                }
-//            }
-//            tableRows.add(rowBuilder.toString());
-//        }
-//        
-//        try{
-//            BufferedWriter bw = new BufferedWriter(new FileWriter("student.txt"));
-//            for (String row : tableRows){
-//                bw.write(row);
-//                bw.newLine();
-//            }
-//            bw.close();
-//    
-//            table.setRowCount(0);
-//            showStudent();
-//            
-//            Icon icon = new ImageIcon(getClass().getResource("/Icon/success.png"));
-//            JOptionPane.showMessageDialog(null, "Student has been removed.", 
-//                                "Notification", JOptionPane.INFORMATION_MESSAGE, icon);
-//        }
-//        catch(IOException ex){
-//            Logger.getLogger(AdminPages.class.getName()).log(Level.SEVERE, null, ex);
-//        }
-//    }
-    
     public void deleteStudent() {
         int rowQty = table.getRowCount();
         int colQty = table.getColumnCount();
@@ -352,7 +313,7 @@ public class Student {
                 rowBuilder.append(table.getValueAt(i, j));
 
                 if (j != colQty - 2) {
-                    rowBuilder.append(",");
+                    rowBuilder.append(";");
                 }
             }
             tableRows.add(rowBuilder.toString());
@@ -378,65 +339,7 @@ public class Student {
         } catch (IOException ex) {
             Logger.getLogger(AdminPages.class.getName()).log(Level.SEVERE, null, ex);
         }
-    }
-    
-//    public void addAssignedLecturer() throws IOException{
-//        try{
-//            ArrayList<String[]> data = new ArrayList<String[]>();
-//            BufferedReader br = new BufferedReader(new FileReader("student.txt"));
-//            String record;
-//            
-//            while ((record = br.readLine()) != null){
-//                String[] old = record.split(",");
-//                data.add(old);
-//            }
-//            
-//            int selectedRowToUpdate = -1;
-//            for (int i = 0; i <data.size(); i++){
-//                if (data.get(i)[0].equals(studentID)){
-//                    selectedRowToUpdate = i;
-//                    break;
-//                }
-//            }
-//            if(selectedRowToUpdate != -1){
-//                String [] row = data.get(selectedRowToUpdate);
-//                row[7] = assignedLecturer;
-//                                
-//            }
-//            
-//            BufferedWriter bw = new BufferedWriter(new FileWriter("student.txt"));
-//            for(String[] row : data){
-//                String newData = String.join(",", row);
-//                bw.write(newData);
-//                bw.newLine();
-//            }
-//            bw.close();
-//            Icon icon = new ImageIcon(getClass().getResource("/Icon/success.png"));
-//            JOptionPane.showMessageDialog(null, "Update Success! ", "Notification", 
-//                                JOptionPane.INFORMATION_MESSAGE, icon);
-//            
-//        }
-//        catch (FileNotFoundException ex) {
-//            Logger.getLogger(Student.class.getName()).log(Level.SEVERE, null, ex);
-//        }
-//    }
-//    
-//    public void addStudentIntoComboBox(JComboBox cb){
-//        try{
-//            cb.removeAllItems();           
-//            BufferedReader br = new BufferedReader(new FileReader("student.txt"));
-//            Object[] rows = br.lines().toArray();
-//            
-//            for (int i = 0; i < rows.length; i++){
-//                String line = rows[i].toString();
-//                String [] dataRow = line.split(",");
-//                cb.addItem(dataRow[0]);
-//            }
-//        
-//        }catch (IOException e) {
-//            e.printStackTrace();
-//        }
-//    }   
+    } 
 }
     
    

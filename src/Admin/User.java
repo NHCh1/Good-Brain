@@ -58,7 +58,7 @@ public class User {
             String rec;
             
             while((rec = br.readLine()) != null){
-                String[] fileData = rec.split(",");
+                String[] fileData = rec.split(";");
                 String[] row = new String[3];
                 System.arraycopy(fileData, 0, row, 0, 3);
                 data.add(row);
@@ -80,7 +80,7 @@ public class User {
             
             BufferedWriter bw = new BufferedWriter(new FileWriter("user.txt"));
             for(String[] row : data){
-                String updatedData = String.join(",", row);
+                String updatedData = String.join(";", row);
                 bw.write(updatedData);
                 bw.newLine();
             }
@@ -105,7 +105,7 @@ public class User {
                 rowBuilder.append(table.getValueAt(i, j));
                 
                 if (j != colQty - 2) {
-                    rowBuilder.append(",");
+                    rowBuilder.append(";");
                 }
             }
             tableRows.add(rowBuilder.toString());
