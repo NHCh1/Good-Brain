@@ -7,7 +7,15 @@ package project_manager;
 import actionCell.tableActionCellEditor;
 import actionCell.tableActionCellRender;
 import actionCell.tableActionEvent;
+import com.itextpdf.text.Document;
+import com.itextpdf.text.Paragraph;
+import com.itextpdf.text.pdf.PdfWriter;
 import java.awt.Component;
+import java.awt.Desktop;
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 
@@ -18,7 +26,10 @@ import javax.swing.table.DefaultTableModel;
 public class pmHomePage extends javax.swing.JFrame {
 
     private pmFunction func;
+    private pmProjectInfo pjInfo;
     private Component previousComponent;
+    private pmHomePage homepage;
+    private String pmID;
     
     /**
      * Creates new form pm_homepage
@@ -31,18 +42,19 @@ public class pmHomePage extends javax.swing.JFrame {
             jTabbedPane2.revalidate();
             jTabbedPane2.repaint();
         }
-
-//        jTabbedPane2.revalidate();
-//        jTabbedPane2.repaint();
     }  
     
     
-    public pmHomePage() {
+    public pmHomePage(String id) {
         initComponents();
+        this.homepage = this;
+        this.pmID = id;
         
         header h = new header();
         jPanel4.add(h);
+        jLabel8.setText("Welcome, " + pmID);
         
+        pjInfo = new pmProjectInfo();
         func = new pmFunction();
         previousComponent = jTabbedPane2.getSelectedComponent();
         
@@ -50,89 +62,108 @@ public class pmHomePage extends javax.swing.JFrame {
             @Override
             public void onEdit(int row){
                 System.out.println("Edit row : " + row);
+//                int selectedRow = projectTable.getSelectedRow();
+//                System.out.println("Selected Row: " + selectedRow);
+                int modelRow = projectTable.convertRowIndexToModel(row);
+                DefaultTableModel model = (DefaultTableModel) projectTable.getModel();
+//                pjInfo = new pmProjectInfo();
+
+                if (modelRow != -1) {
+                    pjInfo.setProjectID(model.getValueAt(modelRow, 0).toString());
+                    pjInfo.setProjectName(model.getValueAt(modelRow, 1).toString());
+                    pjInfo.setIntake(model.getValueAt(modelRow, 2).toString());
+                    System.out.println("this is from home page: " + model.getValueAt(modelRow, 2).toString());
+                    pjInfo.setSupervisor(model.getValueAt(modelRow, 3).toString());
+                    pjInfo.setSecondMarker(model.getValueAt(modelRow, 4).toString());
+                    pjInfo.setDueDate(model.getValueAt(modelRow, 5).toString());
+                }
+                
+                newProject project = new newProject(homepage, pjInfo, true);
+                jTabbedPane2.setComponentAt(0, project);
+                jTabbedPane2.revalidate();
+                jTabbedPane2.repaint();
+                
             }
-            
+
             @Override
             public void onDelete(int row){
                 if(projectTable.isEditing()){
                     projectTable.getCellEditor().stopCellEditing();
                 }
                 DefaultTableModel model = (DefaultTableModel) projectTable.getModel();
-                model.removeRow(row);
+//                model.removeRow(row);
+                int modelRow = projectTable.convertRowIndexToModel(row);
+                
+//                int selectedRow = projectTable.getSelectedRow();
+                if(modelRow != -1){
+                    String projectID = model.getValueAt(modelRow, 0).toString();
+                    
+                    int confirm = JOptionPane.showConfirmDialog(null, "Are you sure to delete this project?", "Delete Confirmation", JOptionPane.YES_NO_OPTION);
+                    
+                    if(confirm == JOptionPane.YES_OPTION){
+                        
+                        try {
+                            func.deleteData("project.txt", projectID);
+                            model.removeRow(modelRow);
+                            JOptionPane.showMessageDialog(homepage,"Project deleted successfully!");
+                        } catch(IOException e){
+                            JOptionPane.showMessageDialog(null, "Error deleting project: " + e.getMessage());
+                        }
+                    }
+                } else {
+                    JOptionPane.showMessageDialog(null, "Please select a row to delete.");
+                }
             }
+            
+//            @Override
+//            public void onEdit(int row){
+//                System.out.println("Edit row : " + row);
+//                int selectedRow = intakeTable.getSelectedRow();
+//                System.out.println("Selected Row: " + selectedRow);
+//                int modelRow = intakeTable.convertRowIndexToModel(selectedRow);
+//                pjInfo = new pmProjectInfo();
+//
+//                if (selectedRow != -1) {
+//                    pjInfo.setProjectID(projectTable.getValueAt(selectedRow, 0).toString());
+//                    pjInfo.setProjectName(projectTable.getValueAt(selectedRow, 1).toString());
+//                    pjInfo.setIntake(projectTable.getValueAt(selectedRow, 2).toString());
+//                    pjInfo.setSupervisor(projectTable.getValueAt(selectedRow, 3).toString());
+//                    pjInfo.setSecondMarker(projectTable.getValueAt(selectedRow, 4).toString());
+//                    pjInfo.setDueDate(projectTable.getValueAt(selectedRow, 5).toString());
+//                }
+//                
+//                newProject project = new newProject(homepage, pjInfo, true);
+//                jTabbedPane2.setComponentAt(0, project);
+//            }
+            
         };
+        
+//        projectManagerToggleBtn.addEventToggleSelected(new ToggleAdapter() {
+//            @Override
+//            public void onSelected(boolean selected) {
+//                List<Lecturer> lecturers;
+//                Lecturer lec = new Lecturer();
+//                lecturers = lec.getAllLecturerData();
+//                if (selected) {
+//                    // Filter lecturers where project_manager is "Yes"
+//                    List<Lecturer> filteredLecturers = new ArrayList<>();
+//                    for (Lecturer lecturer : lecturers) {
+//                        if ("Project Manager".equals(lecturer.getPosition())) {
+//                            filteredLecturers.add(lecturer);
+//                        }
+//                    }
+//                    populateTable(filteredLecturers);
+//                } else {
+//                    // Populate all lecturers
+//                    populateTable(lecturers);
+//                }
+//            }
+//        });
+        
             projectTable.getColumnModel().getColumn(6).setCellRenderer(new tableActionCellRender());
             projectTable.getColumnModel().getColumn(6).setCellEditor(new tableActionCellEditor(event));
     }
     
-//        private void jTable1MouseClicked(java.awt.event.MouseEvent evt) {                                     
-//        // TODO add your handling code here:
-//        
-//        // get table model
-//        DefaultTableModel model = (DefaultTableModel)jTable1.getModel();
-//        
-//        // set data tto tet field when raw is selected
-//        int selectedRow = jTable1.getSelectedRow();
-//        int modelRow = jTable1.convertRowIndexToModel(selectedRow);
-//        
-//        String tbBookingid = model.getValueAt(modelRow, 0).toString();
-//        String tbRoom = model.getValueAt(modelRow, 1).toString();
-//        String tbName = model.getValueAt(modelRow, 2).toString();
-//        String tbIC = model.getValueAt(modelRow, 3).toString();
-//        String tbContact = model.getValueAt(modelRow, 4).toString();
-//        String tbEmail = model.getValueAt(modelRow, 5).toString();
-//        String tbFrom = model.getValueAt(modelRow, 6).toString();
-//        String tbTo = model.getValueAt(modelRow, 7).toString();
-//        String tbNights = model.getValueAt(modelRow, 8).toString();
-//        String tbTotal=  model.getValueAt(modelRow, 9).toString();
-//        String tbStatus =  model.getValueAt(modelRow, 10).toString();
-//        String tbOut = model.getValueAt(modelRow, 11).toString();
-//        String tbPmethod = model.getValueAt(modelRow, 12).toString();
-//        String tbPstatus = model.getValueAt(modelRow, 13).toString();
-//        String tbPtime = model.getValueAt(modelRow, 14).toString();
-//        
-//        roomid.setText(tbRoom);
-//        name.setText(tbName);
-//        ic.setText(tbIC);
-//        contact.setText(tbContact);
-//        email.setText(tbEmail);
-//        in.setText(tbFrom);
-//        out.setText(tbTo);
-//        nights.setText(tbNights);
-//        total.setText(tbTotal);
-//        bookingid.setText(tbBookingid);
-//        status.setSelectedItem(tbStatus);
-//        checkoutTime.setText(tbOut);
-//        Pmethod.setSelectedItem(tbPmethod);
-//        Pstatus.setSelectedItem(tbPstatus);
-//        Ptime.setText(tbPtime);
-//        
-//        bookingid.setEditable(false);
-//        roomid.setEditable(false);
-//        in.setEditable(false);
-//        out.setEditable(false);
-//        nights.setEditable(false);
-//        total.setEditable(false);
-//        
-//        if (tbStatus.equals("Checked-out")){
-//            status.setEnabled(false);
-//        }
-//        else{
-//            status.setEnabled(true);
-//        }
-//        
-//        checkoutTime.setEditable(false);
-//        
-//        Pstatus.setEnabled(false);
-//        
-//        Ptime.setEditable(false);
-//
-//        if (tbPstatus.equals("paid")){
-//            paybtn.setEnabled(false);
-//        }else{
-//            paybtn.setEnabled(true);
-//        }
-//    }  
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -157,13 +188,24 @@ public class pmHomePage extends javax.swing.JFrame {
         jTabbedPane2 = new javax.swing.JTabbedPane();
         jPanel5 = new javax.swing.JPanel();
         jPanel9 = new javax.swing.JPanel();
-        jButton3 = new javax.swing.JButton();
-        jButton1 = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         projectTable = new javax.swing.JTable();
+        jButton1 = new javax.swing.JButton();
+        jLabel8 = new javax.swing.JLabel();
         jPanel6 = new javax.swing.JPanel();
+        jLabel7 = new javax.swing.JLabel();
+        jTextField1 = new javax.swing.JTextField();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        presentationTable = new javax.swing.JTable();
+        projectManagerToggleBtn = new toggle.ToggleButton();
         jPanel7 = new javax.swing.JPanel();
+        jScrollPane3 = new javax.swing.JScrollPane();
+        intakeTable = new javax.swing.JTable();
+        jTextField2 = new javax.swing.JTextField();
         jPanel8 = new javax.swing.JPanel();
+        jScrollPane4 = new javax.swing.JScrollPane();
+        submissionTable = new javax.swing.JTable();
+        reportBtn = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setResizable(false);
@@ -171,15 +213,19 @@ public class pmHomePage extends javax.swing.JFrame {
 
         jPanel2.setPreferredSize(new java.awt.Dimension(1000, 900));
 
-        jPanel1.setBackground(new java.awt.Color(60, 63, 255));
+        jPanel1.setBackground(new java.awt.Color(226, 228, 216));
 
-        jLabel3.setText("Course");
+        jLabel3.setFont(new java.awt.Font("Bell MT", 1, 18)); // NOI18N
+        jLabel3.setForeground(new java.awt.Color(60, 63, 65));
+        jLabel3.setText("Project");
         jLabel3.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jLabel3MouseClicked(evt);
             }
         });
 
+        jLabel4.setFont(new java.awt.Font("Bell MT", 1, 18)); // NOI18N
+        jLabel4.setForeground(new java.awt.Color(60, 63, 65));
         jLabel4.setText("Presentation");
         jLabel4.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -187,29 +233,37 @@ public class pmHomePage extends javax.swing.JFrame {
             }
         });
 
-        jLabel5.setText("Lecturer");
+        jLabel5.setFont(new java.awt.Font("Bell MT", 1, 18)); // NOI18N
+        jLabel5.setForeground(new java.awt.Color(60, 63, 65));
+        jLabel5.setText("Intake");
         jLabel5.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jLabel5MouseClicked(evt);
             }
         });
 
-        jLabel6.setText("jLabel6");
+        jLabel6.setForeground(new java.awt.Color(0, 0, 0));
+        jLabel6.setText("testAss");
+        jLabel6.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabel6MouseClicked(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(77, 77, 77)
-                .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(117, 117, 117)
-                .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(142, 142, 142)
-                .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(249, 249, 249)
+                .addGap(81, 81, 81)
+                .addComponent(jLabel3)
+                .addGap(147, 147, 147)
+                .addComponent(jLabel4)
+                .addGap(163, 163, 163)
+                .addComponent(jLabel5)
+                .addGap(271, 271, 271)
                 .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 62, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(67, Short.MAX_VALUE))
+                .addContainerGap(69, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -217,9 +271,9 @@ public class pmHomePage extends javax.swing.JFrame {
                 .addContainerGap(14, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
-                    .addComponent(jLabel4)
                     .addComponent(jLabel5)
-                    .addComponent(jLabel6))
+                    .addComponent(jLabel6)
+                    .addComponent(jLabel4))
                 .addContainerGap())
         );
 
@@ -238,7 +292,7 @@ public class pmHomePage extends javax.swing.JFrame {
         jPanel4Layout.setHorizontalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
-                .addContainerGap(890, Short.MAX_VALUE)
+                .addContainerGap(897, Short.MAX_VALUE)
                 .addComponent(imageAvatar1, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(35, 35, 35))
             .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -247,7 +301,7 @@ public class pmHomePage extends javax.swing.JFrame {
                     .addComponent(jLabel2)
                     .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                     .addComponent(jLabel1)
-                    .addContainerGap(664, Short.MAX_VALUE)))
+                    .addContainerGap(671, Short.MAX_VALUE)))
         );
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -272,7 +326,7 @@ public class pmHomePage extends javax.swing.JFrame {
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 91, Short.MAX_VALUE))
+                .addGap(0, 84, Short.MAX_VALUE))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -281,14 +335,7 @@ public class pmHomePage extends javax.swing.JFrame {
                 .addGap(0, 0, Short.MAX_VALUE))
         );
 
-        jButton3.setText("jButton3");
-        jButton3.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton3ActionPerformed(evt);
-            }
-        });
-
-        jButton1.setText("Create New");
+        jPanel9.setBackground(new java.awt.Color(239, 240, 234));
 
         projectTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -310,32 +357,46 @@ public class pmHomePage extends javax.swing.JFrame {
         projectTable.setSelectionBackground(new java.awt.Color(0, 204, 255));
         jScrollPane1.setViewportView(projectTable);
 
+        jButton1.setText("New");
+        jButton1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jButton1MouseClicked(evt);
+            }
+        });
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+
+        jLabel8.setText("jLabel8");
+
         javax.swing.GroupLayout jPanel9Layout = new javax.swing.GroupLayout(jPanel9);
         jPanel9.setLayout(jPanel9Layout);
         jPanel9Layout.setHorizontalGroup(
             jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel9Layout.createSequentialGroup()
-                .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel9Layout.createSequentialGroup()
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jButton3)
-                        .addGap(81, 81, 81)
-                        .addComponent(jButton1))
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel9Layout.createSequentialGroup()
-                        .addGap(47, 47, 47)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 815, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(120, Short.MAX_VALUE))
+                        .addGap(94, 94, 94)
+                        .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jButton1)
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 815, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(jPanel9Layout.createSequentialGroup()
+                        .addGap(21, 21, 21)
+                        .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 156, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(97, Short.MAX_VALUE))
         );
         jPanel9Layout.setVerticalGroup(
             jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel9Layout.createSequentialGroup()
-                .addGap(44, 44, 44)
-                .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton3)
-                    .addComponent(jButton1))
-                .addGap(37, 37, 37)
+                .addGap(38, 38, 38)
+                .addComponent(jLabel8)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jButton1)
+                .addGap(18, 18, 18)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 285, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(58, Short.MAX_VALUE))
+                .addContainerGap(84, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
@@ -343,58 +404,160 @@ public class pmHomePage extends javax.swing.JFrame {
         jPanel5Layout.setHorizontalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel5Layout.createSequentialGroup()
-                .addContainerGap()
                 .addComponent(jPanel9, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(619, Short.MAX_VALUE))
+                .addGap(0, 601, Short.MAX_VALUE))
         );
         jPanel5Layout.setVerticalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel5Layout.createSequentialGroup()
                 .addGap(51, 51, 51)
                 .addComponent(jPanel9, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(195, Short.MAX_VALUE))
         );
 
-        jTabbedPane2.addTab("Course", jPanel5);
+        jTabbedPane2.addTab("Project", jPanel5);
+
+        jLabel7.setText("Lecturer ID :");
+
+        presentationTable.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null}
+            },
+            new String [] {
+                "Presentation ID", "Student ID", "Project ID", "Date Time", "Student Acceptance", "Supervisor", "Supervisor Acceptance", "Second Marker", "Second Marker Acceptance", "Action"
+            }
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, false, false, false, false, true, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        jScrollPane2.setViewportView(presentationTable);
 
         javax.swing.GroupLayout jPanel6Layout = new javax.swing.GroupLayout(jPanel6);
         jPanel6.setLayout(jPanel6Layout);
         jPanel6Layout.setHorizontalGroup(
             jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1607, Short.MAX_VALUE)
+            .addGroup(jPanel6Layout.createSequentialGroup()
+                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel6Layout.createSequentialGroup()
+                        .addGap(255, 255, 255)
+                        .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(58, 58, 58)
+                        .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 199, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(62, 62, 62)
+                        .addComponent(projectManagerToggleBtn, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel6Layout.createSequentialGroup()
+                        .addGap(43, 43, 43)
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 925, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(639, Short.MAX_VALUE))
         );
         jPanel6Layout.setVerticalGroup(
             jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 644, Short.MAX_VALUE)
+            .addGroup(jPanel6Layout.createSequentialGroup()
+                .addGap(31, 31, 31)
+                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jLabel7)
+                        .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(projectManagerToggleBtn, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(20, 20, 20)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(209, Short.MAX_VALUE))
         );
 
         jTabbedPane2.addTab("Presentation", jPanel6);
+
+        intakeTable.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null}
+            },
+            new String [] {
+                "Intake ID", "Intake Name", "Duration", "Supervisor", "Second Marker", "Resgister Start", "Register End", "Intake Start", "Intake End ", "Action"
+            }
+        ));
+        jScrollPane3.setViewportView(intakeTable);
 
         javax.swing.GroupLayout jPanel7Layout = new javax.swing.GroupLayout(jPanel7);
         jPanel7.setLayout(jPanel7Layout);
         jPanel7Layout.setHorizontalGroup(
             jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1607, Short.MAX_VALUE)
+            .addGroup(jPanel7Layout.createSequentialGroup()
+                .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel7Layout.createSequentialGroup()
+                        .addGap(44, 44, 44)
+                        .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 921, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel7Layout.createSequentialGroup()
+                        .addGap(314, 314, 314)
+                        .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 214, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(642, Short.MAX_VALUE))
         );
         jPanel7Layout.setVerticalGroup(
             jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 644, Short.MAX_VALUE)
+            .addGroup(jPanel7Layout.createSequentialGroup()
+                .addGap(62, 62, 62)
+                .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(41, 41, 41)
+                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 374, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(223, Short.MAX_VALUE))
         );
 
-        jTabbedPane2.addTab("Lecturer", jPanel7);
+        jTabbedPane2.addTab("Intake", jPanel7);
+
+        submissionTable.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null}
+            },
+            new String [] {
+                "Submission ID", "Project ID", "Student ID", "Status", "Grade", "Name", "Path", "Super Command", "Second Command"
+            }
+        ));
+        jScrollPane4.setViewportView(submissionTable);
+
+        reportBtn.setText("Generate Report");
+        reportBtn.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                reportBtnMouseClicked(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel8Layout = new javax.swing.GroupLayout(jPanel8);
         jPanel8.setLayout(jPanel8Layout);
         jPanel8Layout.setHorizontalGroup(
             jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1607, Short.MAX_VALUE)
+            .addGroup(jPanel8Layout.createSequentialGroup()
+                .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel8Layout.createSequentialGroup()
+                        .addGap(51, 51, 51)
+                        .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 856, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel8Layout.createSequentialGroup()
+                        .addGap(430, 430, 430)
+                        .addComponent(reportBtn)))
+                .addContainerGap(700, Short.MAX_VALUE))
         );
         jPanel8Layout.setVerticalGroup(
             jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 644, Short.MAX_VALUE)
+            .addGroup(jPanel8Layout.createSequentialGroup()
+                .addGap(57, 57, 57)
+                .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 377, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(41, 41, 41)
+                .addComponent(reportBtn)
+                .addContainerGap(224, Short.MAX_VALUE))
         );
 
-        jTabbedPane2.addTab("tab4", jPanel8);
+        jTabbedPane2.addTab("testAss", jPanel8);
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -411,9 +574,9 @@ public class pmHomePage extends javax.swing.JFrame {
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(0, 0, 0)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(4, 4, 4)
+                .addGap(0, 0, 0)
                 .addComponent(jTabbedPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
@@ -421,9 +584,7 @@ public class pmHomePage extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 6, Short.MAX_VALUE))
+            .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, 1006, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -440,67 +601,90 @@ public class pmHomePage extends javax.swing.JFrame {
         jTabbedPane2.setSelectedIndex(0);
 //        DefaultTableModel model = (DefaultTableModel)projectTable.getModel();
         func.clearTable(projectTable);
-        func.setTable("project.txt", projectTable);
+        func.setTable("project.txt", projectTable, pmID);
         
-//        pmProjectInfo pjInfo = new pmProjectInfo();
-//        pjInfo.setProjectName(projectName);
-//        
-//        newProject project = new newProject(pjInfo);
-//        
-//        projID.setText(pjinfo.projectID);
-//        projName.setText(pjinfo.projectName);
-//        projIntake.setText(pjinfo.intake);
-//        projSupervisor.setText(pjinfo.supervisor);
-//        projSecondMarker.setText(pjinfo.secondMarker);
-//        projDueDate.setText(pjinfo.projectDueDate);
     }//GEN-LAST:event_jLabel3MouseClicked
 
     private void jLabel4MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel4MouseClicked
         // TODO add your handling code here:
         jTabbedPane2.setSelectedIndex(1);
         
-
+        func.clearTable(presentationTable);
+        func.setTable("presentation.txt", presentationTable, pmID);
     }//GEN-LAST:event_jLabel4MouseClicked
 
     private void jLabel5MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel5MouseClicked
         // TODO add your handling code here:
         jTabbedPane2.setSelectedIndex(2);
+        
+        func.clearTable(intakeTable);
+        func.setTable("intake.txt", intakeTable, pmID);
     }//GEN-LAST:event_jLabel5MouseClicked
 
-    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-//        newProject project = new newProject(this);
-//        jTabbedPane2.setComponentAt(0, project);        
+    private void jButton1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton1MouseClicked
+        // TODO add your handling code here:
+//        newProject project = new newProject(homepage, pjInfo, true);
+//        jTabbedPane2.setComponentAt(0, project);
+    }//GEN-LAST:event_jButton1MouseClicked
 
-        int selectedRow = projectTable.getSelectedRow();
-        System.out.println("Selected Row: " + selectedRow);
-        int modelRow = projectTable.convertRowIndexToModel(selectedRow);
-        pmProjectInfo pjInfo = new pmProjectInfo();
-
-        if (selectedRow != -1) {
-            pjInfo.setProjectID(projectTable.getValueAt(selectedRow, 0).toString());
-            pjInfo.setProjectName(projectTable.getValueAt(selectedRow, 1).toString());
-            pjInfo.setIntake(projectTable.getValueAt(selectedRow, 2).toString());
-            pjInfo.setSupervisor(projectTable.getValueAt(selectedRow, 3).toString());
-            pjInfo.setSecondMarker(projectTable.getValueAt(selectedRow, 4).toString());
-        }
-//        pmProjectInfo pjInfo = new pmProjectInfo();
-//        pjInfo.setProjectID(projectID);
-//        pjInfo.setProjectName(projectName);
-//        pjInfo.setIntake(intake);
-//        pjInfo.setSupervisor(supervisor);
-//        pjInfo.setSecondMarker(secondMarker);
-       
-        
-        newProject project = new newProject(this, pjInfo);
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        pjInfo = new pmProjectInfo();
+        newProject project = new newProject(homepage, pjInfo, false);
         jTabbedPane2.setComponentAt(0, project);
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jLabel6MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel6MouseClicked
+        // TODO add your handling code here:
+        jTabbedPane2.setSelectedIndex(3);
         
+        func.clearTable(submissionTable);
+        func.setTable("submission.txt", submissionTable);
         
-//        jPanel5.remove(0);
-//        newProject project = new newProject();
-//        project.setVisible(true);
-//        jTabbedPane2.revalidate();
-//        jTabbedPane2.repaint();
-    }//GEN-LAST:event_jButton3ActionPerformed
+    }//GEN-LAST:event_jLabel6MouseClicked
+
+    private void reportBtnMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_reportBtnMouseClicked
+        // TODO add your handling code here:
+//        String pdfFilePath = "C:\\Users\\Owx\\Documents\\NetBeansProjects\\Lecturer\\src\\main\\java\\com\\mycompany\\Report\\"+stuid+".pdf";
+//        try{
+            // Create a new document
+//            Document document = new Document();
+            // Create a PDF writer instance
+//            PdfWriter.getInstance(document, new FileOutputStream(pdfFilePath));
+            // Open the document
+//            document.open();
+            // Add a paragraph to the document
+//            document.add(new Paragraph("Hello, this is a test PDF document."));
+//            document.add(new Paragraph("This is another line in the PDF."));
+//            document.add(new Paragraph("This is another line in the PDF."));
+//            document.add(new Paragraph("This is another line in the PDF."));
+            // Close the document
+//            document.close();
+            
+//            openPDF(pdfFilePath);
+//
+//            System.out.println("PDF created successfully at " + pdfFilePath);
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//        }
+//    }
+    
+//    private static void openPDF(String filePath) {
+//        try {
+//            File pdfFile = new File(filePath);
+//            if (pdfFile.exists()) {
+//                if (Desktop.isDesktopSupported()) {
+//                    Desktop.getDesktop().open(pdfFile);
+//                } else {
+//                    System.out.println("Awt Desktop is not supported!");
+//                }
+//            } else {
+//                System.out.println("File does not exist!");
+//            }
+//
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//        }
+    }//GEN-LAST:event_reportBtnMouseClicked
 
     /**
      * @param args the command line arguments
@@ -533,7 +717,7 @@ public class pmHomePage extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new pmHomePage().setVisible(true);
+                new pmHomePage("L003").setVisible(true);
                 
                 
             }
@@ -542,14 +726,16 @@ public class pmHomePage extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private avatar.ImageAvatar imageAvatar1;
+    private javax.swing.JTable intakeTable;
     private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton3;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
@@ -560,7 +746,16 @@ public class pmHomePage extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel8;
     private javax.swing.JPanel jPanel9;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JScrollPane jScrollPane3;
+    private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JTabbedPane jTabbedPane2;
+    private javax.swing.JTextField jTextField1;
+    private javax.swing.JTextField jTextField2;
+    private javax.swing.JTable presentationTable;
+    private toggle.ToggleButton projectManagerToggleBtn;
     private javax.swing.JTable projectTable;
+    private javax.swing.JButton reportBtn;
+    private javax.swing.JTable submissionTable;
     // End of variables declaration//GEN-END:variables
 }

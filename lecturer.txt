@@ -8,7 +8,7 @@ L007;Micheal Dyer;731026428125;60197616279;L007@staff.goodbrain.edu.my;Banking;E
 L008;Bertie Powell;760707305733;60147706960;L008@staff.goodbrain.edu.my;Finance;Psychology;No
 L009;Nikhil Pruitt;920211318011;6018950769;L009@staff.goodbrain.edu.my;Cloud Engineering;Accounting;No
 L010;Mustafa Harrington;830611242051;60103713883;L010@staff.goodbrain.edu.my;Cyber Security;Intelligent System;No
-L011;Hajra Mclaughlin;691008144015;60133820514;L011@staff.goodbrain.edu.my;Data Anaytics;Software Engineering;No
+L011;Hajra Mclaughlin;691008144015;60133820514;L011@staff.goodbrain.edu.my;Data Analytics;Software Engineering;No
 L012;Rachel Robbins;921106544313;60124115796;L012@staff.goodbrain.edu.my;Digital Forensics;Design;No
 L013;Athena Vazquez;890524461693;60143628179;L013@staff.goodbrain.edu.my;Digital Marketing;Finance;No
 L014;Ashwin Bryan;760319029109;60123456789;L014@staff.goodbrain.edu.my;Intelligent System;Banking;No
