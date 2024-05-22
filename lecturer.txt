@@ -1,14 +1,14 @@
 L001;Ellis Estrada;700601437139;60134881870;L001@staff.goodbrain.edu.my;Cloud Engineering;Business;Yes
-L002;Holly Gibson;640628365897;60131368913;L002@staff.goodbrain.edu.my;Engineering;-;No
-L003;Maliha Allison;640911331121;60122302112;L003@staff.goodbrain.edu.my;FinTech;-;Yes
+L002;Holly Gibson;640628365897;60131368913;L002@staff.goodbrain.edu.my;Engineering;Psychology;No
+L003;Maliha Allison;640911331121;60122302112;L003@staff.goodbrain.edu.my;FinTech;Digital Marketing;Yes
 L004;Drew Haney;800915408163;60172539918;L004@staff.goodbrain.edu.my;Design;Cyber Security;No
-L005;Anita Swanson;930501072097;60178795782;L005@staff.goodbrain.edu.my;Finance;Digital Forensics;No
-L006;Abdul Hahn;840310275831;60191118133;L006@staff.goodbrain.edu.my;Accounting;-;No
+L005;Anita Swanson;930501072097;60178795782;L005@staff.goodbrain.edu.my;Business;Digital Forensics;No
+L006;Abdul Hahn;840310275831;60191118133;L006@staff.goodbrain.edu.my;Accounting;Data Analytics;No
 L007;Micheal Dyer;731026428125;60197616279;L007@staff.goodbrain.edu.my;Banking;Engineering;No
 L008;Bertie Powell;760707305733;60147706960;L008@staff.goodbrain.edu.my;Finance;Psychology;No
 L009;Nikhil Pruitt;920211318011;6018950769;L009@staff.goodbrain.edu.my;Cloud Engineering;Accounting;No
 L010;Mustafa Harrington;830611242051;60103713883;L010@staff.goodbrain.edu.my;Cyber Security;Intelligent System;No
-L011;Hajra Mclaughlin;691008144015;60133820514;L011@staff.goodbrain.edu.my;Data Anaytics;-;No
+L011;Hajra Mclaughlin;691008144015;60133820514;L011@staff.goodbrain.edu.my;Data Anaytics;Software Engineering;No
 L012;Rachel Robbins;921106544313;60124115796;L012@staff.goodbrain.edu.my;Digital Forensics;Design;No
 L013;Athena Vazquez;890524461693;60143628179;L013@staff.goodbrain.edu.my;Digital Marketing;Finance;No
 L014;Ashwin Bryan;760319029109;60123456789;L014@staff.goodbrain.edu.my;Intelligent System;Banking;No
