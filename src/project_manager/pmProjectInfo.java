@@ -99,8 +99,8 @@ public class pmProjectInfo {
     /**
      * @param projDueDate the dueDate to set
      */
-    public void setDueDate(String projDueDate) {
-        this.dueDate = projDueDate;
+    public void setDueDate(String dueDate) {
+        this.dueDate = dueDate;
     }
     
     

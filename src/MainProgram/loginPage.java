@@ -6,6 +6,7 @@ package MainProgram;
 
 import javax.swing.Icon;
 import javax.swing.JOptionPane;
+import project_manager.pmHomePage;
 
 public class loginPage extends javax.swing.JFrame {
 
@@ -113,7 +114,7 @@ public class loginPage extends javax.swing.JFrame {
         int role = check.checkCredentials(id, password);
         
         if (role != -1){
-            showPage(role);
+            showPage(role, id);
         }
         else{
              JOptionPane.showMessageDialog(null, "Invalid user ID or password.", "Error",JOptionPane.ERROR_MESSAGE);
@@ -122,7 +123,7 @@ public class loginPage extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_jButton1ActionPerformed
 
-    private void showPage(int role){
+    private void showPage(int role, String id){
         Icon icon = new javax.swing.ImageIcon(getClass().getResource("/Icon/success.png"));
         JOptionPane.showMessageDialog(null, "Log In Success!", "Notification", JOptionPane.INFORMATION_MESSAGE, icon);
         
@@ -144,7 +145,7 @@ public class loginPage extends javax.swing.JFrame {
                 this.dispose();
                 break;
             case 4:
-                projectManagerPage pm = new projectManagerPage();
+                pmHomePage pm = new pmHomePage(id);
                 pm.setVisible(true);
                 this.dispose();
                 break;
