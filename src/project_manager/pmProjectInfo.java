@@ -4,15 +4,20 @@
  */
 package project_manager;
 
+import java.util.Date;
+
 /**
  *
  * @author User
  */
-public class all_info {
+public class pmProjectInfo {
     private String projectID;
     private String projectName;
     private String intake;
+    private String supervisor;
+    private String secondMarker;
     private String dueDate;
+    
 
     /**
      * @return the projectID
@@ -55,6 +60,34 @@ public class all_info {
     public void setIntake(String intake) {
         this.intake = intake;
     }
+    
+        /**
+     * @return the intake
+     */
+    public String getSupervisor() {
+        return supervisor;
+    }
+
+    /**
+     * @param supervisor the intake to set
+     */
+    public void setSupervisor(String supervisor) {
+        this.supervisor = supervisor;
+    }
+    
+        /**
+     * @return the intake
+     */
+    public String getSecondMarker() {
+        return secondMarker;
+    }
+
+    /**
+     * @param secondMarker the intake to set
+     */
+    public void setSecondMarker(String secondMarker) {
+        this.secondMarker = secondMarker;
+    }
 
     /**
      * @return the dueDate
@@ -64,10 +97,23 @@ public class all_info {
     }
 
     /**
-     * @param dueDate the dueDate to set
+     * @param projDueDate the dueDate to set
      */
-    public void setDueDate(String dueDate) {
-        this.dueDate = dueDate;
+    public void setDueDate(String projDueDate) {
+        this.dueDate = projDueDate;
     }
+    
+    
+//    editpage page = new editpage(info);
+//    
+//    
+//    public editpage(all_info info);info info = new all_info();
+//    info.setDueDate(arraylist[3].toString());
+//    ..
+//    
+//    editpage page = new editpage(info);
+//    
+//    
+//    public editpage(all_info info);
     
 }
