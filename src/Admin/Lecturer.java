@@ -54,10 +54,6 @@ public class Lecturer {
 //        this.projectManager = pm;
     }
     
-//    public Lecturer(String id, String pm){
-//        this.lectureID = id;
-//        this.projectManager = pm;
-//    }
     
     //Add lecturer & update purpose
     public Lecturer(String id, String name, String ic, String contact, String email, String major, String minor, String pm){
@@ -137,14 +133,6 @@ public class Lecturer {
 //        }
         return errors;
     }
-    
-//    private String validateProjectManagerGroup(){
-//        if (yesNoGroup.getSelection() == null) {
-//            return("Please decide whether to assign project manager.");
-//        }
-//        return "";
-//    }
-    
     
     private String validateName(){
         if (name.isEmpty()){
@@ -361,105 +349,6 @@ public class Lecturer {
             Logger.getLogger(Student.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-    
-//    public void deleteLecturer(){
-//        int rowQuantity = table.getRowCount();
-//        int colQuantity = table.getColumnCount();
-//        
-//        ArrayList<String> tableRows = new ArrayList<String>();
-//        for (int i = 0; i < rowQuantity; i ++){
-//            StringBuilder rowBuilder = new StringBuilder();
-//            for (int j = 0; j < colQuantity; j++){
-//                rowBuilder.append(table.getValueAt(i, j));
-//            
-//                if (j != table.getColumnCount() -1){
-//                    rowBuilder.append(",");
-//                }
-//            }
-//        tableRows.add(rowBuilder.toString());
-//        }
-//        
-//        try{
-//            BufferedWriter bw = new BufferedWriter(new FileWriter ("lecturer.txt"));
-//            for (String row : tableRows){
-//                bw.write(row);
-//                bw.newLine();
-//            }
-//            bw.close();
-//            
-//            table.setRowCount(0);
-//            showLecturer();
-//            
-//            Icon icon = new ImageIcon(getClass().getResource("/Icon/success.png"));
-//            JOptionPane.showMessageDialog(null, "Lecturer has been removed", "Notification", JOptionPane.INFORMATION_MESSAGE, icon);
-//        }
-//        catch(IOException ex){
-//            Logger.getLogger(AdminPages.class.getName()).log(Level.SEVERE, null, ex);
-//        }
-//    }
-    
-//    public void deleteLecturer() {
-//        int rowQty = table.getRowCount();
-//        int colQty = table.getColumnCount();
-//
-//        ArrayList<String> tableRows = new ArrayList<>();
-//        for (int i = 0; i < rowQty; i++) {
-//            StringBuilder rowBuilder = new StringBuilder();
-//
-//            for (int j = 0; j < colQty - 1; j++) {
-//                rowBuilder.append(table.getValueAt(i, j));
-//
-//                if (j != colQty - 2) {
-//                    rowBuilder.append(",");
-//                }
-//            }
-//            tableRows.add(rowBuilder.toString());
-//        }
-//
-//        try {
-//            BufferedWriter bw = new BufferedWriter(new FileWriter("lecturer.txt"));
-//            for (String row : tableRows) {
-//                bw.write(row);
-//                bw.newLine();
-//            }
-//            bw.close();
-//
-//            deleteUserInformation();
-//
-//            table.setRowCount(0);
-//            showLecturer();
-//
-//            Icon icon = new ImageIcon(getClass().getResource("/Icon/success.png"));
-//            JOptionPane.showMessageDialog(null, "Lecturer has been removed.",
-//                    "Notification", JOptionPane.INFORMATION_MESSAGE, icon);
-//        } catch (IOException ex) {
-//            Logger.getLogger(AdminPages.class.getName()).log(Level.SEVERE, null, ex);
-//        }
-//    }
-//
-//    private void deleteUserInformation() throws IOException {
-//        File inputFile = new File("user.txt");
-//        File tempFile = new File("tempUser.txt");
-//
-//        BufferedReader br = new BufferedReader(new FileReader(inputFile));
-//        BufferedWriter bw = new BufferedWriter(new FileWriter(tempFile));
-//
-//        String line;
-//        while ((line = br.readLine()) != null) {
-//            if (line.contains(lectureID)) {
-//                continue; // Skip the line that contains the student ID
-//            }
-//            bw.write(line);
-//            bw.newLine();
-//        }
-//
-//        br.close();
-//        bw.close();
-//
-//        inputFile.delete();
-//        tempFile.renameTo(inputFile);
-//    }
-
     
     public void deleteLecturer() {
         int rowQty = table.getRowCount();
