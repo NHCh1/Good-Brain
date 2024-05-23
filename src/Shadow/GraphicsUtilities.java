@@ -1,27 +1,31 @@
-package shadow;
+/*
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
+ */
+package Shadow;
 
+import java.awt.Graphics;
+import java.awt.Graphics2D;
+import java.awt.GraphicsConfiguration;
+import java.awt.GraphicsEnvironment;
+import java.awt.RenderingHints;
+import java.awt.Transparency;
 import java.awt.image.BufferedImage;
 import java.awt.image.ColorModel;
 import java.awt.image.Raster;
 import java.awt.image.WritableRaster;
-import java.awt.GraphicsConfiguration;
-import java.awt.Transparency;
-import java.awt.Graphics;
-import java.awt.GraphicsEnvironment;
-import java.awt.Graphics2D;
-import java.awt.RenderingHints;
 import java.io.IOException;
 import java.net.URL;
 import javax.imageio.ImageIO;
 
-public class GraphicsUtilities {
 
+public class GraphicsUtilities {
     private GraphicsUtilities() {
+        
     }
 
     private static GraphicsConfiguration getGraphicsConfiguration() {
-        return GraphicsEnvironment.getLocalGraphicsEnvironment().
-                getDefaultScreenDevice().getDefaultConfiguration();
+        return GraphicsEnvironment.getLocalGraphicsEnvironment().getDefaultScreenDevice().getDefaultConfiguration();
     }
 
     public static BufferedImage createColorModelCompatibleImage(BufferedImage image) {

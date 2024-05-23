@@ -1,10 +1,13 @@
-package shadow;
+/*
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
+ */
+package Shadow;
 
 import java.awt.Color;
 import java.awt.image.BufferedImage;
 
 public class ShadowRenderer {
-
     private int size = 5;
     private float opacity = 0.5f;
     private Color color = Color.BLACK;
