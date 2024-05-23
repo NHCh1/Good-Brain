@@ -401,6 +401,10 @@ public class AdminPages extends javax.swing.JFrame {
         dashboard = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jPanel1 = new javax.swing.JPanel();
+        chart = new ChartFrame.Chart();
+        cardPanel1 = new Swing.CardPanel();
+        cardPanel2 = new Swing.CardPanel();
+        cardPanel3 = new Swing.CardPanel();
         student = new javax.swing.JPanel();
         jLabel4 = new javax.swing.JLabel();
         studentPageSearchField = new javax.swing.JTextField();
@@ -426,6 +430,7 @@ public class AdminPages extends javax.swing.JFrame {
         jLabel56 = new javax.swing.JLabel();
         studentPicTextField = new javax.swing.JTextField();
         uploadStudentPicBtn = new javax.swing.JButton();
+        studentRegisterPic = new Admin.SetUserProfile();
         editStudent = new javax.swing.JPanel();
         jLabel18 = new javax.swing.JLabel();
         jLabel19 = new javax.swing.JLabel();
@@ -445,6 +450,7 @@ public class AdminPages extends javax.swing.JFrame {
         jLabel57 = new javax.swing.JLabel();
         newStudentProfileTextField = new javax.swing.JTextField();
         uploadStudentNewProfileBtn = new javax.swing.JButton();
+        studentSetImage1 = new Admin.SetUserProfile();
         lecturer = new javax.swing.JPanel();
         jLabel36 = new javax.swing.JLabel();
         jScrollPane2 = new javax.swing.JScrollPane();
@@ -470,6 +476,7 @@ public class AdminPages extends javax.swing.JFrame {
         lecMinorComboBox = new javax.swing.JComboBox<>();
         updateLecturerPictureBtn = new javax.swing.JButton();
         lectureProfileName = new javax.swing.JLabel();
+        setLecturerRegisterImage = new Admin.SetUserProfile();
         editLecturer = new javax.swing.JPanel();
         jLabel35 = new javax.swing.JLabel();
         jLabel15 = new javax.swing.JLabel();
@@ -492,6 +499,7 @@ public class AdminPages extends javax.swing.JFrame {
         jLabel51 = new javax.swing.JLabel();
         lecNewMinorComboBox = new javax.swing.JComboBox<>();
         uploadLecturerNewProfileBtn = new javax.swing.JButton();
+        lecturerSetImage1 = new Admin.SetUserProfile();
         intake = new javax.swing.JPanel();
         jLabel38 = new javax.swing.JLabel();
         jScrollPane3 = new javax.swing.JScrollPane();
@@ -533,6 +541,7 @@ public class AdminPages extends javax.swing.JFrame {
         userIDLabel = new javax.swing.JLabel();
         jLabel55 = new javax.swing.JLabel();
         roleLabel = new javax.swing.JLabel();
+        userSetImage1 = new Admin.SetUserProfile();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setPreferredSize(new java.awt.Dimension(870, 600));
@@ -767,11 +776,11 @@ public class AdminPages extends javax.swing.JFrame {
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 754, Short.MAX_VALUE)
+            .addComponent(chart, javax.swing.GroupLayout.DEFAULT_SIZE, 754, Short.MAX_VALUE)
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 250, Short.MAX_VALUE)
+            .addComponent(chart, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 250, Short.MAX_VALUE)
         );
 
         javax.swing.GroupLayout dashboardLayout = new javax.swing.GroupLayout(dashboard);
@@ -781,6 +790,12 @@ public class AdminPages extends javax.swing.JFrame {
             .addGroup(dashboardLayout.createSequentialGroup()
                 .addGap(51, 51, 51)
                 .addGroup(dashboardLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(dashboardLayout.createSequentialGroup()
+                        .addComponent(cardPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 221, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(31, 31, 31)
+                        .addComponent(cardPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, 221, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(32, 32, 32)
+                        .addComponent(cardPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, 221, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(dashboardLayout.createSequentialGroup()
                         .addGap(405, 405, 405)
                         .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -792,7 +807,12 @@ public class AdminPages extends javax.swing.JFrame {
             .addGroup(dashboardLayout.createSequentialGroup()
                 .addGap(141, 141, 141)
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 141, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 7, Short.MAX_VALUE)
+                .addGroup(dashboardLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(cardPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(cardPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(cardPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(114, 114, 114))
         );
@@ -997,15 +1017,19 @@ public class AdminPages extends javax.swing.JFrame {
                 .addGap(183, 183, 183))
             .addGroup(registerStudentLayout.createSequentialGroup()
                 .addGap(351, 351, 351)
-                .addComponent(jLabel12)
-                .addContainerGap(388, Short.MAX_VALUE))
+                .addGroup(registerStudentLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(studentRegisterPic, javax.swing.GroupLayout.PREFERRED_SIZE, 172, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel12))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         registerStudentLayout.setVerticalGroup(
             registerStudentLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(registerStudentLayout.createSequentialGroup()
                 .addGap(141, 141, 141)
                 .addComponent(jLabel12)
-                .addGap(156, 156, 156)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(studentRegisterPic, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
                 .addGroup(registerStudentLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel13)
                     .addComponent(nameField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -1135,9 +1159,14 @@ public class AdminPages extends javax.swing.JFrame {
                                 .addComponent(newStudentProfileTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 215, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                 .addContainerGap(128, Short.MAX_VALUE))
             .addGroup(editStudentLayout.createSequentialGroup()
-                .addGap(366, 366, 366)
-                .addComponent(jLabel18)
-                .addGap(43, 43, 43)
+                .addGroup(editStudentLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(editStudentLayout.createSequentialGroup()
+                        .addGap(366, 366, 366)
+                        .addComponent(jLabel18))
+                    .addGroup(editStudentLayout.createSequentialGroup()
+                        .addGap(333, 333, 333)
+                        .addComponent(studentSetImage1, javax.swing.GroupLayout.PREFERRED_SIZE, 177, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(18, 18, 18)
                 .addComponent(uploadStudentNewProfileBtn)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
@@ -1146,8 +1175,10 @@ public class AdminPages extends javax.swing.JFrame {
             .addGroup(editStudentLayout.createSequentialGroup()
                 .addGap(142, 142, 142)
                 .addComponent(jLabel18)
-                .addGap(137, 137, 137)
-                .addComponent(uploadStudentNewProfileBtn)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(editStudentLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(uploadStudentNewProfileBtn)
+                    .addComponent(studentSetImage1, javax.swing.GroupLayout.PREFERRED_SIZE, 148, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 22, Short.MAX_VALUE)
                 .addGroup(editStudentLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, editStudentLayout.createSequentialGroup()
@@ -1337,21 +1368,27 @@ public class AdminPages extends javax.swing.JFrame {
                 .addGap(92, 92, 92)
                 .addGroup(createLecturerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(createLecturerLayout.createSequentialGroup()
-                        .addGroup(createLecturerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel25)
-                            .addComponent(jLabel26)
-                            .addComponent(jLabel30))
-                        .addGap(18, 18, 18)
                         .addGroup(createLecturerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addComponent(lecContactField, javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(lecICField, javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(lcNameField, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(48, 48, 48)
-                        .addGroup(createLecturerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel32)
-                            .addComponent(jLabel31)
-                            .addComponent(jLabel50))
-                        .addGap(18, 18, 18)
+                            .addGroup(createLecturerLayout.createSequentialGroup()
+                                .addGroup(createLecturerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel25)
+                                    .addComponent(jLabel26)
+                                    .addComponent(jLabel30))
+                                .addGap(18, 18, 18)
+                                .addGroup(createLecturerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                    .addComponent(lecContactField, javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(lecICField, javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(lcNameField, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(48, 48, 48)
+                                .addGroup(createLecturerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel32)
+                                    .addComponent(jLabel31)
+                                    .addComponent(jLabel50))
+                                .addGap(18, 18, 18))
+                            .addGroup(createLecturerLayout.createSequentialGroup()
+                                .addGap(231, 231, 231)
+                                .addComponent(setLecturerRegisterImage, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addGap(83, 83, 83)))
                         .addGroup(createLecturerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(createLecturerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                                 .addComponent(lecMajorComboBox, javax.swing.GroupLayout.Alignment.LEADING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -1376,10 +1413,12 @@ public class AdminPages extends javax.swing.JFrame {
             .addGroup(createLecturerLayout.createSequentialGroup()
                 .addGap(150, 150, 150)
                 .addComponent(jLabel24)
-                .addGap(140, 140, 140)
-                .addGroup(createLecturerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(updateLecturerPictureBtn)
-                    .addComponent(lectureProfileName, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(createLecturerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(createLecturerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(updateLecturerPictureBtn)
+                        .addComponent(lectureProfileName, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(setLecturerRegisterImage, javax.swing.GroupLayout.PREFERRED_SIZE, 151, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(42, 42, 42)
                 .addGroup(createLecturerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(createLecturerLayout.createSequentialGroup()
@@ -1488,6 +1527,8 @@ public class AdminPages extends javax.swing.JFrame {
             editLecturerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, editLecturerLayout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(lecturerSetImage1, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(31, 31, 31)
                 .addComponent(uploadLecturerNewProfileBtn)
                 .addGap(295, 295, 295))
             .addGroup(editLecturerLayout.createSequentialGroup()
@@ -1543,8 +1584,10 @@ public class AdminPages extends javax.swing.JFrame {
             .addGroup(editLecturerLayout.createSequentialGroup()
                 .addGap(153, 153, 153)
                 .addComponent(jLabel35)
-                .addGap(132, 132, 132)
-                .addComponent(uploadLecturerNewProfileBtn)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(editLecturerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(uploadLecturerNewProfileBtn)
+                    .addComponent(lecturerSetImage1, javax.swing.GroupLayout.PREFERRED_SIZE, 149, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(27, 27, 27)
                 .addGroup(editLecturerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(editLecturerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
@@ -1940,16 +1983,23 @@ public class AdminPages extends javax.swing.JFrame {
                         .addComponent(jButton1)))
                 .addGap(285, 285, 285))
             .addGroup(editUserLayout.createSequentialGroup()
-                .addGap(373, 373, 373)
-                .addComponent(jLabel54)
-                .addContainerGap(404, Short.MAX_VALUE))
+                .addGroup(editUserLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(editUserLayout.createSequentialGroup()
+                        .addGap(373, 373, 373)
+                        .addComponent(jLabel54))
+                    .addGroup(editUserLayout.createSequentialGroup()
+                        .addGap(364, 364, 364)
+                        .addComponent(userSetImage1, javax.swing.GroupLayout.PREFERRED_SIZE, 165, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         editUserLayout.setVerticalGroup(
             editUserLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(editUserLayout.createSequentialGroup()
                 .addGap(158, 158, 158)
                 .addComponent(jLabel54)
-                .addGap(152, 152, 152)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(userSetImage1, javax.swing.GroupLayout.PREFERRED_SIZE, 134, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(editUserLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(userIDLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 19, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel34))
@@ -2714,6 +2764,10 @@ public class AdminPages extends javax.swing.JFrame {
     private javax.swing.JButton addStudentButton;
     private javax.swing.JButton cancelButton2;
     private javax.swing.JButton cancelEditStudentBtn;
+    private Swing.CardPanel cardPanel1;
+    private Swing.CardPanel cardPanel2;
+    private Swing.CardPanel cardPanel3;
+    private ChartFrame.Chart chart;
     private javax.swing.JButton clearLecDetails;
     private javax.swing.JTextField contactField;
     private javax.swing.JComboBox<String> courseComboBox;
@@ -2816,6 +2870,7 @@ public class AdminPages extends javax.swing.JFrame {
     private javax.swing.JTextField lecturePageSearchField;
     private javax.swing.JLabel lectureProfileName;
     private javax.swing.JPanel lecturer;
+    private Admin.SetUserProfile lecturerSetImage1;
     private javax.swing.JTable lecturerTable;
     private javax.swing.JPanel menu1;
     private javax.swing.JPanel menu2;
@@ -2835,6 +2890,7 @@ public class AdminPages extends javax.swing.JFrame {
     private javax.swing.JLabel roleLabel;
     private javax.swing.JLabel roleNoLabel;
     private javax.swing.JButton saveIntakeBtn;
+    private Admin.SetUserProfile setLecturerRegisterImage;
     private javax.swing.JPanel student;
     private javax.swing.JLabel studentEmailLabel;
     private javax.swing.JLabel studentICLabel;
@@ -2844,7 +2900,9 @@ public class AdminPages extends javax.swing.JFrame {
     private javax.swing.JComboBox<String> studentPageFilterBox;
     private javax.swing.JTextField studentPageSearchField;
     private javax.swing.JTextField studentPicTextField;
+    private Admin.SetUserProfile studentRegisterPic;
     private javax.swing.JScrollPane studentScrollPane;
+    private Admin.SetUserProfile studentSetImage1;
     private javax.swing.JPanel studentTablePanel;
     private javax.swing.JLabel studentnNameLabel;
     private javax.swing.JComboBox<String> studyLevelComboBox;
@@ -2858,6 +2916,7 @@ public class AdminPages extends javax.swing.JFrame {
     private javax.swing.JTextField userNewPasswordField;
     private javax.swing.JPanel userPage;
     private javax.swing.JTextField userPageSearchField;
+    private Admin.SetUserProfile userSetImage1;
     private javax.swing.JTable userTable;
     private javax.swing.JCheckBox yesCheckBox;
     private javax.swing.ButtonGroup yesNoGroup;
