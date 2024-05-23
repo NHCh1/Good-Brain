@@ -151,7 +151,7 @@ public class AdminPages extends javax.swing.JFrame {
                 Intake intakeClass = new Intake();
                 intakeClass.addIntakeIntoComboBox(newIntakeCodeComboBox);
 
-                File imageFile = new File("src/image/" + studID + ".jpg");
+                File imageFile = new File("src/Profile/" + studID + ".jpg");
 
                  if (imageFile.exists()) {
                     studentSetImage1.setIcon(new ImageIcon(imageFile.getAbsolutePath()));
@@ -205,7 +205,7 @@ public class AdminPages extends javax.swing.JFrame {
                 
                 addCourseIntoComboBoxForUpdate();
                 
-                lecturerSetImage1.setIcon(new ImageIcon(getClass().getResource("/image/" + id + ".jpg")));
+                lecturerSetImage1.setIcon(new ImageIcon(getClass().getResource("/Profile/" + id + ".jpg")));
                 lectureIDLabel.setText(id);
                 lcNameLabel.setText(name);
                 lcICLabel1.setText(ic);
@@ -273,7 +273,7 @@ public class AdminPages extends javax.swing.JFrame {
                 
                 jTabbedPane1.setSelectedIndex(10);
                 
-                userSetImage1.setIcon(new ImageIcon(getClass().getResource("/image/" + id + ".jpg")));
+                userSetImage1.setIcon(new ImageIcon(getClass().getResource("/Profile/" + id + ".jpg")));
                 userIDLabel.setText(id);
                 userNewPasswordField.setText(password);
                 roleNoLabel.setText(String.valueOf(roleno));
@@ -2067,7 +2067,8 @@ public class AdminPages extends javax.swing.JFrame {
     private void jLabel8MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel8MouseClicked
         int result = JOptionPane.showConfirmDialog(null, "Do you want to exit?", "Exit Confirmation", JOptionPane.YES_NO_OPTION);
         if (result == JOptionPane.YES_OPTION){
-            jTabbedPane1.setSelectedIndex(0);
+//            jTabbedPane1.setSelectedIndex(0);
+            System.exit(0);
         }
         else if (result == JOptionPane.NO_OPTION){
             JOptionPane.showMessageDialog(null, "You may continue with your work.", "Notification", JOptionPane.INFORMATION_MESSAGE);

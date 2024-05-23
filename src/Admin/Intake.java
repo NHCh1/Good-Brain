@@ -216,80 +216,7 @@ public class Intake {
         FileHandler fh = new FileHandler();
         fh.displayData("intake.txt", table);
     }
-    
-//    public void addIntakeIntoComboBox(JComboBox<String> cb, String currentIntakeCode) {
-//        try {
-//            cb.removeAllItems();
-//            BufferedReader br = new BufferedReader(new FileReader("intake.txt"));
-//            Object[] rows = br.lines().toArray();
-//
-//            LocalDate currentDate = LocalDate.now();
-//
-////             Add the current intake code to the combo box
-//            if (currentIntakeCode != null) {
-//                cb.addItem(currentIntakeCode);
-//            }
-//
-//            for (int i = 0; i < rows.length; i++) {
-//                String line = rows[i].toString();
-//                String[] dataRow = line.split(",");
-//                String intakeCode = dataRow[0];
-//                String rStartDate = dataRow[4];
-//                String rEndDate = dataRow[5];
-//
-//                DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
-//                LocalDate registrationStartDate = LocalDate.parse(rStartDate, formatter);
-//                LocalDate registrationEndDate = LocalDate.parse(rEndDate, formatter);
-//
-//                if (currentDate.isAfter(registrationStartDate) && currentDate.isBefore(registrationEndDate.plusDays(1))) {
-//                    cb.addItem(intakeCode);               
-//                }
-//            }
-//
-//        } catch (IOException e) {
-//            e.printStackTrace();
-//        }
-//    }
 
-//    public void addIntakeIntoComboBox(JComboBox<String> cb, String currentIntakeCode) {
-//    try {
-//        cb.removeAllItems();
-//        BufferedReader br = new BufferedReader(new FileReader("intake.txt"));
-//        Object[] rows = br.lines().toArray();
-//
-//        LocalDate currentDate = LocalDate.now();
-//
-//        // Add the current intake code to the combo box if it doesn't already exist
-//        if (!cb.getItemCount() > 0 && currentIntakeCode != null) {
-//            cb.addItem(currentIntakeCode);
-//        } else if (cb.getItemCount() > 0 && !cb.contains(currentIntakeCode)) {
-//            cb.addItem(currentIntakeCode);
-//        }
-//
-//        for (int i = 0; i < rows.length; i++) {
-//            String line = rows[i].toString();
-//            String[] dataRow = line.split(",");
-//            String intakeCode = dataRow[0];
-//            String rStartDate = dataRow[4];
-//            String rEndDate = dataRow[5];
-//
-//            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
-//            LocalDate registrationStartDate = LocalDate.parse(rStartDate, formatter);
-//            LocalDate registrationEndDate = LocalDate.parse(rEndDate, formatter);
-//
-//            if (currentDate.isAfter(registrationStartDate) && currentDate.isBefore(registrationEndDate.plusDays(1))) {
-//                if (!cb.contains(intakeCode)) {
-//                    cb.addItem(intakeCode);
-//                }
-//            }
-//        }
-//
-//    } catch (IOException e) {
-//        e.printStackTrace();
-//    }
-//}
-    
-    
     public void addIntakeIntoComboBox(JComboBox cb){
         try{
             cb.removeAllItems();
@@ -303,8 +230,8 @@ public class Intake {
                 String line = rows[i].toString();
                 String [] dataRow = line.split(";");
                 String intakeCode = dataRow[0];
-                String rStartDate = dataRow[5];
-                String rEndDate = dataRow[6];
+                String rStartDate = dataRow[6];
+                String rEndDate = dataRow[7];
 
                 DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
                 LocalDate registrationStartDate = LocalDate.parse(rStartDate, formatter);
