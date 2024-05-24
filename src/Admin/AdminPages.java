@@ -415,6 +415,7 @@ public class AdminPages extends javax.swing.JFrame {
         studentTablePanel = new javax.swing.JPanel();
         studentScrollPane = new javax.swing.JScrollPane();
         studentJTable = new javax.swing.JTable();
+        addStudentByIntakeButton = new javax.swing.JButton();
         registerStudent = new javax.swing.JPanel();
         jLabel12 = new javax.swing.JLabel();
         jLabel13 = new javax.swing.JLabel();
@@ -431,6 +432,13 @@ public class AdminPages extends javax.swing.JFrame {
         studentPicTextField = new javax.swing.JTextField();
         uploadStudentPicBtn = new javax.swing.JButton();
         studentRegisterPic = new Admin.SetUserProfile();
+        registerStudentByIntake = new javax.swing.JPanel();
+        jLabel59 = new javax.swing.JLabel();
+        addStudentBtn1 = new javax.swing.JButton();
+        jButton5 = new javax.swing.JButton();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jTable1 = new javax.swing.JTable();
+        intakeForGroupComboBox = new javax.swing.JComboBox<>();
         editStudent = new javax.swing.JPanel();
         jLabel18 = new javax.swing.JLabel();
         jLabel19 = new javax.swing.JLabel();
@@ -892,6 +900,14 @@ public class AdminPages extends javax.swing.JFrame {
 
         studentTablePanel.add(studentScrollPane, java.awt.BorderLayout.CENTER);
 
+        addStudentByIntakeButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icon/addStudentGroup.png"))); // NOI18N
+        addStudentByIntakeButton.setContentAreaFilled(false);
+        addStudentByIntakeButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                addStudentByIntakeButtonActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout studentLayout = new javax.swing.GroupLayout(student);
         student.setLayout(studentLayout);
         studentLayout.setHorizontalGroup(
@@ -903,20 +919,20 @@ public class AdminPages extends javax.swing.JFrame {
             .addGroup(studentLayout.createSequentialGroup()
                 .addGap(31, 31, 31)
                 .addGroup(studentLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(studentTablePanel, javax.swing.GroupLayout.PREFERRED_SIZE, 794, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(studentLayout.createSequentialGroup()
-                        .addComponent(studentTablePanel, javax.swing.GroupLayout.PREFERRED_SIZE, 794, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap(75, Short.MAX_VALUE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, studentLayout.createSequentialGroup()
                         .addComponent(studentPageFilterBox, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(82, 82, 82)
                         .addComponent(studentPageSearchField, javax.swing.GroupLayout.PREFERRED_SIZE, 299, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jLabel2)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGap(84, 84, 84)
                         .addComponent(printNameListBtn)
                         .addGap(18, 18, 18)
                         .addComponent(addStudentButton)
-                        .addGap(73, 73, 73))))
+                        .addGap(18, 18, 18)
+                        .addComponent(addStudentByIntakeButton)))
+                .addContainerGap(73, Short.MAX_VALUE))
         );
         studentLayout.setVerticalGroup(
             studentLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -925,17 +941,20 @@ public class AdminPages extends javax.swing.JFrame {
                 .addComponent(jLabel4)
                 .addGap(40, 40, 40)
                 .addGroup(studentLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(printNameListBtn)
                     .addGroup(studentLayout.createSequentialGroup()
-                        .addGap(8, 8, 8)
-                        .addGroup(studentLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addGroup(studentLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                .addComponent(studentPageSearchField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(studentPageFilterBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(jLabel2)))
-                    .addComponent(addStudentButton))
-                .addGap(18, 18, 18)
-                .addComponent(studentTablePanel, javax.swing.GroupLayout.PREFERRED_SIZE, 285, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGroup(studentLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(addStudentButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(printNameListBtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addGroup(studentLayout.createSequentialGroup()
+                                .addGap(8, 8, 8)
+                                .addGroup(studentLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addGroup(studentLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                        .addComponent(studentPageSearchField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(studentPageFilterBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addComponent(jLabel2))))
+                        .addGap(18, 18, 18)
+                        .addComponent(studentTablePanel, javax.swing.GroupLayout.PREFERRED_SIZE, 285, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(addStudentByIntakeButton))
                 .addContainerGap(122, Short.MAX_VALUE))
         );
 
@@ -1058,6 +1077,74 @@ public class AdminPages extends javax.swing.JFrame {
         );
 
         jTabbedPane1.addTab("tab4", registerStudent);
+
+        registerStudentByIntake.setBackground(new java.awt.Color(239, 240, 234));
+
+        jLabel59.setFont(new java.awt.Font("Serif", 1, 18)); // NOI18N
+        jLabel59.setText("Student Registration");
+
+        addStudentBtn1.setText("Add");
+        addStudentBtn1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                addStudentBtn1ActionPerformed(evt);
+            }
+        });
+
+        jButton5.setText("Load");
+        jButton5.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton5ActionPerformed(evt);
+            }
+        });
+
+        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "Name", "IC", "Contact"
+            }
+        ));
+        jScrollPane1.setViewportView(jTable1);
+
+        javax.swing.GroupLayout registerStudentByIntakeLayout = new javax.swing.GroupLayout(registerStudentByIntake);
+        registerStudentByIntake.setLayout(registerStudentByIntakeLayout);
+        registerStudentByIntakeLayout.setHorizontalGroup(
+            registerStudentByIntakeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(registerStudentByIntakeLayout.createSequentialGroup()
+                .addGroup(registerStudentByIntakeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(registerStudentByIntakeLayout.createSequentialGroup()
+                        .addGap(361, 361, 361)
+                        .addComponent(jLabel59))
+                    .addGroup(registerStudentByIntakeLayout.createSequentialGroup()
+                        .addGap(45, 45, 45)
+                        .addGroup(registerStudentByIntakeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(addStudentBtn1)
+                            .addGroup(registerStudentByIntakeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 783, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGroup(registerStudentByIntakeLayout.createSequentialGroup()
+                                    .addComponent(intakeForGroupComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGap(18, 18, 18)
+                                    .addComponent(jButton5))))))
+                .addContainerGap(72, Short.MAX_VALUE))
+        );
+        registerStudentByIntakeLayout.setVerticalGroup(
+            registerStudentByIntakeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(registerStudentByIntakeLayout.createSequentialGroup()
+                .addGap(147, 147, 147)
+                .addComponent(jLabel59)
+                .addGap(16, 16, 16)
+                .addGroup(registerStudentByIntakeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(intakeForGroupComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButton5))
+                .addGap(18, 18, 18)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 290, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(addStudentBtn1)
+                .addContainerGap(122, Short.MAX_VALUE))
+        );
+
+        jTabbedPane1.addTab("tab4", registerStudentByIntake);
 
         editStudent.setBackground(new java.awt.Color(239, 240, 234));
 
@@ -2702,6 +2789,20 @@ public class AdminPages extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_printNameListBtnActionPerformed
 
+    private void addStudentByIntakeButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addStudentByIntakeButtonActionPerformed
+        jTabbedPane1.setSelectedIndex(3);
+        Intake intake = new Intake();
+        intake.addIntakeIntoComboBox(intakeForGroupComboBox);
+    }//GEN-LAST:event_addStudentByIntakeButtonActionPerformed
+
+    private void addStudentBtn1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addStudentBtn1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_addStudentBtn1ActionPerformed
+
+    private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton5ActionPerformed
+
      private void filterTable() {
         DefaultTableModel table = (DefaultTableModel) studentJTable.getModel();
         String selectedItem = (String) studentPageFilterBox.getSelectedItem();
@@ -2761,7 +2862,9 @@ public class AdminPages extends javax.swing.JFrame {
     private javax.swing.JButton addLecturerBtn;
     private javax.swing.JLabel addLecturerLabel;
     private javax.swing.JButton addStudentBtn;
+    private javax.swing.JButton addStudentBtn1;
     private javax.swing.JButton addStudentButton;
+    private javax.swing.JButton addStudentByIntakeButton;
     private javax.swing.JButton cancelButton2;
     private javax.swing.JButton cancelEditStudentBtn;
     private Swing.CardPanel cardPanel1;
@@ -2783,6 +2886,7 @@ public class AdminPages extends javax.swing.JFrame {
     private javax.swing.JComboBox<String> intakeCodeComboBox;
     private javax.swing.JComboBox<String> intakeDurationComboBox;
     private com.toedter.calendar.JDateChooser intakeEndDateChooser;
+    private javax.swing.JComboBox<String> intakeForGroupComboBox;
     private javax.swing.JTextField intakePageSearchField;
     private com.toedter.calendar.JDateChooser intakeRegisterEndDateChooser;
     private com.toedter.calendar.JDateChooser intakeRegisterStartDateChooser;
@@ -2792,6 +2896,7 @@ public class AdminPages extends javax.swing.JFrame {
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
+    private javax.swing.JButton jButton5;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
@@ -2846,15 +2951,18 @@ public class AdminPages extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel56;
     private javax.swing.JLabel jLabel57;
     private javax.swing.JLabel jLabel58;
+    private javax.swing.JLabel jLabel59;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JTabbedPane jTabbedPane1;
+    private javax.swing.JTable jTable1;
     private javax.swing.JLabel lcEmailLabel;
     private javax.swing.JLabel lcICLabel1;
     private javax.swing.JTextField lcNameField;
@@ -2886,6 +2994,7 @@ public class AdminPages extends javax.swing.JFrame {
     private javax.swing.JCheckBox noCheckBox;
     private javax.swing.JButton printNameListBtn;
     private javax.swing.JPanel registerStudent;
+    private javax.swing.JPanel registerStudentByIntake;
     private javax.swing.ButtonGroup roleGroup;
     private javax.swing.JLabel roleLabel;
     private javax.swing.JLabel roleNoLabel;
