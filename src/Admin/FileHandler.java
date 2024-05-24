@@ -11,11 +11,6 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
-import java.util.ArrayList;
-import java.util.List;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
@@ -115,51 +110,6 @@ public class FileHandler {
         inputFile.delete();
         tempFile.renameTo(inputFile);
     }
-    
-//    public void displayProtectedPassword(String fileName, DefaultTableModel table) {
-//        File file = new File(fileName);
-//
-//        if (!file.exists()) {
-//            table.setRowCount(0);
-//            return;
-//        }
-//
-//        try {
-//            BufferedReader reader = new BufferedReader(new FileReader(file));
-//            Object[] tableRows = reader.lines().toArray();
-//
-//            for (int i = 0; i < tableRows.length; i++) {
-//                String line = tableRows[i].toString().trim();
-//                String[] dataRow = line.split(",");
-//
-//                // Mask the password
-//                if (dataRow.length > 1 && dataRow[1] != null) {
-//                    dataRow[1] = hidePassword(dataRow[1]);
-//                }
-//
-//                table.addRow(dataRow);
-//            }
-//
-//        } catch (FileNotFoundException ex) {
-//            JOptionPane.showMessageDialog(null, "File not exist.", "Error", JOptionPane.ERROR_MESSAGE);
-//        }
-//    }
-//
-//    private String hidePassword(String password) {
-//        StringBuilder hiddenPassword = new StringBuilder();
-//        for (int i = 0; i < password.length(); i++) {
-//            hiddenPassword.append("*");
-//        }
-//        return hiddenPassword.toString();
-//    }
-//    
-//    public String showActualPassword(String hiddenPassword) {
-//        StringBuilder actualPassword = new StringBuilder();
-//        for (int i = 0; i < hiddenPassword.length(); i++) {
-//            actualPassword.append(hiddenPassword.charAt(i));
-//        }
-//        return actualPassword.toString();
-//    }
         
         
 }

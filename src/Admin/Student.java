@@ -64,16 +64,6 @@ public class Student {
         this.password = password;
     }
     
-    //Update student details
-//    public Student(String id, String name, String ic, String contact, String email, String intake, String lecture){
-//        this.studentID = id;
-//        this.name = name;
-//        this.ic = ic;
-//        this.newContact = contact;
-//        this.email = email;
-//        this.newIntake = intake;
-//        this.assignedLecturer = lecture;
-//    }
     
     public Student(DefaultTableModel table){
         this.table = table;
@@ -85,10 +75,6 @@ public class Student {
         this.studentID = id;
     }
     
-    //pass the assigned lecturer during lc registration
-//    public Student (String lecturer){
-//        this.assignedLecturer = lecturer;
-//    }
     
     public String getStudentID(){
         createStudentID();
@@ -223,7 +209,41 @@ public class Student {
         JOptionPane.showMessageDialog(null, message, "Error in" + field, JOptionPane.ERROR_MESSAGE);
     }
     
-    public void addStudent(){
+    //might add another (1 individual 1 for intake)
+//    public void addStudent(){
+//        try{
+//            FileWriter writer = new FileWriter("student.txt", true);            
+//            writer.write(studentID + ";" + name + ";" + ic + ";" + contact + ";" + email + ";" + intake + "\n");
+//            writer.close();
+//
+//            Icon icon = new ImageIcon(getClass().getResource("/Icon/success.png"));
+//            JOptionPane.showMessageDialog(null, "New student has been added! ", 
+//                                "Notification", JOptionPane.INFORMATION_MESSAGE, icon);
+//        }
+//        catch (IOException e) {
+//            JOptionPane.showMessageDialog(null, "Failed to add student! ", "Error",
+//                    JOptionPane.ERROR_MESSAGE);
+//        }
+//    }
+    
+     public void addStudent(){
+        try{
+            FileWriter writer = new FileWriter("student.txt", true);            
+            writer.write(studentID + ";" + name + ";" + ic + ";" + contact + ";" + email + ";" + "-" + "\n");
+            writer.close();
+
+            Icon icon = new ImageIcon(getClass().getResource("/Icon/success.png"));
+            JOptionPane.showMessageDialog(null, "New student has been added! ", 
+                                "Notification", JOptionPane.INFORMATION_MESSAGE, icon);
+        }
+        catch (IOException e) {
+            JOptionPane.showMessageDialog(null, "Failed to add student! ", "Error",
+                    JOptionPane.ERROR_MESSAGE);
+        }
+    }
+    
+    //new constructor for retrieving the intake from combo box and student details from jtable
+    public void addStudentByIntake(){
         try{
             FileWriter writer = new FileWriter("student.txt", true);            
             writer.write(studentID + ";" + name + ";" + ic + ";" + contact + ";" + email + ";" + intake + "\n");
