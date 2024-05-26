@@ -2807,9 +2807,13 @@ public class AdminPages extends javax.swing.JFrame {
 //                System.out.println("Row: ID=" + row[0] + ", Name=" + row[1]);
 //            }
 
+//            PrintNameList print = new PrintNameList();
+//            print.showForm(data.toArray(new Object[0][0]), intakeCode);
+//            print.printPanel();
+
             PrintNameList print = new PrintNameList();
             print.showForm(data.toArray(new Object[0][0]), intakeCode);
-            print.printPanel();
+            print.generatePdf();
         }
     }//GEN-LAST:event_printNameListBtnActionPerformed
 
