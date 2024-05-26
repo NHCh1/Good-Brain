@@ -12,4 +12,8 @@ L011;Hajra Mclaughlin;691008144015;60133820514;L011@staff.goodbrain.edu.my;Data 
 L012;Rachel Robbins;921106544313;60124115796;L012@staff.goodbrain.edu.my;Digital Forensics;Design;No
 L013;Athena Vazquez;890524461693;60143628179;L013@staff.goodbrain.edu.my;Digital Marketing;Finance;No
 L014;Ashwin Bryan;760319029109;60123456789;L014@staff.goodbrain.edu.my;Intelligent System;Banking;No
-L015;Liliana Mcmahon;890428111435;60185825800;L015@staff.goodbrain.edu.my;Software Engineering;FinTech;No
+L015;Test lecture one;940212-94-4431;60178985426;L015@staff.goodbrain.edu.my;Digital Forensic;Psychology;Yes
+L016;Test lecture one;940212-94-4431;60178985426;L015@staff.goodbrain.edu.my;Digital Forensic;Psychology;Yes
+L017;Test lecture one;940212-94-4431;60178985426;L015@staff.goodbrain.edu.my;Digital Forensic;Psychology;Yes
+L018;Test lecture one;940212-94-4431;60178985426;L015@staff.goodbrain.edu.my;Digital Forensic;Psychology;Yes
+L019;Test lecture one;940212-94-4431;60178985426;L015@staff.goodbrain.edu.my;Digital Forensic;Psychology;Yes

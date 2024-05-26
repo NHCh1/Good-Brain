@@ -314,7 +314,7 @@ public class Student {
      public void addStudent(){
         try{
             FileWriter writer = new FileWriter("student.txt", true);            
-            writer.write(studentID + ";" + name + ";" + ic + ";" + contact + ";" + email + ";" + "-" + "\n");
+            writer.write(studentID + ";" + name + ";" + ic + ";" + contact + ";" + email + ";" + intake + "\n");
             writer.close();
 
             Icon icon = new ImageIcon(getClass().getResource("/Icon/success.png"));
@@ -325,9 +325,7 @@ public class Student {
             JOptionPane.showMessageDialog(null, "Failed to add student! ", "Error",JOptionPane.ERROR_MESSAGE);
         }
     }
-    
 
-    
     public void createStudentAccount(){
         try{
             FileWriter fw = new FileWriter("user.txt", true);

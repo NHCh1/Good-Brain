@@ -104,11 +104,15 @@ public class FileHandler {
         reader.close();
         writer.close();
 
-//        Files.deleteIfExists(Paths.get(inputFile.getPath()));
-//        Files.move(Paths.get(tempFile.getPath()), Paths.get(inputFile.getPath()));
-        
-        inputFile.delete();
-        tempFile.renameTo(inputFile);
+//        inputFile.delete();
+//        tempFile.renameTo(inputFile);
+        if (!inputFile.delete()) {
+            throw new IOException("Failed to delete original user file");
+        }
+
+        if (!tempFile.renameTo(inputFile)) {
+            throw new IOException("Failed to rename temporary user file");
+        }
     }
         
         

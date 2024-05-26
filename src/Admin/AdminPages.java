@@ -59,16 +59,8 @@ public class AdminPages extends javax.swing.JFrame {
     
     public AdminPages() {
         initComponents();
-        FileHandler fh = new FileHandler();
-        String totalLecturer = String.valueOf(fh.countTotalLecturer());
-        String totalStudent = String.valueOf(fh.countTotalStudent());
-        String totalIntake = String.valueOf(fh.countTotalIntake());
-        
+        displayUserCount();
 
-        cardPanel1.setData(new CardModel(new ImageIcon(getClass().getResource("/Icon/lecturer.png")), "Lecturer", totalLecturer));
-        cardPanel2.setData(new CardModel(new ImageIcon(getClass().getResource("/Icon/student.png")), "Student", totalStudent));
-        cardPanel3.setData(new CardModel(new ImageIcon(getClass().getResource("/Icon/intake.png")), "Intake", totalIntake));
-        
         //set gradient color to cell
 //        TableGradientCell tableGradient = new TableGradientCell(new Color(23,161,115), new Color(12,12,14));
         studentJTable.setDefaultRenderer(Object.class, new TableGradientCell());
@@ -155,8 +147,9 @@ public class AdminPages extends javax.swing.JFrame {
 
                  if (imageFile.exists()) {
                     studentSetImage1.setIcon(new ImageIcon(imageFile.getAbsolutePath()));
-                } else {
-                    // Handle the case where the image file doesn't exist
+//                        studentSetImage1.setIcon(new ImageIcon(imageFile.getAbsolutePath() + "?" + System.currentTimeMillis()));
+                }
+                 else {
                     studentSetImage1.setIcon(null); // or set a default image
                 }
                 
@@ -181,6 +174,7 @@ public class AdminPages extends javax.swing.JFrame {
                     table.removeRow(row);
                     Student delete = new Student(table, id);
                     delete.deleteStudent();
+                    displayUserCount();
                 }
                 else if(decision == JOptionPane.NO_OPTION){
                     Icon icon = new ImageIcon(getClass().getResource("/Icon/shield.png"));
@@ -235,6 +229,7 @@ public class AdminPages extends javax.swing.JFrame {
                     lecTable.removeRow(row);
                     Lecturer delete = new Lecturer(lecTable, id);
                     delete.deleteLecturer();
+                    displayUserCount();
                 }
                 else if(decision == JOptionPane.NO_OPTION){
                     Icon icon = new ImageIcon(getClass().getResource("/Icon/shield.png"));
@@ -294,6 +289,7 @@ public class AdminPages extends javax.swing.JFrame {
                     usertbl.removeRow(row);
                     User delete = new User(usertbl, id);
                     delete.deleteUser();
+                    displayUserCount();
                 }
                 else if(decision == JOptionPane.NO_OPTION){
                     Icon icon = new ImageIcon(getClass().getResource("/Icon/shield.png"));
@@ -327,6 +323,19 @@ public class AdminPages extends javax.swing.JFrame {
         textField.setFont(font);
         textField.setForeground(Color.BLACK);
     }       
+    
+    
+    private void displayUserCount(){
+        FileHandler fh = new FileHandler();
+        String totalLecturer = String.valueOf(fh.countTotalLecturer());
+        String totalStudent = String.valueOf(fh.countTotalStudent());
+        String totalIntake = String.valueOf(fh.countTotalIntake());
+        
+        cardPanel1.setData(new CardModel(new ImageIcon(getClass().getResource("/Icon/lecturer.png")), "Lecturer", totalLecturer));
+        cardPanel2.setData(new CardModel(new ImageIcon(getClass().getResource("/Icon/student.png")), "Student", totalStudent));
+        cardPanel3.setData(new CardModel(new ImageIcon(getClass().getResource("/Icon/intake.png")), "Intake", totalIntake));
+        
+    }
     
     private void displayStudentTable(){
         DefaultTableModel table = (DefaultTableModel) studentJTable.getModel();
@@ -366,7 +375,6 @@ public class AdminPages extends javax.swing.JFrame {
         
         TableAlignment alignment = new TableAlignment();
         alignment.alignTable(userTable);
-        //try see can encrypt the password column anot
     }
 
     /**
@@ -1280,7 +1288,7 @@ public class AdminPages extends javax.swing.JFrame {
                 .addGroup(editStudentLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(uploadStudentNewProfileBtn)
                     .addComponent(studentSetImage1, javax.swing.GroupLayout.PREFERRED_SIZE, 148, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 25, Short.MAX_VALUE)
                 .addGroup(editStudentLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, editStudentLayout.createSequentialGroup()
                         .addGroup(editStudentLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
@@ -1320,7 +1328,7 @@ public class AdminPages extends javax.swing.JFrame {
                 .addGroup(editStudentLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(updateStudentBtn)
                     .addComponent(cancelEditStudentBtn))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(159, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("tab5", editStudent);
@@ -2175,45 +2183,51 @@ public class AdminPages extends javax.swing.JFrame {
         }  
     }//GEN-LAST:event_exitLabelMouseClicked
 
-    
-//    private void saveNewImage(String id) throws IOException {
-//        File sourceFile = openFileChooser.getSelectedFile();
-//        if (sourceFile != null) {
-//            File destFolder = new File("src/image/");
-//            File destFile = new File(destFolder, id + ".jpg");
-//            Files.copy(sourceFile.toPath(), destFile.toPath(), StandardCopyOption.REPLACE_EXISTING);
-//        }     
-//    }
-    
-    
-//    private void saveNewImage(String userid) throws IOException {
-//        File sourceFile = openFileChooser.getSelectedFile();
-//
-//        if (sourceFile != null) {
-//            File destFolder = new File("src/image/");
-//            File destFile = new File(destFolder, userid + ".jpg");
-//
-//            destFile.delete();
-//            Files.copy(sourceFile.toPath(), destFile.toPath(), StandardCopyOption.REPLACE_EXISTING);
-//
-//            // Update the JLabel with the new image
-//            studentSetImage1.setIcon(new ImageIcon(destFile.getAbsolutePath()));
-//        }
-//    }
-//    Version 2
     private void saveNewImage(String id) throws IOException {
-    File sourceFile = openFileChooser.getSelectedFile();
+        File sourceFile = openFileChooser.getSelectedFile();
 
-    if (sourceFile != null) {
-        File destFolder = new File("src/image/");
-        File destFile = new File(destFolder, id + ".jpg");
+        if (sourceFile != null) {
+            File destFolder = new File("src/Profile/");
+            File destFile = new File(destFolder, id + ".jpg");
 
-        // Delete the old image file
-        destFile.delete();
+            // Delete the old image file
+            if (destFile.exists()) {
+                destFile.delete();
+            }
 
-        Files.copy(sourceFile.toPath(), destFile.toPath(), StandardCopyOption.REPLACE_EXISTING);
+            Files.copy(sourceFile.toPath(), destFile.toPath(), StandardCopyOption.REPLACE_EXISTING);
+            updateProfile(id);
+        }
     }
-}
+    
+    private void updateProfile(String id) {
+        File imageFile = new File("src/Profile/" + id + ".jpg");
+
+        if (imageFile.exists()) {
+            String imagePath = imageFile.getAbsolutePath() + "?" + System.currentTimeMillis();
+            if (id.startsWith("S")) {
+                // Update student profile picture
+                studentSetImage1.setIcon(new ImageIcon(imagePath));
+            }
+            else if (id.startsWith("L")) {
+                // Update lecturer profile picture
+                lecturerSetImage1.setIcon(new ImageIcon(imagePath));
+            }
+            else {
+                // Handle invalid ID or set a default image
+                studentSetImage1.setIcon(null);
+                lecturerSetImage1.setIcon(null);
+            }
+        } else {
+            // Handle the case where the image file doesn't exist
+            if (id.startsWith("S")) {
+                studentSetImage1.setIcon(null); // or set a default student image
+            } else if (id.startsWith("L")) {
+                lecturerSetImage1.setIcon(null); // or set a default lecturer image
+            }
+        }
+    }
+
 
     private void addStudentBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addStudentBtnActionPerformed
         String name = nameField.getText().trim();
@@ -2259,7 +2273,7 @@ public class AdminPages extends javax.swing.JFrame {
             show.showStudent();
             jTabbedPane1.setSelectedIndex(1);   //return to student page
         }
-          
+        displayUserCount();
     }//GEN-LAST:event_addStudentBtnActionPerformed
 
     private void saveImageToFolder(String id) {
@@ -2311,11 +2325,8 @@ public class AdminPages extends javax.swing.JFrame {
             Logger.getLogger(AdminPages.class.getName()).log(Level.SEVERE, null, ex);
         }
         
-        //worst situatin: remian at the curent page
-//        clearStudentDetails();
-        
         displayStudentTable();
-//        jTabbedPane1.setSelectedIndex(1);
+        jTabbedPane1.setSelectedIndex(1);
         
     }//GEN-LAST:event_updateStudentBtnActionPerformed
 
@@ -2327,7 +2338,7 @@ public class AdminPages extends javax.swing.JFrame {
 //    }
     
     private void addLecturerLabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_addLecturerLabelMouseClicked
-        jTabbedPane1.setSelectedIndex(5);
+        jTabbedPane1.setSelectedIndex(6);
         addCourseIntoComboBox();
     }//GEN-LAST:event_addLecturerLabelMouseClicked
 
@@ -2440,7 +2451,7 @@ public class AdminPages extends javax.swing.JFrame {
             add.addLecturer();
             
             clearLecturerRegisterField();
-            
+            displayUserCount();
             displayLecturerTable();
             jTabbedPane1.setSelectedIndex(5);
         }
@@ -2840,6 +2851,7 @@ public class AdminPages extends javax.swing.JFrame {
         }
         student.addStudent(studentRecords); 
         student.createStudentAccount(userRecords);
+        displayUserCount();
         displayStudentTable();
         jTabbedPane1.setSelectedIndex(1);
     }//GEN-LAST:event_addStudentFromListBtnActionPerformed
