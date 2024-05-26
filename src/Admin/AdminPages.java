@@ -434,10 +434,10 @@ public class AdminPages extends javax.swing.JFrame {
         studentRegisterPic = new Admin.SetUserProfile();
         registerStudentByIntake = new javax.swing.JPanel();
         jLabel59 = new javax.swing.JLabel();
-        addStudentBtn1 = new javax.swing.JButton();
-        jButton5 = new javax.swing.JButton();
+        addStudentFromListBtn = new javax.swing.JButton();
+        loadStudentIntoTableButton = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        studentListTable = new javax.swing.JTable();
         intakeForGroupComboBox = new javax.swing.JComboBox<>();
         editStudent = new javax.swing.JPanel();
         jLabel18 = new javax.swing.JLabel();
@@ -633,6 +633,9 @@ public class AdminPages extends javax.swing.JFrame {
         menu2.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 menu2MouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                menu2MouseEntered(evt);
             }
         });
 
@@ -1083,21 +1086,21 @@ public class AdminPages extends javax.swing.JFrame {
         jLabel59.setFont(new java.awt.Font("Serif", 1, 18)); // NOI18N
         jLabel59.setText("Student Registration");
 
-        addStudentBtn1.setText("Add");
-        addStudentBtn1.addActionListener(new java.awt.event.ActionListener() {
+        addStudentFromListBtn.setText("Add");
+        addStudentFromListBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                addStudentBtn1ActionPerformed(evt);
+                addStudentFromListBtnActionPerformed(evt);
             }
         });
 
-        jButton5.setText("Load");
-        jButton5.addActionListener(new java.awt.event.ActionListener() {
+        loadStudentIntoTableButton.setText("Load");
+        loadStudentIntoTableButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton5ActionPerformed(evt);
+                loadStudentIntoTableButtonActionPerformed(evt);
             }
         });
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        studentListTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
@@ -1105,7 +1108,7 @@ public class AdminPages extends javax.swing.JFrame {
                 "Name", "IC", "Contact"
             }
         ));
-        jScrollPane1.setViewportView(jTable1);
+        jScrollPane1.setViewportView(studentListTable);
 
         javax.swing.GroupLayout registerStudentByIntakeLayout = new javax.swing.GroupLayout(registerStudentByIntake);
         registerStudentByIntake.setLayout(registerStudentByIntakeLayout);
@@ -1119,13 +1122,13 @@ public class AdminPages extends javax.swing.JFrame {
                     .addGroup(registerStudentByIntakeLayout.createSequentialGroup()
                         .addGap(45, 45, 45)
                         .addGroup(registerStudentByIntakeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(addStudentBtn1)
+                            .addComponent(addStudentFromListBtn)
                             .addGroup(registerStudentByIntakeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 783, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGroup(registerStudentByIntakeLayout.createSequentialGroup()
                                     .addComponent(intakeForGroupComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addGap(18, 18, 18)
-                                    .addComponent(jButton5))))))
+                                    .addComponent(loadStudentIntoTableButton))))))
                 .addContainerGap(72, Short.MAX_VALUE))
         );
         registerStudentByIntakeLayout.setVerticalGroup(
@@ -1136,11 +1139,11 @@ public class AdminPages extends javax.swing.JFrame {
                 .addGap(16, 16, 16)
                 .addGroup(registerStudentByIntakeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(intakeForGroupComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton5))
+                    .addComponent(loadStudentIntoTableButton))
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 290, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(addStudentBtn1)
+                .addComponent(addStudentFromListBtn)
                 .addContainerGap(122, Short.MAX_VALUE))
         );
 
@@ -2132,7 +2135,7 @@ public class AdminPages extends javax.swing.JFrame {
     }//GEN-LAST:event_menu2MouseClicked
 
     private void menu3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_menu3MouseClicked
-        jTabbedPane1.setSelectedIndex(4);
+        jTabbedPane1.setSelectedIndex(5);
         menu3.setBackground(new Color(139,188,213));
         menu1.setBackground(new Color(185,214,243));
         menu2.setBackground(new Color(185,214,243));
@@ -2438,7 +2441,7 @@ public class AdminPages extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void menu4MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_menu4MouseClicked
-        jTabbedPane1.setSelectedIndex(7);
+        jTabbedPane1.setSelectedIndex(8);
         menu4.setBackground(new Color(139,188,213));
         menu1.setBackground(new Color(185,214,243));
         menu2.setBackground(new Color(185,214,243));
@@ -2635,7 +2638,7 @@ public class AdminPages extends javax.swing.JFrame {
     }//GEN-LAST:event_intakePageSearchFieldKeyReleased
 
     private void menu5MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_menu5MouseClicked
-        jTabbedPane1.setSelectedIndex(9);
+        jTabbedPane1.setSelectedIndex(10);
         menu5.setBackground(new Color(139,188,213));
         menu1.setBackground(new Color(185,214,243));
         menu2.setBackground(new Color(185,214,243));
@@ -2795,13 +2798,45 @@ public class AdminPages extends javax.swing.JFrame {
         intake.addIntakeIntoComboBox(intakeForGroupComboBox);
     }//GEN-LAST:event_addStudentByIntakeButtonActionPerformed
 
-    private void addStudentBtn1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addStudentBtn1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_addStudentBtn1ActionPerformed
+    private void addStudentFromListBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addStudentFromListBtnActionPerformed
+        Student student = new Student();
+        student.initializeLastStudentID();
+        
+        String intakeCode = (String) intakeForGroupComboBox.getSelectedItem();
+        List<String> studentRecords = new ArrayList<>();
+        List<String> userRecords = new ArrayList<>();
+        
+        
+        for (int i = 0; i < studentListTable.getRowCount(); i++) {
+            String name = (String) studentListTable.getValueAt(i, 0);
+            String ic = (String) studentListTable.getValueAt(i, 1);
+            String contact = (String) studentListTable.getValueAt(i, 2);
 
-    private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
+            String studentID = student.createStudentIDForGroup();
+            String email = student.createEmailForGroup(studentID);
+            String password = student.createPasswordForGroup(ic, studentID);
+
+            String record = String.join(";", studentID, name, ic,contact, email, intakeCode);
+            studentRecords.add(record);
+            
+            String userRecord = String.join(";", studentID, password, "3");
+            userRecords.add(userRecord);
+        }
+        student.addStudent(studentRecords); 
+        student.createStudentAccount(userRecords);
+        displayStudentTable();
+        jTabbedPane1.setSelectedIndex(1);
+    }//GEN-LAST:event_addStudentFromListBtnActionPerformed
+
+    private void loadStudentIntoTableButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_loadStudentIntoTableButtonActionPerformed
+        DefaultTableModel table = (DefaultTableModel) studentListTable.getModel();
+        FileHandler fh = new FileHandler();
+        fh.displayData("studentList.txt", table);
+    }//GEN-LAST:event_loadStudentIntoTableButtonActionPerformed
+
+    private void menu2MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_menu2MouseEntered
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButton5ActionPerformed
+    }//GEN-LAST:event_menu2MouseEntered
 
      private void filterTable() {
         DefaultTableModel table = (DefaultTableModel) studentJTable.getModel();
@@ -2862,9 +2897,9 @@ public class AdminPages extends javax.swing.JFrame {
     private javax.swing.JButton addLecturerBtn;
     private javax.swing.JLabel addLecturerLabel;
     private javax.swing.JButton addStudentBtn;
-    private javax.swing.JButton addStudentBtn1;
     private javax.swing.JButton addStudentButton;
     private javax.swing.JButton addStudentByIntakeButton;
+    private javax.swing.JButton addStudentFromListBtn;
     private javax.swing.JButton cancelButton2;
     private javax.swing.JButton cancelEditStudentBtn;
     private Swing.CardPanel cardPanel1;
@@ -2896,7 +2931,6 @@ public class AdminPages extends javax.swing.JFrame {
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
-    private javax.swing.JButton jButton5;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
@@ -2962,7 +2996,6 @@ public class AdminPages extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JTabbedPane jTabbedPane1;
-    private javax.swing.JTable jTable1;
     private javax.swing.JLabel lcEmailLabel;
     private javax.swing.JLabel lcICLabel1;
     private javax.swing.JTextField lcNameField;
@@ -2980,6 +3013,7 @@ public class AdminPages extends javax.swing.JFrame {
     private javax.swing.JPanel lecturer;
     private Admin.SetUserProfile lecturerSetImage1;
     private javax.swing.JTable lecturerTable;
+    private javax.swing.JButton loadStudentIntoTableButton;
     private javax.swing.JPanel menu1;
     private javax.swing.JPanel menu2;
     private javax.swing.JPanel menu3;
@@ -3005,6 +3039,7 @@ public class AdminPages extends javax.swing.JFrame {
     private javax.swing.JLabel studentICLabel;
     private javax.swing.JLabel studentIDLabel;
     private javax.swing.JTable studentJTable;
+    private javax.swing.JTable studentListTable;
     private javax.swing.JTextField studentNewContactField;
     private javax.swing.JComboBox<String> studentPageFilterBox;
     private javax.swing.JTextField studentPageSearchField;

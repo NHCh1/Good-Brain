@@ -28,6 +28,7 @@ public class Student {
     private String contact;
     private String email;
     private String intake;
+    private int lastStudentID;
 //    private String assignedLecturer;
     
     private String newContact;
@@ -75,7 +76,11 @@ public class Student {
         this.studentID = id;
     }
     
-    
+    public Student(){
+        
+    }
+        
+    // ------- Registration by Individual STARTS -------
     public String getStudentID(){
         createStudentID();
         return studentID;
@@ -92,10 +97,6 @@ public class Student {
         return email;
     }
     
-    public Student(){
-        
-    }
-        
     private void createStudentID(){
         studentID = "";
         
@@ -137,17 +138,100 @@ public class Student {
         }
     }
     
-    private void createPassword(String ic){
-        if (ic.matches("\\d{6}-\\d{2}-\\d{4}")) {
-            icPrefix = ic.substring(0, 6);
-            password = icPrefix + studentID;
-        }
-    }
-    
     private void createEmail(){
         email = studentID + "@mail.goodbrain.edu.my";
     }
+    
+    private void createPassword(String ic){
+        if(ic.matches("\\d{6}-\\d{2}-\\d{4}")){
+            icPrefix = ic.substring(0,6);
+            password = icPrefix + studentID;
+        }
+    }
+    // ------- Registration by Individual END -------
+    
+    
+    // ------- Registration by Group STARTS -------
+    public void initializeLastStudentID() {
+        try {
+            File file = new File("student.txt");
+            if (!file.exists()) {
+                lastStudentID = 0;
+            } else {
+                BufferedReader br = new BufferedReader(new FileReader(file));
+                String line;
+                List<String> studentIDs = new ArrayList<>();
+
+                while ((line = br.readLine()) != null) {
+                    String[] data = line.split(";");
+                    studentIDs.add(data[0]);
+                }
+                br.close();
+
+                if (!studentIDs.isEmpty()) {
+                    int highestID = 0;
+                    for (String id : studentIDs) {
+                        int digit = Integer.parseInt(id.substring(1));
+                        if (digit > highestID) {
+                            highestID = digit;
+                        }
+                    }
+                    lastStudentID = highestID;
+                } else {
+                    lastStudentID = 0; // Initialize if no students are present in the file
+                }
+            }
+        } catch (IOException ex) {
+            Logger.getLogger(AdminPages.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    
+    public String createStudentIDForGroup() {
+        lastStudentID++;
+        studentID = "S" + String.format("%03d", lastStudentID);
+        return studentID;
+    }
+    
+    public String createPasswordForGroup(String ic, String id){
+        if(ic.matches("\\d{6}-\\d{2}-\\d{4}")){
+            icPrefix = ic.substring(0,6);
+            return icPrefix + studentID;
+        }
+        return null;
+    }
+    
+    public String createEmailForGroup (String studentID){
+        return studentID + "@mail.goodbrain.edu.my";
+    }
      
+    public void addStudent(List<String> studentData){
+        try(BufferedWriter bw = new BufferedWriter(new FileWriter("student.txt", true))){
+            for(String data : studentData){
+                bw.write(data);
+                bw.newLine();
+            }
+            Icon icon = new ImageIcon(getClass().getResource("/Icon/success.png"));
+            JOptionPane.showMessageDialog(null, "Students has been added! ","Notification", JOptionPane.INFORMATION_MESSAGE, icon);
+            }
+        
+        catch (IOException ie){
+            JOptionPane.showMessageDialog(null, "Failed to add student! ", "Error",JOptionPane.ERROR_MESSAGE);
+        }
+    }
+    
+    public void createStudentAccount(List<String> rec){
+        try(BufferedWriter bw = new BufferedWriter(new FileWriter("user.txt", true))){
+            for(String data : rec){
+                bw.write(data);
+                bw.newLine();
+            }
+        }
+        catch (IOException ie){
+            JOptionPane.showMessageDialog(null, "Failed to add users! ", "Error",JOptionPane.ERROR_MESSAGE);
+        }
+    }
+    // ------- Registration by Group END -------
+    
     public List<String> studentValidation(){
         List<String> errors = new ArrayList<>();
         StringBuilder errorMessage = new StringBuilder();
@@ -209,23 +293,6 @@ public class Student {
         JOptionPane.showMessageDialog(null, message, "Error in" + field, JOptionPane.ERROR_MESSAGE);
     }
     
-    //might add another (1 individual 1 for intake)
-//    public void addStudent(){
-//        try{
-//            FileWriter writer = new FileWriter("student.txt", true);            
-//            writer.write(studentID + ";" + name + ";" + ic + ";" + contact + ";" + email + ";" + intake + "\n");
-//            writer.close();
-//
-//            Icon icon = new ImageIcon(getClass().getResource("/Icon/success.png"));
-//            JOptionPane.showMessageDialog(null, "New student has been added! ", 
-//                                "Notification", JOptionPane.INFORMATION_MESSAGE, icon);
-//        }
-//        catch (IOException e) {
-//            JOptionPane.showMessageDialog(null, "Failed to add student! ", "Error",
-//                    JOptionPane.ERROR_MESSAGE);
-//        }
-//    }
-    
      public void addStudent(){
         try{
             FileWriter writer = new FileWriter("student.txt", true);            
@@ -237,27 +304,11 @@ public class Student {
                                 "Notification", JOptionPane.INFORMATION_MESSAGE, icon);
         }
         catch (IOException e) {
-            JOptionPane.showMessageDialog(null, "Failed to add student! ", "Error",
-                    JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(null, "Failed to add student! ", "Error",JOptionPane.ERROR_MESSAGE);
         }
     }
     
-    //new constructor for retrieving the intake from combo box and student details from jtable
-    public void addStudentByIntake(){
-        try{
-            FileWriter writer = new FileWriter("student.txt", true);            
-            writer.write(studentID + ";" + name + ";" + ic + ";" + contact + ";" + email + ";" + intake + "\n");
-            writer.close();
 
-            Icon icon = new ImageIcon(getClass().getResource("/Icon/success.png"));
-            JOptionPane.showMessageDialog(null, "New student has been added! ", 
-                                "Notification", JOptionPane.INFORMATION_MESSAGE, icon);
-        }
-        catch (IOException e) {
-            JOptionPane.showMessageDialog(null, "Failed to add student! ", "Error",
-                    JOptionPane.ERROR_MESSAGE);
-        }
-    }
     
     public void createStudentAccount(){
         try{
@@ -266,8 +317,7 @@ public class Student {
             fw.close();
         }
         catch(IOException e){
-            JOptionPane.showMessageDialog(null, "Failed to add student! ", "Error",
-                    JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(null, "Failed to add student! ", "Error", JOptionPane.ERROR_MESSAGE);
         }
     }
     
