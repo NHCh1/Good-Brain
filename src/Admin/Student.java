@@ -152,6 +152,24 @@ public class Student {
     
     
     // ------- Registration by Group STARTS -------
+    public List<String[]> loadExistingRecords() {
+        List<String[]> existingRecords = new ArrayList<>();
+        try {
+            File file = new File("student.txt");
+            if (file.exists()) {
+                BufferedReader br = new BufferedReader(new FileReader(file));
+                String line;
+                while ((line = br.readLine()) != null) {
+                    existingRecords.add(line.split(";"));
+                }
+                br.close();
+            }
+        } catch (IOException ex) {
+            Logger.getLogger(Student.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return existingRecords;
+    }
+
     public void initializeLastStudentID() {
         try {
             File file = new File("student.txt");
