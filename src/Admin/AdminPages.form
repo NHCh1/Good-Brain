@@ -108,7 +108,7 @@
     <Container class="javax.swing.JPanel" name="menubar">
       <Properties>
         <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-          <Color blue="f3" green="d6" red="b9" type="rgb"/>
+          <Color blue="ae" green="be" red="ac" type="rgb"/>
         </Property>
       </Properties>
       <Constraints>
@@ -160,7 +160,7 @@
         <Container class="javax.swing.JPanel" name="menu1">
           <Properties>
             <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-              <Color blue="f3" green="d6" red="b9" type="rgb"/>
+              <Color blue="ae" green="be" red="ac" type="rgb"/>
             </Property>
           </Properties>
           <Events>
@@ -214,7 +214,7 @@
         <Container class="javax.swing.JPanel" name="menu2">
           <Properties>
             <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-              <Color blue="f3" green="d6" red="b9" type="rgb"/>
+              <Color blue="ae" green="be" red="ac" type="rgb"/>
             </Property>
           </Properties>
           <Events>
@@ -256,7 +256,7 @@
         <Container class="javax.swing.JPanel" name="menu3">
           <Properties>
             <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-              <Color blue="f3" green="d6" red="b9" type="rgb"/>
+              <Color blue="ae" green="be" red="ac" type="rgb"/>
             </Property>
           </Properties>
           <Events>
@@ -297,11 +297,12 @@
         <Container class="javax.swing.JPanel" name="menu4">
           <Properties>
             <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-              <Color blue="f3" green="d6" red="b9" type="rgb"/>
+              <Color blue="ae" green="be" red="ac" type="rgb"/>
             </Property>
           </Properties>
           <Events>
             <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="menu4MouseClicked"/>
+            <EventHandler event="mouseEntered" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="menu4MouseEntered"/>
           </Events>
 
           <Layout>
@@ -338,7 +339,7 @@
         <Container class="javax.swing.JPanel" name="menu5">
           <Properties>
             <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-              <Color blue="f3" green="d6" red="b9" type="rgb"/>
+              <Color blue="ae" green="be" red="ac" type="rgb"/>
             </Property>
           </Properties>
           <Events>
@@ -695,6 +696,9 @@
                           </TableColumnModel>
                         </Property>
                         <Property name="rowHeight" type="int" value="40"/>
+                        <Property name="selectionBackground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                          <Color blue="a3" green="c7" red="8f" type="rgb"/>
+                        </Property>
                         <Property name="tableHeader" type="javax.swing.table.JTableHeader" editor="org.netbeans.modules.form.editors2.JTableHeaderEditor">
                           <TableHeader reorderingAllowed="true" resizingAllowed="true"/>
                         </Property>
@@ -1510,6 +1514,9 @@
                       </TableColumnModel>
                     </Property>
                     <Property name="rowHeight" type="int" value="40"/>
+                    <Property name="selectionBackground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                      <Color blue="a3" green="c7" red="8f" type="rgb"/>
+                    </Property>
                     <Property name="tableHeader" type="javax.swing.table.JTableHeader" editor="org.netbeans.modules.form.editors2.JTableHeaderEditor">
                       <TableHeader reorderingAllowed="true" resizingAllowed="true"/>
                     </Property>
@@ -2284,6 +2291,9 @@
                       </TableColumnModel>
                     </Property>
                     <Property name="rowHeight" type="int" value="40"/>
+                    <Property name="selectionBackground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                      <Color blue="a3" green="c7" red="8f" type="rgb"/>
+                    </Property>
                     <Property name="tableHeader" type="javax.swing.table.JTableHeader" editor="org.netbeans.modules.form.editors2.JTableHeaderEditor">
                       <TableHeader reorderingAllowed="true" resizingAllowed="true"/>
                     </Property>
@@ -2693,6 +2703,9 @@
                       </TableColumnModel>
                     </Property>
                     <Property name="rowHeight" type="int" value="40"/>
+                    <Property name="selectionBackground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                      <Color blue="a3" green="c7" red="8f" type="rgb"/>
+                    </Property>
                     <Property name="tableHeader" type="javax.swing.table.JTableHeader" editor="org.netbeans.modules.form.editors2.JTableHeaderEditor">
                       <TableHeader reorderingAllowed="true" resizingAllowed="true"/>
                     </Property>

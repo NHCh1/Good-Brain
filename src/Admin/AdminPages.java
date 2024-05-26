@@ -63,7 +63,7 @@ public class AdminPages extends javax.swing.JFrame {
 
         //set gradient color to cell
 //        TableGradientCell tableGradient = new TableGradientCell(new Color(23,161,115), new Color(12,12,14));
-        studentJTable.setDefaultRenderer(Object.class, new TableGradientCell());
+//        studentJTable.setDefaultRenderer(Object.class, new TableGradientCell());
 //        lecturerTable.setDefaultRenderer(Object.class, new TableGradientCell1());
 //        intakeTable.setDefaultRenderer(Object.class, new TableGradientCell1());
 
@@ -604,9 +604,9 @@ public class AdminPages extends javax.swing.JFrame {
 
         getContentPane().add(header, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 860, 60));
 
-        menubar.setBackground(new java.awt.Color(185, 214, 243));
+        menubar.setBackground(new java.awt.Color(172, 190, 174));
 
-        menu1.setBackground(new java.awt.Color(185, 214, 243));
+        menu1.setBackground(new java.awt.Color(172, 190, 174));
         menu1.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 menu1MouseClicked(evt);
@@ -640,7 +640,7 @@ public class AdminPages extends javax.swing.JFrame {
             }
         });
 
-        menu2.setBackground(new java.awt.Color(185, 214, 243));
+        menu2.setBackground(new java.awt.Color(172, 190, 174));
         menu2.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 menu2MouseClicked(evt);
@@ -670,7 +670,7 @@ public class AdminPages extends javax.swing.JFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        menu3.setBackground(new java.awt.Color(185, 214, 243));
+        menu3.setBackground(new java.awt.Color(172, 190, 174));
         menu3.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 menu3MouseClicked(evt);
@@ -697,10 +697,13 @@ public class AdminPages extends javax.swing.JFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        menu4.setBackground(new java.awt.Color(185, 214, 243));
+        menu4.setBackground(new java.awt.Color(172, 190, 174));
         menu4.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 menu4MouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                menu4MouseEntered(evt);
             }
         });
 
@@ -724,7 +727,7 @@ public class AdminPages extends javax.swing.JFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        menu5.setBackground(new java.awt.Color(185, 214, 243));
+        menu5.setBackground(new java.awt.Color(172, 190, 174));
         menu5.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 menu5MouseClicked(evt);
@@ -905,6 +908,7 @@ public class AdminPages extends javax.swing.JFrame {
             }
         });
         studentJTable.setRowHeight(40);
+        studentJTable.setSelectionBackground(new java.awt.Color(143, 199, 163));
         studentScrollPane.setViewportView(studentJTable);
         if (studentJTable.getColumnModel().getColumnCount() > 0) {
             studentJTable.getColumnModel().getColumn(0).setPreferredWidth(40);
@@ -1353,6 +1357,7 @@ public class AdminPages extends javax.swing.JFrame {
             }
         ));
         lecturerTable.setRowHeight(40);
+        lecturerTable.setSelectionBackground(new java.awt.Color(143, 199, 163));
         jScrollPane2.setViewportView(lecturerTable);
         if (lecturerTable.getColumnModel().getColumnCount() > 0) {
             lecturerTable.getColumnModel().getColumn(0).setPreferredWidth(50);
@@ -1760,6 +1765,7 @@ public class AdminPages extends javax.swing.JFrame {
             }
         ));
         intakeTable.setRowHeight(40);
+        intakeTable.setSelectionBackground(new java.awt.Color(143, 199, 163));
         jScrollPane3.setViewportView(intakeTable);
         if (intakeTable.getColumnModel().getColumnCount() > 0) {
             intakeTable.getColumnModel().getColumn(0).setPreferredWidth(60);
@@ -1976,6 +1982,7 @@ public class AdminPages extends javax.swing.JFrame {
             }
         ));
         userTable.setRowHeight(40);
+        userTable.setSelectionBackground(new java.awt.Color(143, 199, 163));
         jScrollPane4.setViewportView(userTable);
 
         userPageSearchField.setText("Search here");
@@ -2146,33 +2153,33 @@ public class AdminPages extends javax.swing.JFrame {
         Intake intake = new Intake();
         intake.addIntakeCodeForFilter(studentPageFilterBox);
         jTabbedPane1.setSelectedIndex(1);
-        menu2.setBackground(new Color(139,188,213));
-        menu1.setBackground(new Color(185,214,243));
-        menu3.setBackground(new Color(185,214,243));
-        menu4.setBackground(new Color(185,214,243));
-        menu5.setBackground(new Color(185,214,243));
+        menu2.setBackground(new Color(200, 219, 202));
+        menu1.setBackground(new Color(172,190,174));
+        menu3.setBackground(new Color(172,190,174));
+        menu4.setBackground(new Color(172,190,174));
+        menu5.setBackground(new Color(172,190,174));
         
         displayStudentTable();
     }//GEN-LAST:event_menu2MouseClicked
 
     private void menu3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_menu3MouseClicked
         jTabbedPane1.setSelectedIndex(5);
-        menu3.setBackground(new Color(139,188,213));
-        menu1.setBackground(new Color(185,214,243));
-        menu2.setBackground(new Color(185,214,243));
-        menu4.setBackground(new Color(185,214,243));
-        menu5.setBackground(new Color(185,214,243));
+        menu3.setBackground(new Color(200, 219, 202));
+        menu1.setBackground(new Color(172,190,174));
+        menu2.setBackground(new Color(172,190,174));
+        menu4.setBackground(new Color(172,190,174));
+        menu5.setBackground(new Color(172,190,174));
 
         displayLecturerTable();
     }//GEN-LAST:event_menu3MouseClicked
 
     private void menu1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_menu1MouseClicked
         jTabbedPane1.setSelectedIndex(0);
-        menu1.setBackground(new Color(139,188,213));
-        menu2.setBackground(new Color(185,214,243));
-        menu3.setBackground(new Color(185,214,243));
-        menu4.setBackground(new Color(185,214,243));
-        menu5.setBackground(new Color(185,214,243));
+        menu1.setBackground(new Color(200, 219, 202));
+        menu2.setBackground(new Color(172,190,174));
+        menu3.setBackground(new Color(172,190,174));
+        menu4.setBackground(new Color(172,190,174));
+        menu5.setBackground(new Color(172,190,174));
     }//GEN-LAST:event_menu1MouseClicked
 
     private void exitLabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_exitLabelMouseClicked
@@ -2469,11 +2476,11 @@ public class AdminPages extends javax.swing.JFrame {
 
     private void menu4MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_menu4MouseClicked
         jTabbedPane1.setSelectedIndex(8);
-        menu4.setBackground(new Color(139,188,213));
-        menu1.setBackground(new Color(185,214,243));
-        menu2.setBackground(new Color(185,214,243));
-        menu3.setBackground(new Color(185,214,243));
-        menu5.setBackground(new Color(185,214,243));
+        menu4.setBackground(new Color(200, 219, 202));
+        menu1.setBackground(new Color(172,190,174));
+        menu2.setBackground(new Color(172,190,174));
+        menu3.setBackground(new Color(172,190,174));
+        menu5.setBackground(new Color(172,190,174));
         displayIntakeTable();
     }//GEN-LAST:event_menu4MouseClicked
 
@@ -2667,11 +2674,11 @@ public class AdminPages extends javax.swing.JFrame {
 
     private void menu5MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_menu5MouseClicked
         jTabbedPane1.setSelectedIndex(10);
-        menu5.setBackground(new Color(139,188,213));
-        menu1.setBackground(new Color(185,214,243));
-        menu2.setBackground(new Color(185,214,243));
-        menu3.setBackground(new Color(185,214,243));
-        menu4.setBackground(new Color(185,214,243));
+        menu5.setBackground(new Color(200, 219, 202));
+        menu1.setBackground(new Color(172,190,174));
+        menu2.setBackground(new Color(172,190,174));
+        menu3.setBackground(new Color(172,190,174));
+        menu4.setBackground(new Color(172,190,174));
         
         displayUserTable();
     }//GEN-LAST:event_menu5MouseClicked
@@ -2896,6 +2903,10 @@ public class AdminPages extends javax.swing.JFrame {
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
         jTabbedPane1.setSelectedIndex(1);
     }//GEN-LAST:event_jButton5ActionPerformed
+
+    private void menu4MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_menu4MouseEntered
+        // TODO add your handling code here:
+    }//GEN-LAST:event_menu4MouseEntered
 
      private void filterTable() {
         DefaultTableModel table = (DefaultTableModel) studentJTable.getModel();
