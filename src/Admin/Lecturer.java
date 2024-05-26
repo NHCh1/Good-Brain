@@ -336,9 +336,9 @@ public class Lecturer {
                     String[] row = data.get(i);
                     if (row[2].equals("2") && pm.equals("Yes")) {
                         row[2] = "4"; // Update to project manager
-                    } else if (row[2].equals("4") && pm.equals("no")) {
+                    } else if (row[2].equals("4") && pm.equals("No")) {
                         row[2] = "2"; // Keep as project manager
-                    } else if (row[2].equals("2") && pm.equals("no")) {
+                    } else if (row[2].equals("2") && pm.equals("No")) {
                         row[2] = "2";
                     }
                     data.set(i, row);
