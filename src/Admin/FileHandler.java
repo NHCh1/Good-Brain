@@ -11,6 +11,10 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+import java.util.ArrayList;
+import java.util.List;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
@@ -85,35 +89,48 @@ public class FileHandler {
         return count;
     }
     
-    public void deleteUserInformation(String id) throws IOException {
-        File inputFile = new File("user.txt");
-        File tempFile = new File("tempUser.txt");
-
-        BufferedReader reader = new BufferedReader(new FileReader(inputFile));
-        BufferedWriter writer = new BufferedWriter(new FileWriter(tempFile));
-
-        String line;
-        while ((line = reader.readLine()) != null) {
-            if (line.contains(id)) {
-                continue; // Skip the line that contains the user ID
-            }
-            writer.write(line);
-            writer.newLine();
-        }
-
-        reader.close();
-        writer.close();
-
-//        inputFile.delete();
-//        tempFile.renameTo(inputFile);
-        if (!inputFile.delete()) {
-            throw new IOException("Failed to delete original user file");
-        }
-
-        if (!tempFile.renameTo(inputFile)) {
-            throw new IOException("Failed to rename temporary user file");
-        }
+    public List<String> readFile(String filePath) throws IOException {
+        return Files.readAllLines(Paths.get(filePath));
     }
-        
-        
+
+    public void writeFile(String filePath, List<String> lines) throws IOException {
+        Files.write(Paths.get(filePath), lines);
+    }
+
+    public boolean deleteUserInformation(String filePath, String id) throws IOException {
+        List<String> lines = readFile(filePath);
+        List<String> updatedLines = new ArrayList<>();
+
+        boolean found = false;
+        for (String line : lines) {
+            if (!line.startsWith(id)) {
+                updatedLines.add(line);
+            } else {
+                found = true;
+            }
+        }
+
+        if (found) {
+            writeFile(filePath, updatedLines);
+        }
+
+        return found;
+    }
+
+    public void deleteFromUserFile(String userId) throws IOException {
+        String userFilePath = "user.txt";
+        deleteUserInformation(userFilePath, userId);
+    }
+
+    public void deleteFromSpecificFile(String userId) throws IOException {
+        String filePath;
+        if (userId.startsWith("S")) {
+            filePath = "student.txt";
+        } else if (userId.startsWith("L")) {
+            filePath = "lecturer.txt";
+        } else {
+            throw new IllegalArgumentException("Unknown user ID prefix");
+        }
+        deleteUserInformation(filePath, userId);
+    }  
 }

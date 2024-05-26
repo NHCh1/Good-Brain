@@ -172,7 +172,8 @@ public class AdminPages extends javax.swing.JFrame {
                 if(decision == JOptionPane.YES_OPTION){
                     String id = studentJTable.getValueAt(studentJTable.getSelectedRow(), 0).toString();
                     table.removeRow(row);
-                    Student delete = new Student(table, id);
+//                    Student delete = new Student(table, id);
+                    Student delete = new Student(id);
                     delete.deleteStudent();
                     displayUserCount();
                 }
@@ -287,7 +288,8 @@ public class AdminPages extends javax.swing.JFrame {
                     String id = userTable.getValueAt(userTable.getSelectedRow(), 0).toString();
                     
                     usertbl.removeRow(row);
-                    User delete = new User(usertbl, id);
+//                    User delete = new User(usertbl, id);
+                    User delete = new User(id);
                     delete.deleteUser();
                     displayUserCount();
                 }
@@ -2424,12 +2426,16 @@ public class AdminPages extends javax.swing.JFrame {
             minor = "-";
         }
         
-        ButtonModel selectedYesNoButton = yesNoGroup.getSelection();
+//        ButtonModel selectedYesNoButton = yesNoGroup.getSelection();
         yesCheckBox.setActionCommand("Yes");
         noCheckBox.setActionCommand("No");
-        String pm = selectedYesNoButton.getActionCommand();
         
-        Lecturer lc = new Lecturer(name, ic, contact);
+        ButtonModel selectedYesNoButton = yesNoGroup.getSelection();
+        String pm = selectedYesNoButton != null ? selectedYesNoButton.getActionCommand() : "";
+
+//        String pm = selectedYesNoButton.getActionCommand();
+        
+        Lecturer lc = new Lecturer(name, ic, contact, pm);
         List<String> validationErrors = lc.lecturerValidation();
         if (!validationErrors.isEmpty()) {
             StringBuilder errorMessage = new StringBuilder("The following errors are detected:\n");
@@ -2536,13 +2542,14 @@ public class AdminPages extends javax.swing.JFrame {
             intake.addIntake();
 
             clearRegisterIntakeField();
-            jTabbedPane1.setSelectedIndex(7);
+            jTabbedPane1.setSelectedIndex(8);
             displayIntakeTable();
         }    
     }//GEN-LAST:event_saveIntakeBtnActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         clearRegisterIntakeField();
+        jTabbedPane1.setSelectedIndex(8);
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void clearRegisterIntakeField(){
@@ -2729,7 +2736,7 @@ public class AdminPages extends javax.swing.JFrame {
             Logger.getLogger(AdminPages.class.getName()).log(Level.SEVERE, null, ex);
         }
         
-        jTabbedPane1.setSelectedIndex(9);
+        jTabbedPane1.setSelectedIndex(10);
         displayUserTable();
     }//GEN-LAST:event_jButton1ActionPerformed
 
@@ -2749,7 +2756,7 @@ public class AdminPages extends javax.swing.JFrame {
     }//GEN-LAST:event_userPageSearchFieldFocusLost
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
-        jTabbedPane1.setSelectedIndex(9);
+        jTabbedPane1.setSelectedIndex(10);
     }//GEN-LAST:event_jButton4ActionPerformed
 
     private void userPageSearchFieldKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_userPageSearchFieldKeyReleased

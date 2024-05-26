@@ -30,8 +30,12 @@ public class User {
         
     }
     
-    public User(DefaultTableModel table, String id){
-        this.table = table;
+//    public User(DefaultTableModel table, String id){
+//        this.table = table;
+//        this.id = id;
+//    }
+    
+    public User(String id){
         this.id = id;
     }
     
@@ -137,189 +141,15 @@ public class User {
 //    }
     
     public void deleteUser() {
-    int rowQty = table.getRowCount();
-    int colQty = table.getColumnCount();
-
-    ArrayList<String> tableRows = new ArrayList<>();
-    for (int i = 0; i < rowQty; i++) {
-        StringBuilder rowBuilder = new StringBuilder();
-
-        for (int j = 0; j < colQty - 1; j++) {
-            rowBuilder.append(table.getValueAt(i, j));
-
-            if (j != colQty - 2) {
-                rowBuilder.append(";");
-            }
-        }
-        tableRows.add(rowBuilder.toString());
-    }
-
-    try (BufferedWriter bw = new BufferedWriter(new FileWriter("user.txt"))) {
-        for (String row : tableRows) {
-            bw.write(row);
-            bw.newLine();
-        }
-    } catch (IOException ex) {
-        Logger.getLogger(AdminPages.class.getName()).log(Level.SEVERE, null, ex);
-    }
-
-    try {
-        processUserInformation(id);
-        table.setRowCount(0);
-        showUser();
-
-        Icon icon = new ImageIcon(getClass().getResource("/Icon/success.png"));
-        JOptionPane.showMessageDialog(null, "User has been removed.",
-                "Notification", JOptionPane.INFORMATION_MESSAGE, icon);
-    } catch (IOException ex) {
-        Logger.getLogger(AdminPages.class.getName()).log(Level.SEVERE, null, ex);
-        Icon icon = new ImageIcon(getClass().getResource("/Icon/error.png"));
-        JOptionPane.showMessageDialog(null, "Failed to remove user.",
-                "Error", JOptionPane.ERROR_MESSAGE, icon);
-    }
-}
-
-    
-    private void processUserInformation(String userID) throws IOException {
-        String fileName = "";
-        if (userID.startsWith("S")) {
-            fileName = "student.txt";
-        } else if (userID.startsWith("L")) {
-            fileName = "lecturer.txt";
-        }
-
-        File inputFile = new File(fileName);
-        File tempFile = new File("temp" + fileName);
-
-        try (BufferedReader br = new BufferedReader(new FileReader(inputFile));
-             BufferedWriter bw = new BufferedWriter(new FileWriter(tempFile))) {
-
-            String line;
-            while ((line = br.readLine()) != null) {
-                if (line.contains(userID)) {
-                    continue; // Skip the line containing the user ID
-                }
-                bw.write(line);
-                bw.newLine();
-            }
+        try {
+            FileHandler fileHandler = new FileHandler();
+            fileHandler.deleteFromSpecificFile(id);
+            fileHandler.deleteFromUserFile(id);
         } catch (IOException e) {
-            throw new IOException("Error processing user information", e);
-        }
-
-        if (!deleteFileWithRetry(inputFile, 3, 1000)) {
-            throw new IOException("Failed to delete original file after retries: " + fileName);
-        }
-
-        if (!tempFile.renameTo(inputFile)) {
-            throw new IOException("Failed to rename temporary file: " + tempFile.getName());
+            e.printStackTrace();
+            JOptionPane.showMessageDialog(null, "Failed to delete user: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
         }
     }
-
-    private boolean deleteFileWithRetry(File file, int attempts, long waitTimeMillis) {
-        for (int i = 0; i < attempts; i++) {
-            if (file.delete()) {
-                return true;
-            }
-            try {
-                Thread.sleep(waitTimeMillis);
-            } catch (InterruptedException e) {
-                Thread.currentThread().interrupt();
-                return false;
-            }
-        }
-        return false;
-    }
-
-
     
-//    private void processUserInformation(String userID) throws IOException {
-//        String fileName = "";
-//        if (userID.startsWith("S")) {
-//            fileName = "student.txt";
-//        } else if (userID.startsWith("L")) {
-//            fileName = "lecturer.txt";
-//        }
-//
-//        File inputFile = new File(fileName);
-//        File tempFile = new File("temp" + fileName);
-//
-//        BufferedReader br = null;
-//        BufferedWriter bw = null;
-//
-//        try {
-//            br = new BufferedReader(new FileReader(inputFile));
-//            bw = new BufferedWriter(new FileWriter(tempFile));
-//
-//            String line;
-//            while ((line = br.readLine()) != null) {
-//                if (line.contains(userID)) {
-//                    continue; // Skip the line containing the user ID
-//                }
-//                bw.write(line);
-//                bw.newLine();
-//            }
-//        }
-//        catch (IOException e) {
-//            throw new IOException("Error processing user information", e);
-//        }
-//        finally {
-//            if (br != null) {
-//                try {
-//                    br.close();
-//                } catch (IOException e) {
-//                    e.printStackTrace();
-//                }
-//            }
-//            if (bw != null) {
-//                try {
-//                    bw.close();
-//                } catch (IOException e) {
-//                    e.printStackTrace();
-//                }
-//            }
-//        }
-//
-//        // Ensure the original file is deleted and the temp file is renamed atomically
-//        if (!inputFile.delete()) {
-//            throw new IOException("Failed to delete original file: " + fileName);
-//        }
-//
-//        if (!tempFile.renameTo(inputFile)) {
-//            throw new IOException("Failed to rename temporary file: " + tempFile.getName());
-//        }
-//    }
-
-
-    
-//    private void processUserInformation(String userID) throws IOException {
-//        String fileName = "";
-//        if (userID.startsWith("S")) {
-//            fileName = "student.txt";
-//        }
-//        else if (userID.startsWith("L")) {
-//            fileName = "lecturer.txt";
-//        }
-//
-//        File inputFile = new File(fileName);
-//        File tempFile = new File("temp" + fileName);
-//
-//        BufferedReader br = new BufferedReader(new FileReader(inputFile));
-//        BufferedWriter bw = new BufferedWriter(new FileWriter(tempFile));
-//
-//        String line;
-//        while ((line = br.readLine()) != null) {
-//            if (line.contains(userID)) {
-//                continue;
-//            }
-//            bw.write(line);
-//            bw.newLine();
-//        }
-//
-//        br.close();
-//        bw.close();
-//
-//        inputFile.delete();
-//        tempFile.renameTo(inputFile);
-//    }
 }
 

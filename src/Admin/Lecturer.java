@@ -47,10 +47,11 @@ public class Lecturer {
     
     
     //Validation purpose
-    public Lecturer(String name, String ic, String contact){
+    public Lecturer(String name, String ic, String contact, String pm){
         this.name = name;
         this.ic = ic;
         this.contact = contact;
+        this.projectManager = pm;
 //        this.role = role;
 //        this.student = student;
 //        this.projectManager = pm;
@@ -129,10 +130,10 @@ public class Lecturer {
             errors.add(contactError);
         }    
         
-//        String pmError = validateProjectManagerGroup();
-//        if(!pmError.isEmpty()){
-//            errors.add(pmError);
-//        }
+        String pmError = validateProjectManagerGroup();
+        if (!pmError.isEmpty()) {
+            errors.add(pmError);
+        }
         return errors;
     }
     
@@ -165,6 +166,13 @@ public class Lecturer {
         }
         return "";
     }
+    
+    private String validateProjectManagerGroup() {
+    if (projectManager.isEmpty()) {
+        return "Please select if the lecturer is a project manager.";
+    }
+    return "";
+}
     
     private void createEmail(){
         email = lectureID + "@staff.goodbrain.edu.my";
@@ -351,48 +359,7 @@ public class Lecturer {
             Logger.getLogger(Student.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-    
-//    public void deleteLecturer() {
-//        int rowQty = table.getRowCount();
-//        int colQty = table.getColumnCount();
-//
-//        ArrayList<String> tableRows = new ArrayList<>();
-//        for (int i = 0; i < rowQty; i++) {
-//            StringBuilder rowBuilder = new StringBuilder();
-//
-//            for (int j = 0; j < colQty - 1; j++) {
-//                rowBuilder.append(table.getValueAt(i, j));
-//
-//                if (j != colQty - 2) {
-//                    rowBuilder.append(";");
-//                }
-//            }
-//            tableRows.add(rowBuilder.toString());
-//        }
-//
-//        try {
-//            BufferedWriter bw = new BufferedWriter(new FileWriter("lecturer.txt"));
-//            for (String row : tableRows) {
-//                bw.write(row);
-//                bw.newLine();
-//            }
-//            bw.close();
-//
-//            FileHandler fh = new FileHandler();
-//            fh.deleteUserInformation(lectureID);
-//
-//            table.setRowCount(0);
-//            showLecturer();
-//
-//            Icon icon = new ImageIcon(getClass().getResource("/Icon/success.png"));
-//            JOptionPane.showMessageDialog(null, "Lecturer has been removed.",
-//                    "Notification", JOptionPane.INFORMATION_MESSAGE, icon);
-//        } catch (IOException ex) {
-//            Logger.getLogger(AdminPages.class.getName()).log(Level.SEVERE, null, ex);
-//        }
-//    }
-    
-    
+
         public void deleteLecturer() {
             int rowQty = table.getRowCount();
             int colQty = table.getColumnCount();
@@ -420,7 +387,8 @@ public class Lecturer {
                 bw.close();
 
                 FileHandler fh = new FileHandler();
-                fh.deleteUserInformation(lectureID);
+                fh.deleteFromSpecificFile(lectureID);
+                fh.deleteFromUserFile(lectureID);
 
                 table.setRowCount(0);
                 showLecturer();

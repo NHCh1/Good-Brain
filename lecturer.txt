@@ -23,11 +23,9 @@ L022;Ruby Hayes;780903-43-7445;60134567890;L022@lecturer.edu.my;Finance;Digital 
 L023;Zoe Foster;770701-47-8556;60145678901;L023@lecturer.edu.my;Intelligent System;Cloud Engineering;Yes
 L024;Gavin Cox;760528-42-9667;60156789012;L024@lecturer.edu.my;Data Analytic;Psychology;No
 L025;Hannah Ward;750407-46-0778;60167890123;L025@lecturer.edu.my;Digital Forensic;Finance;No
-L026;Violet Jenkins;710625-44-5212;60101234567;L029@lecturer.edu.my;Software Engineering;Finance;No
-L027;Zachary Price;700410-48-6323;60112345678;L030@lecturer.edu.my;Psychology;Cyber Security;No
-L028;Sara Patel;950715-35-7224;60132343782;L015@staff.goodbrain.edu.my;Psychology;Digital Marketing;No L029;Carlos Santos;880520-29-6256;60146789230;L016@staff.goodbrain.edu.my;Engineering;Cyber Security;No L030;Luna Fernandez;910303-37-8348;60171492567;L017@staff.goodbrain.edu.my;Data Analytics;Finance;Yes L031;Kai Nguyen;930818-32-9461;60156129374;L018@staff.goodbrain.edu.my;Accounting;Digital Forensics;No L032;Eva Rios;900625-38-1573;60189234679;L019@staff.goodbrain.edu.my;Intelligent System;Cloud Engineering;No
-L033;Oscar Kim;870712-33-2694;60172903485;L020@staff.goodbrain.edu.my;Software Engineering;Psychology;No L034;Maya Chen;890817-36-3716;60138196472;L021@staff.goodbrain.edu.my;Digital Forensics;Cyber Security;Yes L035;Ethan Singh;920408-39-4827;60169472830;L022@staff.goodbrain.edu.my;Digital Marketing;Data Analytics;No
-L036;Zara Khan;940225-34-5939;60161384729;L023@staff.goodbrain.edu.my;Finance;Banking;No
-L037;Liam Lee;910112-33-6050;60181624593;L024@staff.goodbrain.edu.my;Cyber Security;Engineering;No L038;Nora Wang;900520-37-7162;60152748364;L025@staff.goodbrain.edu.my;Psychology;Finance;Yes
-L039;Luca Garcia;930805-30-8273;60143962571;L026@staff.goodbrain.edu.my;Cloud Engineering;Intelligent System;No
-L040;Leah Lopez;920503-31-9384;60177639158;L027@staff.goodbrain.edu.my;Intelligent System;Software Engineering;No
+L026;Zara Khan;940225-34-5939;60161384729;L023@staff.goodbrain.edu.my;Finance;Banking;No
+L027;Liam Lee;910112-33-6050;60181624593;L024@staff.goodbrain.edu.my;Cyber Security;Engineering;No
+L028;Nora Wang;900520-37-7162;60152748364;L025@staff.goodbrain.edu.my;Psychology;Finance;Yes
+L029;Luca Garcia;930805-30-8273;60143962571;L026@staff.goodbrain.edu.my;Cloud Engineering;Intelligent System;No
+L030;Leah Lopez;920503-31-9384;60177639158;L027@staff.goodbrain.edu.my;Intelligent System;Software Engineering;No
+L031;Quby Woo;950615-02-4121;60157984316;L031@staff.goodbrain.edu.my;Accounting;Finance;No
