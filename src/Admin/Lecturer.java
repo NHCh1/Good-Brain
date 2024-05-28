@@ -347,7 +347,7 @@ public class Lecturer {
         return lectureID + "@mail.goodbrain.edu.my";
     }
      
-    public void addStudent(List<String> studentData){
+    public void addLecturer(List<String> studentData){
         try(BufferedWriter bw = new BufferedWriter(new FileWriter("lecturer.txt", true))){
             for(String data : studentData){
                 bw.write(data);
@@ -362,7 +362,7 @@ public class Lecturer {
         }
     }
     
-    public void createStudentAccount(List<String> rec){
+    public void createLectureAccount(List<String> rec){
         try(BufferedWriter bw = new BufferedWriter(new FileWriter("user.txt", true))){
             for(String data : rec){
                 bw.write(data);

@@ -290,7 +290,6 @@ public class AdminPages extends javax.swing.JFrame {
                     String id = userTable.getValueAt(userTable.getSelectedRow(), 0).toString();
                     
                     usertbl.removeRow(row);
-//                    User delete = new User(usertbl, id);
                     User delete = new User(id);
                     delete.deleteUser();
                     displayUserCount();
@@ -2364,7 +2363,7 @@ public class AdminPages extends javax.swing.JFrame {
             String password = newStudent.getPassword(ic);
             String email = newStudent.getEmail();
 
-            //update account.txt file
+            //update user.txt file
             Student newAccount = new Student(id, password);
             newAccount.createStudentAccount();
             
@@ -2998,7 +2997,42 @@ public class AdminPages extends javax.swing.JFrame {
     }//GEN-LAST:event_menu4MouseEntered
 
     private void addLecturerFromListBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addLecturerFromListBtnActionPerformed
+//        Lecturer lecturer = new Lecturer();
+//        
+//        List<String[]> previousRecord = lecturer.loadExistingRecords();
+//        List<String> lectureRecords = new ArrayList<>();
+//        List<String> userRecords = new ArrayList<>();
+//        
+//        lecturer.initializeLastLecturerID();
+//        
+//        for (int i = 0; i < lectureListTable.getRowCount(); i++) {
+//            String name = (String) lectureListTable.getValueAt(i, 0);
+//            String ic = (String) lectureListTable.getValueAt(i, 1);
+//            String contact = (String) lectureListTable.getValueAt(i, 2);
+//            String major = (String) lectureListTable.getValueAt(i, 3);
+//            String minor = (String) lectureListTable.getValueAt)i. 4);
+//
+//            if (isDuplicate(ic, contact, previousRecord, lectureRecords)) {
+//                JOptionPane.showMessageDialog(this, "Duplicate data found!", "Error", JOptionPane.ERROR_MESSAGE);
+//                return;
+//            }
+//
+//            String lecturerID = lecturer.createLectureIDForGroup();
+//            String email = student.createEmailForGroup(lecturerID);
+//            String password = student.createPasswordForGroup(ic, lecturerID);
+//
+//            String record = String.join(";", lecturerID, name, ic, contact, email, major, minor, "-");
+//            studentRecords.add(record);
+//            
+//            String userRecord = String.join(";", lecturerID, password, "2");
+//            userRecords.add(userRecord);
+//        }
+//        lecturer.addLecturer(lectureRecords); 
+//        lecturer.createStudentAccount(createLectureAccount);
         
+        displayUserCount();
+        displayLecturerTable();
+
         jTabbedPane1.setSelectedIndex(5);
     }//GEN-LAST:event_addLecturerFromListBtnActionPerformed
 
