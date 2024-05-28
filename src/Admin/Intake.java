@@ -198,7 +198,7 @@ public class Intake {
     public void addIntake(){
         try{
             FileWriter writer = new FileWriter("intake.txt", true);            
-            writer.write(intakeCode + ";" + studyLevel + ";" + course + ";" + intakeDuration + ";" + "-" + ";" + "-" + ";" +
+            writer.write(intakeCode + ";" + studyLevel + ";" + course + ";" + intakeDuration + ";" +
                     intakeRegisterStartDate + "," + intakeRegisterEndDate + "," + intakeStartDate + "," + intakeEndDate + "\n");
             writer.close();
 
