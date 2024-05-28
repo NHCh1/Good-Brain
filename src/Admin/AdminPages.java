@@ -196,7 +196,7 @@ public class AdminPages extends javax.swing.JFrame {
                 String minor = lecturerTable.getValueAt(lecturerTable.getSelectedRow(), 6).toString();
                 String pmRole = lecturerTable.getValueAt(lecturerTable.getSelectedRow(), 7).toString();
                 
-                jTabbedPane1.setSelectedIndex(7);
+                jTabbedPane1.setSelectedIndex(8);
                 
                 addCourseIntoComboBoxForUpdate();
                 
@@ -223,18 +223,20 @@ public class AdminPages extends javax.swing.JFrame {
                     lecturerTable.getCellEditor().stopCellEditing();
                 }
 
-                int decision = JOptionPane.showConfirmDialog(null, "Are you sure to remove this lecturer? \n This action is irreversible"
-                                   ,"Alert", JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE);
+                int decision = JOptionPane.showConfirmDialog(null, "Are you sure to remove this lecturer?"
+                        + " \n This action is irreversible" ,"Alert", 
+                        JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE);
                 if(decision == JOptionPane.YES_OPTION){
                     String id = lecturerTable.getValueAt(lecturerTable.getSelectedRow(), 0).toString();
                     lecTable.removeRow(row);
-                    Lecturer delete = new Lecturer(lecTable, id);
+                    Lecturer delete = new Lecturer(id);
                     delete.deleteLecturer();
                     displayUserCount();
                 }
                 else if(decision == JOptionPane.NO_OPTION){
                     Icon icon = new ImageIcon(getClass().getResource("/Icon/shield.png"));
-                    JOptionPane.showMessageDialog(null, "No changes has been made.", "Notification", JOptionPane.INFORMATION_MESSAGE,icon);                    
+                    JOptionPane.showMessageDialog(null, "No changes has been made.", "Notification", 
+                            JOptionPane.INFORMATION_MESSAGE,icon);                    
                 }
             }
         };
@@ -267,7 +269,7 @@ public class AdminPages extends javax.swing.JFrame {
                     }
                 }
                 
-                jTabbedPane1.setSelectedIndex(11);
+                jTabbedPane1.setSelectedIndex(12);
                 
                 userSetImage1.setIcon(new ImageIcon(getClass().getResource("/Profile/" + id + ".jpg")));
                 userIDLabel.setText(id);
@@ -475,8 +477,9 @@ public class AdminPages extends javax.swing.JFrame {
         jScrollPane2 = new javax.swing.JScrollPane();
         lecturerTable = new javax.swing.JTable();
         lecturePageSearchField = new javax.swing.JTextField();
-        addLecturerLabel = new javax.swing.JLabel();
-        createLecturer = new javax.swing.JPanel();
+        addLecturerByGtoupButton = new javax.swing.JButton();
+        addLecturerButton = new javax.swing.JButton();
+        registerLecturer = new javax.swing.JPanel();
         jLabel24 = new javax.swing.JLabel();
         jLabel25 = new javax.swing.JLabel();
         jLabel26 = new javax.swing.JLabel();
@@ -496,6 +499,13 @@ public class AdminPages extends javax.swing.JFrame {
         updateLecturerPictureBtn = new javax.swing.JButton();
         lectureProfileName = new javax.swing.JLabel();
         setLecturerRegisterImage = new Admin.SetUserProfile();
+        registerLecturerByGroup = new javax.swing.JPanel();
+        jLabel67 = new javax.swing.JLabel();
+        addLecturerFromListBtn = new javax.swing.JButton();
+        loadLecturerIntoTableButton = new javax.swing.JButton();
+        jScrollPane5 = new javax.swing.JScrollPane();
+        lectureListTable = new javax.swing.JTable();
+        jButton6 = new javax.swing.JButton();
         editLecturer = new javax.swing.JPanel();
         jLabel35 = new javax.swing.JLabel();
         jLabel15 = new javax.swing.JLabel();
@@ -1379,10 +1389,19 @@ public class AdminPages extends javax.swing.JFrame {
             }
         });
 
-        addLecturerLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icon/addLecturer.png"))); // NOI18N
-        addLecturerLabel.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                addLecturerLabelMouseClicked(evt);
+        addLecturerByGtoupButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icon/addLecturerGroup.png"))); // NOI18N
+        addLecturerByGtoupButton.setContentAreaFilled(false);
+        addLecturerByGtoupButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                addLecturerByGtoupButtonActionPerformed(evt);
+            }
+        });
+
+        addLecturerButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icon/addLecturer.png"))); // NOI18N
+        addLecturerButton.setContentAreaFilled(false);
+        addLecturerButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                addLecturerButtonActionPerformed(evt);
             }
         });
 
@@ -1393,9 +1412,11 @@ public class AdminPages extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, lecturerLayout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(lecturePageSearchField, javax.swing.GroupLayout.PREFERRED_SIZE, 375, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(161, 161, 161)
-                .addComponent(addLecturerLabel)
-                .addGap(96, 96, 96))
+                .addGap(97, 97, 97)
+                .addComponent(addLecturerButton)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(addLecturerByGtoupButton)
+                .addGap(67, 67, 67))
             .addGroup(lecturerLayout.createSequentialGroup()
                 .addGroup(lecturerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(lecturerLayout.createSequentialGroup()
@@ -1411,18 +1432,22 @@ public class AdminPages extends javax.swing.JFrame {
             .addGroup(lecturerLayout.createSequentialGroup()
                 .addGap(150, 150, 150)
                 .addComponent(jLabel36)
-                .addGap(38, 38, 38)
-                .addGroup(lecturerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(lecturePageSearchField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(addLecturerLabel))
+                .addGap(31, 31, 31)
+                .addGroup(lecturerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(addLecturerByGtoupButton, javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(lecturerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addComponent(addLecturerButton, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGroup(lecturerLayout.createSequentialGroup()
+                            .addComponent(lecturePageSearchField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGap(10, 10, 10))))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 285, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(134, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("tab3", lecturer);
 
-        createLecturer.setBackground(new java.awt.Color(239, 240, 234));
+        registerLecturer.setBackground(new java.awt.Color(239, 240, 234));
 
         jLabel24.setFont(new java.awt.Font("Serif", 1, 18)); // NOI18N
         jLabel24.setText("Lecturer Registration");
@@ -1472,106 +1497,182 @@ public class AdminPages extends javax.swing.JFrame {
             }
         });
 
-        javax.swing.GroupLayout createLecturerLayout = new javax.swing.GroupLayout(createLecturer);
-        createLecturer.setLayout(createLecturerLayout);
-        createLecturerLayout.setHorizontalGroup(
-            createLecturerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(createLecturerLayout.createSequentialGroup()
+        javax.swing.GroupLayout registerLecturerLayout = new javax.swing.GroupLayout(registerLecturer);
+        registerLecturer.setLayout(registerLecturerLayout);
+        registerLecturerLayout.setHorizontalGroup(
+            registerLecturerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(registerLecturerLayout.createSequentialGroup()
                 .addGap(339, 339, 339)
                 .addComponent(jLabel24)
                 .addGap(0, 0, Short.MAX_VALUE))
-            .addGroup(createLecturerLayout.createSequentialGroup()
+            .addGroup(registerLecturerLayout.createSequentialGroup()
                 .addGap(92, 92, 92)
-                .addGroup(createLecturerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(createLecturerLayout.createSequentialGroup()
-                        .addGroup(createLecturerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addGroup(createLecturerLayout.createSequentialGroup()
-                                .addGroup(createLecturerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(registerLecturerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(registerLecturerLayout.createSequentialGroup()
+                        .addGroup(registerLecturerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addGroup(registerLecturerLayout.createSequentialGroup()
+                                .addGroup(registerLecturerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jLabel25)
                                     .addComponent(jLabel26)
                                     .addComponent(jLabel30))
                                 .addGap(18, 18, 18)
-                                .addGroup(createLecturerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                .addGroup(registerLecturerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                                     .addComponent(lecContactField, javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(lecICField, javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(lcNameField, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addGap(48, 48, 48)
-                                .addGroup(createLecturerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addGroup(registerLecturerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jLabel32)
                                     .addComponent(jLabel31)
                                     .addComponent(jLabel50))
                                 .addGap(18, 18, 18))
-                            .addGroup(createLecturerLayout.createSequentialGroup()
+                            .addGroup(registerLecturerLayout.createSequentialGroup()
                                 .addGap(231, 231, 231)
                                 .addComponent(setLecturerRegisterImage, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addGap(83, 83, 83)))
-                        .addGroup(createLecturerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(createLecturerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                        .addGroup(registerLecturerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(registerLecturerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                                 .addComponent(lecMajorComboBox, javax.swing.GroupLayout.Alignment.LEADING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(lecMinorComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(createLecturerLayout.createSequentialGroup()
+                            .addGroup(registerLecturerLayout.createSequentialGroup()
                                 .addComponent(yesCheckBox, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(noCheckBox, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(createLecturerLayout.createSequentialGroup()
+                            .addGroup(registerLecturerLayout.createSequentialGroup()
                                 .addComponent(updateLecturerPictureBtn)
                                 .addGap(18, 18, 18)
                                 .addComponent(lectureProfileName, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addGap(11, 11, 11))
-                    .addGroup(createLecturerLayout.createSequentialGroup()
+                    .addGroup(registerLecturerLayout.createSequentialGroup()
                         .addComponent(cancelButton2)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(addLecturerBtn)))
                 .addContainerGap(98, Short.MAX_VALUE))
         );
-        createLecturerLayout.setVerticalGroup(
-            createLecturerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(createLecturerLayout.createSequentialGroup()
+        registerLecturerLayout.setVerticalGroup(
+            registerLecturerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(registerLecturerLayout.createSequentialGroup()
                 .addGap(150, 150, 150)
                 .addComponent(jLabel24)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(createLecturerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(createLecturerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGroup(registerLecturerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(registerLecturerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(updateLecturerPictureBtn)
                         .addComponent(lectureProfileName, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(setLecturerRegisterImage, javax.swing.GroupLayout.PREFERRED_SIZE, 151, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(42, 42, 42)
-                .addGroup(createLecturerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(createLecturerLayout.createSequentialGroup()
+                .addGroup(registerLecturerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(registerLecturerLayout.createSequentialGroup()
                         .addComponent(jLabel31)
                         .addGap(23, 23, 23)
                         .addComponent(jLabel50)
                         .addGap(18, 18, 18)
                         .addComponent(jLabel32))
-                    .addGroup(createLecturerLayout.createSequentialGroup()
+                    .addGroup(registerLecturerLayout.createSequentialGroup()
                         .addComponent(jLabel25)
                         .addGap(18, 18, 18)
                         .addComponent(jLabel26)
                         .addGap(18, 18, 18)
                         .addComponent(jLabel30))
-                    .addGroup(createLecturerLayout.createSequentialGroup()
+                    .addGroup(registerLecturerLayout.createSequentialGroup()
                         .addComponent(lcNameField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
                         .addComponent(lecICField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
                         .addComponent(lecContactField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(createLecturerLayout.createSequentialGroup()
+                    .addGroup(registerLecturerLayout.createSequentialGroup()
                         .addGap(1, 1, 1)
                         .addComponent(lecMajorComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
                         .addComponent(lecMinorComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
-                        .addGroup(createLecturerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addGroup(registerLecturerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(yesCheckBox)
                             .addComponent(noCheckBox))))
                 .addGap(18, 18, 18)
-                .addGroup(createLecturerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGroup(registerLecturerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(addLecturerBtn)
                     .addComponent(cancelButton2))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        jTabbedPane1.addTab("tab6", createLecturer);
+        jTabbedPane1.addTab("tab6", registerLecturer);
+
+        registerLecturerByGroup.setBackground(new java.awt.Color(239, 240, 234));
+
+        jLabel67.setFont(new java.awt.Font("Serif", 1, 18)); // NOI18N
+        jLabel67.setText("Lecturer Registration (Group)");
+
+        addLecturerFromListBtn.setText("Add");
+        addLecturerFromListBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                addLecturerFromListBtnActionPerformed(evt);
+            }
+        });
+
+        loadLecturerIntoTableButton.setText("Load");
+        loadLecturerIntoTableButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                loadLecturerIntoTableButtonActionPerformed(evt);
+            }
+        });
+
+        lectureListTable.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "Name", "IC", "Contact", "Major Area", "Minor Area"
+            }
+        ));
+        jScrollPane5.setViewportView(lectureListTable);
+
+        jButton6.setText("Cancel");
+        jButton6.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton6ActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout registerLecturerByGroupLayout = new javax.swing.GroupLayout(registerLecturerByGroup);
+        registerLecturerByGroup.setLayout(registerLecturerByGroupLayout);
+        registerLecturerByGroupLayout.setHorizontalGroup(
+            registerLecturerByGroupLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, registerLecturerByGroupLayout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jLabel67)
+                .addGap(328, 328, 328))
+            .addGroup(registerLecturerByGroupLayout.createSequentialGroup()
+                .addGroup(registerLecturerByGroupLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(registerLecturerByGroupLayout.createSequentialGroup()
+                        .addGap(654, 654, 654)
+                        .addComponent(jButton6)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(addLecturerFromListBtn))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, registerLecturerByGroupLayout.createSequentialGroup()
+                        .addGap(27, 27, 27)
+                        .addGroup(registerLecturerByGroupLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(loadLecturerIntoTableButton)
+                            .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 801, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addContainerGap(72, Short.MAX_VALUE))
+        );
+        registerLecturerByGroupLayout.setVerticalGroup(
+            registerLecturerByGroupLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(registerLecturerByGroupLayout.createSequentialGroup()
+                .addGap(145, 145, 145)
+                .addComponent(jLabel67)
+                .addGap(24, 24, 24)
+                .addComponent(loadLecturerIntoTableButton)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 290, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(registerLecturerByGroupLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(addLecturerFromListBtn)
+                    .addComponent(jButton6))
+                .addContainerGap(122, Short.MAX_VALUE))
+        );
+
+        jTabbedPane1.addTab("tab4", registerLecturerByGroup);
 
         editLecturer.setBackground(new java.awt.Color(239, 240, 234));
 
@@ -2339,18 +2440,6 @@ public class AdminPages extends javax.swing.JFrame {
         
     }//GEN-LAST:event_updateStudentBtnActionPerformed
 
-//    private void refreshSetImageForStudent(File imageFile) {
-//        // Construct the path to the newly uploaded image
-//        String imagePath = imageFile.getAbsolutePath();
-//        studentSetImage1.repaint();
-//        studentSetImage1.setIcon(new ImageIcon(imagePath));
-//    }
-    
-    private void addLecturerLabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_addLecturerLabelMouseClicked
-        jTabbedPane1.setSelectedIndex(6);
-        addCourseIntoComboBox();
-    }//GEN-LAST:event_addLecturerLabelMouseClicked
-
     private void cancelButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelButton2ActionPerformed
         clearLecturerRegisterField();
     }//GEN-LAST:event_cancelButton2ActionPerformed
@@ -2475,7 +2564,7 @@ public class AdminPages extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void menu4MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_menu4MouseClicked
-        jTabbedPane1.setSelectedIndex(8);
+        jTabbedPane1.setSelectedIndex(9);
         menu4.setBackground(new Color(200, 219, 202));
         menu1.setBackground(new Color(172,190,174));
         menu2.setBackground(new Color(172,190,174));
@@ -2549,7 +2638,7 @@ public class AdminPages extends javax.swing.JFrame {
             intake.addIntake();
 
             clearRegisterIntakeField();
-            jTabbedPane1.setSelectedIndex(8);
+            jTabbedPane1.setSelectedIndex(9);
             displayIntakeTable();
         }    
     }//GEN-LAST:event_saveIntakeBtnActionPerformed
@@ -2571,7 +2660,7 @@ public class AdminPages extends javax.swing.JFrame {
     
     
     private void addIntakeButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_addIntakeButtonMouseClicked
-        jTabbedPane1.setSelectedIndex(9);
+        jTabbedPane1.setSelectedIndex(10);
         displayIntakeTable();
     }//GEN-LAST:event_addIntakeButtonMouseClicked
 
@@ -2673,7 +2762,7 @@ public class AdminPages extends javax.swing.JFrame {
     }//GEN-LAST:event_intakePageSearchFieldKeyReleased
 
     private void menu5MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_menu5MouseClicked
-        jTabbedPane1.setSelectedIndex(10);
+        jTabbedPane1.setSelectedIndex(11);
         menu5.setBackground(new Color(200, 219, 202));
         menu1.setBackground(new Color(172,190,174));
         menu2.setBackground(new Color(172,190,174));
@@ -2743,7 +2832,7 @@ public class AdminPages extends javax.swing.JFrame {
             Logger.getLogger(AdminPages.class.getName()).log(Level.SEVERE, null, ex);
         }
         
-        jTabbedPane1.setSelectedIndex(10);
+        jTabbedPane1.setSelectedIndex(11);
         displayUserTable();
     }//GEN-LAST:event_jButton1ActionPerformed
 
@@ -2763,7 +2852,7 @@ public class AdminPages extends javax.swing.JFrame {
     }//GEN-LAST:event_userPageSearchFieldFocusLost
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
-        jTabbedPane1.setSelectedIndex(10);
+        jTabbedPane1.setSelectedIndex(11);
     }//GEN-LAST:event_jButton4ActionPerformed
 
     private void userPageSearchFieldKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_userPageSearchFieldKeyReleased
@@ -2908,6 +2997,30 @@ public class AdminPages extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_menu4MouseEntered
 
+    private void addLecturerFromListBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addLecturerFromListBtnActionPerformed
+        
+        jTabbedPane1.setSelectedIndex(5);
+    }//GEN-LAST:event_addLecturerFromListBtnActionPerformed
+
+    private void loadLecturerIntoTableButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_loadLecturerIntoTableButtonActionPerformed
+        DefaultTableModel table = (DefaultTableModel) lectureListTable.getModel();
+        FileHandler fh = new FileHandler();
+        fh.displayData("lecturerList.txt", table);
+    }//GEN-LAST:event_loadLecturerIntoTableButtonActionPerformed
+
+    private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton6ActionPerformed
+
+    private void addLecturerByGtoupButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addLecturerByGtoupButtonActionPerformed
+       jTabbedPane1.setSelectedIndex(7);
+    }//GEN-LAST:event_addLecturerByGtoupButtonActionPerformed
+
+    private void addLecturerButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addLecturerButtonActionPerformed
+        jTabbedPane1.setSelectedIndex(6);
+        addCourseIntoComboBox();
+    }//GEN-LAST:event_addLecturerButtonActionPerformed
+
      private void filterTable() {
         DefaultTableModel table = (DefaultTableModel) studentJTable.getModel();
         String selectedItem = (String) studentPageFilterBox.getSelectedItem();
@@ -2965,7 +3078,9 @@ public class AdminPages extends javax.swing.JFrame {
     private javax.swing.JPanel addIntake;
     private javax.swing.JLabel addIntakeButton;
     private javax.swing.JButton addLecturerBtn;
-    private javax.swing.JLabel addLecturerLabel;
+    private javax.swing.JButton addLecturerButton;
+    private javax.swing.JButton addLecturerByGtoupButton;
+    private javax.swing.JButton addLecturerFromListBtn;
     private javax.swing.JButton addStudentBtn;
     private javax.swing.JButton addStudentButton;
     private javax.swing.JButton addStudentByIntakeButton;
@@ -2979,7 +3094,6 @@ public class AdminPages extends javax.swing.JFrame {
     private javax.swing.JButton clearLecDetails;
     private javax.swing.JTextField contactField;
     private javax.swing.JComboBox<String> courseComboBox;
-    private javax.swing.JPanel createLecturer;
     private javax.swing.JPanel dashboard;
     private javax.swing.JPanel editLecturer;
     private javax.swing.JPanel editStudent;
@@ -3003,6 +3117,7 @@ public class AdminPages extends javax.swing.JFrame {
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
     private javax.swing.JButton jButton5;
+    private javax.swing.JButton jButton6;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
@@ -3059,6 +3174,7 @@ public class AdminPages extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel58;
     private javax.swing.JLabel jLabel59;
     private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel67;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
@@ -3066,6 +3182,7 @@ public class AdminPages extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JScrollPane jScrollPane4;
+    private javax.swing.JScrollPane jScrollPane5;
     private javax.swing.JTabbedPane jTabbedPane1;
     private javax.swing.JLabel lcEmailLabel;
     private javax.swing.JLabel lcICLabel1;
@@ -3079,11 +3196,13 @@ public class AdminPages extends javax.swing.JFrame {
     private javax.swing.JComboBox<String> lecNewMajorComboBox;
     private javax.swing.JComboBox<String> lecNewMinorComboBox;
     private javax.swing.JLabel lectureIDLabel;
+    private javax.swing.JTable lectureListTable;
     private javax.swing.JTextField lecturePageSearchField;
     private javax.swing.JLabel lectureProfileName;
     private javax.swing.JPanel lecturer;
     private Admin.SetUserProfile lecturerSetImage1;
     private javax.swing.JTable lecturerTable;
+    private javax.swing.JButton loadLecturerIntoTableButton;
     private javax.swing.JButton loadStudentIntoTableButton;
     private javax.swing.JPanel menu1;
     private javax.swing.JPanel menu2;
@@ -3098,6 +3217,8 @@ public class AdminPages extends javax.swing.JFrame {
     private javax.swing.JCheckBox newYesCheckBox;
     private javax.swing.JCheckBox noCheckBox;
     private javax.swing.JButton printNameListBtn;
+    private javax.swing.JPanel registerLecturer;
+    private javax.swing.JPanel registerLecturerByGroup;
     private javax.swing.JPanel registerStudent;
     private javax.swing.JPanel registerStudentByIntake;
     private javax.swing.ButtonGroup roleGroup;

@@ -36,6 +36,7 @@ public class Lecturer {
 //    private String student;
     private String projectManager;
     
+    private int lastLecturerID = 0;
     private String icPrefix;
     
     private String newContact;
@@ -86,8 +87,7 @@ public class Lecturer {
     }
     
     //For delete purpose
-    public Lecturer(DefaultTableModel table, String id){
-        this.table = table;
+    public Lecturer(String id){
         this.lectureID = id;
     }
     
@@ -95,6 +95,7 @@ public class Lecturer {
         
     }
     
+    // ----------- REGISTRATION By INDIVIDUAL STARTS -----------
     public String getEmail(){
         createEmail();
         return email;
@@ -258,7 +259,7 @@ public class Lecturer {
         try{
             FileWriter fw = new FileWriter("lecturer.txt", true);
             fw.write(lectureID + ";" + name + ";" + ic + ";" + contact + ";" + email + ";" + major + ";" 
-                    + minorEmpty + ";" + projectManager + "\n");
+                    + minorEmpty + ";" + "-" + "\n");
             fw.close();
 
             Icon icon = new ImageIcon(getClass().getResource("/Icon/success.png"));
@@ -271,7 +272,111 @@ public class Lecturer {
         }
         
     }
+    // ----------- REGISTRATION By INDIVIDUAL ENDS -----------
     
+    
+    
+    // ------- Registration by Group STARTS -------
+    public List<String[]> loadExistingRecords() {
+        List<String[]> existingRecords = new ArrayList<>();
+        try {
+            File file = new File("lecturer.txt");
+            if (file.exists()) {
+                BufferedReader br = new BufferedReader(new FileReader(file));
+                String line;
+                while ((line = br.readLine()) != null) {
+                    existingRecords.add(line.split(";"));
+                }
+                br.close();
+            }
+        } catch (IOException ex) {
+            Logger.getLogger(Lecturer.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return existingRecords;
+    }
+
+    public void initializeLastLecturerID() {
+        try {
+            File file = new File("student.txt");
+            if (!file.exists()) {
+                lastLecturerID = 0;
+            } else {
+                BufferedReader br = new BufferedReader(new FileReader(file));
+                String line;
+                List<String> studentIDs = new ArrayList<>();
+
+                while ((line = br.readLine()) != null) {
+                    String[] data = line.split(";");
+                    studentIDs.add(data[0]);
+                }
+                br.close();
+
+                if (!studentIDs.isEmpty()) {
+                    int highestID = 0;
+                    for (String id : studentIDs) {
+                        int digit = Integer.parseInt(id.substring(1));
+                        if (digit > highestID) {
+                            highestID = digit;
+                        }
+                    }
+                    lastLecturerID = highestID;
+                } else {
+                    lastLecturerID = 0; // Initialize if no students are present in the file
+                }
+            }
+        } catch (IOException ex) {
+            Logger.getLogger(AdminPages.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    
+    public String createLectureIDForGroup() {
+        lastLecturerID++;
+        lectureID = "S" + String.format("%03d", lastLecturerID);
+        return lectureID;
+    }
+    
+    public String createPasswordForGroup(String ic, String id){
+        if(ic.matches("\\d{6}-\\d{2}-\\d{4}")){
+            icPrefix = ic.substring(0,6);
+            return icPrefix + lectureID;
+        }
+        return null;
+    }
+    
+    public String createEmailForGroup (String studentID){
+        return lectureID + "@mail.goodbrain.edu.my";
+    }
+     
+    public void addStudent(List<String> studentData){
+        try(BufferedWriter bw = new BufferedWriter(new FileWriter("lecturer.txt", true))){
+            for(String data : studentData){
+                bw.write(data);
+                bw.newLine();
+            }
+            Icon icon = new ImageIcon(getClass().getResource("/Icon/success.png"));
+            JOptionPane.showMessageDialog(null, "Students has been added! ","Notification", JOptionPane.INFORMATION_MESSAGE, icon);
+            }
+        
+        catch (IOException ie){
+            JOptionPane.showMessageDialog(null, "Failed to add student! ", "Error",JOptionPane.ERROR_MESSAGE);
+        }
+    }
+    
+    public void createStudentAccount(List<String> rec){
+        try(BufferedWriter bw = new BufferedWriter(new FileWriter("user.txt", true))){
+            for(String data : rec){
+                bw.write(data);
+                bw.newLine();
+            }
+        }
+        catch (IOException ie){
+            JOptionPane.showMessageDialog(null, "Failed to add users! ", "Error",JOptionPane.ERROR_MESSAGE);
+        }
+    }
+    // ------- Registration by Group END -------
+    
+    
+    //add PM validation during update
     public void updateLecturer() throws IOException {
         try{
             ArrayList<String[]> data = new ArrayList<String[]>();
