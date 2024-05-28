@@ -302,7 +302,6 @@
           </Properties>
           <Events>
             <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="menu4MouseClicked"/>
-            <EventHandler event="mouseEntered" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="menu4MouseEntered"/>
           </Events>
 
           <Layout>
@@ -1052,6 +1051,7 @@
                         </Column>
                       </TableColumnModel>
                     </Property>
+                    <Property name="rowHeight" type="int" value="25"/>
                     <Property name="tableHeader" type="javax.swing.table.JTableHeader" editor="org.netbeans.modules.form.editors2.JTableHeaderEditor">
                       <TableHeader reorderingAllowed="true" resizingAllowed="true"/>
                     </Property>
@@ -1157,7 +1157,7 @@
                           </Group>
                           <Group type="102" attributes="0">
                               <EmptySpace min="-2" pref="333" max="-2" attributes="0"/>
-                              <Component id="studentSetImage1" min="-2" pref="177" max="-2" attributes="0"/>
+                              <Component id="studentNewAvatar1" min="-2" pref="177" max="-2" attributes="0"/>
                           </Group>
                       </Group>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
@@ -1174,7 +1174,7 @@
                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="1" attributes="0">
                           <Component id="uploadStudentNewProfileBtn" min="-2" max="-2" attributes="0"/>
-                          <Component id="studentSetImage1" min="-2" pref="148" max="-2" attributes="0"/>
+                          <Component id="studentNewAvatar1" min="-2" pref="148" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace pref="25" max="32767" attributes="0"/>
                       <Group type="103" groupAlignment="0" max="-2" attributes="0">
@@ -1366,7 +1366,7 @@
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="uploadStudentNewProfileBtnActionPerformed"/>
               </Events>
             </Component>
-            <Container class="Admin.SetUserProfile" name="studentSetImage1">
+            <Container class="Admin.SetUserProfile" name="studentNewAvatar1">
 
               <Layout class="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout">
                 <Property name="useNullLayout" type="boolean" value="true"/>
@@ -1971,6 +1971,7 @@
                         </Column>
                       </TableColumnModel>
                     </Property>
+                    <Property name="rowHeight" type="int" value="25"/>
                     <Property name="tableHeader" type="javax.swing.table.JTableHeader" editor="org.netbeans.modules.form.editors2.JTableHeaderEditor">
                       <TableHeader reorderingAllowed="true" resizingAllowed="true"/>
                     </Property>
@@ -2007,7 +2008,7 @@
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" alignment="1" attributes="0">
                       <EmptySpace max="32767" attributes="0"/>
-                      <Component id="lecturerSetImage1" min="-2" pref="180" max="-2" attributes="0"/>
+                      <Component id="lecturerAvatarNew" min="-2" pref="180" max="-2" attributes="0"/>
                       <EmptySpace min="-2" pref="31" max="-2" attributes="0"/>
                       <Component id="uploadLecturerNewProfileBtn" min="-2" max="-2" attributes="0"/>
                       <EmptySpace min="-2" pref="295" max="-2" attributes="0"/>
@@ -2086,7 +2087,7 @@
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="1" attributes="0">
                           <Component id="uploadLecturerNewProfileBtn" min="-2" max="-2" attributes="0"/>
-                          <Component id="lecturerSetImage1" min="-2" pref="149" max="-2" attributes="0"/>
+                          <Component id="lecturerAvatarNew" min="-2" pref="149" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace min="-2" pref="27" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
@@ -2307,7 +2308,7 @@
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="uploadLecturerNewProfileBtnActionPerformed"/>
               </Events>
             </Component>
-            <Container class="Admin.SetUserProfile" name="lecturerSetImage1">
+            <Container class="Admin.SetUserProfile" name="lecturerAvatarNew">
 
               <Layout class="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout">
                 <Property name="useNullLayout" type="boolean" value="true"/>
@@ -2346,8 +2347,8 @@
                               <Component id="jLabel38" min="-2" max="-2" attributes="0"/>
                           </Group>
                           <Group type="102" alignment="0" attributes="0">
-                              <EmptySpace max="-2" attributes="0"/>
-                              <Component id="jScrollPane3" min="-2" pref="848" max="-2" attributes="0"/>
+                              <EmptySpace min="-2" pref="17" max="-2" attributes="0"/>
+                              <Component id="jScrollPane3" min="-2" pref="860" max="-2" attributes="0"/>
                           </Group>
                       </Group>
                       <EmptySpace max="32767" attributes="0"/>
@@ -2393,13 +2394,11 @@
                       <Font name="Serif" size="13" style="0"/>
                     </Property>
                     <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
-                      <Table columnCount="10" rowCount="0">
+                      <Table columnCount="8" rowCount="0">
                         <Column editable="true" title="Intake Code" type="java.lang.Object"/>
                         <Column editable="true" title="Study Level" type="java.lang.Object"/>
                         <Column editable="true" title="Course" type="java.lang.Object"/>
                         <Column editable="true" title="Duration" type="java.lang.Object"/>
-                        <Column editable="true" title="Lec 1" type="java.lang.Object"/>
-                        <Column editable="true" title="Lec 2" type="java.lang.Object"/>
                         <Column editable="true" title="Registration Start Date" type="java.lang.Object"/>
                         <Column editable="true" title="Registration End Date" type="java.lang.Object"/>
                         <Column editable="true" title="Start Date" type="java.lang.Object"/>
@@ -2424,16 +2423,6 @@
                           <Renderer/>
                         </Column>
                         <Column maxWidth="-1" minWidth="-1" prefWidth="50" resizable="true">
-                          <Title/>
-                          <Editor/>
-                          <Renderer/>
-                        </Column>
-                        <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
-                          <Title/>
-                          <Editor/>
-                          <Renderer/>
-                        </Column>
-                        <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
                           <Title/>
                           <Editor/>
                           <Renderer/>
@@ -2959,7 +2948,7 @@
                           </Group>
                           <Group type="102" alignment="0" attributes="0">
                               <EmptySpace min="-2" pref="364" max="-2" attributes="0"/>
-                              <Component id="userSetImage1" min="-2" pref="165" max="-2" attributes="0"/>
+                              <Component id="userNewAvatar1" min="-2" pref="165" max="-2" attributes="0"/>
                           </Group>
                       </Group>
                       <EmptySpace max="32767" attributes="0"/>
@@ -2972,7 +2961,7 @@
                       <EmptySpace min="-2" pref="158" max="-2" attributes="0"/>
                       <Component id="jLabel54" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
-                      <Component id="userSetImage1" min="-2" pref="134" max="-2" attributes="0"/>
+                      <Component id="userNewAvatar1" min="-2" pref="134" max="-2" attributes="0"/>
                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Component id="userIDLabel" min="-2" pref="19" max="-2" attributes="0"/>
@@ -3085,7 +3074,7 @@
                 </Property>
               </Properties>
             </Component>
-            <Container class="Admin.SetUserProfile" name="userSetImage1">
+            <Container class="Admin.SetUserProfile" name="userNewAvatar1">
 
               <Layout class="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout">
                 <Property name="useNullLayout" type="boolean" value="true"/>

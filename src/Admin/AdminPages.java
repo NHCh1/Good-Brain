@@ -145,12 +145,11 @@ public class AdminPages extends javax.swing.JFrame {
 
                 File imageFile = new File("src/Profile/" + studID + ".jpg");
 
-                 if (imageFile.exists()) {
-                    studentSetImage1.setIcon(new ImageIcon(imageFile.getAbsolutePath()));
-//                        studentSetImage1.setIcon(new ImageIcon(imageFile.getAbsolutePath() + "?" + System.currentTimeMillis()));
+                if (imageFile.exists()) {
+                    studentNewAvatar1.setIcon(new ImageIcon(imageFile.getAbsolutePath()));
                 }
                  else {
-                    studentSetImage1.setIcon(null); // or set a default image
+                    studentNewAvatar1.setIcon(null);
                 }
                 
                 studentIDLabel.setText(studID);
@@ -172,7 +171,6 @@ public class AdminPages extends javax.swing.JFrame {
                 if(decision == JOptionPane.YES_OPTION){
                     String id = studentJTable.getValueAt(studentJTable.getSelectedRow(), 0).toString();
                     table.removeRow(row);
-//                    Student delete = new Student(table, id);
                     Student delete = new Student(id);
                     delete.deleteStudent();
                     displayUserCount();
@@ -200,7 +198,15 @@ public class AdminPages extends javax.swing.JFrame {
                 
                 addCourseIntoComboBoxForUpdate();
                 
-                lecturerSetImage1.setIcon(new ImageIcon(getClass().getResource("/Profile/" + id + ".jpg")));
+                File imageFile = new File("src/Profile/" + id + ".jpg");
+
+                if (imageFile.exists()) {
+                    lecturerAvatarNew.setIcon(new ImageIcon(imageFile.getAbsolutePath()));
+                }
+                 else {
+                    lecturerAvatarNew.setIcon(null);
+                }
+                
                 lectureIDLabel.setText(id);
                 lcNameLabel.setText(name);
                 lcICLabel1.setText(ic);
@@ -208,13 +214,14 @@ public class AdminPages extends javax.swing.JFrame {
                 lcEmailLabel.setText(email);
                 lecNewMajorComboBox.setSelectedItem(major);
                 lecNewMinorComboBox.setSelectedItem(minor);
+                yesNoGroup.setSelected(null, true);
                 //button set
-                if(pmRole.equals("Yes")){
-                    newYesCheckBox.setSelected(true);
-                }
-                else{
-                    newNoCheckBox.setSelected(true);
-                }
+//                if(pmRole.equals("Yes")){
+//                    newYesCheckBox.setSelected(true);
+//                }
+//                else{
+//                    newNoCheckBox.setSelected(true);
+//                }
             }
 
             @Override
@@ -271,7 +278,7 @@ public class AdminPages extends javax.swing.JFrame {
                 
                 jTabbedPane1.setSelectedIndex(12);
                 
-                userSetImage1.setIcon(new ImageIcon(getClass().getResource("/Profile/" + id + ".jpg")));
+                userNewAvatar1.setIcon(new ImageIcon(getClass().getResource("/Profile/" + id + ".jpg")));
                 userIDLabel.setText(id);
                 userNewPasswordField.setText(password);
                 roleNoLabel.setText(String.valueOf(roleno));
@@ -470,7 +477,7 @@ public class AdminPages extends javax.swing.JFrame {
         jLabel57 = new javax.swing.JLabel();
         newStudentProfileTextField = new javax.swing.JTextField();
         uploadStudentNewProfileBtn = new javax.swing.JButton();
-        studentSetImage1 = new Admin.SetUserProfile();
+        studentNewAvatar1 = new Admin.SetUserProfile();
         lecturer = new javax.swing.JPanel();
         jLabel36 = new javax.swing.JLabel();
         jScrollPane2 = new javax.swing.JScrollPane();
@@ -527,7 +534,7 @@ public class AdminPages extends javax.swing.JFrame {
         jLabel51 = new javax.swing.JLabel();
         lecNewMinorComboBox = new javax.swing.JComboBox<>();
         uploadLecturerNewProfileBtn = new javax.swing.JButton();
-        lecturerSetImage1 = new Admin.SetUserProfile();
+        lecturerAvatarNew = new Admin.SetUserProfile();
         intake = new javax.swing.JPanel();
         jLabel38 = new javax.swing.JLabel();
         jScrollPane3 = new javax.swing.JScrollPane();
@@ -569,7 +576,7 @@ public class AdminPages extends javax.swing.JFrame {
         userIDLabel = new javax.swing.JLabel();
         jLabel55 = new javax.swing.JLabel();
         roleLabel = new javax.swing.JLabel();
-        userSetImage1 = new Admin.SetUserProfile();
+        userNewAvatar1 = new Admin.SetUserProfile();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setPreferredSize(new java.awt.Dimension(870, 600));
@@ -710,9 +717,6 @@ public class AdminPages extends javax.swing.JFrame {
         menu4.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 menu4MouseClicked(evt);
-            }
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                menu4MouseEntered(evt);
             }
         });
 
@@ -1131,6 +1135,7 @@ public class AdminPages extends javax.swing.JFrame {
                 "Name", "IC", "Contact"
             }
         ));
+        studentListTable.setRowHeight(25);
         jScrollPane1.setViewportView(studentListTable);
 
         jButton5.setText("Cancel");
@@ -1289,7 +1294,7 @@ public class AdminPages extends javax.swing.JFrame {
                         .addComponent(jLabel18))
                     .addGroup(editStudentLayout.createSequentialGroup()
                         .addGap(333, 333, 333)
-                        .addComponent(studentSetImage1, javax.swing.GroupLayout.PREFERRED_SIZE, 177, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(studentNewAvatar1, javax.swing.GroupLayout.PREFERRED_SIZE, 177, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(18, 18, 18)
                 .addComponent(uploadStudentNewProfileBtn)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -1302,7 +1307,7 @@ public class AdminPages extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(editStudentLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(uploadStudentNewProfileBtn)
-                    .addComponent(studentSetImage1, javax.swing.GroupLayout.PREFERRED_SIZE, 148, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(studentNewAvatar1, javax.swing.GroupLayout.PREFERRED_SIZE, 148, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 25, Short.MAX_VALUE)
                 .addGroup(editStudentLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, editStudentLayout.createSequentialGroup()
@@ -1624,6 +1629,7 @@ public class AdminPages extends javax.swing.JFrame {
                 "Name", "IC", "Contact", "Major Area", "Minor Area"
             }
         ));
+        lectureListTable.setRowHeight(25);
         jScrollPane5.setViewportView(lectureListTable);
 
         jButton6.setText("Cancel");
@@ -1743,7 +1749,7 @@ public class AdminPages extends javax.swing.JFrame {
             editLecturerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, editLecturerLayout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(lecturerSetImage1, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(lecturerAvatarNew, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(31, 31, 31)
                 .addComponent(uploadLecturerNewProfileBtn)
                 .addGap(295, 295, 295))
@@ -1803,7 +1809,7 @@ public class AdminPages extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(editLecturerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(uploadLecturerNewProfileBtn)
-                    .addComponent(lecturerSetImage1, javax.swing.GroupLayout.PREFERRED_SIZE, 149, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(lecturerAvatarNew, javax.swing.GroupLayout.PREFERRED_SIZE, 149, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(27, 27, 27)
                 .addGroup(editLecturerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(editLecturerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
@@ -1861,7 +1867,7 @@ public class AdminPages extends javax.swing.JFrame {
 
             },
             new String [] {
-                "Intake Code", "Study Level", "Course", "Duration", "Lec 1", "Lec 2", "Registration Start Date", "Registration End Date", "Start Date", "End Date"
+                "Intake Code", "Study Level", "Course", "Duration", "Registration Start Date", "Registration End Date", "Start Date", "End Date"
             }
         ));
         intakeTable.setRowHeight(40);
@@ -1910,8 +1916,8 @@ public class AdminPages extends javax.swing.JFrame {
                         .addGap(378, 378, 378)
                         .addComponent(jLabel38))
                     .addGroup(intakeLayout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 848, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(17, 17, 17)
+                        .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 860, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         intakeLayout.setVerticalGroup(
@@ -2207,7 +2213,7 @@ public class AdminPages extends javax.swing.JFrame {
                         .addComponent(jLabel54))
                     .addGroup(editUserLayout.createSequentialGroup()
                         .addGap(364, 364, 364)
-                        .addComponent(userSetImage1, javax.swing.GroupLayout.PREFERRED_SIZE, 165, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(userNewAvatar1, javax.swing.GroupLayout.PREFERRED_SIZE, 165, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         editUserLayout.setVerticalGroup(
@@ -2216,7 +2222,7 @@ public class AdminPages extends javax.swing.JFrame {
                 .addGap(158, 158, 158)
                 .addComponent(jLabel54)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(userSetImage1, javax.swing.GroupLayout.PREFERRED_SIZE, 134, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(userNewAvatar1, javax.swing.GroupLayout.PREFERRED_SIZE, 134, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(editUserLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(userIDLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 19, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -2316,23 +2322,23 @@ public class AdminPages extends javax.swing.JFrame {
             String imagePath = imageFile.getAbsolutePath() + "?" + System.currentTimeMillis();
             if (id.startsWith("S")) {
                 // Update student profile picture
-                studentSetImage1.setIcon(new ImageIcon(imagePath));
+                studentNewAvatar1.setIcon(new ImageIcon(imagePath));
             }
             else if (id.startsWith("L")) {
                 // Update lecturer profile picture
-                lecturerSetImage1.setIcon(new ImageIcon(imagePath));
+                lecturerAvatarNew.setIcon(new ImageIcon(imagePath));
             }
             else {
                 // Handle invalid ID or set a default image
-                studentSetImage1.setIcon(null);
-                lecturerSetImage1.setIcon(null);
+                studentNewAvatar1.setIcon(null);
+                lecturerAvatarNew.setIcon(null);
             }
         } else {
             // Handle the case where the image file doesn't exist
             if (id.startsWith("S")) {
-                studentSetImage1.setIcon(null); // or set a default student image
+                studentNewAvatar1.setIcon(null); // or set a default student image
             } else if (id.startsWith("L")) {
-                lecturerSetImage1.setIcon(null); // or set a default lecturer image
+                lecturerAvatarNew.setIcon(null); // or set a default lecturer image
             }
         }
     }
@@ -2789,7 +2795,7 @@ public class AdminPages extends javax.swing.JFrame {
         openFileChooser.setCurrentDirectory(profileFolder);
         int returnValue = openFileChooser.showOpenDialog(this);
         if (returnValue == JFileChooser.APPROVE_OPTION){
-            studentSetImage1.setIcon(new ImageIcon(openFileChooser.getSelectedFile().toString()));
+            studentNewAvatar1.setIcon(new ImageIcon(openFileChooser.getSelectedFile().toString()));
             newStudentProfileTextField.setText(openFileChooser.getSelectedFile().getName());
         }
     }//GEN-LAST:event_uploadStudentNewProfileBtnActionPerformed
@@ -2812,8 +2818,7 @@ public class AdminPages extends javax.swing.JFrame {
         openFileChooser.setCurrentDirectory(profileFolder);
         int returnValue = openFileChooser.showOpenDialog(this);
         if (returnValue == JFileChooser.APPROVE_OPTION){
-            lecturerSetImage1.setIcon(new ImageIcon(openFileChooser.getSelectedFile().toString()));
-//            newStudentProfileTextField.setText(openFileChooser.getSelectedFile().getName());
+            lecturerAvatarNew.setIcon(new ImageIcon(openFileChooser.getSelectedFile().toString()));
         }
     }//GEN-LAST:event_uploadLecturerNewProfileBtnActionPerformed
 
@@ -2982,6 +2987,9 @@ public class AdminPages extends javax.swing.JFrame {
         DefaultTableModel table = (DefaultTableModel) studentListTable.getModel();
         FileHandler fh = new FileHandler();
         fh.displayData("studentList.txt", table);
+        
+        TableAlignment alignment = new TableAlignment();
+        alignment.alignTable(studentListTable);
     }//GEN-LAST:event_loadStudentIntoTableButtonActionPerformed
 
     private void menu2MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_menu2MouseEntered
@@ -2992,43 +3000,39 @@ public class AdminPages extends javax.swing.JFrame {
         jTabbedPane1.setSelectedIndex(1);
     }//GEN-LAST:event_jButton5ActionPerformed
 
-    private void menu4MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_menu4MouseEntered
-        // TODO add your handling code here:
-    }//GEN-LAST:event_menu4MouseEntered
-
     private void addLecturerFromListBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addLecturerFromListBtnActionPerformed
-//        Lecturer lecturer = new Lecturer();
-//        
-//        List<String[]> previousRecord = lecturer.loadExistingRecords();
-//        List<String> lectureRecords = new ArrayList<>();
-//        List<String> userRecords = new ArrayList<>();
-//        
-//        lecturer.initializeLastLecturerID();
-//        
-//        for (int i = 0; i < lectureListTable.getRowCount(); i++) {
-//            String name = (String) lectureListTable.getValueAt(i, 0);
-//            String ic = (String) lectureListTable.getValueAt(i, 1);
-//            String contact = (String) lectureListTable.getValueAt(i, 2);
-//            String major = (String) lectureListTable.getValueAt(i, 3);
-//            String minor = (String) lectureListTable.getValueAt)i. 4);
-//
-//            if (isDuplicate(ic, contact, previousRecord, lectureRecords)) {
-//                JOptionPane.showMessageDialog(this, "Duplicate data found!", "Error", JOptionPane.ERROR_MESSAGE);
-//                return;
-//            }
-//
-//            String lecturerID = lecturer.createLectureIDForGroup();
-//            String email = student.createEmailForGroup(lecturerID);
-//            String password = student.createPasswordForGroup(ic, lecturerID);
-//
-//            String record = String.join(";", lecturerID, name, ic, contact, email, major, minor, "-");
-//            studentRecords.add(record);
-//            
-//            String userRecord = String.join(";", lecturerID, password, "2");
-//            userRecords.add(userRecord);
-//        }
-//        lecturer.addLecturer(lectureRecords); 
-//        lecturer.createStudentAccount(createLectureAccount);
+        Lecturer lecturer = new Lecturer();
+        
+        List<String[]> previousRecord = lecturer.loadExistingRecords();
+        List<String> lectureRecords = new ArrayList<>();
+        List<String> userRecords = new ArrayList<>();
+        
+        lecturer.initializeLastLecturerID();
+        
+        for (int i = 0; i < lectureListTable.getRowCount(); i++) {
+            String name = (String) lectureListTable.getValueAt(i, 0);
+            String ic = (String) lectureListTable.getValueAt(i, 1);
+            String contact = (String) lectureListTable.getValueAt(i, 2);
+            String major = (String) lectureListTable.getValueAt(i, 3);
+            String minor = (String) lectureListTable.getValueAt(i, 4);
+
+            if (isDuplicate(ic, contact, previousRecord, lectureRecords)) {
+                JOptionPane.showMessageDialog(this, "Duplicate data found!", "Error", JOptionPane.ERROR_MESSAGE);
+                return;
+            }
+
+            String lecturerID = lecturer.createLectureIDForGroup();
+            String email = lecturer.createEmailForGroup(lecturerID);
+            String password = lecturer.createPasswordForGroup(ic, lecturerID);
+
+            String record = String.join(";", lecturerID, name, ic, contact, email, major, minor, "-");
+            lectureRecords.add(record);
+            
+            String userRecord = String.join(";", lecturerID, password, "2");
+            userRecords.add(userRecord);
+        }
+        lecturer.addLecturer(lectureRecords); 
+        lecturer.createLectureAccount(userRecords);
         
         displayUserCount();
         displayLecturerTable();
@@ -3040,10 +3044,13 @@ public class AdminPages extends javax.swing.JFrame {
         DefaultTableModel table = (DefaultTableModel) lectureListTable.getModel();
         FileHandler fh = new FileHandler();
         fh.displayData("lecturerList.txt", table);
+        
+        TableAlignment alignment = new TableAlignment();
+        alignment.alignTable(lectureListTable);
     }//GEN-LAST:event_loadLecturerIntoTableButtonActionPerformed
 
     private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
-        // TODO add your handling code here:
+        jTabbedPane1.setSelectedIndex(5);
     }//GEN-LAST:event_jButton6ActionPerformed
 
     private void addLecturerByGtoupButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addLecturerByGtoupButtonActionPerformed
@@ -3234,7 +3241,7 @@ public class AdminPages extends javax.swing.JFrame {
     private javax.swing.JTextField lecturePageSearchField;
     private javax.swing.JLabel lectureProfileName;
     private javax.swing.JPanel lecturer;
-    private Admin.SetUserProfile lecturerSetImage1;
+    private Admin.SetUserProfile lecturerAvatarNew;
     private javax.swing.JTable lecturerTable;
     private javax.swing.JButton loadLecturerIntoTableButton;
     private javax.swing.JButton loadStudentIntoTableButton;
@@ -3266,13 +3273,13 @@ public class AdminPages extends javax.swing.JFrame {
     private javax.swing.JLabel studentIDLabel;
     private javax.swing.JTable studentJTable;
     private javax.swing.JTable studentListTable;
+    private Admin.SetUserProfile studentNewAvatar1;
     private javax.swing.JTextField studentNewContactField;
     private javax.swing.JComboBox<String> studentPageFilterBox;
     private javax.swing.JTextField studentPageSearchField;
     private javax.swing.JTextField studentPicTextField;
     private Admin.SetUserProfile studentRegisterPic;
     private javax.swing.JScrollPane studentScrollPane;
-    private Admin.SetUserProfile studentSetImage1;
     private javax.swing.JPanel studentTablePanel;
     private javax.swing.JLabel studentnNameLabel;
     private javax.swing.JComboBox<String> studyLevelComboBox;
@@ -3283,10 +3290,10 @@ public class AdminPages extends javax.swing.JFrame {
     private javax.swing.JButton uploadStudentNewProfileBtn;
     private javax.swing.JButton uploadStudentPicBtn;
     private javax.swing.JLabel userIDLabel;
+    private Admin.SetUserProfile userNewAvatar1;
     private javax.swing.JTextField userNewPasswordField;
     private javax.swing.JPanel userPage;
     private javax.swing.JTextField userPageSearchField;
-    private Admin.SetUserProfile userSetImage1;
     private javax.swing.JTable userTable;
     private javax.swing.JCheckBox yesCheckBox;
     private javax.swing.ButtonGroup yesNoGroup;

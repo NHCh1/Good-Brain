@@ -21,11 +21,14 @@ L020;Maya Ward;800202-44-5223;60112345678;L020@lecturer.edu.my;Software Engineer
 L021;Owen Bell;790104-49-6334;60123456789;L021@lecturer.edu.my;Cyber Security;Software Engineering;Yes
 L022;Ruby Hayes;780903-43-7445;60134567890;L022@lecturer.edu.my;Finance;Digital Forensic;No
 L023;Zoe Foster;770701-47-8556;60145678901;L023@lecturer.edu.my;Intelligent System;Cloud Engineering;Yes
-L024;Gavin Cox;760528-42-9667;60156789012;L024@lecturer.edu.my;Data Analytic;Psychology;No
-L025;Hannah Ward;750407-46-0778;60167890123;L025@lecturer.edu.my;Digital Forensic;Finance;No
-L026;Zara Khan;940225-34-5939;60161384729;L023@staff.goodbrain.edu.my;Finance;Banking;No
-L027;Liam Lee;910112-33-6050;60181624593;L024@staff.goodbrain.edu.my;Cyber Security;Engineering;No
-L028;Nora Wang;900520-37-7162;60152748364;L025@staff.goodbrain.edu.my;Psychology;Finance;Yes
-L029;Luca Garcia;930805-30-8273;60143962571;L026@staff.goodbrain.edu.my;Cloud Engineering;Intelligent System;No
-L030;Leah Lopez;920503-31-9384;60177639158;L027@staff.goodbrain.edu.my;Intelligent System;Software Engineering;No
-L031;Quby Woo;950615-02-4121;60157984316;L031@staff.goodbrain.edu.my;Accounting;Finance;No
+L024;Benjamin Kim;871028-14-5896;60123456789;L024@staff.goodbrain.edu.my;Cloud Engineering;Data Analytics;-
+L025;Sophia Lee;930711-12-6785;60198765432;L025@staff.goodbrain.edu.my;Accounting;Finance;-
+L026;Jackson Choi;880502-11-7456;60187654321;L026@staff.goodbrain.edu.my;Digital Marketing;-;-
+L027;Victoria Park;900315-13-6321;60123458976;L027@staff.goodbrain.edu.my;Cyber Security;Intelligent Systems;-
+L028;Ethan Kang;860704-10-5834;60187654321;L028@staff.goodbrain.edu.my;Data Analytics;Software Engineering;-
+L029;Lily Yoon;950811-13-7458;60145678901;L029@staff.goodbrain.edu.my;Cloud Engineering;Digital Forensic;-
+L030;Sebastian Song;920210-12-6742;60134567890;L030@staff.goodbrain.edu.my;Intelligent Systems;Cyber Security;-
+L031;Isabella Jung;890915-13-5219;60123456789;L031@staff.goodbrain.edu.my;Software Engineering;Finance;-
+L032;Cooper Choi;930706-12-6978;60198765432;L032@staff.goodbrain.edu.my;Digital Marketing;-;-
+L033;Hailey Moon;900528-11-6432;60123459876;L033@staff.goodbrain.edu.my;Finance;Cloud Engineering;-
+L034;Aiden Park;900705-14-5278;60187650987;L034@staff.goodbrain.edu.my;Psychology;Data Analytics;-

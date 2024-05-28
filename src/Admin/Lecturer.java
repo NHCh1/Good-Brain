@@ -297,7 +297,7 @@ public class Lecturer {
 
     public void initializeLastLecturerID() {
         try {
-            File file = new File("student.txt");
+            File file = new File("lecturer.txt");
             if (!file.exists()) {
                 lastLecturerID = 0;
             } else {
@@ -331,7 +331,7 @@ public class Lecturer {
     
     public String createLectureIDForGroup() {
         lastLecturerID++;
-        lectureID = "S" + String.format("%03d", lastLecturerID);
+        lectureID = "L" + String.format("%03d", lastLecturerID);
         return lectureID;
     }
     
@@ -343,22 +343,22 @@ public class Lecturer {
         return null;
     }
     
-    public String createEmailForGroup (String studentID){
-        return lectureID + "@mail.goodbrain.edu.my";
+    public String createEmailForGroup (String lectureID){
+        return lectureID + "@staff.goodbrain.edu.my";
     }
      
-    public void addLecturer(List<String> studentData){
+    public void addLecturer(List<String> lectureData){
         try(BufferedWriter bw = new BufferedWriter(new FileWriter("lecturer.txt", true))){
-            for(String data : studentData){
+            for(String data : lectureData){
                 bw.write(data);
                 bw.newLine();
             }
             Icon icon = new ImageIcon(getClass().getResource("/Icon/success.png"));
-            JOptionPane.showMessageDialog(null, "Students has been added! ","Notification", JOptionPane.INFORMATION_MESSAGE, icon);
+            JOptionPane.showMessageDialog(null, "Lecturers has been added! ","Notification", JOptionPane.INFORMATION_MESSAGE, icon);
             }
         
         catch (IOException ie){
-            JOptionPane.showMessageDialog(null, "Failed to add student! ", "Error",JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(null, "Failed to add lecturer! ", "Error",JOptionPane.ERROR_MESSAGE);
         }
     }
     

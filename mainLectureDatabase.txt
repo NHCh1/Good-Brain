@@ -1,0 +1,46 @@
+Stella Kim;870829-13-6981;60198763524;Cyber Security;Digital Marketing
+Leo Chang;940203-11-7134;60198751432;Digital Forensic;Intelligent Systems
+Olivia Lee;950214-13-5896;60123450987;Data Analytics;-
+Jayden Yoo;880703-14-6758;60187654098;Accounting;Cloud Engineering
+Chloe Song;910320-12-6342;60123459786;Finance;Digital Forensic
+Mason Choi;930408-11-6980;60198752436;Intelligent Systems;Psychology
+Grace Shin;860731-13-5879;60123457689;Software Engineering;Cyber Security
+Noah Kim;940908-14-6325;60187654890;Cloud Engineering;Finance
+Emma Park;880422-12-7654;60198764532;Digital Marketing;Data Analytics
+Daniel Ho;900615-11-5836;60123459087;Psychology;Intelligent Systems
+Mia Ryu;920509-14-7456;60198756321;Cyber Security;Digital Marketing
+Owen Lim;920730-13-6378;60123450987;Data Analytics;Software Engineering
+Harper Jung;890120-12-5897;60187654098;Accounting;-
+Aaron Lee;930421-14-6458;60198754236;Finance;Cloud Engineering
+Ellie Kim;910303-13-6981;60123452689;Intelligent Systems;Psychology
+Connor Choi;880601-11-6325;60198754890;Software Engineering;-
+Luna Park;940815-12-7654;60123464532;Cloud Engineering;-
+Caleb Yoon;910714-13-5836;60198759087;Digital Marketing;Data Analytics
+Madelyn Song;900530-12-7456;60123456321;Psychology;Intelligent Systems
+Samuel Moon;930825-13-5378;60198750987;Cyber Security;Digital Marketing
+Avery Chang;890710-14-5897;60123454098;Data Analytics;-
+Jack Lee;960120-11-6458;60198754236;Accounting;Cloud Engineering
+Zoey Kim;880819-13-6981;60123452689;Finance;Digital Forensic
+Luke Ho;910703-14-6325;60198754890;Intelligent Systems;Psychology
+Eva Ryu;930312-12-7654;60123464532;Software Engineering;Cyber Security
+Jaxon Lim;920606-11-5836;60198759087;Cloud Engineering;Finance
+Lilyan Jung;890315-12-7456;60123456321;Digital Marketing;Data Analytics
+Logan Park;950707-13-5378;60198750987;Psychology;Intelligent Systems
+Ellie Shin;930522-14-5897;60123454098;Cyber Security;Digital Marketing
+Owen Yoo;900120-11-6458;60198754236;Data Analytics;Software Engineering
+Gabriella Song;900727-13-6981;60123452689;Accounting;Cloud Engineering
+Charles Kim;890629-14-6325;60187654890;Finance;Digital Forensic
+Charlotte Choi;920515-12-7654;60123464532;Intelligent Systems;Psychology
+Dylan Lee;920420-13-5836;60187659087;Software Engineering;Cyber Security
+Emery Ho;930628-14-7456;60123456321;Cloud Engineering;Finance
+Owen Park;880802-11-5378;60187650987;Digital Marketing;Data Analytics
+Harper Lim;940507-12-5897;60123454098;Psychology;Intelligent Systems
+Scarlett Chang;950423-13-6458;60187654236;Cyber Security;Digital Marketing
+Carter Yoon;910817-11-6981;60123452689;Data Analytics;Software Engineering
+Gavin Cox;760528-42-9667;60156789012;L024@lecturer.edu.my;Data Analytic;Psychology
+Hannah Ward;750407-46-0778;60167890123;L025@lecturer.edu.my;Digital Forensic;Finance
+Zara Khan;940225-34-5939;60161384729;L023@staff.goodbrain.edu.my;Finance;Banking
+Liam Lee;910112-33-6050;60181624593;L024@staff.goodbrain.edu.my;Cyber Security;Engineering
+Nora Wang;900520-37-7162;60152748364;L025@staff.goodbrain.edu.my;Psychology;Finance
+Luca Garcia;930805-30-8273;60143962571;L026@staff.goodbrain.edu.my;Cloud Engineering;Intelligent System
+Leah Lopez;920503-31-9384;60177639158;L027@staff.goodbrain.edu.my;Intelligent System;Software Engineering
