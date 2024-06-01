@@ -1,4 +1,3 @@
-Madelyn Song;900530-12-7456;60123456321;Psychology;Intelligent Systems
 Samuel Moon;930825-13-5378;60198750987;Cyber Security;Digital Marketing
 Avery Chang;890710-14-5897;60123454098;Data Analytics;-
 Jack Lee;960120-11-6458;60198754236;Accounting;Cloud Engineering

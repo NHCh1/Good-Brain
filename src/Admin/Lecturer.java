@@ -48,34 +48,37 @@ public class Lecturer {
     
     
     //Validation purpose
-    public Lecturer(String name, String ic, String contact, String pm){
+    public Lecturer(String name, String ic, String contact){
         this.name = name;
         this.ic = ic;
         this.contact = contact;
-        this.projectManager = pm;
 //        this.role = role;
 //        this.student = student;
 //        this.projectManager = pm;
     }
     
     
-    //Add lecturer & update purpose
-    public Lecturer(String id, String name, String ic, String contact, String email, String major, String minor, String pm){
+    //Add lecturer
+    public Lecturer(String id, String name, String ic, String contact, String email, String major, String minor){
         this.lectureID = id;
         this.name = name;
         this.ic = ic;
         this.contact = contact;
         this.email = email;
         this.major = major;
-        this.minor = minor;
-        this.projectManager = pm;
-        
+        this.minor = minor; 
+    }
+    
+    //Update lecturer
+    public Lecturer(String id, String name, String ic, String contact, String email, String major, String minor, String pm){
+        this.lectureID = id;
+        this.name = name;
+        this.ic = ic;
         this.newContact = contact;
         this.newMajor = major;
         this.newMinor = minor;
         this.isPMRole = pm;
     }
-
     
     public Lecturer (String id, String password){
         this.lectureID = id;
@@ -129,11 +132,6 @@ public class Lecturer {
         String contactError = validateContact();
         if (!contactError.isEmpty()) {
             errors.add(contactError);
-        }    
-        
-        String pmError = validateProjectManagerGroup();
-        if (!pmError.isEmpty()) {
-            errors.add(pmError);
         }
         return errors;
     }
@@ -168,12 +166,6 @@ public class Lecturer {
         return "";
     }
     
-    private String validateProjectManagerGroup() {
-    if (projectManager.isEmpty()) {
-        return "Please select if the lecturer is a project manager.";
-    }
-    return "";
-}
     
     private void createEmail(){
         email = lectureID + "@staff.goodbrain.edu.my";
@@ -227,30 +219,15 @@ public class Lecturer {
         }
     }
     
-    public void createLectureAccount(String pm){
-        this.projectManager = pm;
-        
-        if (pm.equals("Yes")){
-            try{
-                FileWriter fw = new FileWriter("user.txt", true);
-                fw.write(lectureID + ";" + password + ";" + "4" + "\n");
-                fw.close();
+    public void createLectureAccount(){
+        try{
+            FileWriter fw = new FileWriter("user.txt", true);
+            fw.write(lectureID + ";" + password + ";" + "2" + "\n");
+            fw.close();
         }catch(IOException e){
-            JOptionPane.showMessageDialog(null, "Failed to add project manager! ", "Error",
+            JOptionPane.showMessageDialog(null, "Failed to add user! ", "Error",
                     JOptionPane.ERROR_MESSAGE);
-            }
-        }
-        else if (pm.equals("No")){
-            try{
-                FileWriter fw = new FileWriter("user.txt", true);
-                fw.write(lectureID + ";" + password + ";" + "2" + "\n");
-                fw.close();
-            }catch(IOException e){
-                JOptionPane.showMessageDialog(null, "Failed to add lecturer! ", "Error",
-                        JOptionPane.ERROR_MESSAGE);
-                }
-        }
-        
+            }   
     }
     
     public void addLecturer(){
@@ -444,15 +421,12 @@ public class Lecturer {
                     } else if (pm.equals("No")) {
                         row[2] = "2"; // Keep as project manager
                     }
-//                    else if (row[2].equals("2") && pm.equals("No")) {
-//                        row[2] = "2";
-//                    }
                     data.set(i, row);
                     break;
                 }
             }
             
-            BufferedWriter bw = new BufferedWriter(new FileWriter("lecturer.txt"));
+            BufferedWriter bw = new BufferedWriter(new FileWriter("user.txt"));
             for(String[] row : data){
                 String newData = String.join(";", row);
                 bw.write(newData);

@@ -63,6 +63,7 @@ public class AdminPages extends javax.swing.JFrame {
         initComponents();
         displayUserCount();
 
+        adminProfile.setIcon(new ImageIcon("src/Profile/A001.jpg"));
         //set gradient color to cell
 //        TableGradientCell tableGradient = new TableGradientCell(new Color(23,161,115), new Color(12,12,14));
 //        studentJTable.setDefaultRenderer(Object.class, new TableGradientCell());
@@ -405,6 +406,7 @@ public class AdminPages extends javax.swing.JFrame {
         jLabel5 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
+        adminProfile = new Admin.SetUserProfile();
         menubar = new javax.swing.JPanel();
         menu1 = new javax.swing.JPanel();
         jLabel3 = new javax.swing.JLabel();
@@ -602,20 +604,27 @@ public class AdminPages extends javax.swing.JFrame {
                 .addGroup(headerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(headerLayout.createSequentialGroup()
-                        .addGap(78, 78, 78)
+                        .addGap(12, 12, 12)
+                        .addComponent(adminProfile, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
                         .addComponent(jLabel6)
-                        .addGap(227, 227, 227)
+                        .addGap(229, 229, 229)
                         .addComponent(jLabel5)))
-                .addContainerGap(441, Short.MAX_VALUE))
+                .addContainerGap(427, Short.MAX_VALUE))
         );
         headerLayout.setVerticalGroup(
             headerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(headerLayout.createSequentialGroup()
-                .addGap(21, 21, 21)
-                .addGroup(headerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel6)
-                    .addComponent(jLabel5))
-                .addGap(72, 72, 72)
+                .addGroup(headerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(headerLayout.createSequentialGroup()
+                        .addGap(21, 21, 21)
+                        .addGroup(headerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel6)
+                            .addComponent(jLabel5)))
+                    .addGroup(headerLayout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(adminProfile, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(89, 89, 89)
                 .addComponent(jLabel9, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
         );
@@ -2538,7 +2547,7 @@ public class AdminPages extends javax.swing.JFrame {
 
 //        String pm = selectedYesNoButton.getActionCommand();
         
-        Lecturer lc = new Lecturer(name, ic, contact, pm);
+        Lecturer lc = new Lecturer(name, ic, contact);
         List<String> validationErrors = lc.lecturerValidation();
         if (!validationErrors.isEmpty()) {
             StringBuilder errorMessage = new StringBuilder("The following errors are detected:\n");
@@ -2552,8 +2561,8 @@ public class AdminPages extends javax.swing.JFrame {
             String email = lec.getEmail();
             String password = lec.getPassword(ic);
             Lecturer createAcc = new Lecturer(lecID, password);
-            createAcc.createLectureAccount(pm);
-            Lecturer add = new Lecturer(lecID, name, ic, contact, email, major, minor, pm);
+            createAcc.createLectureAccount();
+            Lecturer add = new Lecturer(lecID, name, ic, contact, email, major, minor);
             
             saveImageToFolder(lecID);
             
@@ -2715,6 +2724,8 @@ public class AdminPages extends javax.swing.JFrame {
         catch (IOException ex) {
             Logger.getLogger(AdminPages.class.getName()).log(Level.SEVERE, null, ex);
         }
+        
+        
         jTabbedPane1.setSelectedIndex(5);
         displayLecturerTable();
     }//GEN-LAST:event_updateLecBtnActionPerformed
@@ -3141,6 +3152,7 @@ public class AdminPages extends javax.swing.JFrame {
     private javax.swing.JButton addStudentButton;
     private javax.swing.JButton addStudentByIntakeButton;
     private javax.swing.JButton addStudentFromListBtn;
+    private Admin.SetUserProfile adminProfile;
     private javax.swing.JButton cancelButton2;
     private javax.swing.JButton cancelEditStudentBtn;
     private Swing.CardPanel cardPanel1;
