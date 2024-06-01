@@ -439,13 +439,14 @@ public class Lecturer {
             for (int i = 0; i < data.size(); i++) {
                 if (data.get(i)[0].equals(lectureID)) {
                     String[] row = data.get(i);
-                    if (row[2].equals("2") && pm.equals("Yes")) {
+                    if (pm.equals("Yes")) {
                         row[2] = "4"; // Update to project manager
-                    } else if (row[2].equals("4") && pm.equals("No")) {
+                    } else if (pm.equals("No")) {
                         row[2] = "2"; // Keep as project manager
-                    } else if (row[2].equals("2") && pm.equals("No")) {
-                        row[2] = "2";
                     }
+//                    else if (row[2].equals("2") && pm.equals("No")) {
+//                        row[2] = "2";
+//                    }
                     data.set(i, row);
                     break;
                 }

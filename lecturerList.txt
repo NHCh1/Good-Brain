@@ -1,11 +1,9 @@
-Benjamin Kim;871028-14-5896;60123456789;Cloud Engineering;Data Analytics
-Sophia Lee;930711-12-6785;60198765432;Accounting;Finance
-Jackson Choi;880502-11-7456;60187654321;Digital Marketing;-
-Victoria Park;900315-13-6321;60123458976;Cyber Security;Intelligent Systems
-Ethan Kang;860704-10-5834;60187654321;Data Analytics;Software Engineering
-Lily Yoon;950811-13-7458;60145678901;Cloud Engineering;Digital Forensic
-Sebastian Song;920210-12-6742;60134567890;Intelligent Systems;Cyber Security
-Isabella Jung;890915-13-5219;60123456789;Software Engineering;Finance
-Cooper Choi;930706-12-6978;60198765432;Digital Marketing;-
-Hailey Moon;900528-11-6432;60123459876;Finance;Cloud Engineering
-Aiden Park;900705-14-5278;60187650987;Psychology;Data Analytics
+Daniel Ho;900615-11-5836;60123459087;Psychology;Intelligent Systems
+Mia Ryu;920509-14-7456;60198756321;Cyber Security;Digital Marketing
+Owen Lim;920730-13-6378;60123450987;Data Analytics;Software Engineering
+Harper Jung;890120-12-5897;60187654098;Accounting;-
+Aaron Lee;930421-14-6458;60198754236;Finance;Cloud Engineering
+Ellie Kim;910303-13-6981;60123452689;Intelligent Systems;Psychology
+Connor Choi;880601-11-6325;60198754890;Software Engineering;-
+Luna Park;940815-12-7654;60123464532;Cloud Engineering;-
+Caleb Yoon;910714-13-5836;60198759087;Digital Marketing;Data Analytics

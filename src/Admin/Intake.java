@@ -5,6 +5,8 @@
 package Admin;
 
 import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -12,6 +14,8 @@ import java.time.LocalDate;
 import java.time.YearMonth;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.Icon;
@@ -149,7 +153,7 @@ public class Intake {
         else if(course.equals("Engineering")){
             courseAbbr = "EN";
         }
-        else if(course.contains("Finanace")){
+        else if(course.contains("Finance")){
             courseAbbr = "FN";
         }
         else if(course.equals("FinTech")){
@@ -168,16 +172,21 @@ public class Intake {
         
     private ArrayList<String[]> readIntake() throws IOException{
         ArrayList<String[]> intakes = new ArrayList<String[]>();
-        BufferedReader br = new BufferedReader(new FileReader("intake.txt"));
-        String data;
-                
-        while ((data = br.readLine()) != null){
-            String [] intakeData = data.split(";");
-            intakes.add(intakeData);
-        }
-        br.close();
         
-        return intakes;
+        File file = new File("intake.txt");
+        if (!file.exists()) {
+            file.createNewFile();
+        }
+            BufferedReader br = new BufferedReader(new FileReader("intake.txt"));
+            String data;
+
+            while ((data = br.readLine()) != null){
+                String [] intakeData = data.split(";");
+                intakes.add(intakeData);
+            }
+            br.close();
+
+            return intakes;
     }
     
         public boolean checkIsCodeCreated() throws IOException{
@@ -196,16 +205,18 @@ public class Intake {
     
     
     public void addIntake(){
+        
         try{
             FileWriter writer = new FileWriter("intake.txt", true);            
             writer.write(intakeCode + ";" + studyLevel + ";" + course + ";" + intakeDuration + ";" +
-                    intakeRegisterStartDate + "," + intakeRegisterEndDate + "," + intakeStartDate + "," + intakeEndDate + "\n");
+                    intakeRegisterStartDate + ";" + intakeRegisterEndDate + ";" + intakeStartDate + ";" + intakeEndDate + "\n");
             writer.close();
 
             Icon icon = new ImageIcon(getClass().getResource("/Icon/success.png"));
             JOptionPane.showMessageDialog(null, "New intake has been added! ", 
                                     "Notification", JOptionPane.INFORMATION_MESSAGE, icon);
-        }
+            }
+        
         catch (IOException e) {
             JOptionPane.showMessageDialog(null, "New intake creation failed! ", "Error",
                     JOptionPane.ERROR_MESSAGE);
@@ -228,17 +239,18 @@ public class Intake {
 
             for (int i = 0; i < rows.length; i++){
                 String line = rows[i].toString();
+                
                 String [] dataRow = line.split(";");
-                String intakeCode = dataRow[0];
-                String rStartDate = dataRow[6];
-                String rEndDate = dataRow[7];
+                String IntakeCode = dataRow[0];
+                String rStartDate = dataRow[4];
+                String rEndDate = dataRow[5];
 
                 DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
                 LocalDate registrationStartDate = LocalDate.parse(rStartDate, formatter);
                 LocalDate registrationEndDate = LocalDate.parse(rEndDate, formatter);
 
                 if (currentDate.isAfter(registrationStartDate) && currentDate.isBefore(registrationEndDate.plusDays(1))) {
-                    cb.addItem(intakeCode);
+                    cb.addItem(IntakeCode);
                 }
             }
 
@@ -264,6 +276,49 @@ public class Intake {
             cb.addItem(code);
         }
     }
+     
+    public void updateIntake(String intakeCode, int numberOfGroups) {
+        try {
+            // Read existing intake records
+            List<String> lines = new ArrayList<>();
+            BufferedReader br = new BufferedReader(new FileReader("intake.txt"));
+            String line;
+            while ((line = br.readLine()) != null) {
+                lines.add(line);
+            }
+            br.close();
 
-    
+            // Find the original intake line
+            String originalIntakeLine = null;
+            for (String existingLine : lines) {
+                if (existingLine.startsWith(intakeCode + ";")) {
+                    originalIntakeLine = existingLine;
+                    break;
+                }
+            }
+
+            if (originalIntakeLine == null) {
+                return;  // Original intake code not found, exit the method
+            }
+
+            // Add new intake lines for each group
+            for (int i = 1; i <= numberOfGroups; i++) {
+                String newIntakeCode = intakeCode + "(" + i + ")";
+                String newIntakeLine = newIntakeCode + originalIntakeLine.substring(intakeCode.length());
+                lines.add(newIntakeLine);
+            }
+
+            // Write updated lines back to the intake.txt file
+            BufferedWriter bw = new BufferedWriter(new FileWriter("intake.txt"));
+            for (String updatedLine : lines) {
+                bw.write(updatedLine);
+                bw.newLine();
+            }
+            bw.close();
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
 }

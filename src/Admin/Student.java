@@ -59,6 +59,7 @@ public class Student {
         this.newIntake = intake;
     }
     
+    
     //Add new account details
     public Student(String id,String password){
         this.studentID = id;
@@ -155,6 +156,51 @@ public class Student {
     }
     // ------- Registration by Individual END -------
     
+    public String getId() {
+        return studentID;
+    }
+    public String getName() {
+        return name;
+    }
+    public String getIc() {
+        return ic;
+    
+    }
+    public String getContact() {
+        return contact;
+    }
+    public String getemail() {
+        return email;
+    }
+    public String getIntakeCode() {
+        return intake;
+    }
+    public String getPassword() {
+        return password;
+    }
+
+    public void setIntakeCode(String intakeCode) {
+        this.intake = intakeCode;
+    }
+    
+    public void setPassword(String password) {
+        this.password = password;
+    }
+    
+    public List<Student> groupStudent(List<Student> students, String intakeCode) {
+        List<Student> groupedStudents = new ArrayList<>();
+        int groupNumber = 1;
+
+        for (int i = 0; i < students.size(); i++) {
+            if (i > 0 && i % 20 == 0) {
+                groupNumber++;
+            }
+            Student student = students.get(i);
+            student.setIntakeCode(intakeCode + "(" + groupNumber + ")");
+            groupedStudents.add(student);
+        }
+        return groupedStudents;
+    }
     
     // ------- Registration by Group STARTS -------
     public List<String[]> loadExistingRecords() {
@@ -218,9 +264,9 @@ public class Student {
     public String createPasswordForGroup(String ic, String id){
         if(ic.matches("\\d{6}-\\d{2}-\\d{4}")){
             icPrefix = ic.substring(0,6);
-            return icPrefix + studentID;
         }
-        return null;
+        password = icPrefix + studentID;
+        return password;
     }
     
     public String createEmailForGroup (String studentID){

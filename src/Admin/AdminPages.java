@@ -42,6 +42,8 @@ import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableRowSorter;
 import TableController.TableAlignment;
 import TableController.TableGradientCell;
+import java.util.HashSet;
+import java.util.Set;
 
 
 
@@ -1917,7 +1919,7 @@ public class AdminPages extends javax.swing.JFrame {
                         .addComponent(jLabel38))
                     .addGroup(intakeLayout.createSequentialGroup()
                         .addGap(17, 17, 17)
-                        .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 860, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 822, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         intakeLayout.setVerticalGroup(
@@ -1929,9 +1931,9 @@ public class AdminPages extends javax.swing.JFrame {
                 .addGroup(intakeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(addIntakeButton)
                     .addComponent(intakePageSearchField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 285, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 300, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(121, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("tab8", intake);
@@ -2713,8 +2715,6 @@ public class AdminPages extends javax.swing.JFrame {
         catch (IOException ex) {
             Logger.getLogger(AdminPages.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
-        
         jTabbedPane1.setSelectedIndex(5);
         displayLecturerTable();
     }//GEN-LAST:event_updateLecBtnActionPerformed
@@ -2940,6 +2940,8 @@ public class AdminPages extends javax.swing.JFrame {
         student.initializeLastStudentID();
         
         String intakeCode = (String) intakeForGroupComboBox.getSelectedItem();
+        List<Student> studentsToRegister = new ArrayList<>();
+    
         for (int i = 0; i < studentListTable.getRowCount(); i++) {
             String name = (String) studentListTable.getValueAt(i, 0);
             String ic = (String) studentListTable.getValueAt(i, 1);
@@ -2953,15 +2955,26 @@ public class AdminPages extends javax.swing.JFrame {
             String studentID = student.createStudentIDForGroup();
             String email = student.createEmailForGroup(studentID);
             String password = student.createPasswordForGroup(ic, studentID);
-
-            String record = String.join(";", studentID, name, ic,contact, email, intakeCode);
-            studentRecords.add(record);
+            //add grouping here
             
-            String userRecord = String.join(";", studentID, password, "3");
-            userRecords.add(userRecord);
+            Student newStudent = new Student(studentID, name, ic, contact, email, intakeCode);
+            newStudent.setPassword(password);
+            studentsToRegister.add(newStudent);
         }
+        
+            List<Student> groupedStudents = student.groupStudent(studentsToRegister, intakeCode);
+            for (Student individual : groupedStudents) {
+                String record = String.join(";", individual.getId(), individual.getName(), individual.getIc(), individual.getContact(), individual.getEmail(), individual.getIntakeCode());
+                studentRecords.add(record);
+
+                String userRecord = String.join(";", individual.getId(), individual.getPassword(), "3");
+                userRecords.add(userRecord);
+            }
+            
         student.addStudent(studentRecords); 
         student.createStudentAccount(userRecords);
+        Intake intake = new Intake();
+        intake.updateIntake(intakeCode, groupedStudents.size() / 20 + 1);
         displayUserCount();
         displayStudentTable();
         jTabbedPane1.setSelectedIndex(1);
@@ -2997,6 +3010,8 @@ public class AdminPages extends javax.swing.JFrame {
     }//GEN-LAST:event_menu2MouseEntered
 
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
+        DefaultTableModel table = (DefaultTableModel) studentListTable.getModel();
+        table.setRowCount(0);
         jTabbedPane1.setSelectedIndex(1);
     }//GEN-LAST:event_jButton5ActionPerformed
 
