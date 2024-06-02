@@ -3047,8 +3047,9 @@ public class AdminPages extends javax.swing.JFrame {
             student.createStudentAccount(userRecords);
 
             // Update intake with new group count
-            int newGroupCount = (int) Math.ceil((double) studentCounts.getOrDefault(intakeCode, 0) / 20.0);
-            newGroupCount += (studentsToRegister.size() / 20);
+            int currentStudentCount = studentCounts.getOrDefault(intakeCode, 0);
+            int newGroupCount = (int) Math.ceil((double) currentStudentCount / 20.0);
+            newGroupCount += (int) Math.ceil((double) studentsToRegister.size() / 20.0);
             Intake intake = new Intake();
             intake.updateIntake(intakeCode, newGroupCount);
 

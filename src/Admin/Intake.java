@@ -15,7 +15,9 @@ import java.time.YearMonth;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.Icon;
@@ -259,6 +261,58 @@ public class Intake {
         }
     }
     
+    //display all without group
+//      public void addIntakeIntoComboBox(JComboBox<String> cb) {
+//        try {
+//            cb.removeAllItems();
+//            cb.addItem("");
+//            BufferedReader br = new BufferedReader(new FileReader("intake.txt"));
+//            Object[] rows = br.lines().toArray();
+//            br.close();
+//
+//            LocalDate currentDate = LocalDate.now();
+//            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+//
+//            Set<String> uniqueIntakeCodes = new HashSet<>();
+//            Set<String> groupedIntakeCodes = new HashSet<>();
+//
+//            for (Object row : rows) {
+//                String line = row.toString();
+//                String[] dataRow = line.split(";");
+//
+//                if (dataRow.length < 6) {
+//                    continue; // Skip invalid rows
+//                }
+//
+//                String intakeCode = dataRow[0];
+//                String rStartDate = dataRow[4];
+//                String rEndDate = dataRow[5];
+//
+//                LocalDate registrationStartDate = LocalDate.parse(rStartDate, formatter);
+//                LocalDate registrationEndDate = LocalDate.parse(rEndDate, formatter);
+//
+//                if (currentDate.isAfter(registrationStartDate) && currentDate.isBefore(registrationEndDate.plusDays(1))) {
+//                    if (intakeCode.matches(".*\\(\\d+\\)$")) {
+//                        groupedIntakeCodes.add(intakeCode.replaceAll("\\(\\d+\\)$", ""));
+//                    } else {
+//                        uniqueIntakeCodes.add(intakeCode);
+//                    }
+//                }
+//            }
+//
+//            // Remove grouped intake codes from the set of unique intake codes
+//            uniqueIntakeCodes.removeAll(groupedIntakeCodes);
+//
+//            // Add remaining unique intake codes to the combo box
+//            for (String intakeCode : uniqueIntakeCodes) {
+//                cb.addItem(intakeCode);
+//            }
+//
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//        }
+//    }
+
     public void addIntakeCodeForFilter(JComboBox cb){
         ArrayList<String> intakeCodes = new ArrayList<>();
         try (
@@ -332,10 +386,7 @@ public class Intake {
             }
             br.close();
 
-            // Remove existing group lines for this intake
-            //issue should be this
-            lines.removeIf(existingLine -> existingLine.startsWith(intakeCode + "("));
-
+            
             // Find the original intake line
             String originalIntakeLine = null;
             for (String existingLine : lines) {
@@ -348,6 +399,10 @@ public class Intake {
             if (originalIntakeLine == null) {
                 return;  // Original intake code not found, exit the method
             }
+            
+            //Remove existing group lines for this intake
+            lines.removeIf(existingLine -> existingLine.startsWith(intakeCode + "("));
+
 
             // Add new intake lines for each group
             for (int i = 1; i <= newGroupCount; i++) {
