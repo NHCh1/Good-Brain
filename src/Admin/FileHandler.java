@@ -15,6 +15,8 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
+import javax.swing.Icon;
+import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
@@ -113,7 +115,6 @@ public class FileHandler {
         if (found) {
             writeFile(filePath, updatedLines);
         }
-
         return found;
     }
 

@@ -1,10 +1,3 @@
-Samuel Moon;930825-13-5378;60198750987;Cyber Security;Digital Marketing
-Avery Chang;890710-14-5897;60123454098;Data Analytics;-
-Jack Lee;960120-11-6458;60198754236;Accounting;Cloud Engineering
-Zoey Kim;880819-13-6981;60123452689;Finance;Digital Forensic
-Luke Ho;910703-14-6325;60198754890;Intelligent Systems;Psychology
-Eva Ryu;930312-12-7654;60123464532;Software Engineering;Cyber Security
-Jaxon Lim;920606-11-5836;60198759087;Cloud Engineering;Finance
 Lilyan Jung;890315-12-7456;60123456321;Digital Marketing;Data Analytics
 Logan Park;950707-13-5378;60198750987;Psychology;Intelligent Systems
 Ellie Shin;930522-14-5897;60123454098;Cyber Security;Digital Marketing

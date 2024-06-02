@@ -176,6 +176,9 @@ public class AdminPages extends javax.swing.JFrame {
                     table.removeRow(row);
                     Student delete = new Student(id);
                     delete.deleteStudent();
+                    Icon icon = new ImageIcon(getClass().getResource("/Icon/success.png"));
+                    JOptionPane.showMessageDialog(null, "Student has been removed.", "Notification", JOptionPane.INFORMATION_MESSAGE, icon);
+                    
                     displayUserCount();
                 }
                 else if(decision == JOptionPane.NO_OPTION){
@@ -233,14 +236,15 @@ public class AdminPages extends javax.swing.JFrame {
                     lecturerTable.getCellEditor().stopCellEditing();
                 }
 
-                int decision = JOptionPane.showConfirmDialog(null, "Are you sure to remove this lecturer?"
-                        + " \n This action is irreversible" ,"Alert", 
+                int decision = JOptionPane.showConfirmDialog(null, "Are you sure to remove this lecturer?" + " \n This action is irreversible" ,"Alert", 
                         JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE);
                 if(decision == JOptionPane.YES_OPTION){
                     String id = lecturerTable.getValueAt(lecturerTable.getSelectedRow(), 0).toString();
                     lecTable.removeRow(row);
                     Lecturer delete = new Lecturer(id);
                     delete.deleteLecturer();
+                    Icon icon = new ImageIcon(getClass().getResource("/Icon/success.png"));
+                    JOptionPane.showMessageDialog(null, "Lecturer has been removed.", "Notification", JOptionPane.INFORMATION_MESSAGE, icon);
                     displayUserCount();
                 }
                 else if(decision == JOptionPane.NO_OPTION){
@@ -281,7 +285,14 @@ public class AdminPages extends javax.swing.JFrame {
                 
                 jTabbedPane1.setSelectedIndex(12);
                 
-                userNewAvatar1.setIcon(new ImageIcon(getClass().getResource("/Profile/" + id + ".jpg")));
+                File imageFile = new File("src/Profile/" + id + ".jpg");
+                if (imageFile.exists()) {
+                    userNewAvatar1.setIcon(new ImageIcon(imageFile.getAbsolutePath()));
+                }
+                 else {
+                    userNewAvatar1.setIcon(null);
+                }
+                
                 userIDLabel.setText(id);
                 userNewPasswordField.setText(password);
                 roleNoLabel.setText(String.valueOf(roleno));
@@ -302,6 +313,9 @@ public class AdminPages extends javax.swing.JFrame {
                     usertbl.removeRow(row);
                     User delete = new User(id);
                     delete.deleteUser();
+                    Icon icon = new ImageIcon(getClass().getResource("/Icon/success.png"));
+                    JOptionPane.showMessageDialog(null, "User has been removed.", "Notification", JOptionPane.INFORMATION_MESSAGE, icon);
+                    
                     displayUserCount();
                 }
                 else if(decision == JOptionPane.NO_OPTION){
@@ -2661,7 +2675,7 @@ public class AdminPages extends javax.swing.JFrame {
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         clearRegisterIntakeField();
-        jTabbedPane1.setSelectedIndex(8);
+        jTabbedPane1.setSelectedIndex(9);
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void clearRegisterIntakeField(){
@@ -3009,6 +3023,7 @@ public class AdminPages extends javax.swing.JFrame {
     
     private void loadStudentIntoTableButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_loadStudentIntoTableButtonActionPerformed
         DefaultTableModel table = (DefaultTableModel) studentListTable.getModel();
+        table.setRowCount(0);
         FileHandler fh = new FileHandler();
         fh.displayData("studentList.txt", table);
         
@@ -3068,6 +3083,7 @@ public class AdminPages extends javax.swing.JFrame {
 
     private void loadLecturerIntoTableButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_loadLecturerIntoTableButtonActionPerformed
         DefaultTableModel table = (DefaultTableModel) lectureListTable.getModel();
+        table.setRowCount(0);
         FileHandler fh = new FileHandler();
         fh.displayData("lecturerList.txt", table);
         
