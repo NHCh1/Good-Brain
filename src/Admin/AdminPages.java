@@ -46,20 +46,18 @@ import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 
-
-
 public class AdminPages extends javax.swing.JFrame {
 
     private final JFileChooser openFileChooser;
     private final JFileChooser saveFileChooser;
-    
+
     private Dimension originalSize;
     private Timer zoomTimer;
-    private double scaleFactor = 1.1; 
-    
+    private double scaleFactor = 1.1;
+
     private BufferedImage originalBI;
     private BufferedImage newBI;
-    
+
     public AdminPages() {
         initComponents();
         displayUserCount();
@@ -82,19 +80,19 @@ public class AdminPages extends javax.swing.JFrame {
                 + "border:3,0,3,0,$Table.background,10,10");
         studentScrollPane.getVerticalScrollBar().putClientProperty(FlatClientProperties.STYLE, ""
                 + "hoverTrackColor:null");
-        
+
         chart.addLegend("Foundation", new Color(58, 38, 24), new Color(58, 38, 24));
         chart.addLegend("Diploma", new Color(117, 64, 67), new Color(117, 64, 67));
         chart.addLegend("Degree", new Color(154, 136, 115), new Color(154, 136, 115));
         chart.addLegend("Master", new Color(55, 66, 61), new Color(55, 66, 61));
         chart.addData(new ModelChart("2019", new double[]{2800, 2950, 3012, 2650}));
         chart.addData(new ModelChart("2020", new double[]{2600, 2750, 2900, 3150}));
-        chart.addData(new ModelChart("2019", new double[]{2905, 3500, 2330,2200}));
+        chart.addData(new ModelChart("2019", new double[]{2905, 3500, 2330, 2200}));
         chart.addData(new ModelChart("2022", new double[]{2480, 2150, 2500, 2100}));
         chart.addData(new ModelChart("2023", new double[]{3500, 3200, 3000, 2150}));
         chart.addData(new ModelChart("2024", new double[]{1900, 2800, 3810, 2200}));
         chart.start();
-        
+
         originalSize = new Dimension(215, 110);
         cardPanel1.setPreferredSize(originalSize);
         // Create a Timer for zoom effect
@@ -114,30 +112,29 @@ public class AdminPages extends javax.swing.JFrame {
                 cardPanel1.repaint(); // Repaint the panel
             }
         });
-        
-        
+
         openFileChooser = new JFileChooser();
-        saveFileChooser = new JFileChooser();      
-        
+        saveFileChooser = new JFileChooser();
+
         addPlaceholder(studentPageSearchField);
         addPlaceholder(lecturePageSearchField);
         addPlaceholder(intakePageSearchField);
         addPlaceholder(userPageSearchField);
-        
+
         DefaultTableModel table = (DefaultTableModel) studentJTable.getModel();
         DefaultTableModel lecTable = (DefaultTableModel) lecturerTable.getModel();
         DefaultTableModel usertbl = (DefaultTableModel) userTable.getModel();
-        
+
         //Call action button funtion
-        TableActionEvent studentActionEvent = new TableActionEvent(){
+        TableActionEvent studentActionEvent = new TableActionEvent() {
             @Override
             public void onEdit(int row) {
                 Student edit = new Student(table);
-                String studID = studentJTable.getValueAt(studentJTable.getSelectedRow(),0).toString();
+                String studID = studentJTable.getValueAt(studentJTable.getSelectedRow(), 0).toString();
                 String name = studentJTable.getValueAt(studentJTable.getSelectedRow(), 1).toString();
                 String ic = studentJTable.getValueAt(studentJTable.getSelectedRow(), 2).toString();
                 String contact = studentJTable.getValueAt(studentJTable.getSelectedRow(), 3).toString();
-                String email = studentJTable.getValueAt(studentJTable.getSelectedRow(), 4).toString();                             
+                String email = studentJTable.getValueAt(studentJTable.getSelectedRow(), 4).toString();
                 String intake = studentJTable.getValueAt(studentJTable.getSelectedRow(), 5).toString();
 //                String lecturer = studentJTable.getValueAt(studentJTable.getSelectedRow(), 6).toString();
 
@@ -151,45 +148,43 @@ public class AdminPages extends javax.swing.JFrame {
 
                 if (imageFile.exists()) {
                     studentNewAvatar1.setIcon(new ImageIcon(imageFile.getAbsolutePath()));
-                }
-                 else {
+                } else {
                     studentNewAvatar1.setIcon(null);
                 }
-                
+
                 studentIDLabel.setText(studID);
                 studentnNameLabel.setText(name);
                 studentICLabel.setText(ic);
                 studentNewContactField.setText(contact);
-                studentEmailLabel.setText(email);       
-                newIntakeCodeComboBox.setSelectedItem(intake);    
+                studentEmailLabel.setText(email);
+                newIntakeCodeComboBox.setSelectedItem(intake);
             }
 
             @Override
             public void onDelete(int row) {
-                if(studentJTable.isEditing()){
+                if (studentJTable.isEditing()) {
                     studentJTable.getCellEditor().stopCellEditing();
                 }
 
-                int decision = JOptionPane.showConfirmDialog(null, "Are you sure to remove this student? \n This action is irreversible"
-                                   ,"Alert", JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE);
-                if(decision == JOptionPane.YES_OPTION){
+                int decision = JOptionPane.showConfirmDialog(null, "Are you sure to remove this student? \n This action is irreversible",
+                         "Alert", JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE);
+                if (decision == JOptionPane.YES_OPTION) {
                     String id = studentJTable.getValueAt(studentJTable.getSelectedRow(), 0).toString();
                     table.removeRow(row);
                     Student delete = new Student(id);
                     delete.deleteStudent();
                     Icon icon = new ImageIcon(getClass().getResource("/Icon/success.png"));
                     JOptionPane.showMessageDialog(null, "Student has been removed.", "Notification", JOptionPane.INFORMATION_MESSAGE, icon);
-                    
+
                     displayUserCount();
-                }
-                else if(decision == JOptionPane.NO_OPTION){
+                } else if (decision == JOptionPane.NO_OPTION) {
                     Icon icon = new ImageIcon(getClass().getResource("/Icon/shield.png"));
-                    JOptionPane.showMessageDialog(null, "No changes has been made.", "Notification", JOptionPane.INFORMATION_MESSAGE,icon);                    
+                    JOptionPane.showMessageDialog(null, "No changes has been made.", "Notification", JOptionPane.INFORMATION_MESSAGE, icon);
                 }
             }
         };
-        
-        TableActionEvent lecturerActionEvent = new TableActionEvent(){
+
+        TableActionEvent lecturerActionEvent = new TableActionEvent() {
             @Override
             public void onEdit(int row) {
                 String id = lecturerTable.getValueAt(lecturerTable.getSelectedRow(), 0).toString();
@@ -200,20 +195,19 @@ public class AdminPages extends javax.swing.JFrame {
                 String major = lecturerTable.getValueAt(lecturerTable.getSelectedRow(), 5).toString();
                 String minor = lecturerTable.getValueAt(lecturerTable.getSelectedRow(), 6).toString();
                 String pmRole = lecturerTable.getValueAt(lecturerTable.getSelectedRow(), 7).toString();
-                
+
                 jTabbedPane1.setSelectedIndex(8);
-                
+
                 addCourseIntoComboBoxForUpdate();
-                
+
                 File imageFile = new File("src/Profile/" + id + ".jpg");
 
                 if (imageFile.exists()) {
                     lecturerAvatarNew.setIcon(new ImageIcon(imageFile.getAbsolutePath()));
-                }
-                 else {
+                } else {
                     lecturerAvatarNew.setIcon(null);
                 }
-                
+
                 lectureIDLabel.setText(id);
                 lcNameLabel.setText(name);
                 lcICLabel1.setText(ic);
@@ -233,13 +227,13 @@ public class AdminPages extends javax.swing.JFrame {
 
             @Override
             public void onDelete(int row) {
-                if(lecturerTable.isEditing()){
+                if (lecturerTable.isEditing()) {
                     lecturerTable.getCellEditor().stopCellEditing();
                 }
 
-                int decision = JOptionPane.showConfirmDialog(null, "Are you sure to remove this lecturer?" + " \n This action is irreversible" ,"Alert", 
+                int decision = JOptionPane.showConfirmDialog(null, "Are you sure to remove this lecturer?" + " \n This action is irreversible", "Alert",
                         JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE);
-                if(decision == JOptionPane.YES_OPTION){
+                if (decision == JOptionPane.YES_OPTION) {
                     String id = lecturerTable.getValueAt(lecturerTable.getSelectedRow(), 0).toString();
                     lecTable.removeRow(row);
                     Lecturer delete = new Lecturer(id);
@@ -247,53 +241,51 @@ public class AdminPages extends javax.swing.JFrame {
                     Icon icon = new ImageIcon(getClass().getResource("/Icon/success.png"));
                     JOptionPane.showMessageDialog(null, "Lecturer has been removed.", "Notification", JOptionPane.INFORMATION_MESSAGE, icon);
                     displayUserCount();
-                }
-                else if(decision == JOptionPane.NO_OPTION){
+                } else if (decision == JOptionPane.NO_OPTION) {
                     Icon icon = new ImageIcon(getClass().getResource("/Icon/shield.png"));
-                    JOptionPane.showMessageDialog(null, "No changes has been made.", "Notification", 
-                            JOptionPane.INFORMATION_MESSAGE,icon);                    
+                    JOptionPane.showMessageDialog(null, "No changes has been made.", "Notification",
+                            JOptionPane.INFORMATION_MESSAGE, icon);
                 }
             }
         };
-        
+
         TableActionEvent userActionEvent = new TableActionEvent() {
             @Override
             public void onEdit(int row) {
                 String id = userTable.getValueAt(userTable.getSelectedRow(), 0).toString();
                 String password = userTable.getValueAt(userTable.getSelectedRow(), 1).toString();
                 int roleno = Integer.parseInt(userTable.getValueAt(userTable.getSelectedRow(), 2).toString());
-                
+
                 String role = "";
-                
-                switch(roleno){
-                    case(1):{
+
+                switch (roleno) {
+                    case (1): {
                         role = "Admin";
                         break;
                     }
-                    case(2):{
+                    case (2): {
                         role = "Lecturer";
                         break;
                     }
-                    case(3):{
-                        role="Student";
+                    case (3): {
+                        role = "Student";
                         break;
                     }
-                    case(4):{
+                    case (4): {
                         role = "Project Manager";
                         break;
                     }
                 }
-                
+
                 jTabbedPane1.setSelectedIndex(12);
-                
+
                 File imageFile = new File("src/Profile/" + id + ".jpg");
                 if (imageFile.exists()) {
                     userNewAvatar1.setIcon(new ImageIcon(imageFile.getAbsolutePath()));
-                }
-                 else {
+                } else {
                     userNewAvatar1.setIcon(null);
                 }
-                
+
                 userIDLabel.setText(id);
                 userNewPasswordField.setText(password);
                 roleNoLabel.setText(String.valueOf(roleno));
@@ -302,105 +294,102 @@ public class AdminPages extends javax.swing.JFrame {
 
             @Override
             public void onDelete(int row) {
-                if(userTable.isEditing()){
+                if (userTable.isEditing()) {
                     userTable.getCellEditor().stopCellEditing();
                 }
 
-                int decision = JOptionPane.showConfirmDialog(null, "Are you sure to remove this user? \n This action is irreversible"
-                                   ,"Alert", JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE);
-                if(decision == JOptionPane.YES_OPTION){
+                int decision = JOptionPane.showConfirmDialog(null, "Are you sure to remove this user? \n This action is irreversible",
+                         "Alert", JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE);
+                if (decision == JOptionPane.YES_OPTION) {
                     String id = userTable.getValueAt(userTable.getSelectedRow(), 0).toString();
-                    
+
                     usertbl.removeRow(row);
                     User delete = new User(id);
                     delete.deleteUser();
                     Icon icon = new ImageIcon(getClass().getResource("/Icon/success.png"));
                     JOptionPane.showMessageDialog(null, "User has been removed.", "Notification", JOptionPane.INFORMATION_MESSAGE, icon);
-                    
+
                     displayUserCount();
-                }
-                else if(decision == JOptionPane.NO_OPTION){
+                } else if (decision == JOptionPane.NO_OPTION) {
                     Icon icon = new ImageIcon(getClass().getResource("/Icon/shield.png"));
-                    JOptionPane.showMessageDialog(null, "No changes has been made.", "Notification", JOptionPane.INFORMATION_MESSAGE,icon);                    
+                    JOptionPane.showMessageDialog(null, "No changes has been made.", "Notification", JOptionPane.INFORMATION_MESSAGE, icon);
                 }
             }
         };
-        
+
         //Edit the action column by adjusting the size
         studentJTable.getColumnModel().getColumn(6).setCellRenderer(new TableActionCellRender());
         studentJTable.getColumnModel().getColumn(6).setCellEditor(new TableActionCellEditor(studentActionEvent));
-        
+
         lecturerTable.getColumnModel().getColumn(8).setCellRenderer(new TableActionCellRender());
         lecturerTable.getColumnModel().getColumn(8).setCellEditor(new TableActionCellEditor(lecturerActionEvent));
-    
+
         userTable.getColumnModel().getColumn(3).setCellRenderer(new TableActionCellRender());
         userTable.getColumnModel().getColumn(3).setCellEditor(new TableActionCellEditor(userActionEvent));
     }
-    
-    
-    private void addPlaceholder(JTextField textField){
+
+    private void addPlaceholder(JTextField textField) {
         Font font = textField.getFont();
         font = font.deriveFont(Font.ITALIC);
         textField.setFont(font);
         textField.setForeground(Color.GRAY);
     }
-    
-    private void removePlaceholder(JTextField textField){
+
+    private void removePlaceholder(JTextField textField) {
         Font font = textField.getFont();
         font = font.deriveFont(Font.PLAIN);
         textField.setFont(font);
         textField.setForeground(Color.BLACK);
-    }       
-    
-    
-    private void displayUserCount(){
+    }
+
+    private void displayUserCount() {
         FileHandler fh = new FileHandler();
         String totalLecturer = String.valueOf(fh.countTotalLecturer());
         String totalStudent = String.valueOf(fh.countTotalStudent());
         String totalIntake = String.valueOf(fh.countTotalIntake());
-        
+
         cardPanel1.setData(new CardModel(new ImageIcon(getClass().getResource("/Icon/lecturer.png")), "Lecturer", totalLecturer));
         cardPanel2.setData(new CardModel(new ImageIcon(getClass().getResource("/Icon/student.png")), "Student", totalStudent));
         cardPanel3.setData(new CardModel(new ImageIcon(getClass().getResource("/Icon/intake.png")), "Intake", totalIntake));
-        
+
     }
-    
-    private void displayStudentTable(){
+
+    private void displayStudentTable() {
         DefaultTableModel table = (DefaultTableModel) studentJTable.getModel();
-        table.setRowCount(0);            
+        table.setRowCount(0);
         Student show = new Student(table);
         show.showStudent();
-        
+
         TableAlignment alignment = new TableAlignment();
         alignment.alignTable(studentJTable);
     }
-    
-    private void displayLecturerTable(){
+
+    private void displayLecturerTable() {
         DefaultTableModel table = (DefaultTableModel) lecturerTable.getModel();
-        table.setRowCount(0);            
+        table.setRowCount(0);
         Lecturer showLC = new Lecturer(table);
         showLC.showLecturer();
-        
+
         TableAlignment alignment = new TableAlignment();
         alignment.alignTable(lecturerTable);
     }
-    
-    private void displayIntakeTable(){
+
+    private void displayIntakeTable() {
         DefaultTableModel table = (DefaultTableModel) intakeTable.getModel();
         table.setRowCount(0);
         Intake intake = new Intake(table);
         intake.showIntake();
-        
+
         TableAlignment alignment = new TableAlignment();
         alignment.alignTable(intakeTable);
     }
-    
-    private void displayUserTable(){
+
+    private void displayUserTable() {
         DefaultTableModel table = (DefaultTableModel) userTable.getModel();
         table.setRowCount(0);
         User user = new User(table);
         user.showUser();
-        
+
         TableAlignment alignment = new TableAlignment();
         alignment.alignTable(userTable);
     }
@@ -2286,21 +2275,21 @@ public class AdminPages extends javax.swing.JFrame {
         intake.addIntakeCodeForFilter(studentPageFilterBox);
         jTabbedPane1.setSelectedIndex(1);
         menu2.setBackground(new Color(200, 219, 202));
-        menu1.setBackground(new Color(172,190,174));
-        menu3.setBackground(new Color(172,190,174));
-        menu4.setBackground(new Color(172,190,174));
-        menu5.setBackground(new Color(172,190,174));
-        
+        menu1.setBackground(new Color(172, 190, 174));
+        menu3.setBackground(new Color(172, 190, 174));
+        menu4.setBackground(new Color(172, 190, 174));
+        menu5.setBackground(new Color(172, 190, 174));
+
         displayStudentTable();
     }//GEN-LAST:event_menu2MouseClicked
 
     private void menu3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_menu3MouseClicked
         jTabbedPane1.setSelectedIndex(5);
         menu3.setBackground(new Color(200, 219, 202));
-        menu1.setBackground(new Color(172,190,174));
-        menu2.setBackground(new Color(172,190,174));
-        menu4.setBackground(new Color(172,190,174));
-        menu5.setBackground(new Color(172,190,174));
+        menu1.setBackground(new Color(172, 190, 174));
+        menu2.setBackground(new Color(172, 190, 174));
+        menu4.setBackground(new Color(172, 190, 174));
+        menu5.setBackground(new Color(172, 190, 174));
 
         displayLecturerTable();
     }//GEN-LAST:event_menu3MouseClicked
@@ -2308,20 +2297,19 @@ public class AdminPages extends javax.swing.JFrame {
     private void menu1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_menu1MouseClicked
         jTabbedPane1.setSelectedIndex(0);
         menu1.setBackground(new Color(200, 219, 202));
-        menu2.setBackground(new Color(172,190,174));
-        menu3.setBackground(new Color(172,190,174));
-        menu4.setBackground(new Color(172,190,174));
-        menu5.setBackground(new Color(172,190,174));
+        menu2.setBackground(new Color(172, 190, 174));
+        menu3.setBackground(new Color(172, 190, 174));
+        menu4.setBackground(new Color(172, 190, 174));
+        menu5.setBackground(new Color(172, 190, 174));
     }//GEN-LAST:event_menu1MouseClicked
 
     private void exitLabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_exitLabelMouseClicked
         int result = JOptionPane.showConfirmDialog(null, "Do you want to exit?", "Exit Confirmation", JOptionPane.YES_NO_OPTION);
-        if (result == JOptionPane.YES_OPTION){
-           System.exit(0);
-        }
-        else if (result == JOptionPane.NO_OPTION){
+        if (result == JOptionPane.YES_OPTION) {
+            System.exit(0);
+        } else if (result == JOptionPane.NO_OPTION) {
             JOptionPane.showMessageDialog(null, "You may continue with your work.", "Notification", JOptionPane.INFORMATION_MESSAGE);
-        }  
+        }
     }//GEN-LAST:event_exitLabelMouseClicked
 
     private void saveNewImage(String id) throws IOException {
@@ -2340,7 +2328,7 @@ public class AdminPages extends javax.swing.JFrame {
             updateProfile(id);
         }
     }
-    
+
     private void updateProfile(String id) {
         File imageFile = new File("src/Profile/" + id + ".jpg");
 
@@ -2349,12 +2337,10 @@ public class AdminPages extends javax.swing.JFrame {
             if (id.startsWith("S")) {
                 // Update student profile picture
                 studentNewAvatar1.setIcon(new ImageIcon(imagePath));
-            }
-            else if (id.startsWith("L")) {
+            } else if (id.startsWith("L")) {
                 // Update lecturer profile picture
                 lecturerAvatarNew.setIcon(new ImageIcon(imagePath));
-            }
-            else {
+            } else {
                 // Handle invalid ID or set a default image
                 studentNewAvatar1.setIcon(null);
                 lecturerAvatarNew.setIcon(null);
@@ -2373,23 +2359,22 @@ public class AdminPages extends javax.swing.JFrame {
     private void addStudentBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addStudentBtnActionPerformed
         String name = nameField.getText().trim();
         String ic = icField.getText();
-        String contact = contactField.getText();        
+        String contact = contactField.getText();
         String intake = (String) intakeCodeComboBox.getSelectedItem();
-        
+
         //Validate data entered
         Student validate = new Student(name, ic, contact);
         List<String> validationErrors = validate.studentValidation();
         String errorMesssage = "";
-        
+
         if (!validationErrors.isEmpty()) {
             StringBuilder errorMessage = new StringBuilder("The following errors are detected:\n");
             for (String error : validationErrors) {
                 errorMessage.append("- ").append(error).append("\n");
             }
             JOptionPane.showMessageDialog(null, errorMessage.toString(), "Errors Found", JOptionPane.ERROR_MESSAGE);
-            clearField();           
-        }
-        else {
+            clearField();
+        } else {
             Student newStudent = new Student();
             String id = newStudent.getStudentID();
             String password = newStudent.getPassword(ic);
@@ -2398,18 +2383,18 @@ public class AdminPages extends javax.swing.JFrame {
             //update user.txt file
             Student newAccount = new Student(id, password);
             newAccount.createStudentAccount();
-            
+
             //update student.txt file
-            Student finalDetails = new Student(id, name, ic, contact, email, intake); 
+            Student finalDetails = new Student(id, name, ic, contact, email, intake);
             finalDetails.addStudent();
-            
+
             saveImageToFolder(id);
-            
+
             clearField();
-            
+
             DefaultTableModel table = (DefaultTableModel) studentJTable.getModel();
             //reset the table & display the latest data into table
-            table.setRowCount(0);            
+            table.setRowCount(0);
             Student show = new Student(table);
             show.showStudent();
             jTabbedPane1.setSelectedIndex(1);   //return to student page
@@ -2434,7 +2419,7 @@ public class AdminPages extends javax.swing.JFrame {
         }
     }
 
-    private void clearField(){
+    private void clearField() {
         nameField.setText(null);
         icField.setText(null);
         contactField.setText(null);
@@ -2443,39 +2428,39 @@ public class AdminPages extends javax.swing.JFrame {
         studentRegisterPic.setIcon(null);
         studentPicTextField.setText(null);
     }
-        
+
     private void updateStudentBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_updateStudentBtnActionPerformed
         String studID = studentIDLabel.getText();
         String name = studentnNameLabel.getText();
         String ic = studentICLabel.getText();
-        String contact = studentNewContactField.getText();        
+        String contact = studentNewContactField.getText();
         String email = studentEmailLabel.getText();
-        String intakeCode = (String)newIntakeCodeComboBox.getSelectedItem();
+        String intakeCode = (String) newIntakeCodeComboBox.getSelectedItem();
 //        String lecturer = (String) lectureAssignedComboBox.getSelectedItem();
 
         Student edit = new Student(studID, name, ic, contact, email, intakeCode);
         try {
             edit.editStudent();
-        }catch (IOException ex) {
+        } catch (IOException ex) {
             Logger.getLogger(AdminPages.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
+
         try {
             saveNewImage(studID);
-        }catch (IOException ex) {
+        } catch (IOException ex) {
             Logger.getLogger(AdminPages.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
+
         displayStudentTable();
         jTabbedPane1.setSelectedIndex(1);
-        
+
     }//GEN-LAST:event_updateStudentBtnActionPerformed
 
     private void cancelButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelButton2ActionPerformed
         clearLecturerRegisterField();
     }//GEN-LAST:event_cancelButton2ActionPerformed
 
-    private void clearLecturerRegisterField(){
+    private void clearLecturerRegisterField() {
         lcNameField.setText(null);
         lecICField.setText(null);
         lecContactField.setText(null);
@@ -2485,9 +2470,9 @@ public class AdminPages extends javax.swing.JFrame {
         lectureProfileName.setText(null);
         setLecturerRegisterImage.setIcon(null);
     }
-    
+
     private void studentPageSearchFieldFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_studentPageSearchFieldFocusGained
-        if (studentPageSearchField.getText().equals("Search here")){
+        if (studentPageSearchField.getText().equals("Search here")) {
             studentPageSearchField.setText(null);
             studentPageSearchField.requestFocus();
             removePlaceholder(studentPageSearchField);
@@ -2495,7 +2480,7 @@ public class AdminPages extends javax.swing.JFrame {
     }//GEN-LAST:event_studentPageSearchFieldFocusGained
 
     private void lecturePageSearchFieldFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_lecturePageSearchFieldFocusGained
-        if (lecturePageSearchField.getText().equals("Search here")){
+        if (lecturePageSearchField.getText().equals("Search here")) {
             lecturePageSearchField.setText(null);
             lecturePageSearchField.requestFocus();
             removePlaceholder(lecturePageSearchField);
@@ -2503,65 +2488,64 @@ public class AdminPages extends javax.swing.JFrame {
     }//GEN-LAST:event_lecturePageSearchFieldFocusGained
 
     private void studentPageSearchFieldFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_studentPageSearchFieldFocusLost
-        if (studentPageSearchField.getText().length() == 0){
+        if (studentPageSearchField.getText().length() == 0) {
             addPlaceholder(studentPageSearchField);
             studentPageSearchField.setText("Search here");
         }
     }//GEN-LAST:event_studentPageSearchFieldFocusLost
 
     private void lecturePageSearchFieldFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_lecturePageSearchFieldFocusLost
-        if (lecturePageSearchField.getText().length() == 0){
+        if (lecturePageSearchField.getText().length() == 0) {
             addPlaceholder(lecturePageSearchField);
             lecturePageSearchField.setText("Search here");
         }
     }//GEN-LAST:event_lecturePageSearchFieldFocusLost
 
-    private void addCourseIntoComboBox(){
-        String[] area = {"", "Accounting", "Cloud Engineering" , "Cyber Security", "Data Analytic", "Digital Forensic","Digital Marketing",
-            "Finance", "Intelligent System", "Software Engineering" , "Psychology"};
-        for (String major : area){
+    private void addCourseIntoComboBox() {
+        String[] area = {"", "Accounting", "Cloud Engineering", "Cyber Security", "Data Analytic", "Digital Forensic", "Digital Marketing",
+            "Finance", "Intelligent System", "Software Engineering", "Psychology"};
+        for (String major : area) {
             lecMajorComboBox.addItem(major);
-        } 
-        for (String minor : area){
+        }
+        for (String minor : area) {
             lecMinorComboBox.addItem(minor);
         }
     }
-    
-    private void addCourseIntoComboBoxForUpdate(){
+
+    private void addCourseIntoComboBoxForUpdate() {
         lecNewMajorComboBox.removeAllItems();
         lecNewMinorComboBox.removeAllItems();
-        
-        String[] area = {"", "Accounting", "Cloud Engineering" , "Cyber Security", "Data Analytic", "Digital Forensic","Digital Marketing",
-            "Finance", "Intelligent System", "Software Engineering" , "Psychology"};
-        for (String major : area){
+
+        String[] area = {"", "Accounting", "Cloud Engineering", "Cyber Security", "Data Analytic", "Digital Forensic", "Digital Marketing",
+            "Finance", "Intelligent System", "Software Engineering", "Psychology"};
+        for (String major : area) {
             lecNewMajorComboBox.addItem(major);
-        } 
-        for (String minor : area){
+        }
+        for (String minor : area) {
             lecNewMinorComboBox.addItem(minor);
         }
     }
-    
+
     private void addLecturerBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addLecturerBtnActionPerformed
         String name = lcNameField.getText();
         String ic = lecICField.getText();
         String contact = lecContactField.getText().trim();
         String major = (String) lecMajorComboBox.getSelectedItem();
         String minor = (String) lecMinorComboBox.getSelectedItem();
-        
+
         // Check if minor is null or empty, set it to "-"
         if (minor == null || minor.isEmpty()) {
             minor = "-";
         }
-        
+
 //        ButtonModel selectedYesNoButton = yesNoGroup.getSelection();
         yesCheckBox.setActionCommand("Yes");
         noCheckBox.setActionCommand("No");
-        
+
         ButtonModel selectedYesNoButton = yesNoGroup.getSelection();
         String pm = selectedYesNoButton != null ? selectedYesNoButton.getActionCommand() : "";
 
 //        String pm = selectedYesNoButton.getActionCommand();
-        
         Lecturer lc = new Lecturer(name, ic, contact);
         List<String> validationErrors = lc.lecturerValidation();
         if (!validationErrors.isEmpty()) {
@@ -2578,11 +2562,11 @@ public class AdminPages extends javax.swing.JFrame {
             Lecturer createAcc = new Lecturer(lecID, password);
             createAcc.createLectureAccount();
             Lecturer add = new Lecturer(lecID, name, ic, contact, email, major, minor);
-            
+
             saveImageToFolder(lecID);
-            
+
             add.addLecturer();
-            
+
             clearLecturerRegisterField();
             displayUserCount();
             displayLecturerTable();
@@ -2597,16 +2581,16 @@ public class AdminPages extends javax.swing.JFrame {
     private void menu4MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_menu4MouseClicked
         jTabbedPane1.setSelectedIndex(9);
         menu4.setBackground(new Color(200, 219, 202));
-        menu1.setBackground(new Color(172,190,174));
-        menu2.setBackground(new Color(172,190,174));
-        menu3.setBackground(new Color(172,190,174));
-        menu5.setBackground(new Color(172,190,174));
+        menu1.setBackground(new Color(172, 190, 174));
+        menu2.setBackground(new Color(172, 190, 174));
+        menu3.setBackground(new Color(172, 190, 174));
+        menu5.setBackground(new Color(172, 190, 174));
         displayIntakeTable();
     }//GEN-LAST:event_menu4MouseClicked
 
     private void saveIntakeBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveIntakeBtnActionPerformed
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
-        
+
         String level = (String) studyLevelComboBox.getSelectedItem();
         String course = (String) courseComboBox.getSelectedItem();
         String duration = (String) intakeDurationComboBox.getSelectedItem();
@@ -2614,64 +2598,60 @@ public class AdminPages extends javax.swing.JFrame {
         Date intakeRegisterEndDate = intakeRegisterEndDateChooser.getDate();
         Date intakeStartDate = intakeStartDateChooser.getDate();
         Date intakeEndDate = intakeEndDateChooser.getDate();
-        
-        
+
         //Intake registration start & end date
         String registerStartDate = dateFormat.format(intakeRegisterStartDate);
         String registerEndDate = dateFormat.format(intakeRegisterEndDate);
-        
+
         //Intake start & end date
         String startDate = dateFormat.format(intakeStartDate);
         String endDate = dateFormat.format(intakeEndDate);
-        
-        
+
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
         LocalDate chosenIntakeRegisterStartDate = LocalDate.parse(registerStartDate, formatter);
         LocalDate chosenIntakeRegisterEndDate = LocalDate.parse(registerEndDate, formatter);
-        
+
         LocalDate chosenIntakeStartDate = LocalDate.parse(startDate, formatter);
         LocalDate chosenIntakeEndDate = LocalDate.parse(endDate, formatter);
-        
-        
-        if(chosenIntakeRegisterEndDate.isBefore(chosenIntakeRegisterStartDate)){
+
+        if (chosenIntakeRegisterEndDate.isBefore(chosenIntakeRegisterStartDate)) {
             JOptionPane.showMessageDialog(null, "Registration end date could not be earlier than registration start date!", "Error", JOptionPane.ERROR_MESSAGE);
             return;
         }
-        
-        if(chosenIntakeEndDate.isBefore(chosenIntakeStartDate)){
+
+        if (chosenIntakeEndDate.isBefore(chosenIntakeStartDate)) {
             JOptionPane.showMessageDialog(null, "Intake end date could not be earlier than intake start date!", "Error", JOptionPane.ERROR_MESSAGE);
             return;
         }
-        
+
         //Initialize the variables
         Intake getDetails = new Intake(level, course, duration, registerStartDate, registerEndDate, startDate, endDate);
         Intake generateCode = new Intake(level, startDate, course);
-        
+
         try {
             generateCode.createIntakeCode();
         } catch (IOException ex) {
             Logger.getLogger(AdminPages.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
+
         String code = generateCode.getIntakeCode();
         Intake checkCode = new Intake(code);
-        
+
         boolean isCreated = false;
         try {
             isCreated = checkCode.checkIsCodeCreated();
-        }
-        catch (IOException ex) {
+        } catch (IOException ex) {
             Logger.getLogger(AdminPages.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
-        if(isCreated){
+
+        if (isCreated) {
             Intake intake = new Intake(code, level, course, duration, registerStartDate, registerEndDate, startDate, endDate);
             intake.addIntake();
 
             clearRegisterIntakeField();
             jTabbedPane1.setSelectedIndex(9);
             displayIntakeTable();
-        }    
+        }
     }//GEN-LAST:event_saveIntakeBtnActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
@@ -2679,23 +2659,23 @@ public class AdminPages extends javax.swing.JFrame {
         jTabbedPane1.setSelectedIndex(9);
     }//GEN-LAST:event_jButton3ActionPerformed
 
-    private void clearRegisterIntakeField(){
+    private void clearRegisterIntakeField() {
         studyLevelComboBox.setSelectedIndex(0);
         courseComboBox.setSelectedIndex(0);
         intakeDurationComboBox.setSelectedIndex(0);
         intakeRegisterStartDateChooser.setDate(null);
         intakeRegisterEndDateChooser.setDate(null);
         intakeStartDateChooser.setDate(null);
-        intakeEndDateChooser.setDate(null);  
+        intakeEndDateChooser.setDate(null);
     }
-    
-    
+
+
     private void addIntakeButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_addIntakeButtonMouseClicked
         jTabbedPane1.setSelectedIndex(10);
         displayIntakeTable();
     }//GEN-LAST:event_addIntakeButtonMouseClicked
 
-    private void clearStudentDetails(){
+    private void clearStudentDetails() {
         studentIDLabel.setText(null);
         studentnNameLabel.setText(null);
         studentICLabel.setText(null);
@@ -2704,8 +2684,8 @@ public class AdminPages extends javax.swing.JFrame {
         newIntakeCodeComboBox.setSelectedIndex(0);
 //        lectureAssignedComboBox.setSelectedIndex(0);
     }
-    
-    
+
+
     private void cancelEditStudentBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelEditStudentBtnActionPerformed
 //        clearStudentDetails();
         jTabbedPane1.setSelectedIndex(1);
@@ -2723,24 +2703,21 @@ public class AdminPages extends javax.swing.JFrame {
         newYesCheckBox.setActionCommand("Yes");
         newNoCheckBox.setActionCommand("No");
         String pm = selectedYesNoButton.getActionCommand();
-        
+
         Lecturer lecturer = new Lecturer(lecID, name, ic, contact, email, major, minor, pm);
 
         try {
             lecturer.updateLecturer();
-        }
-        catch (IOException ex) {
+        } catch (IOException ex) {
             Logger.getLogger(AdminPages.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
+
         try {
             saveNewImage(lecID);
-        }
-        catch (IOException ex) {
+        } catch (IOException ex) {
             Logger.getLogger(AdminPages.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
-        
+
         jTabbedPane1.setSelectedIndex(5);
         displayLecturerTable();
     }//GEN-LAST:event_updateLecBtnActionPerformed
@@ -2771,7 +2748,7 @@ public class AdminPages extends javax.swing.JFrame {
     }//GEN-LAST:event_lecturePageSearchFieldKeyReleased
 
     private void intakePageSearchFieldFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_intakePageSearchFieldFocusGained
-        if (intakePageSearchField.getText().equals("Search here")){
+        if (intakePageSearchField.getText().equals("Search here")) {
             intakePageSearchField.setText(null);
             intakePageSearchField.requestFocus();
             removePlaceholder(intakePageSearchField);
@@ -2779,7 +2756,7 @@ public class AdminPages extends javax.swing.JFrame {
     }//GEN-LAST:event_intakePageSearchFieldFocusGained
 
     private void intakePageSearchFieldFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_intakePageSearchFieldFocusLost
-        if (intakePageSearchField.getText().length() == 0){
+        if (intakePageSearchField.getText().length() == 0) {
             addPlaceholder(intakePageSearchField);
             intakePageSearchField.setText("Search here");
         }
@@ -2795,11 +2772,11 @@ public class AdminPages extends javax.swing.JFrame {
     private void menu5MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_menu5MouseClicked
         jTabbedPane1.setSelectedIndex(11);
         menu5.setBackground(new Color(200, 219, 202));
-        menu1.setBackground(new Color(172,190,174));
-        menu2.setBackground(new Color(172,190,174));
-        menu3.setBackground(new Color(172,190,174));
-        menu4.setBackground(new Color(172,190,174));
-        
+        menu1.setBackground(new Color(172, 190, 174));
+        menu2.setBackground(new Color(172, 190, 174));
+        menu3.setBackground(new Color(172, 190, 174));
+        menu4.setBackground(new Color(172, 190, 174));
+
         displayUserTable();
     }//GEN-LAST:event_menu5MouseClicked
 
@@ -2809,7 +2786,7 @@ public class AdminPages extends javax.swing.JFrame {
         File profileFolder = new File(downloadFolder, "profile");
         openFileChooser.setCurrentDirectory(profileFolder);
         int returnValue = openFileChooser.showOpenDialog(this);
-        if (returnValue == JFileChooser.APPROVE_OPTION){
+        if (returnValue == JFileChooser.APPROVE_OPTION) {
             studentRegisterPic.setIcon(new ImageIcon(openFileChooser.getSelectedFile().toString()));
             studentPicTextField.setText(openFileChooser.getSelectedFile().getName());
         }
@@ -2820,7 +2797,7 @@ public class AdminPages extends javax.swing.JFrame {
         File profileFolder = new File(downloadFolder, "profile");
         openFileChooser.setCurrentDirectory(profileFolder);
         int returnValue = openFileChooser.showOpenDialog(this);
-        if (returnValue == JFileChooser.APPROVE_OPTION){
+        if (returnValue == JFileChooser.APPROVE_OPTION) {
             studentNewAvatar1.setIcon(new ImageIcon(openFileChooser.getSelectedFile().toString()));
             newStudentProfileTextField.setText(openFileChooser.getSelectedFile().getName());
         }
@@ -2831,7 +2808,7 @@ public class AdminPages extends javax.swing.JFrame {
         File profileFolder = new File(downloadFolder, "profile");
         openFileChooser.setCurrentDirectory(profileFolder);
         int returnValue = openFileChooser.showOpenDialog(this);
-        if (returnValue == JFileChooser.APPROVE_OPTION){
+        if (returnValue == JFileChooser.APPROVE_OPTION) {
             setLecturerRegisterImage.setIcon(new ImageIcon(openFileChooser.getSelectedFile().toString()));
             lectureProfileName.setText(openFileChooser.getSelectedFile().getName());
 //            lectureProfileName.setText("Upload success");
@@ -2843,7 +2820,7 @@ public class AdminPages extends javax.swing.JFrame {
         File profileFolder = new File(downloadFolder, "profile");
         openFileChooser.setCurrentDirectory(profileFolder);
         int returnValue = openFileChooser.showOpenDialog(this);
-        if (returnValue == JFileChooser.APPROVE_OPTION){
+        if (returnValue == JFileChooser.APPROVE_OPTION) {
             lecturerAvatarNew.setIcon(new ImageIcon(openFileChooser.getSelectedFile().toString()));
         }
     }//GEN-LAST:event_uploadLecturerNewProfileBtnActionPerformed
@@ -2852,22 +2829,21 @@ public class AdminPages extends javax.swing.JFrame {
         String id = userIDLabel.getText();
         String newPassword = userNewPasswordField.getText();
         String role = roleNoLabel.getText();
-        
+
         User user = new User(id, newPassword, role);
-        
+
         try {
             user.updateUser();
-        }
-        catch (IOException ex) {
+        } catch (IOException ex) {
             Logger.getLogger(AdminPages.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
+
         jTabbedPane1.setSelectedIndex(11);
         displayUserTable();
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void userPageSearchFieldFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_userPageSearchFieldFocusGained
-        if (userPageSearchField.getText().equals("Search here")){
+        if (userPageSearchField.getText().equals("Search here")) {
             userPageSearchField.setText(null);
             userPageSearchField.requestFocus();
             removePlaceholder(userPageSearchField);
@@ -2875,7 +2851,7 @@ public class AdminPages extends javax.swing.JFrame {
     }//GEN-LAST:event_userPageSearchFieldFocusGained
 
     private void userPageSearchFieldFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_userPageSearchFieldFocusLost
-        if(userPageSearchField.getText().length() == 0){
+        if (userPageSearchField.getText().length() == 0) {
             addPlaceholder(userPageSearchField);
             userPageSearchField.setText("Search here");
         }
@@ -2894,7 +2870,7 @@ public class AdminPages extends javax.swing.JFrame {
 
     private void studentPageFilterBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_studentPageFilterBoxActionPerformed
         String selectedIntake = (String) studentPageFilterBox.getSelectedItem();
-        if(selectedIntake != null){
+        if (selectedIntake != null) {
             filterTable();
         }
     }//GEN-LAST:event_studentPageFilterBoxActionPerformed
@@ -2939,11 +2915,9 @@ public class AdminPages extends javax.swing.JFrame {
 //            for (Object[] row : data) {
 //                System.out.println("Row: ID=" + row[0] + ", Name=" + row[1]);
 //            }
-
 //            PrintNameList print = new PrintNameList();
 //            print.showForm(data.toArray(new Object[0][0]), intakeCode);
 //            print.printPanel();
-
             PrintNameList print = new PrintNameList();
             print.showForm(data.toArray(new Object[0][0]), intakeCode);
             print.generatePdf();
@@ -3009,30 +2983,42 @@ public class AdminPages extends javax.swing.JFrame {
         List<String[]> previousRecord = student.loadExistingRecords();
         List<String> studentRecords = new ArrayList<>();
         List<String> userRecords = new ArrayList<>();
+        List<Student> studentsToRegister = new ArrayList<>();
+        List<String> duplicateRecords = new ArrayList<>();  // To collect duplicate records
+
         student.initializeLastStudentID();
         String intakeCode = (String) intakeForGroupComboBox.getSelectedItem();
-        List<Student> studentsToRegister = new ArrayList<>();
 
         for (int i = 0; i < studentListTable.getRowCount(); i++) {
             String name = (String) studentListTable.getValueAt(i, 0);
             String ic = (String) studentListTable.getValueAt(i, 1);
             String contact = (String) studentListTable.getValueAt(i, 2);
 
-            if (isDuplicate(ic, contact, previousRecord, studentRecords)) {
-                JOptionPane.showMessageDialog(this, "Duplicate data found!", "Error", JOptionPane.ERROR_MESSAGE);
-                return;
-            }
+            String duplicateRecord = isDuplicate(ic, contact, previousRecord, studentRecords);
+            if (duplicateRecord != null) {
+                duplicateRecords.add(duplicateRecord);
+            } else {
+                String studentID = student.createStudentIDForGroup();
+                String email = student.createEmailForGroup(studentID);
+                String password = student.createPasswordForGroup(ic, studentID);
 
-            String studentID = student.createStudentIDForGroup();
-            String email = student.createEmailForGroup(studentID);
-            String password = student.createPasswordForGroup(ic, studentID);
-            Student newStudent = new Student(studentID, name, ic, contact, email, intakeCode);
-            newStudent.setPassword(password);
-            studentsToRegister.add(newStudent);
+                Student newStudent = new Student(studentID, name, ic, contact, email, intakeCode);
+                newStudent.setPassword(password);
+                studentsToRegister.add(newStudent);
+            }
+        }
+
+        if (!duplicateRecords.isEmpty()) {
+            StringBuilder duplicatesMessage = new StringBuilder("Duplicate data found:\n");
+            for (String record : duplicateRecords) {
+                duplicatesMessage.append(record).append("\n");
+            }
+            JOptionPane.showMessageDialog(this, duplicatesMessage.toString(), "Error", JOptionPane.ERROR_MESSAGE);
+            return;
         }
 
         try {
-            Map<String, Integer> studentCounts = student.countStudentsInIntakes("student.txt");
+            Map<String, Integer> studentCounts = Student.countStudentsInIntakes("student.txt");
             List<Student> groupedStudents = student.groupStudent(studentsToRegister, intakeCode, studentCounts);
 
             for (Student individual : groupedStudents) {
@@ -3046,10 +3032,18 @@ public class AdminPages extends javax.swing.JFrame {
             student.addStudent(studentRecords);
             student.createStudentAccount(userRecords);
 
+            // Calculate the new group count
+            int existingCount = studentCounts.getOrDefault(intakeCode, 0);
+            System.out.println("Existing count " + existingCount);
+            int newCount = studentsToRegister.size();
+            System.out.println("Nw count " + newCount);
+            int totalCount = existingCount + newCount;
+            System.out.println("Total count " + totalCount);
+                    
+            int newGroupCount = (int) Math.ceil((double) totalCount / 20.0);
+            System.out.println("New group count " + newGroupCount);
+            
             // Update intake with new group count
-            int currentStudentCount = studentCounts.getOrDefault(intakeCode, 0);
-            int newGroupCount = (int) Math.ceil((double) currentStudentCount / 20.0);
-            newGroupCount += (int) Math.ceil((double) studentsToRegister.size() / 20.0);
             Intake intake = new Intake();
             intake.updateIntake(intakeCode, newGroupCount);
 
@@ -3061,28 +3055,28 @@ public class AdminPages extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_addStudentFromListBtnActionPerformed
 
-    private boolean isDuplicate(String ic, String contact, List<String[]>previousRecord, List<String>studentRecord){
-        for(String[] rec : previousRecord){
-            if(rec[2].equals(ic) & rec[3].equals(contact)){
-                return true;
+    private String isDuplicate(String ic, String contact, List<String[]> previousRecord, List<String> studentRecord) {
+        for (String[] rec : previousRecord) {
+            if (rec[2].equals(ic) & rec[3].equals(contact)) {
+                return String.join(";", rec);
             }
         }
-        for(String rec : studentRecord){
+        for (String rec : studentRecord) {
             String[] data = rec.split(";");
-            if(data[2].equals(ic) & data[3].equals(contact)){
-                return true;
+            if (data[2].equals(ic) & data[3].equals(contact)) {
+                return rec;
             }
         }
-        return false;
+        return null;
     }
-    
-    
+
+
     private void loadStudentIntoTableButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_loadStudentIntoTableButtonActionPerformed
         DefaultTableModel table = (DefaultTableModel) studentListTable.getModel();
         table.setRowCount(0);
         FileHandler fh = new FileHandler();
         fh.displayData("studentList.txt", table);
-        
+
         TableAlignment alignment = new TableAlignment();
         alignment.alignTable(studentListTable);
     }//GEN-LAST:event_loadStudentIntoTableButtonActionPerformed
@@ -3099,13 +3093,13 @@ public class AdminPages extends javax.swing.JFrame {
 
     private void addLecturerFromListBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addLecturerFromListBtnActionPerformed
         Lecturer lecturer = new Lecturer();
-        
+
         List<String[]> previousRecord = lecturer.loadExistingRecords();
         List<String> lectureRecords = new ArrayList<>();
         List<String> userRecords = new ArrayList<>();
-        
+
         lecturer.initializeLastLecturerID();
-        
+
         for (int i = 0; i < lectureListTable.getRowCount(); i++) {
             String name = (String) lectureListTable.getValueAt(i, 0);
             String ic = (String) lectureListTable.getValueAt(i, 1);
@@ -3113,8 +3107,9 @@ public class AdminPages extends javax.swing.JFrame {
             String major = (String) lectureListTable.getValueAt(i, 3);
             String minor = (String) lectureListTable.getValueAt(i, 4);
 
-            if (isDuplicate(ic, contact, previousRecord, lectureRecords)) {
-                JOptionPane.showMessageDialog(this, "Duplicate data found!", "Error", JOptionPane.ERROR_MESSAGE);
+            String duplicatedLecture = isDuplicate(ic, contact, previousRecord, lectureRecords);
+            if (duplicatedLecture != null) {
+                JOptionPane.showMessageDialog(this, "Duplicate data found: " + duplicatedLecture, "Error", JOptionPane.ERROR_MESSAGE);
                 return;
             }
 
@@ -3124,13 +3119,13 @@ public class AdminPages extends javax.swing.JFrame {
 
             String record = String.join(";", lecturerID, name, ic, contact, email, major, minor, "-");
             lectureRecords.add(record);
-            
+
             String userRecord = String.join(";", lecturerID, password, "2");
             userRecords.add(userRecord);
         }
-        lecturer.addLecturer(lectureRecords); 
+        lecturer.addLecturer(lectureRecords);
         lecturer.createLectureAccount(userRecords);
-        
+
         displayUserCount();
         displayLecturerTable();
 
@@ -3142,7 +3137,7 @@ public class AdminPages extends javax.swing.JFrame {
         table.setRowCount(0);
         FileHandler fh = new FileHandler();
         fh.displayData("lecturerList.txt", table);
-        
+
         TableAlignment alignment = new TableAlignment();
         alignment.alignTable(lectureListTable);
     }//GEN-LAST:event_loadLecturerIntoTableButtonActionPerformed
@@ -3152,7 +3147,7 @@ public class AdminPages extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton6ActionPerformed
 
     private void addLecturerByGtoupButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addLecturerByGtoupButtonActionPerformed
-       jTabbedPane1.setSelectedIndex(7);
+        jTabbedPane1.setSelectedIndex(7);
     }//GEN-LAST:event_addLecturerByGtoupButtonActionPerformed
 
     private void addLecturerButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addLecturerButtonActionPerformed
@@ -3160,7 +3155,7 @@ public class AdminPages extends javax.swing.JFrame {
         addCourseIntoComboBox();
     }//GEN-LAST:event_addLecturerButtonActionPerformed
 
-     private void filterTable() {
+    private void filterTable() {
         DefaultTableModel table = (DefaultTableModel) studentJTable.getModel();
         String selectedItem = (String) studentPageFilterBox.getSelectedItem();
         TableRowSorter<DefaultTableModel> sorter = new TableRowSorter<>(table);
@@ -3171,16 +3166,14 @@ public class AdminPages extends javax.swing.JFrame {
             sorter.setRowFilter(null); // Show all rows when no selection
         }
     }
-    
-    
+
     /**
      * @param args the command line arguments
      */
     public static void main(String args[]) {
         FlatLightLaf.setup();
         FlatLaf.registerCustomDefaultsSource("flatlafProperties");
-        
-        
+
 //        /* Set the Nimbus look and feel */
 //        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
 //        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.

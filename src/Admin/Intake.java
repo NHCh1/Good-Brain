@@ -17,6 +17,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -375,52 +376,85 @@ public class Intake {
 //        }
 //    }
 
-    public void updateIntake(String intakeCode, int newGroupCount) {
-        try {
-            // Read existing intake records
-            List<String> lines = new ArrayList<>();
-            BufferedReader br = new BufferedReader(new FileReader("intake.txt"));
-            String line;
-            while ((line = br.readLine()) != null) {
-                lines.add(line);
-            }
-            br.close();
+public void updateIntake(String intakeCode, int newGroupCount) {
+    try {
+        // Read existing intake records
+        List<String> lines = new ArrayList<>();
+        BufferedReader br = new BufferedReader(new FileReader("intake.txt"));
+        String line;
+        while ((line = br.readLine()) != null) {
+            lines.add(line);
+        }
+        br.close();
 
-            
-            // Find the original intake line
-            String originalIntakeLine = null;
-            for (String existingLine : lines) {
-                if (existingLine.startsWith(intakeCode + ";")) {
-                    originalIntakeLine = existingLine;
-                    break;
+        // Find the original intake line
+        String originalIntakeLine = null;
+        for (String existingLine : lines) {
+            if (existingLine.startsWith(intakeCode + ";")) {
+                originalIntakeLine = existingLine;
+                break;
+            }
+        }
+
+        if (originalIntakeLine == null) {
+            return;  // Original intake code not found, exit the method
+        }
+
+        // Count the number of students in each group for the given intake code
+        Map<String, Integer> studentCounts = Student.countStudentsInIntakes("student.txt");
+
+        // Determine the highest existing group number and if it's full
+        int highestGroupNumber = 0;
+        boolean lastGroupIsFull = true;
+
+        for (Map.Entry<String, Integer> entry : studentCounts.entrySet()) {
+            String key = entry.getKey();
+            if (key.startsWith(intakeCode + "(") && key.endsWith(")")) {
+                int startIndex = intakeCode.length() + 1;
+                int endIndex = key.indexOf(")", startIndex);
+                if (endIndex > startIndex) {
+                    try {
+                        int groupNumber = Integer.parseInt(key.substring(startIndex, endIndex));
+                        if (groupNumber > highestGroupNumber) {
+                            highestGroupNumber = groupNumber;
+                        }
+                        if (entry.getValue() < 20) {
+                            lastGroupIsFull = false;
+                        }
+                    } catch (NumberFormatException e) {
+                        // Ignore lines with invalid group numbers
+                    }
                 }
             }
-
-            if (originalIntakeLine == null) {
-                return;  // Original intake code not found, exit the method
-            }
-            
-            //Remove existing group lines for this intake
-            lines.removeIf(existingLine -> existingLine.startsWith(intakeCode + "("));
-
-
-            // Add new intake lines for each group
-            for (int i = 1; i <= newGroupCount; i++) {
-                String newIntakeCode = intakeCode + "(" + i + ")";
-                String newIntakeLine = newIntakeCode + originalIntakeLine.substring(intakeCode.length());
-                lines.add(newIntakeLine);
-            }
-
-            // Write updated lines back to the intake.txt file
-            BufferedWriter bw = new BufferedWriter(new FileWriter("intake.txt"));
-            for (String updatedLine : lines) {
-                bw.write(updatedLine);
-                bw.newLine();
-            }
-            bw.close();
-
-        } catch (IOException e) {
-            e.printStackTrace();
         }
+
+        // Determine if a new group is needed
+        if (!lastGroupIsFull) {
+            newGroupCount = 0;  // No new groups needed if the last group is not full
+        } else {
+            newGroupCount = 1;  // Only one new group needed
+        }
+
+        // Add new intake lines for each new group if necessary
+        for (int i = highestGroupNumber + 1; i <= highestGroupNumber + newGroupCount; i++) {
+            String newIntakeCode = intakeCode + "(" + i + ")";
+            String newIntakeLine = newIntakeCode + originalIntakeLine.substring(intakeCode.length());
+            lines.add(newIntakeLine);
+        }
+
+        // Write updated lines back to the intake.txt file
+        BufferedWriter bw = new BufferedWriter(new FileWriter("intake.txt"));
+        for (String updatedLine : lines) {
+            bw.write(updatedLine);
+            bw.newLine();
+        }
+        bw.close();
+
+    } catch (IOException e) {
+        e.printStackTrace();
     }
+}
+
+
+
 }
