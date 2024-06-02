@@ -25,7 +25,5 @@ L024;Harper Jung;890120-12-5897;60187654098;L024@staff.goodbrain.edu.my;Accounti
 L025;Aaron Lee;930421-14-6458;60198754236;L025@staff.goodbrain.edu.my;Finance;Cloud Engineering;-
 L026;Samuel Moon;930825-13-5378;60198750987;L026@staff.goodbrain.edu.my;Cyber Security;Digital Marketing;-
 L027;Avery Chang;890710-14-5897;60123454098;L027@staff.goodbrain.edu.my;Data Analytics;-;-
-L028;Jack Lee;960120-11-6458;60198754236;L028@staff.goodbrain.edu.my;Accounting;Cloud Engineering;-
 L029;Zoey Kim;880819-13-6981;60123452689;L029@staff.goodbrain.edu.my;Finance;Digital Forensic;Yes
-L030;Luke Ho;910703-14-6325;60198754890;L030@staff.goodbrain.edu.my;Intelligent Systems;Psychology;-
 L031;Eva Ryu;930312-12-7654;60123464532;L031@staff.goodbrain.edu.my;Software Engineering;Cyber Security;-

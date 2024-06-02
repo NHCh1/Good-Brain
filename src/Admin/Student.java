@@ -12,7 +12,9 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.Icon;
@@ -187,20 +189,59 @@ public class Student {
         this.password = password;
     }
     
-    public List<Student> groupStudent(List<Student> students, String intakeCode) {
+//    public List<Student> groupStudent(List<Student> students, String intakeCode) {
+//        List<Student> groupedStudents = new ArrayList<>();
+//        int groupNumber = 1;
+//
+//        for (int i = 0; i < students.size(); i++) {
+//            if (i > 0 && i % 20 == 0) {
+//                groupNumber++;
+//            }
+//            Student student = students.get(i);
+//            student.setIntakeCode(intakeCode + "(" + groupNumber + ")");
+//            groupedStudents.add(student);
+//        }
+//        return groupedStudents;
+//    }
+    
+    
+    public List<Student> groupStudent(List<Student> students, String intakeCode, Map<String, Integer> studentCounts) {
         List<Student> groupedStudents = new ArrayList<>();
         int groupNumber = 1;
+        int currentGroupSize = studentCounts.getOrDefault(intakeCode + "(" + groupNumber + ")", 0);
 
-        for (int i = 0; i < students.size(); i++) {
-            if (i > 0 && i % 20 == 0) {
+        for (Student student : students) {
+            if (currentGroupSize >= 20) {
                 groupNumber++;
+                currentGroupSize = 0;
             }
-            Student student = students.get(i);
-            student.setIntakeCode(intakeCode + "(" + groupNumber + ")");
+
+            String newIntakeCode = intakeCode + "(" + groupNumber + ")";
+            student.setIntakeCode(newIntakeCode);
             groupedStudents.add(student);
+            currentGroupSize++;
         }
+
         return groupedStudents;
     }
+    
+    public static Map<String, Integer> countStudentsInIntakes(String studentFile) throws IOException {
+        Map<String, Integer> studentCountMap = new HashMap<>();
+        BufferedReader br = new BufferedReader(new FileReader(studentFile));
+        String line;
+
+        while ((line = br.readLine()) != null) {
+            String[] dataRow = line.split(";");
+            String intakeCode = dataRow[5];  // Assuming intake code is in the sixth column
+
+            studentCountMap.put(intakeCode, studentCountMap.getOrDefault(intakeCode, 0) + 1);
+        }
+
+        br.close();
+        return studentCountMap;
+    }
+
+    
     
     // ------- Registration by Group STARTS -------
     public List<String[]> loadExistingRecords() {

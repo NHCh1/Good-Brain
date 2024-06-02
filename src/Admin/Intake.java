@@ -109,7 +109,7 @@ public class Intake {
         else if(studyLevel.equals("Diploma")){
             levelPrefix = "U";
         }
-        else if(studyLevel.equals("Bachelor's Degrees")){
+        else if(studyLevel.equals("Degree")){
             levelPrefix = "D";
         }
         else if(studyLevel.equals("Master")){
@@ -277,7 +277,51 @@ public class Intake {
         }
     }
      
-    public void updateIntake(String intakeCode, int numberOfGroups) {
+//    public void updateIntake(String intakeCode, int numberOfGroups) {
+//        try {
+//            // Read existing intake records
+//            List<String> lines = new ArrayList<>();
+//            BufferedReader br = new BufferedReader(new FileReader("intake.txt"));
+//            String line;
+//            while ((line = br.readLine()) != null) {
+//                lines.add(line);
+//            }
+//            br.close();
+//
+//            // Find the original intake line
+//            String originalIntakeLine = null;
+//            for (String existingLine : lines) {
+//                if (existingLine.startsWith(intakeCode + ";")) {
+//                    originalIntakeLine = existingLine;
+//                    break;
+//                }
+//            }
+//
+//            if (originalIntakeLine == null) {
+//                return;  // Original intake code not found, exit the method
+//            }
+//
+//            // Add new intake lines for each group
+//            for (int i = 1; i <= numberOfGroups; i++) {
+//                String newIntakeCode = intakeCode + "(" + i + ")";
+//                String newIntakeLine = newIntakeCode + originalIntakeLine.substring(intakeCode.length());
+//                lines.add(newIntakeLine);
+//            }
+//
+//            // Write updated lines back to the intake.txt file
+//            BufferedWriter bw = new BufferedWriter(new FileWriter("intake.txt"));
+//            for (String updatedLine : lines) {
+//                bw.write(updatedLine);
+//                bw.newLine();
+//            }
+//            bw.close();
+//
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//        }
+//    }
+
+    public void updateIntake(String intakeCode, int newGroupCount) {
         try {
             // Read existing intake records
             List<String> lines = new ArrayList<>();
@@ -287,6 +331,10 @@ public class Intake {
                 lines.add(line);
             }
             br.close();
+
+            // Remove existing group lines for this intake
+            //issue should be this
+            lines.removeIf(existingLine -> existingLine.startsWith(intakeCode + "("));
 
             // Find the original intake line
             String originalIntakeLine = null;
@@ -302,7 +350,7 @@ public class Intake {
             }
 
             // Add new intake lines for each group
-            for (int i = 1; i <= numberOfGroups; i++) {
+            for (int i = 1; i <= newGroupCount; i++) {
                 String newIntakeCode = intakeCode + "(" + i + ")";
                 String newIntakeLine = newIntakeCode + originalIntakeLine.substring(intakeCode.length());
                 lines.add(newIntakeLine);
@@ -320,5 +368,4 @@ public class Intake {
             e.printStackTrace();
         }
     }
-
 }

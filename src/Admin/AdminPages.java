@@ -43,6 +43,7 @@ import javax.swing.table.TableRowSorter;
 import TableController.TableAlignment;
 import TableController.TableGradientCell;
 import java.util.HashSet;
+import java.util.Map;
 import java.util.Set;
 
 
@@ -2956,17 +2957,62 @@ public class AdminPages extends javax.swing.JFrame {
     }//GEN-LAST:event_addStudentByIntakeButtonActionPerformed
 
     private void addStudentFromListBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addStudentFromListBtnActionPerformed
+//        Student student = new Student();
+//        
+//        List<String[]> previousRecord = student.loadExistingRecords();
+//        List<String> studentRecords = new ArrayList<>();
+//        List<String> userRecords = new ArrayList<>();
+//        
+//        student.initializeLastStudentID();
+//        
+//        String intakeCode = (String) intakeForGroupComboBox.getSelectedItem();
+//        List<Student> studentsToRegister = new ArrayList<>();
+//    
+//        for (int i = 0; i < studentListTable.getRowCount(); i++) {
+//            String name = (String) studentListTable.getValueAt(i, 0);
+//            String ic = (String) studentListTable.getValueAt(i, 1);
+//            String contact = (String) studentListTable.getValueAt(i, 2);
+//
+//            if (isDuplicate(ic, contact, previousRecord, studentRecords)) {
+//                JOptionPane.showMessageDialog(this, "Duplicate data found!", "Error", JOptionPane.ERROR_MESSAGE);
+//                return;
+//            }
+//
+//            String studentID = student.createStudentIDForGroup();
+//            String email = student.createEmailForGroup(studentID);
+//            String password = student.createPasswordForGroup(ic, studentID);
+//            //add grouping here
+//            
+//            Student newStudent = new Student(studentID, name, ic, contact, email, intakeCode);
+//            newStudent.setPassword(password);
+//            studentsToRegister.add(newStudent);
+//        }
+//        
+//            List<Student> groupedStudents = student.groupStudent(studentsToRegister, intakeCode);
+//            for (Student individual : groupedStudents) {
+//                String record = String.join(";", individual.getId(), individual.getName(), individual.getIc(), individual.getContact(), individual.getEmail(), individual.getIntakeCode());
+//                studentRecords.add(record);
+//
+//                String userRecord = String.join(";", individual.getId(), individual.getPassword(), "3");
+//                userRecords.add(userRecord);
+//            }
+//            
+//        student.addStudent(studentRecords); 
+//        student.createStudentAccount(userRecords);
+//        Intake intake = new Intake();
+//        intake.updateIntake(intakeCode, groupedStudents.size() / 20 + 1);
+//        displayUserCount();
+//        displayStudentTable();
+//        jTabbedPane1.setSelectedIndex(1);
         Student student = new Student();
-        
+
         List<String[]> previousRecord = student.loadExistingRecords();
         List<String> studentRecords = new ArrayList<>();
         List<String> userRecords = new ArrayList<>();
-        
         student.initializeLastStudentID();
-        
         String intakeCode = (String) intakeForGroupComboBox.getSelectedItem();
         List<Student> studentsToRegister = new ArrayList<>();
-    
+
         for (int i = 0; i < studentListTable.getRowCount(); i++) {
             String name = (String) studentListTable.getValueAt(i, 0);
             String ic = (String) studentListTable.getValueAt(i, 1);
@@ -2980,14 +3026,15 @@ public class AdminPages extends javax.swing.JFrame {
             String studentID = student.createStudentIDForGroup();
             String email = student.createEmailForGroup(studentID);
             String password = student.createPasswordForGroup(ic, studentID);
-            //add grouping here
-            
             Student newStudent = new Student(studentID, name, ic, contact, email, intakeCode);
             newStudent.setPassword(password);
             studentsToRegister.add(newStudent);
         }
-        
-            List<Student> groupedStudents = student.groupStudent(studentsToRegister, intakeCode);
+
+        try {
+            Map<String, Integer> studentCounts = student.countStudentsInIntakes("student.txt");
+            List<Student> groupedStudents = student.groupStudent(studentsToRegister, intakeCode, studentCounts);
+
             for (Student individual : groupedStudents) {
                 String record = String.join(";", individual.getId(), individual.getName(), individual.getIc(), individual.getContact(), individual.getEmail(), individual.getIntakeCode());
                 studentRecords.add(record);
@@ -2995,14 +3042,22 @@ public class AdminPages extends javax.swing.JFrame {
                 String userRecord = String.join(";", individual.getId(), individual.getPassword(), "3");
                 userRecords.add(userRecord);
             }
-            
-        student.addStudent(studentRecords); 
-        student.createStudentAccount(userRecords);
-        Intake intake = new Intake();
-        intake.updateIntake(intakeCode, groupedStudents.size() / 20 + 1);
-        displayUserCount();
-        displayStudentTable();
-        jTabbedPane1.setSelectedIndex(1);
+
+            student.addStudent(studentRecords);
+            student.createStudentAccount(userRecords);
+
+            // Update intake with new group count
+            int newGroupCount = (int) Math.ceil((double) studentCounts.getOrDefault(intakeCode, 0) / 20.0);
+            newGroupCount += (studentsToRegister.size() / 20);
+            Intake intake = new Intake();
+            intake.updateIntake(intakeCode, newGroupCount);
+
+            displayUserCount();
+            displayStudentTable();
+            jTabbedPane1.setSelectedIndex(1);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }//GEN-LAST:event_addStudentFromListBtnActionPerformed
 
     private boolean isDuplicate(String ic, String contact, List<String[]>previousRecord, List<String>studentRecord){
