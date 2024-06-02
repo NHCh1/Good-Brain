@@ -248,72 +248,22 @@ public class Intake {
                 String rStartDate = dataRow[4];
                 String rEndDate = dataRow[5];
 
-                DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
-                LocalDate registrationStartDate = LocalDate.parse(rStartDate, formatter);
-                LocalDate registrationEndDate = LocalDate.parse(rEndDate, formatter);
+                 // Check if the intake code contains parentheses
+                if (!IntakeCode.contains("(") && !IntakeCode.contains(")")) {
+                    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+                    LocalDate registrationStartDate = LocalDate.parse(rStartDate, formatter);
+                    LocalDate registrationEndDate = LocalDate.parse(rEndDate, formatter);
 
-                if (currentDate.isAfter(registrationStartDate) && currentDate.isBefore(registrationEndDate.plusDays(1))) {
-                    cb.addItem(IntakeCode);
+                    if (currentDate.isAfter(registrationStartDate) && currentDate.isBefore(registrationEndDate.plusDays(1))) {
+                        cb.addItem(IntakeCode);
+                    }
                 }
             }
-
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
     
-    //display all without group
-//      public void addIntakeIntoComboBox(JComboBox<String> cb) {
-//        try {
-//            cb.removeAllItems();
-//            cb.addItem("");
-//            BufferedReader br = new BufferedReader(new FileReader("intake.txt"));
-//            Object[] rows = br.lines().toArray();
-//            br.close();
-//
-//            LocalDate currentDate = LocalDate.now();
-//            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
-//
-//            Set<String> uniqueIntakeCodes = new HashSet<>();
-//            Set<String> groupedIntakeCodes = new HashSet<>();
-//
-//            for (Object row : rows) {
-//                String line = row.toString();
-//                String[] dataRow = line.split(";");
-//
-//                if (dataRow.length < 6) {
-//                    continue; // Skip invalid rows
-//                }
-//
-//                String intakeCode = dataRow[0];
-//                String rStartDate = dataRow[4];
-//                String rEndDate = dataRow[5];
-//
-//                LocalDate registrationStartDate = LocalDate.parse(rStartDate, formatter);
-//                LocalDate registrationEndDate = LocalDate.parse(rEndDate, formatter);
-//
-//                if (currentDate.isAfter(registrationStartDate) && currentDate.isBefore(registrationEndDate.plusDays(1))) {
-//                    if (intakeCode.matches(".*\\(\\d+\\)$")) {
-//                        groupedIntakeCodes.add(intakeCode.replaceAll("\\(\\d+\\)$", ""));
-//                    } else {
-//                        uniqueIntakeCodes.add(intakeCode);
-//                    }
-//                }
-//            }
-//
-//            // Remove grouped intake codes from the set of unique intake codes
-//            uniqueIntakeCodes.removeAll(groupedIntakeCodes);
-//
-//            // Add remaining unique intake codes to the combo box
-//            for (String intakeCode : uniqueIntakeCodes) {
-//                cb.addItem(intakeCode);
-//            }
-//
-//        } catch (IOException e) {
-//            e.printStackTrace();
-//        }
-//    }
-
     public void addIntakeCodeForFilter(JComboBox cb){
         ArrayList<String> intakeCodes = new ArrayList<>();
         try (
@@ -376,7 +326,7 @@ public class Intake {
 //        }
 //    }
 
-public void updateIntake(String intakeCode, int newGroupCount) {
+ public void updateIntake(String intakeCode, int newGroupCount) {
     try {
         // Read existing intake records
         List<String> lines = new ArrayList<>();
@@ -400,26 +350,17 @@ public void updateIntake(String intakeCode, int newGroupCount) {
             return;  // Original intake code not found, exit the method
         }
 
-        // Count the number of students in each group for the given intake code
-        Map<String, Integer> studentCounts = Student.countStudentsInIntakes("student.txt");
-
-        // Determine the highest existing group number and if it's full
+        // Determine the highest existing group number
         int highestGroupNumber = 0;
-        boolean lastGroupIsFull = true;
-
-        for (Map.Entry<String, Integer> entry : studentCounts.entrySet()) {
-            String key = entry.getKey();
-            if (key.startsWith(intakeCode + "(") && key.endsWith(")")) {
+        for (String existingLine : lines) {
+            if (existingLine.startsWith(intakeCode + "(")) {
                 int startIndex = intakeCode.length() + 1;
-                int endIndex = key.indexOf(")", startIndex);
+                int endIndex = existingLine.indexOf(")", startIndex);
                 if (endIndex > startIndex) {
                     try {
-                        int groupNumber = Integer.parseInt(key.substring(startIndex, endIndex));
+                        int groupNumber = Integer.parseInt(existingLine.substring(startIndex, endIndex));
                         if (groupNumber > highestGroupNumber) {
                             highestGroupNumber = groupNumber;
-                        }
-                        if (entry.getValue() < 20) {
-                            lastGroupIsFull = false;
                         }
                     } catch (NumberFormatException e) {
                         // Ignore lines with invalid group numbers
@@ -428,14 +369,7 @@ public void updateIntake(String intakeCode, int newGroupCount) {
             }
         }
 
-        // Determine if a new group is needed
-        if (!lastGroupIsFull) {
-            newGroupCount = 0;  // No new groups needed if the last group is not full
-        } else {
-            newGroupCount = 1;  // Only one new group needed
-        }
-
-        // Add new intake lines for each new group if necessary
+        // Add new intake lines for each new group
         for (int i = highestGroupNumber + 1; i <= highestGroupNumber + newGroupCount; i++) {
             String newIntakeCode = intakeCode + "(" + i + ")";
             String newIntakeLine = newIntakeCode + originalIntakeLine.substring(intakeCode.length());
@@ -456,5 +390,7 @@ public void updateIntake(String intakeCode, int newGroupCount) {
 }
 
 
-
+    
+    
+    
 }
