@@ -12,7 +12,9 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.Icon;
@@ -28,6 +30,7 @@ public class Student {
     private String contact;
     private String email;
     private String intake;
+    private int lastStudentID;
 //    private String assignedLecturer;
     
     private String newContact;
@@ -58,38 +61,34 @@ public class Student {
         this.newIntake = intake;
     }
     
+    
     //Add new account details
     public Student(String id,String password){
         this.studentID = id;
         this.password = password;
     }
     
-    //Update student details
-//    public Student(String id, String name, String ic, String contact, String email, String intake, String lecture){
-//        this.studentID = id;
-//        this.name = name;
-//        this.ic = ic;
-//        this.newContact = contact;
-//        this.email = email;
-//        this.newIntake = intake;
-//        this.assignedLecturer = lecture;
-//    }
     
     public Student(DefaultTableModel table){
         this.table = table;
     }
     
     //Delete student from both student and user.txt
-    public Student (DefaultTableModel table, String id){
-        this.table = table;
+//    public Student (DefaultTableModel table, String id){
+//        this.table = table;
+//        this.studentID = id;
+//    }
+    
+    //For delete purpose based on ID
+    public Student (String id){
         this.studentID = id;
     }
     
-    //pass the assigned lecturer during lc registration
-//    public Student (String lecturer){
-//        this.assignedLecturer = lecturer;
-//    }
-    
+    public Student(){
+        
+    }
+        
+    // ------- Registration by Individual STARTS -------
     public String getStudentID(){
         createStudentID();
         return studentID;
@@ -106,10 +105,6 @@ public class Student {
         return email;
     }
     
-    public Student(){
-        
-    }
-        
     private void createStudentID(){
         studentID = "";
         
@@ -151,17 +146,202 @@ public class Student {
         }
     }
     
-    private void createPassword(String ic){
-        if (ic.matches("\\d{6}-\\d{2}-\\d{4}")) {
-            icPrefix = ic.substring(0, 6);
-            password = icPrefix + studentID;
-        }
-    }
-    
     private void createEmail(){
         email = studentID + "@mail.goodbrain.edu.my";
     }
+    
+    private void createPassword(String ic){
+        if(ic.matches("\\d{6}-\\d{2}-\\d{4}")){
+            icPrefix = ic.substring(0,6);
+            password = icPrefix + studentID;
+        }
+    }
+    // ------- Registration by Individual END -------
+    
+    public String getId() {
+        return studentID;
+    }
+    public String getName() {
+        return name;
+    }
+    public String getIc() {
+        return ic;
+    
+    }
+    public String getContact() {
+        return contact;
+    }
+    public String getemail() {
+        return email;
+    }
+    public String getIntakeCode() {
+        return intake;
+    }
+    public String getPassword() {
+        return password;
+    }
+
+    public void setIntakeCode(String intakeCode) {
+        this.intake = intakeCode;
+    }
+    
+    public void setPassword(String password) {
+        this.password = password;
+    }
+    
+//    public List<Student> groupStudent(List<Student> students, String intakeCode) {
+//        List<Student> groupedStudents = new ArrayList<>();
+//        int groupNumber = 1;
+//
+//        for (int i = 0; i < students.size(); i++) {
+//            if (i > 0 && i % 20 == 0) {
+//                groupNumber++;
+//            }
+//            Student student = students.get(i);
+//            student.setIntakeCode(intakeCode + "(" + groupNumber + ")");
+//            groupedStudents.add(student);
+//        }
+//        return groupedStudents;
+//    }
+    
+    
+    public List<Student> groupStudent(List<Student> students, String intakeCode, Map<String, Integer> studentCounts) {
+        List<Student> groupedStudents = new ArrayList<>();
+        int groupNumber = 1;
+        int currentGroupSize = studentCounts.getOrDefault(intakeCode + "(" + groupNumber + ")", 0);
+
+        for (Student student : students) {
+            if (currentGroupSize >= 20) {
+                groupNumber++;
+                currentGroupSize = 0;
+            }
+
+            String newIntakeCode = intakeCode + "(" + groupNumber + ")";
+            student.setIntakeCode(newIntakeCode);
+            groupedStudents.add(student);
+            currentGroupSize++;
+        }
+
+        return groupedStudents;
+    }
+    
+    public static Map<String, Integer> countStudentsInIntakes(String studentFile) throws IOException {
+        Map<String, Integer> studentCountMap = new HashMap<>();
+        BufferedReader br = new BufferedReader(new FileReader(studentFile));
+        String line;
+
+        while ((line = br.readLine()) != null) {
+            String[] dataRow = line.split(";");
+            String intakeCode = dataRow[5];  // Assuming intake code is in the sixth column
+
+            studentCountMap.put(intakeCode, studentCountMap.getOrDefault(intakeCode, 0) + 1);
+        }
+
+        br.close();
+        return studentCountMap;
+    }
+
+    
+    
+    // ------- Registration by Group STARTS -------
+    public List<String[]> loadExistingRecords() {
+        List<String[]> existingRecords = new ArrayList<>();
+        try {
+            File file = new File("student.txt");
+            if (file.exists()) {
+                BufferedReader br = new BufferedReader(new FileReader(file));
+                String line;
+                while ((line = br.readLine()) != null) {
+                    existingRecords.add(line.split(";"));
+                }
+                br.close();
+            }
+        } catch (IOException ex) {
+            Logger.getLogger(Student.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return existingRecords;
+    }
+
+    public void initializeLastStudentID() {
+        try {
+            File file = new File("student.txt");
+            if (!file.exists()) {
+                lastStudentID = 0;
+            } else {
+                BufferedReader br = new BufferedReader(new FileReader(file));
+                String line;
+                List<String> studentIDs = new ArrayList<>();
+
+                while ((line = br.readLine()) != null) {
+                    String[] data = line.split(";");
+                    studentIDs.add(data[0]);
+                }
+                br.close();
+
+                if (!studentIDs.isEmpty()) {
+                    int highestID = 0;
+                    for (String id : studentIDs) {
+                        int digit = Integer.parseInt(id.substring(1));
+                        if (digit > highestID) {
+                            highestID = digit;
+                        }
+                    }
+                    lastStudentID = highestID;
+                } else {
+                    lastStudentID = 0; // Initialize if no students are present in the file
+                }
+            }
+        } catch (IOException ex) {
+            Logger.getLogger(AdminPages.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    
+    public String createStudentIDForGroup() {
+        lastStudentID++;
+        studentID = "S" + String.format("%03d", lastStudentID);
+        return studentID;
+    }
+    
+    public String createPasswordForGroup(String ic, String id){
+        if(ic.matches("\\d{6}-\\d{2}-\\d{4}")){
+            icPrefix = ic.substring(0,6);
+        }
+        password = icPrefix + studentID;
+        return password;
+    }
+    
+    public String createEmailForGroup (String studentID){
+        return studentID + "@mail.goodbrain.edu.my";
+    }
      
+    public void addStudent(List<String> studentData){
+        try(BufferedWriter bw = new BufferedWriter(new FileWriter("student.txt", true))){
+            for(String data : studentData){
+                bw.write(data);
+                bw.newLine();
+            }
+            Icon icon = new ImageIcon(getClass().getResource("/Icon/success.png"));
+            JOptionPane.showMessageDialog(null, "Students has been added! ","Notification", JOptionPane.INFORMATION_MESSAGE, icon);
+            }
+        
+        catch (IOException ie){
+            JOptionPane.showMessageDialog(null, "Failed to add student! ", "Error",JOptionPane.ERROR_MESSAGE);
+        }
+    }
+    
+    public void createStudentAccount(List<String> rec){
+        try(BufferedWriter bw = new BufferedWriter(new FileWriter("user.txt", true))){
+            for(String data : rec){
+                bw.write(data);
+                bw.newLine();
+            }
+        }
+        catch (IOException ie){
+            JOptionPane.showMessageDialog(null, "Failed to add users! ", "Error",JOptionPane.ERROR_MESSAGE);
+        }
+    }
+    // ------- Registration by Group END -------
+    
     public List<String> studentValidation(){
         List<String> errors = new ArrayList<>();
         StringBuilder errorMessage = new StringBuilder();
@@ -223,7 +403,7 @@ public class Student {
         JOptionPane.showMessageDialog(null, message, "Error in" + field, JOptionPane.ERROR_MESSAGE);
     }
     
-    public void addStudent(){
+     public void addStudent(){
         try{
             FileWriter writer = new FileWriter("student.txt", true);            
             writer.write(studentID + ";" + name + ";" + ic + ";" + contact + ";" + email + ";" + intake + "\n");
@@ -234,11 +414,10 @@ public class Student {
                                 "Notification", JOptionPane.INFORMATION_MESSAGE, icon);
         }
         catch (IOException e) {
-            JOptionPane.showMessageDialog(null, "Failed to add student! ", "Error",
-                    JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(null, "Failed to add student! ", "Error",JOptionPane.ERROR_MESSAGE);
         }
     }
-    
+
     public void createStudentAccount(){
         try{
             FileWriter fw = new FileWriter("user.txt", true);
@@ -246,8 +425,7 @@ public class Student {
             fw.close();
         }
         catch(IOException e){
-            JOptionPane.showMessageDialog(null, "Failed to add student! ", "Error",
-                    JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(null, "Failed to add student! ", "Error", JOptionPane.ERROR_MESSAGE);
         }
     }
     
@@ -301,45 +479,60 @@ public class Student {
         }
     }
     
-    public void deleteStudent() {
-        int rowQty = table.getRowCount();
-        int colQty = table.getColumnCount();
-
-        ArrayList<String> tableRows = new ArrayList<>();
-        for (int i = 0; i < rowQty; i++) {
-            StringBuilder rowBuilder = new StringBuilder();
-
-            for (int j = 0; j < colQty - 1; j++) {
-                rowBuilder.append(table.getValueAt(i, j));
-
-                if (j != colQty - 2) {
-                    rowBuilder.append(";");
-                }
-            }
-            tableRows.add(rowBuilder.toString());
-        }
-
+    
+     public void deleteStudent() {
         try {
-            BufferedWriter bw = new BufferedWriter(new FileWriter("student.txt"));
-            for (String row : tableRows) {
-                bw.write(row);
-                bw.newLine();
-            }
-            bw.close();
-
-            FileHandler fh = new FileHandler();
-            fh.deleteUserInformation(studentID);
-
-            table.setRowCount(0);
-            showStudent();
-
-            Icon icon = new ImageIcon(getClass().getResource("/Icon/success.png"));
-            JOptionPane.showMessageDialog(null, "Student has been removed.",
-                    "Notification", JOptionPane.INFORMATION_MESSAGE, icon);
-        } catch (IOException ex) {
-            Logger.getLogger(AdminPages.class.getName()).log(Level.SEVERE, null, ex);
+            FileHandler fileHandler = new FileHandler();
+            fileHandler.deleteFromSpecificFile(studentID);
+            fileHandler.deleteFromUserFile(studentID);
         }
-    } 
+        catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 }
+    
+//    public void deleteStudent() {
+//        int rowQty = table.getRowCount();
+//        int colQty = table.getColumnCount();
+//
+//        ArrayList<String> tableRows = new ArrayList<>();
+//        for (int i = 0; i < rowQty; i++) {
+//            StringBuilder rowBuilder = new StringBuilder();
+//
+//            for (int j = 0; j < colQty - 1; j++) {
+//                rowBuilder.append(table.getValueAt(i, j));
+//
+//                if (j != colQty - 2) {
+//                    rowBuilder.append(";");
+//                }
+//            }
+//            tableRows.add(rowBuilder.toString());
+//        }
+//
+//        try {
+//            BufferedWriter bw = new BufferedWriter(new FileWriter("student.txt"));
+//            for (String row : tableRows) {
+//                bw.write(row);
+//                bw.newLine();
+//            }
+//            bw.close();
+//
+//            FileHandler fh = new FileHandler();
+//            fh.deleteFromSpecificFile(studentID);
+//            fh.deleteFromUserFile(studentID);
+////            fh.deleteUserInformation(studentID);
+//
+//            table.setRowCount(0);
+//            showStudent();
+//
+//            Icon icon = new ImageIcon(getClass().getResource("/Icon/success.png"));
+//            JOptionPane.showMessageDialog(null, "Student has been removed.",
+//                    "Notification", JOptionPane.INFORMATION_MESSAGE, icon);
+//        } catch (IOException ex) {
+//            Logger.getLogger(AdminPages.class.getName()).log(Level.SEVERE, null, ex);
+//        }
+//    } 
+//}
     
    

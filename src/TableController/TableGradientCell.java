@@ -25,7 +25,7 @@ public class TableGradientCell extends DefaultTableCellRenderer{
     private int row;
     
     public TableGradientCell() {
-        this(Color.decode("#009FFF"), Color.decode("#ec2F4B"));
+        this(Color.decode("#005AA7"), Color.decode("#FFFDE4"));
     }
     
     public TableGradientCell(Color color1, Color color2) {
@@ -40,7 +40,7 @@ public class TableGradientCell extends DefaultTableCellRenderer{
         Component com = super.getTableCellRendererComponent(table, value, isSelected, hasFocus, row, column);
         Rectangle cellRec = table.getCellRect(row, column, true);
         x = -cellRec.x;
-        width = table.getWidth()-cellRec.x;
+        width = table.getWidth() - cellRec.x;
         this.isSelected = isSelected;
         this.row = row;
         return com;
@@ -53,8 +53,6 @@ public class TableGradientCell extends DefaultTableCellRenderer{
             g2.setPaint(new GradientPaint(x, 0, color1, width, 0, color2));
             g2.fill(new Rectangle2D.Double(0, 0, getWidth(), getHeight()));
         } else if(row%2 == 0) {
-//            Color gradientColor1 = FlatLaf.isLafDark() ? Color.decode("#4a4a49") : Color.decode("#fcfcfc");
-//            Color gradientColor2 = FlatLaf.isLafDark() ? Color.decode("#3d3d3d") : Color.decode("#77f4fc");
             Color gradientColor1 = Color.decode("#fcfcfc");
             Color gradientColor2 = Color.decode("#77f4fc");
             g2.setPaint(new GradientPaint(x, 0, gradientColor1, width, 0, gradientColor2));

@@ -4,6 +4,8 @@
  */
 package Admin;
 
+import Admin.AdminPages;
+import Admin.FileHandler;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
@@ -34,6 +36,7 @@ public class Lecturer {
 //    private String student;
     private String projectManager;
     
+    private int lastLecturerID = 0;
     private String icPrefix;
     
     private String newContact;
@@ -55,23 +58,27 @@ public class Lecturer {
     }
     
     
-    //Add lecturer & update purpose
-    public Lecturer(String id, String name, String ic, String contact, String email, String major, String minor, String pm){
+    //Add lecturer
+    public Lecturer(String id, String name, String ic, String contact, String email, String major, String minor){
         this.lectureID = id;
         this.name = name;
         this.ic = ic;
         this.contact = contact;
         this.email = email;
         this.major = major;
-        this.minor = minor;
-        this.projectManager = pm;
-        
+        this.minor = minor; 
+    }
+    
+    //Update lecturer
+    public Lecturer(String id, String name, String ic, String contact, String email, String major, String minor, String pm){
+        this.lectureID = id;
+        this.name = name;
+        this.ic = ic;
         this.newContact = contact;
         this.newMajor = major;
         this.newMinor = minor;
         this.isPMRole = pm;
     }
-
     
     public Lecturer (String id, String password){
         this.lectureID = id;
@@ -83,8 +90,7 @@ public class Lecturer {
     }
     
     //For delete purpose
-    public Lecturer(DefaultTableModel table, String id){
-        this.table = table;
+    public Lecturer(String id){
         this.lectureID = id;
     }
     
@@ -92,6 +98,7 @@ public class Lecturer {
         
     }
     
+    // ----------- REGISTRATION By INDIVIDUAL STARTS -----------
     public String getEmail(){
         createEmail();
         return email;
@@ -125,12 +132,7 @@ public class Lecturer {
         String contactError = validateContact();
         if (!contactError.isEmpty()) {
             errors.add(contactError);
-        }    
-        
-//        String pmError = validateProjectManagerGroup();
-//        if(!pmError.isEmpty()){
-//            errors.add(pmError);
-//        }
+        }
         return errors;
     }
     
@@ -163,6 +165,7 @@ public class Lecturer {
         }
         return "";
     }
+    
     
     private void createEmail(){
         email = lectureID + "@staff.goodbrain.edu.my";
@@ -216,30 +219,15 @@ public class Lecturer {
         }
     }
     
-    public void createLectureAccount(String pm){
-        this.projectManager = pm;
-        
-        if (pm.equals("Yes")){
-            try{
-                FileWriter fw = new FileWriter("user.txt", true);
-                fw.write(lectureID + ";" + password + ";" + "4" + "\n");
-                fw.close();
+    public void createLectureAccount(){
+        try{
+            FileWriter fw = new FileWriter("user.txt", true);
+            fw.write(lectureID + ";" + password + ";" + "2" + "\n");
+            fw.close();
         }catch(IOException e){
-            JOptionPane.showMessageDialog(null, "Failed to add project manager! ", "Error",
+            JOptionPane.showMessageDialog(null, "Failed to add user! ", "Error",
                     JOptionPane.ERROR_MESSAGE);
-            }
-        }
-        else if (pm.equals("No")){
-            try{
-                FileWriter fw = new FileWriter("user.txt", true);
-                fw.write(lectureID + ";" + password + ";" + "2" + "\n");
-                fw.close();
-            }catch(IOException e){
-                JOptionPane.showMessageDialog(null, "Failed to add lecturer! ", "Error",
-                        JOptionPane.ERROR_MESSAGE);
-                }
-        }
-        
+            }   
     }
     
     public void addLecturer(){
@@ -248,7 +236,7 @@ public class Lecturer {
         try{
             FileWriter fw = new FileWriter("lecturer.txt", true);
             fw.write(lectureID + ";" + name + ";" + ic + ";" + contact + ";" + email + ";" + major + ";" 
-                    + minorEmpty + ";" + projectManager + "\n");
+                    + minorEmpty + ";" + "-" + "\n");
             fw.close();
 
             Icon icon = new ImageIcon(getClass().getResource("/Icon/success.png"));
@@ -261,7 +249,111 @@ public class Lecturer {
         }
         
     }
+    // ----------- REGISTRATION By INDIVIDUAL ENDS -----------
     
+    
+    
+    // ------- Registration by Group STARTS -------
+    public List<String[]> loadExistingRecords() {
+        List<String[]> existingRecords = new ArrayList<>();
+        try {
+            File file = new File("lecturer.txt");
+            if (file.exists()) {
+                BufferedReader br = new BufferedReader(new FileReader(file));
+                String line;
+                while ((line = br.readLine()) != null) {
+                    existingRecords.add(line.split(";"));
+                }
+                br.close();
+            }
+        } catch (IOException ex) {
+            Logger.getLogger(Lecturer.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return existingRecords;
+    }
+
+    public void initializeLastLecturerID() {
+        try {
+            File file = new File("lecturer.txt");
+            if (!file.exists()) {
+                lastLecturerID = 0;
+            } else {
+                BufferedReader br = new BufferedReader(new FileReader(file));
+                String line;
+                List<String> studentIDs = new ArrayList<>();
+
+                while ((line = br.readLine()) != null) {
+                    String[] data = line.split(";");
+                    studentIDs.add(data[0]);
+                }
+                br.close();
+
+                if (!studentIDs.isEmpty()) {
+                    int highestID = 0;
+                    for (String id : studentIDs) {
+                        int digit = Integer.parseInt(id.substring(1));
+                        if (digit > highestID) {
+                            highestID = digit;
+                        }
+                    }
+                    lastLecturerID = highestID;
+                } else {
+                    lastLecturerID = 0; // Initialize if no students are present in the file
+                }
+            }
+        } catch (IOException ex) {
+            Logger.getLogger(AdminPages.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    
+    public String createLectureIDForGroup() {
+        lastLecturerID++;
+        lectureID = "L" + String.format("%03d", lastLecturerID);
+        return lectureID;
+    }
+    
+    public String createPasswordForGroup(String ic, String id){
+        if(ic.matches("\\d{6}-\\d{2}-\\d{4}")){
+            icPrefix = ic.substring(0,6);
+            return icPrefix + lectureID;
+        }
+        return null;
+    }
+    
+    public String createEmailForGroup (String lectureID){
+        return lectureID + "@staff.goodbrain.edu.my";
+    }
+     
+    public void addLecturer(List<String> lectureData){
+        try(BufferedWriter bw = new BufferedWriter(new FileWriter("lecturer.txt", true))){
+            for(String data : lectureData){
+                bw.write(data);
+                bw.newLine();
+            }
+            Icon icon = new ImageIcon(getClass().getResource("/Icon/success.png"));
+            JOptionPane.showMessageDialog(null, "Lecturers has been added! ","Notification", JOptionPane.INFORMATION_MESSAGE, icon);
+            }
+        
+        catch (IOException ie){
+            JOptionPane.showMessageDialog(null, "Failed to add lecturer! ", "Error",JOptionPane.ERROR_MESSAGE);
+        }
+    }
+    
+    public void createLectureAccount(List<String> rec){
+        try(BufferedWriter bw = new BufferedWriter(new FileWriter("user.txt", true))){
+            for(String data : rec){
+                bw.write(data);
+                bw.newLine();
+            }
+        }
+        catch (IOException ie){
+            JOptionPane.showMessageDialog(null, "Failed to add users! ", "Error",JOptionPane.ERROR_MESSAGE);
+        }
+    }
+    // ------- Registration by Group END -------
+    
+    
+    //add PM validation during update
     public void updateLecturer() throws IOException {
         try{
             ArrayList<String[]> data = new ArrayList<String[]>();
@@ -324,19 +416,17 @@ public class Lecturer {
             for (int i = 0; i < data.size(); i++) {
                 if (data.get(i)[0].equals(lectureID)) {
                     String[] row = data.get(i);
-                    if (row[2].equals("2") && pm.equals("Yes")) {
+                    if (pm.equals("Yes")) {
                         row[2] = "4"; // Update to project manager
-                    } else if (row[2].equals("4") && pm.equals("no")) {
+                    } else if (pm.equals("No")) {
                         row[2] = "2"; // Keep as project manager
-                    } else if (row[2].equals("2") && pm.equals("no")) {
-                        row[2] = "2";
                     }
                     data.set(i, row);
                     break;
                 }
             }
             
-            BufferedWriter bw = new BufferedWriter(new FileWriter("lecturer.txt"));
+            BufferedWriter bw = new BufferedWriter(new FileWriter("user.txt"));
             for(String[] row : data){
                 String newData = String.join(";", row);
                 bw.write(newData);
@@ -349,47 +439,59 @@ public class Lecturer {
             Logger.getLogger(Student.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
+
+//        public void deleteLecturer() {
+//            int rowQty = table.getRowCount();
+//            int colQty = table.getColumnCount();
+//
+//            ArrayList<String> tableRows = new ArrayList<>();
+//            for (int i = 0; i < rowQty; i++) {
+//                StringBuilder rowBuilder = new StringBuilder();
+//
+//                for (int j = 0; j < colQty - 1; j++) {
+//                    rowBuilder.append(table.getValueAt(i, j));
+//
+//                    if (j != colQty - 2) {
+//                        rowBuilder.append(";");
+//                    }
+//                }
+//                tableRows.add(rowBuilder.toString());
+//            }
+//
+//            try {
+//                BufferedWriter bw = new BufferedWriter(new FileWriter("lecturer.txt"));
+//                for (String row : tableRows) {
+//                    bw.write(row);
+//                    bw.newLine();
+//                }
+//                bw.close();
+//
+//                FileHandler fh = new FileHandler();
+//                fh.deleteFromSpecificFile(lectureID);
+//                fh.deleteFromUserFile(lectureID);
+//
+//                table.setRowCount(0);
+//                showLecturer();
+//
+//                Icon icon = new ImageIcon(getClass().getResource("/Icon/success.png"));
+//                JOptionPane.showMessageDialog(null, "Lecturer has been removed.",
+//                        "Notification", JOptionPane.INFORMATION_MESSAGE, icon);
+//            } catch (IOException ex) {
+//                Logger.getLogger(AdminPages.class.getName()).log(Level.SEVERE, null, ex);
+//            }
+//    }
     
     public void deleteLecturer() {
-        int rowQty = table.getRowCount();
-        int colQty = table.getColumnCount();
-
-        ArrayList<String> tableRows = new ArrayList<>();
-        for (int i = 0; i < rowQty; i++) {
-            StringBuilder rowBuilder = new StringBuilder();
-
-            for (int j = 0; j < colQty - 1; j++) {
-                rowBuilder.append(table.getValueAt(i, j));
-
-                if (j != colQty - 2) {
-                    rowBuilder.append(";");
-                }
-            }
-            tableRows.add(rowBuilder.toString());
-        }
-
         try {
-            BufferedWriter bw = new BufferedWriter(new FileWriter("lecturer.txt"));
-            for (String row : tableRows) {
-                bw.write(row);
-                bw.newLine();
-            }
-            bw.close();
-
-            FileHandler fh = new FileHandler();
-            fh.deleteUserInformation(lectureID);
-
-            table.setRowCount(0);
-            showLecturer();
-
-            Icon icon = new ImageIcon(getClass().getResource("/Icon/success.png"));
-            JOptionPane.showMessageDialog(null, "Lecturer has been removed.",
-                    "Notification", JOptionPane.INFORMATION_MESSAGE, icon);
-        } catch (IOException ex) {
-            Logger.getLogger(AdminPages.class.getName()).log(Level.SEVERE, null, ex);
+            FileHandler fileHandler = new FileHandler();
+            fileHandler.deleteFromSpecificFile(lectureID);
+            fileHandler.deleteFromUserFile(lectureID);
+        }
+        catch (IOException e) {
+            e.printStackTrace();
         }
     }
-    
+
     public void showLecturer(){
         FileHandler fh = new FileHandler();
         fh.displayData("lecturer.txt", table);

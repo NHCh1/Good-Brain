@@ -4,51 +4,56 @@
  */
 package Admin;
 
-import com.formdev.flatlaf.FlatLaf;
-import java.awt.Graphics;
-import java.awt.Graphics2D;
-import java.awt.print.PageFormat;
-import java.awt.print.Printable;
-import java.awt.print.PrinterException;
-import java.awt.print.PrinterJob;
-import javax.swing.table.DefaultTableModel;
 import TableController.TableAlignment;
+import com.formdev.flatlaf.FlatLaf;
+//import java.awt.Graphics;
+//import java.awt.Graphics2D;
+//import java.awt.print.PageFormat;
+//import java.awt.print.Printable;
+//import java.awt.print.PrinterException;
+//import java.awt.print.PrinterJob;
+//import javax.swing.table.DefaultTableModel;
+//import TableController.TableAlignment;
+//import java.io.File;
+//import java.io.FileOutputStream;
+//import java.io.IOException;
+
+import com.itextpdf.text.*;
+import com.itextpdf.text.pdf.*;
+import javax.swing.*;
+import javax.swing.table.DefaultTableModel;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
-
+import java.util.stream.Stream;
 
 public class PrintNameList extends javax.swing.JFrame {
     private Object[][] data;
     private String intakeCode;
-    
-    private static final double A4_WIDTH_INCHES = 8.27;
-    private static final double A4_HEIGHT_INCHES = 11.69;
 
     public PrintNameList() {
-        
+        initComponents();
     }
 
-    public void showForm(Object[][] data, String intakeCode){
-        initComponents();
+    public void showForm(Object[][] data, String intakeCode) {
         this.data = data;
         this.intakeCode = intakeCode;
         System.out.println(data);
         populateTable();
         setVisible(true);
     }
-    
-    private void populateTable(){
+
+    private void populateTable() {
         TableAlignment alignment = new TableAlignment();
         alignment.alignTable(nameListTable);
-        
+
         intakeCodeLabel.setText(intakeCode);
         DefaultTableModel model = (DefaultTableModel) nameListTable.getModel();
         model.setRowCount(0);
-        
+
         int studentCount = 0;
         int groupCount = 1;
-        
+
         for (int i = 0; i < data.length; i++) {
             Object[] rowData = new Object[4];
             rowData[0] = ++studentCount; // No. column
@@ -56,63 +61,221 @@ public class PrintNameList extends javax.swing.JFrame {
             rowData[2] = data[i][0]; // Student ID column
             rowData[3] = "Group " + groupCount; // Group column
 
-            // Increment group number after every 10 students
-            if (studentCount % 10 == 0) {
+            // Increment group number after every 20 students
+            if (studentCount % 20 == 0) {
                 groupCount++;
             }
             model.addRow(rowData);
         }
     }
-    
-    
-        public void printPanel() {
-        PrinterJob printer = PrinterJob.getPrinterJob();
-        printer.setJobName(intakeCode);
 
-        printer.setPrintable(new Printable() {
-            @Override
-            public int print(Graphics gr, PageFormat pf, int pageNum) {
-                pf.setOrientation(PageFormat.LANDSCAPE);
-
-                if (pageNum > 0) {
-                    // Handle page numbers greater than 0
-                    return Printable.NO_SUCH_PAGE;
-                }
-
-                Graphics2D g2d = (Graphics2D) gr;
-                g2d.translate(pf.getImageableX(), pf.getImageableY());
-
-                // Print the JPanel (nameListPanel) to fit the A4 size
-                double scaleX = pf.getImageableWidth() / nameListPanel.getWidth();
-                double scaleY = pf.getImageableHeight() / nameListPanel.getHeight();
-                double scale = Math.min(scaleX, scaleY);
-                g2d.scale(scale, scale);
-                nameListPanel.print(g2d);
-
-
-                // Save the printed content to a PDF file
-                File folder = new File("C:/Users/User/Documents/NetBeansProjects/newAGH/NameList/" + intakeCode + ".pdf");
-                if (!folder.exists()) {
-                    folder.mkdir(); // Create the folder if it doesn't exist
-                }
-
-                File file = new File(folder + intakeCode + ".pdf");
-                try (FileOutputStream fos = new FileOutputStream(file)) {
-                    fos.flush();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-
-                return Printable.PAGE_EXISTS;
+    public void generatePdf() {
+        Document document = new Document(PageSize.A4.rotate());
+        try {
+            String filePath = "C:/Users/User/Documents/NetBeansProjects/Good-Brain/src/NameList/" + intakeCode + ".pdf";
+            File folder = new File(filePath).getParentFile();
+            if (!folder.exists()) {
+                folder.mkdirs(); // Create the folder if it doesn't exist
             }
-        });
 
-            try {
-                printer.print();
-            } catch (PrinterException ex) {
-                ex.printStackTrace();
+            PdfWriter.getInstance(document, new FileOutputStream(filePath));
+            document.open();
+
+            Font headerFont = FontFactory.getFont(FontFactory.HELVETICA_BOLD, 18, BaseColor.BLACK);
+            Font titleFont = FontFactory.getFont(FontFactory.HELVETICA_BOLD, 16, BaseColor.BLACK);
+
+            Paragraph header = new Paragraph("GoodBrain", headerFont);
+            header.setAlignment(Element.ALIGN_CENTER);
+            document.add(header);
+
+            Paragraph title = new Paragraph("Intake: " + intakeCode, titleFont);
+            title.setAlignment(Element.ALIGN_CENTER);
+            document.add(title);
+
+            document.add(Chunk.NEWLINE);
+
+            // Create table
+            PdfPTable table = new PdfPTable(4);
+            table.setWidthPercentage(100);
+            table.setWidths(new int[]{1, 4, 4, 2});
+
+            // Add table headers
+            addTableHeader(table);
+
+            // Add table data
+            addRows(table);
+
+            document.add(table);
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            document.close();
+        }
+    }
+
+    private void addTableHeader(PdfPTable table) {
+        Font headerFont = FontFactory.getFont(FontFactory.HELVETICA_BOLD, 14, BaseColor.BLACK);
+        Stream.of("No", "Student Name", "Student ID", "Group").forEach(columnTitle -> {
+            PdfPCell header = new PdfPCell();
+            header.setBackgroundColor(BaseColor.LIGHT_GRAY);
+            header.setBorderWidth(1);
+            header.setPhrase(new Phrase(columnTitle, headerFont));
+            header.setHorizontalAlignment(Element.ALIGN_CENTER);
+            header.setVerticalAlignment(Element.ALIGN_MIDDLE);
+            header.setMinimumHeight(30);
+            table.addCell(header);
+        });
+    }
+
+//    private void addRows(PdfPTable table) {
+//        int studentCount = 0;
+//        int groupCount = 1;
+//
+//        for (Object[] rowData : data) {
+//            table.addCell(String.valueOf(++studentCount));
+//            table.addCell(String.valueOf(rowData[1]));
+//            table.addCell(String.valueOf(rowData[0]));
+//            table.addCell("Group " + groupCount);
+//
+//            // Increment group number after every 20 students
+//            if (studentCount % 20 == 0) {
+//                groupCount++;
+//            }
+//        }
+//    }
+    
+    private void addRows(PdfPTable table) {
+        int studentCount = 0;
+        int groupCount = 1;
+
+        Font cellFont = FontFactory.getFont(FontFactory.HELVETICA, 13, BaseColor.BLACK);
+ 
+        for (Object[] rowData : data) {
+            PdfPCell cell1 = new PdfPCell(new Phrase(String.valueOf(++studentCount)));
+            PdfPCell cell2 = new PdfPCell(new Phrase(String.valueOf(rowData[1])));
+            PdfPCell cell3 = new PdfPCell(new Phrase(String.valueOf(rowData[0])));
+            PdfPCell cell4 = new PdfPCell(new Phrase("Group " + groupCount, cellFont));
+
+            // Align content to the center
+            cell1.setHorizontalAlignment(Element.ALIGN_CENTER);
+            cell2.setHorizontalAlignment(Element.ALIGN_CENTER);
+            cell3.setHorizontalAlignment(Element.ALIGN_CENTER);
+            cell4.setHorizontalAlignment(Element.ALIGN_CENTER);
+
+            // Set cell height
+            cell1.setMinimumHeight(30);
+            cell2.setMinimumHeight(30);
+            cell3.setMinimumHeight(30);
+            cell4.setMinimumHeight(30);
+
+            table.addCell(cell1);
+            table.addCell(cell2);
+            table.addCell(cell3);
+            table.addCell(cell4);
+
+            // Increment group number after every 20 students
+            if (studentCount % 20 == 0) {
+                groupCount++;
             }
         }
+    }
+    
+    
+//    private Object[][] data;
+//    private String intakeCode;
+//    
+//    private static final double A4_WIDTH_INCHES = 8.27;
+//    private static final double A4_HEIGHT_INCHES = 11.69;
+//
+//    public PrintNameList() {
+//        
+//    }
+//
+//    public void showForm(Object[][] data, String intakeCode){
+//        initComponents();
+//        this.data = data;
+//        this.intakeCode = intakeCode;
+//        System.out.println(data);
+//        populateTable();
+//        setVisible(true);
+//    }
+//    
+//    private void populateTable(){
+//        TableAlignment alignment = new TableAlignment();
+//        alignment.alignTable(nameListTable);
+//        
+//        intakeCodeLabel.setText(intakeCode);
+//        DefaultTableModel model = (DefaultTableModel) nameListTable.getModel();
+//        model.setRowCount(0);
+//        
+//        int studentCount = 0;
+//        int groupCount = 1;
+//        
+//        for (int i = 0; i < data.length; i++) {
+//            Object[] rowData = new Object[4];
+//            rowData[0] = ++studentCount; // No. column
+//            rowData[1] = data[i][1]; // Student Name column
+//            rowData[2] = data[i][0]; // Student ID column
+//            rowData[3] = "Group " + groupCount; // Group column
+//
+//            // Increment group number after every 10 students
+//            if (studentCount % 10 == 0) {
+//                groupCount++;
+//            }
+//            model.addRow(rowData);
+//        }
+//    }
+//    
+//    
+//        public void printPanel() {
+//        PrinterJob printer = PrinterJob.getPrinterJob();
+//        printer.setJobName(intakeCode);
+//
+//        printer.setPrintable(new Printable() {
+//            @Override
+//            public int print(Graphics gr, PageFormat pf, int pageNum) {
+//                pf.setOrientation(PageFormat.LANDSCAPE);
+//
+//                if (pageNum > 0) {
+//                    // Handle page numbers greater than 0
+//                    return Printable.NO_SUCH_PAGE;
+//                }
+//
+//                Graphics2D g2d = (Graphics2D) gr;
+//                g2d.translate(pf.getImageableX(), pf.getImageableY());
+//
+//                // Print the JPanel (nameListPanel) to fit the A4 size
+//                double scaleX = pf.getImageableWidth() / nameListPanel.getWidth();
+//                double scaleY = pf.getImageableHeight() / nameListPanel.getHeight();
+//                double scale = Math.min(scaleX, scaleY);
+//                g2d.scale(scale, scale);
+//                nameListPanel.print(g2d);
+//
+//
+//                // Save the printed content to a PDF file
+////                File folder = new File("C:/Users/User/Documents/NetBeansProjects/Good-Brain/NameList/" + intakeCode + ".pdf");
+//                File folder = new File("/src/NameList/" + intakeCode + ".pdf");
+//                if (!folder.exists()) {
+//                    folder.mkdir(); // Create the folder if it doesn't exist
+//                }
+//
+//                File file = new File(folder + intakeCode + ".pdf");
+//                try (FileOutputStream fos = new FileOutputStream(file)) {
+//                    fos.flush();
+//                } catch (IOException e) {
+//                    e.printStackTrace();
+//                }
+//
+//                return Printable.PAGE_EXISTS;
+//            }
+//        });
+//
+//            try {
+//                printer.print();
+//            } catch (PrinterException ex) {
+//                ex.printStackTrace();
+//            }
+//        }
     
 //        public void printPanel() {
 //            try {
@@ -193,30 +356,30 @@ public class PrintNameList extends javax.swing.JFrame {
             .addGroup(nameListPanelLayout.createSequentialGroup()
                 .addGroup(nameListPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(nameListPanelLayout.createSequentialGroup()
-                        .addGap(291, 291, 291)
+                        .addGap(252, 252, 252)
                         .addComponent(jLabel1))
                     .addGroup(nameListPanelLayout.createSequentialGroup()
-                        .addGap(28, 28, 28)
+                        .addGap(23, 23, 23)
                         .addGroup(nameListPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 623, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 581, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(nameListPanelLayout.createSequentialGroup()
                                 .addComponent(jLabel2)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(intakeCodeLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                .addContainerGap(14, Short.MAX_VALUE))
+                .addContainerGap(23, Short.MAX_VALUE))
         );
         nameListPanelLayout.setVerticalGroup(
             nameListPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(nameListPanelLayout.createSequentialGroup()
-                .addGap(17, 17, 17)
+                .addGap(15, 15, 15)
                 .addComponent(jLabel1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 47, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(nameListPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel2)
                     .addComponent(intakeCodeLabel, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 19, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 520, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(12, 12, 12))
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 530, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(19, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -227,9 +390,7 @@ public class PrintNameList extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(nameListPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+            .addComponent(nameListPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
 
         pack();
