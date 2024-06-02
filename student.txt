@@ -152,3 +152,4 @@ S156;Yamamoto Ryota;050707-07-7890;60198765407;S156@mail.goodbrain.edu.my;GBD240
 S157;Ito Sakura;060808-08-8901;60198765408;S157@mail.goodbrain.edu.my;GBD2407DF(2)
 S158;Sato Kenji;070909-09-9012;60198765409;S158@mail.goodbrain.edu.my;GBD2407DF(2)
 S159;Taniguchi Naomi;081010-10-0123;60198765410;S159@mail.goodbrain.edu.my;GBD2407DF(2)
+S160;Johnson Chin;950612-94-5421;60179842467;S160@mail.goodbrain.edu.my;GBD2407DA(2)

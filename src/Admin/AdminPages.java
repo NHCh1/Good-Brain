@@ -2889,7 +2889,7 @@ public class AdminPages extends javax.swing.JFrame {
     private void addStudentButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addStudentButtonActionPerformed
         jTabbedPane1.setSelectedIndex(2);
         Intake intakeList = new Intake();
-        intakeList.addIntakeIntoComboBox(intakeCodeComboBox);
+        intakeList.addIntakeIntoComboBoxWithGroup(intakeCodeComboBox);
     }//GEN-LAST:event_addStudentButtonActionPerformed
 
     private void printNameListBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_printNameListBtnActionPerformed

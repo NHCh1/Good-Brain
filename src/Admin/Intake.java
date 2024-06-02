@@ -231,6 +231,7 @@ public class Intake {
         fh.displayData("intake.txt", table);
     }
 
+    
     public void addIntakeIntoComboBox(JComboBox cb){
         try{
             cb.removeAllItems();
@@ -258,6 +259,39 @@ public class Intake {
                         cb.addItem(IntakeCode);
                     }
                 }
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+    
+    
+    public void addIntakeIntoComboBoxWithGroup(JComboBox cb){
+        try{
+            cb.removeAllItems();
+            cb.addItem("");
+            BufferedReader br = new BufferedReader(new FileReader("intake.txt"));
+            Object[] rows = br.lines().toArray();
+
+            LocalDate currentDate = LocalDate.now();
+
+            for (int i = 0; i < rows.length; i++){
+                String line = rows[i].toString();
+                
+                String [] dataRow = line.split(";");
+                String IntakeCode = dataRow[0];
+                String rStartDate = dataRow[4];
+                String rEndDate = dataRow[5];
+
+
+                DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+                LocalDate registrationStartDate = LocalDate.parse(rStartDate, formatter);
+                LocalDate registrationEndDate = LocalDate.parse(rEndDate, formatter);
+
+                if (currentDate.isAfter(registrationStartDate) && currentDate.isBefore(registrationEndDate.plusDays(1))) {
+                    cb.addItem(IntakeCode);
+                }
+                
             }
         } catch (IOException e) {
             e.printStackTrace();
