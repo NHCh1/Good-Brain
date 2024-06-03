@@ -150,7 +150,7 @@ public class Intake {
         else if(course.equals("Design")){
             courseAbbr = "DS";
         }
-        else if(course.equals("Digital Forensic")){
+        else if(course.equals("Digital Forensics")){
             courseAbbr = "DF";
         }
         else if(course.equals("Digital Marketing")){
