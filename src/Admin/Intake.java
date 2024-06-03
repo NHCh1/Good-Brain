@@ -135,6 +135,9 @@ public class Intake {
         else if(course.equals("Banking")){
             courseAbbr = "BK";
         }
+        else if(course.equals("Business")){
+            courseAbbr = "BN";
+        }
         else if(course.equals("Cloud Engineering")){
             courseAbbr = "CE";
         }
