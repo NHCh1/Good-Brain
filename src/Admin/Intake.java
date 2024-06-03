@@ -395,9 +395,6 @@ public class Intake {
                         int groupNumber = Integer.parseInt(existingLine.substring(startIndex, endIndex));
                         if (groupNumber > highestGroupNumber) {
                             highestGroupNumber = groupNumber;
-                            System.out.println("highest group number" + highestGroupNumber);
-                            System.out.println("Start index " + startIndex);
-                            System.out.println("End index" + endIndex);
                         }
                     } catch (NumberFormatException e) {
                         // Ignore lines with invalid group numbers
@@ -406,8 +403,12 @@ public class Intake {
             }
         }
 
-        // Add new intake lines for each new group
-        for (int i = highestGroupNumber + 1; i <= newGroupCount; i++) {
+        // Calculate the actual number of new groups needed
+        int currentGroupCount = highestGroupNumber;
+        int totalGroupsNeeded = newGroupCount;
+
+        // Add new intake lines for each new group if necessary
+        for (int i = currentGroupCount + 1; i <= totalGroupsNeeded; i++) {
             String newIntakeCode = intakeCode + "(" + i + ")";
             String newIntakeLine = newIntakeCode + originalIntakeLine.substring(intakeCode.length());
             lines.add(newIntakeLine);

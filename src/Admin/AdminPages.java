@@ -503,9 +503,6 @@ public class AdminPages extends javax.swing.JFrame {
         lcNameField = new javax.swing.JTextField();
         lecICField = new javax.swing.JTextField();
         lecContactField = new javax.swing.JTextField();
-        jLabel32 = new javax.swing.JLabel();
-        yesCheckBox = new javax.swing.JCheckBox();
-        noCheckBox = new javax.swing.JCheckBox();
         addLecturerBtn = new javax.swing.JButton();
         cancelButton2 = new javax.swing.JButton();
         lecMajorComboBox = new javax.swing.JComboBox<>();
@@ -1491,15 +1488,6 @@ public class AdminPages extends javax.swing.JFrame {
         jLabel31.setFont(new java.awt.Font("Serif", 1, 14)); // NOI18N
         jLabel31.setText("Major Functional Area:");
 
-        jLabel32.setFont(new java.awt.Font("Serif", 1, 14)); // NOI18N
-        jLabel32.setText("Project Manager:");
-
-        yesNoGroup.add(yesCheckBox);
-        yesCheckBox.setText("Yes");
-
-        yesNoGroup.add(noCheckBox);
-        noCheckBox.setText("No");
-
         addLecturerBtn.setText("Confirm");
         addLecturerBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -1549,7 +1537,6 @@ public class AdminPages extends javax.swing.JFrame {
                                     .addComponent(lcNameField, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addGap(48, 48, 48)
                                 .addGroup(registerLecturerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel32)
                                     .addComponent(jLabel31)
                                     .addComponent(jLabel50))
                                 .addGap(18, 18, 18))
@@ -1561,10 +1548,6 @@ public class AdminPages extends javax.swing.JFrame {
                             .addGroup(registerLecturerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                                 .addComponent(lecMajorComboBox, javax.swing.GroupLayout.Alignment.LEADING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(lecMinorComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(registerLecturerLayout.createSequentialGroup()
-                                .addComponent(yesCheckBox, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(noCheckBox, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(registerLecturerLayout.createSequentialGroup()
                                 .addComponent(updateLecturerPictureBtn)
                                 .addGap(18, 18, 18)
@@ -1592,9 +1575,7 @@ public class AdminPages extends javax.swing.JFrame {
                     .addGroup(registerLecturerLayout.createSequentialGroup()
                         .addComponent(jLabel31)
                         .addGap(23, 23, 23)
-                        .addComponent(jLabel50)
-                        .addGap(18, 18, 18)
-                        .addComponent(jLabel32))
+                        .addComponent(jLabel50))
                     .addGroup(registerLecturerLayout.createSequentialGroup()
                         .addComponent(jLabel25)
                         .addGap(18, 18, 18)
@@ -1611,16 +1592,12 @@ public class AdminPages extends javax.swing.JFrame {
                         .addGap(1, 1, 1)
                         .addComponent(lecMajorComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
-                        .addComponent(lecMinorComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addGroup(registerLecturerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(yesCheckBox)
-                            .addComponent(noCheckBox))))
+                        .addComponent(lecMinorComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(18, 18, 18)
                 .addGroup(registerLecturerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(addLecturerBtn)
                     .addComponent(cancelButton2))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(153, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("tab6", registerLecturer);
@@ -2555,14 +2532,6 @@ public class AdminPages extends javax.swing.JFrame {
             minor = "-";
         }
 
-//        ButtonModel selectedYesNoButton = yesNoGroup.getSelection();
-        yesCheckBox.setActionCommand("Yes");
-        noCheckBox.setActionCommand("No");
-
-        ButtonModel selectedYesNoButton = yesNoGroup.getSelection();
-        String pm = selectedYesNoButton != null ? selectedYesNoButton.getActionCommand() : "";
-
-//        String pm = selectedYesNoButton.getActionCommand();
         Lecturer lc = new Lecturer(name, ic, contact);
         List<String> validationErrors = lc.lecturerValidation();
         if (!validationErrors.isEmpty()) {
@@ -2948,53 +2917,6 @@ public class AdminPages extends javax.swing.JFrame {
     }//GEN-LAST:event_addStudentByIntakeButtonActionPerformed
 
     private void addStudentFromListBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addStudentFromListBtnActionPerformed
-//        Student student = new Student();
-//        
-//        List<String[]> previousRecord = student.loadExistingRecords();
-//        List<String> studentRecords = new ArrayList<>();
-//        List<String> userRecords = new ArrayList<>();
-//        
-//        student.initializeLastStudentID();
-//        
-//        String intakeCode = (String) intakeForGroupComboBox.getSelectedItem();
-//        List<Student> studentsToRegister = new ArrayList<>();
-//    
-//        for (int i = 0; i < studentListTable.getRowCount(); i++) {
-//            String name = (String) studentListTable.getValueAt(i, 0);
-//            String ic = (String) studentListTable.getValueAt(i, 1);
-//            String contact = (String) studentListTable.getValueAt(i, 2);
-//
-//            if (isDuplicate(ic, contact, previousRecord, studentRecords)) {
-//                JOptionPane.showMessageDialog(this, "Duplicate data found!", "Error", JOptionPane.ERROR_MESSAGE);
-//                return;
-//            }
-//
-//            String studentID = student.createStudentIDForGroup();
-//            String email = student.createEmailForGroup(studentID);
-//            String password = student.createPasswordForGroup(ic, studentID);
-//            //add grouping here
-//            
-//            Student newStudent = new Student(studentID, name, ic, contact, email, intakeCode);
-//            newStudent.setPassword(password);
-//            studentsToRegister.add(newStudent);
-//        }
-//        
-//            List<Student> groupedStudents = student.groupStudent(studentsToRegister, intakeCode);
-//            for (Student individual : groupedStudents) {
-//                String record = String.join(";", individual.getId(), individual.getName(), individual.getIc(), individual.getContact(), individual.getEmail(), individual.getIntakeCode());
-//                studentRecords.add(record);
-//
-//                String userRecord = String.join(";", individual.getId(), individual.getPassword(), "3");
-//                userRecords.add(userRecord);
-//            }
-//            
-//        student.addStudent(studentRecords); 
-//        student.createStudentAccount(userRecords);
-//        Intake intake = new Intake();
-//        intake.updateIntake(intakeCode, groupedStudents.size() / 20 + 1);
-//        displayUserCount();
-//        displayStudentTable();
-//        jTabbedPane1.setSelectedIndex(1);
         Student student = new Student();
 
         List<String[]> previousRecord = student.loadExistingRecords();
@@ -3033,24 +2955,35 @@ public class AdminPages extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this, duplicatesMessage.toString(), "Error", JOptionPane.ERROR_MESSAGE);
             return;
         }
-
+        
+        String baseIntakeCode = intakeCode.split("\\(")[0]; 
+        
         try {
             Map<String, Integer> studentCounts = Student.countStudentsInIntakes("student.txt");
+            Map<String, Integer> studentCountsInMainIntake = Student.countStudentsInMainIntake("student.txt");
             
-             // Debugging: Print the contents of studentCounts map
+            // Debugging: Print the contents of studentCounts map
             System.out.println("Student counts per intake: " + studentCounts);
 
-            int existingCount = studentCounts.getOrDefault(intakeCode, 0);
+            int existingCount = studentCountsInMainIntake.getOrDefault(intakeCode, 0);
             System.out.println("Existing count for intake " + intakeCode + ": " + existingCount);
 
-             int newCount = studentsToRegister.size();
+            int newCount = studentsToRegister.size();
             int totalCount = existingCount + newCount;
 
             // Print the total number of students in the intake
             System.out.println("Total number of students in the intake " + intakeCode + ": " + totalCount);
 
+            // Calculate the new group count
+            int newGroupCount = (int) Math.ceil((double) totalCount / 20.0);
+            System.out.println("New group count " + newGroupCount);
+
+        // Update intake with new group count
+        Intake intake = new Intake();
+        intake.updateIntake(intakeCode.split("\\(")[0], newGroupCount);
+
         
-            List<Student> groupedStudents = student.groupStudent(studentsToRegister, intakeCode, studentCounts);
+            List<Student> groupedStudents = student.groupStudent(studentsToRegister, intakeCode.split("\\(")[0], studentCounts);
 
             for (Student individual : groupedStudents) {
                 String record = String.join(";", individual.getId(), individual.getName(), individual.getIc(), individual.getContact(), individual.getEmail(), individual.getIntakeCode());
@@ -3062,22 +2995,6 @@ public class AdminPages extends javax.swing.JFrame {
 
             student.addStudent(studentRecords);
             student.createStudentAccount(userRecords);
-
-
-            // Calculate the new group count
-//            int existingCount = studentCounts.getOrDefault(intakeCode, 0);
-//            System.out.println("Existing student " + existingCount1);
-//            int newCount = studentsToRegister.size();
-//            System.out.println("Nw count " + newCount);
-//            int totalCount = existingCount + newCount;
-//            System.out.println("Total count " + totalCount);
-                    
-            int newGroupCount = (int) Math.ceil((double) totalCount / 20.0);
-            System.out.println("New group count " + newGroupCount);
-            
-            // Update intake with new group count
-            Intake intake = new Intake();
-            intake.updateIntake(intakeCode, newGroupCount);
 
             displayUserCount();
             displayStudentTable();
@@ -3129,6 +3046,7 @@ public class AdminPages extends javax.swing.JFrame {
         List<String[]> previousRecord = lecturer.loadExistingRecords();
         List<String> lectureRecords = new ArrayList<>();
         List<String> userRecords = new ArrayList<>();
+        List<String> duplicateRecords = new ArrayList<>();  // To collect duplicate records
 
         lecturer.initializeLastLecturerID();
 
@@ -3141,20 +3059,29 @@ public class AdminPages extends javax.swing.JFrame {
 
             String duplicatedLecture = isDuplicate(ic, contact, previousRecord, lectureRecords);
             if (duplicatedLecture != null) {
-                JOptionPane.showMessageDialog(this, "Duplicate data found: " + duplicatedLecture, "Error", JOptionPane.ERROR_MESSAGE);
+                duplicateRecords.add(duplicatedLecture);
+            } else {
+                String lecturerID = lecturer.createLectureIDForGroup();
+                String email = lecturer.createEmailForGroup(lecturerID);
+                String password = lecturer.createPasswordForGroup(ic, lecturerID);
+                
+                String record = String.join(";", lecturerID, name, ic, contact, email, major, minor, "-");
+                lectureRecords.add(record);
+
+                String userRecord = String.join(";", lecturerID, password, "2");
+                userRecords.add(userRecord);
+            }
+        }
+            
+             if (!duplicateRecords.isEmpty()) {
+                StringBuilder duplicatesMessage = new StringBuilder("Duplicate data found:\n");
+                for (String record : duplicateRecords) {
+                    duplicatesMessage.append(record).append("\n");
+                }
+                JOptionPane.showMessageDialog(this, duplicatesMessage.toString(), "Error", JOptionPane.ERROR_MESSAGE);
                 return;
             }
-
-            String lecturerID = lecturer.createLectureIDForGroup();
-            String email = lecturer.createEmailForGroup(lecturerID);
-            String password = lecturer.createPasswordForGroup(ic, lecturerID);
-
-            String record = String.join(";", lecturerID, name, ic, contact, email, major, minor, "-");
-            lectureRecords.add(record);
-
-            String userRecord = String.join(";", lecturerID, password, "2");
-            userRecords.add(userRecord);
-        }
+        
         lecturer.addLecturer(lectureRecords);
         lecturer.createLectureAccount(userRecords);
 
@@ -3308,7 +3235,6 @@ public class AdminPages extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel30;
     private javax.swing.JLabel jLabel31;
-    private javax.swing.JLabel jLabel32;
     private javax.swing.JLabel jLabel33;
     private javax.swing.JLabel jLabel34;
     private javax.swing.JLabel jLabel35;
@@ -3382,7 +3308,6 @@ public class AdminPages extends javax.swing.JFrame {
     private javax.swing.JCheckBox newNoCheckBox;
     private javax.swing.JTextField newStudentProfileTextField;
     private javax.swing.JCheckBox newYesCheckBox;
-    private javax.swing.JCheckBox noCheckBox;
     private javax.swing.JButton printNameListBtn;
     private javax.swing.JPanel registerLecturer;
     private javax.swing.JPanel registerLecturerByGroup;
@@ -3421,7 +3346,6 @@ public class AdminPages extends javax.swing.JFrame {
     private javax.swing.JPanel userPage;
     private javax.swing.JTextField userPageSearchField;
     private javax.swing.JTable userTable;
-    private javax.swing.JCheckBox yesCheckBox;
     private javax.swing.ButtonGroup yesNoGroup;
     // End of variables declaration//GEN-END:variables
 }
