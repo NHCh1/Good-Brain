@@ -2519,8 +2519,8 @@ public class AdminPages extends javax.swing.JFrame {
     }//GEN-LAST:event_lecturePageSearchFieldFocusLost
 
     private void addCourseIntoComboBox() {
-        String[] area = {"", "Accounting", "Cloud Engineering", "Cyber Security", "Data Analytic", "Digital Forensic", "Digital Marketing",
-            "Finance", "Intelligent System", "Software Engineering", "Psychology"};
+        String[] area = {"", "Accounting", "Banking", "Cloud Engineering", "Cyber Security", "Data Analytics", "Digital Forensic", "Digital Marketing",
+            "Engineering" , "Finance", "Fintech" , "Intelligent System", "Software Engineering", "Psychology"};
         for (String major : area) {
             lecMajorComboBox.addItem(major);
         }
@@ -2533,8 +2533,8 @@ public class AdminPages extends javax.swing.JFrame {
         lecNewMajorComboBox.removeAllItems();
         lecNewMinorComboBox.removeAllItems();
 
-        String[] area = {"", "Accounting", "Cloud Engineering", "Cyber Security", "Data Analytic", "Digital Forensic", "Digital Marketing",
-            "Finance", "Intelligent System", "Software Engineering", "Psychology"};
+        String[] area = {"", "Accounting", "Banking", "Cloud Engineering", "Cyber Security", "Data Analytics", "Digital Forensic", "Digital Marketing",
+            "Engineering" , "Finance", "Fintech" , "Intelligent System", "Software Engineering", "Psychology"};
         for (String major : area) {
             lecNewMajorComboBox.addItem(major);
         }
