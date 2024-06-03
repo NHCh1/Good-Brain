@@ -1467,7 +1467,7 @@ public class AdminPages extends javax.swing.JFrame {
                     .addGroup(lecturerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                         .addComponent(addLecturerButton, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGroup(lecturerLayout.createSequentialGroup()
-                            .addGroup(lecturerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addGroup(lecturerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                 .addComponent(lecturePageSearchField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addComponent(jLabel8))
                             .addGap(10, 10, 10))))
@@ -1945,9 +1945,8 @@ public class AdminPages extends javax.swing.JFrame {
                     .addGroup(intakeLayout.createSequentialGroup()
                         .addComponent(jLabel60)
                         .addGap(10, 10, 10)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 300, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(121, Short.MAX_VALUE))
+                .addContainerGap(133, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("tab8", intake);
@@ -2775,8 +2774,8 @@ public class AdminPages extends javax.swing.JFrame {
 
     private void uploadStudentPicBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_uploadStudentPicBtnActionPerformed
 //        openFileChooser.setCurrentDirectory(new File("image/"));
-        File downloadFolder = new File(System.getProperty("user.home"), "Downloads");
-        File profileFolder = new File(downloadFolder, "profile");
+//        File downloadFolder = new File(System.getProperty("user.home"), "Downloads");
+        File profileFolder = new File("src/Profile/");
         openFileChooser.setCurrentDirectory(profileFolder);
         int returnValue = openFileChooser.showOpenDialog(this);
         if (returnValue == JFileChooser.APPROVE_OPTION) {
@@ -2787,7 +2786,7 @@ public class AdminPages extends javax.swing.JFrame {
 
     private void uploadStudentNewProfileBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_uploadStudentNewProfileBtnActionPerformed
         File downloadFolder = new File(System.getProperty("user.home"), "Downloads");
-        File profileFolder = new File(downloadFolder, "profile");
+        File profileFolder = new File("src/Profile/");
         openFileChooser.setCurrentDirectory(profileFolder);
         int returnValue = openFileChooser.showOpenDialog(this);
         if (returnValue == JFileChooser.APPROVE_OPTION) {
@@ -2798,7 +2797,7 @@ public class AdminPages extends javax.swing.JFrame {
 
     private void updateLecturerPictureBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_updateLecturerPictureBtnActionPerformed
         File downloadFolder = new File(System.getProperty("user.home"), "Downloads");
-        File profileFolder = new File(downloadFolder, "profile");
+        File profileFolder = new File("src/Profile/");
         openFileChooser.setCurrentDirectory(profileFolder);
         int returnValue = openFileChooser.showOpenDialog(this);
         if (returnValue == JFileChooser.APPROVE_OPTION) {
@@ -2810,7 +2809,7 @@ public class AdminPages extends javax.swing.JFrame {
 
     private void uploadLecturerNewProfileBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_uploadLecturerNewProfileBtnActionPerformed
         File downloadFolder = new File(System.getProperty("user.home"), "Downloads");
-        File profileFolder = new File(downloadFolder, "profile");
+        File profileFolder = new File("src/Profile/");
         openFileChooser.setCurrentDirectory(profileFolder);
         int returnValue = openFileChooser.showOpenDialog(this);
         if (returnValue == JFileChooser.APPROVE_OPTION) {
