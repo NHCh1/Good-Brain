@@ -239,7 +239,7 @@ public class Lecturer {
                     + minorEmpty + ";" + "-" + "\n");
             fw.close();
 
-            Icon icon = new ImageIcon(getClass().getResource("/Icon/success.png"));
+            Icon icon = new ImageIcon(getClass().getResource("/Icon/adminSuccess.png"));
             JOptionPane.showMessageDialog(null, "New lecturer has been added! ", 
                                 "Notification", JOptionPane.INFORMATION_MESSAGE, icon);
         }
@@ -330,7 +330,7 @@ public class Lecturer {
                 bw.write(data);
                 bw.newLine();
             }
-            Icon icon = new ImageIcon(getClass().getResource("/Icon/success.png"));
+            Icon icon = new ImageIcon(getClass().getResource("/Icon/adminSuccess.png"));
             JOptionPane.showMessageDialog(null, "Lecturers has been added! ","Notification", JOptionPane.INFORMATION_MESSAGE, icon);
             }
         
@@ -391,7 +391,7 @@ public class Lecturer {
                 bw.newLine();
             }
             bw.close();
-            Icon icon = new ImageIcon(getClass().getResource("/Icon/success.png"));
+            Icon icon = new ImageIcon(getClass().getResource("/Icon/adminSuccess.png"));
             JOptionPane.showMessageDialog(null, "Update Success! ", "Notification", 
                                 JOptionPane.INFORMATION_MESSAGE, icon);
             

@@ -215,7 +215,7 @@ public class Intake {
                     intakeRegisterStartDate + ";" + intakeRegisterEndDate + ";" + intakeStartDate + ";" + intakeEndDate + "\n");
             writer.close();
 
-            Icon icon = new ImageIcon(getClass().getResource("/Icon/success.png"));
+            Icon icon = new ImageIcon(getClass().getResource("/Icon/adminSuccess.png"));
             JOptionPane.showMessageDialog(null, "New intake has been added! ", 
                                     "Notification", JOptionPane.INFORMATION_MESSAGE, icon);
             }
@@ -395,6 +395,9 @@ public class Intake {
                         int groupNumber = Integer.parseInt(existingLine.substring(startIndex, endIndex));
                         if (groupNumber > highestGroupNumber) {
                             highestGroupNumber = groupNumber;
+                            System.out.println("highest group number" + highestGroupNumber);
+                            System.out.println("Start index " + startIndex);
+                            System.out.println("End index" + endIndex);
                         }
                     } catch (NumberFormatException e) {
                         // Ignore lines with invalid group numbers
@@ -404,7 +407,7 @@ public class Intake {
         }
 
         // Add new intake lines for each new group
-        for (int i = highestGroupNumber + 1; i <= highestGroupNumber + newGroupCount; i++) {
+        for (int i = highestGroupNumber + 1; i <= newGroupCount; i++) {
             String newIntakeCode = intakeCode + "(" + i + ")";
             String newIntakeLine = newIntakeCode + originalIntakeLine.substring(intakeCode.length());
             lines.add(newIntakeLine);

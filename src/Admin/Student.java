@@ -238,6 +238,7 @@ public class Student {
         }
 
         br.close();
+        System.out.println("Student counts per intake: " + studentCountMap);
         return studentCountMap;
     }
 
@@ -320,7 +321,7 @@ public class Student {
                 bw.write(data);
                 bw.newLine();
             }
-            Icon icon = new ImageIcon(getClass().getResource("/Icon/success.png"));
+            Icon icon = new ImageIcon(getClass().getResource("/Icon/adminSuccess.png"));
             JOptionPane.showMessageDialog(null, "Students has been added! ","Notification", JOptionPane.INFORMATION_MESSAGE, icon);
             }
         
@@ -409,7 +410,7 @@ public class Student {
             writer.write(studentID + ";" + name + ";" + ic + ";" + contact + ";" + email + ";" + intake + "\n");
             writer.close();
 
-            Icon icon = new ImageIcon(getClass().getResource("/Icon/success.png"));
+            Icon icon = new ImageIcon(getClass().getResource("/Icon/adminSuccess.png"));
             JOptionPane.showMessageDialog(null, "New student has been added! ", 
                                 "Notification", JOptionPane.INFORMATION_MESSAGE, icon);
         }
@@ -469,7 +470,7 @@ public class Student {
                 bw.newLine();
             }
             bw.close();
-            Icon icon = new ImageIcon(getClass().getResource("/Icon/success.png"));
+            Icon icon = new ImageIcon(getClass().getResource("/Icon/adminSuccess.png"));
             JOptionPane.showMessageDialog(null, "Update Success! ", "Notification", 
                                 JOptionPane.INFORMATION_MESSAGE, icon);
             

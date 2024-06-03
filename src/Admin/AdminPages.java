@@ -173,12 +173,12 @@ public class AdminPages extends javax.swing.JFrame {
                     table.removeRow(row);
                     Student delete = new Student(id);
                     delete.deleteStudent();
-                    Icon icon = new ImageIcon(getClass().getResource("/Icon/success.png"));
+                    Icon icon = new ImageIcon(getClass().getResource("/Icon/adminSuccess.png"));
                     JOptionPane.showMessageDialog(null, "Student has been removed.", "Notification", JOptionPane.INFORMATION_MESSAGE, icon);
 
                     displayUserCount();
                 } else if (decision == JOptionPane.NO_OPTION) {
-                    Icon icon = new ImageIcon(getClass().getResource("/Icon/shield.png"));
+                    Icon icon = new ImageIcon(getClass().getResource("/Icon/adminShield.png"));
                     JOptionPane.showMessageDialog(null, "No changes has been made.", "Notification", JOptionPane.INFORMATION_MESSAGE, icon);
                 }
             }
@@ -238,11 +238,11 @@ public class AdminPages extends javax.swing.JFrame {
                     lecTable.removeRow(row);
                     Lecturer delete = new Lecturer(id);
                     delete.deleteLecturer();
-                    Icon icon = new ImageIcon(getClass().getResource("/Icon/success.png"));
+                    Icon icon = new ImageIcon(getClass().getResource("/Icon/adminSuccess.png"));
                     JOptionPane.showMessageDialog(null, "Lecturer has been removed.", "Notification", JOptionPane.INFORMATION_MESSAGE, icon);
                     displayUserCount();
                 } else if (decision == JOptionPane.NO_OPTION) {
-                    Icon icon = new ImageIcon(getClass().getResource("/Icon/shield.png"));
+                    Icon icon = new ImageIcon(getClass().getResource("/Icon/adminShield.png"));
                     JOptionPane.showMessageDialog(null, "No changes has been made.", "Notification",
                             JOptionPane.INFORMATION_MESSAGE, icon);
                 }
@@ -306,12 +306,12 @@ public class AdminPages extends javax.swing.JFrame {
                     usertbl.removeRow(row);
                     User delete = new User(id);
                     delete.deleteUser();
-                    Icon icon = new ImageIcon(getClass().getResource("/Icon/success.png"));
+                    Icon icon = new ImageIcon(getClass().getResource("/Icon/adminSuccess.png"));
                     JOptionPane.showMessageDialog(null, "User has been removed.", "Notification", JOptionPane.INFORMATION_MESSAGE, icon);
 
                     displayUserCount();
                 } else if (decision == JOptionPane.NO_OPTION) {
-                    Icon icon = new ImageIcon(getClass().getResource("/Icon/shield.png"));
+                    Icon icon = new ImageIcon(getClass().getResource("/Icon/adminShield.png"));
                     JOptionPane.showMessageDialog(null, "No changes has been made.", "Notification", JOptionPane.INFORMATION_MESSAGE, icon);
                 }
             }
@@ -348,9 +348,9 @@ public class AdminPages extends javax.swing.JFrame {
         String totalStudent = String.valueOf(fh.countTotalStudent());
         String totalIntake = String.valueOf(fh.countTotalIntake());
 
-        cardPanel1.setData(new CardModel(new ImageIcon(getClass().getResource("/Icon/lecturer.png")), "Lecturer", totalLecturer));
-        cardPanel2.setData(new CardModel(new ImageIcon(getClass().getResource("/Icon/student.png")), "Student", totalStudent));
-        cardPanel3.setData(new CardModel(new ImageIcon(getClass().getResource("/Icon/intake.png")), "Intake", totalIntake));
+        cardPanel1.setData(new CardModel(new ImageIcon(getClass().getResource("/Icon/adminHomeLecturer.png")), "Lecturer", totalLecturer));
+        cardPanel2.setData(new CardModel(new ImageIcon(getClass().getResource("/Icon/adminHomeStudent.png")), "Student", totalStudent));
+        cardPanel3.setData(new CardModel(new ImageIcon(getClass().getResource("/Icon/adminHomeIntake.png")), "Intake", totalIntake));
 
     }
 
@@ -493,6 +493,7 @@ public class AdminPages extends javax.swing.JFrame {
         lecturePageSearchField = new javax.swing.JTextField();
         addLecturerByGtoupButton = new javax.swing.JButton();
         addLecturerButton = new javax.swing.JButton();
+        jLabel8 = new javax.swing.JLabel();
         registerLecturer = new javax.swing.JPanel();
         jLabel24 = new javax.swing.JLabel();
         jLabel25 = new javax.swing.JLabel();
@@ -549,6 +550,7 @@ public class AdminPages extends javax.swing.JFrame {
         intakeTable = new javax.swing.JTable();
         addIntakeButton = new javax.swing.JLabel();
         intakePageSearchField = new javax.swing.JTextField();
+        jLabel60 = new javax.swing.JLabel();
         addIntake = new javax.swing.JPanel();
         jLabel39 = new javax.swing.JLabel();
         jLabel40 = new javax.swing.JLabel();
@@ -898,9 +900,9 @@ public class AdminPages extends javax.swing.JFrame {
             }
         });
 
-        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icon/search.png"))); // NOI18N
+        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icon/adminSearch.png"))); // NOI18N
 
-        printNameListBtn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icon/printer.png"))); // NOI18N
+        printNameListBtn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icon/adminPrinter.png"))); // NOI18N
         printNameListBtn.setContentAreaFilled(false);
         printNameListBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -908,7 +910,7 @@ public class AdminPages extends javax.swing.JFrame {
             }
         });
 
-        addStudentButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icon/addstudent.png"))); // NOI18N
+        addStudentButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icon/adminAddstudent.png"))); // NOI18N
         addStudentButton.setContentAreaFilled(false);
         addStudentButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -946,7 +948,7 @@ public class AdminPages extends javax.swing.JFrame {
 
         studentTablePanel.add(studentScrollPane, java.awt.BorderLayout.CENTER);
 
-        addStudentByIntakeButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icon/addStudentGroup.png"))); // NOI18N
+        addStudentByIntakeButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icon/adminAddStudentGroup.png"))); // NOI18N
         addStudentByIntakeButton.setContentAreaFilled(false);
         addStudentByIntakeButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -1408,7 +1410,7 @@ public class AdminPages extends javax.swing.JFrame {
             }
         });
 
-        addLecturerByGtoupButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icon/addLecturerGroup.png"))); // NOI18N
+        addLecturerByGtoupButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icon/adminAddLecturerGroup.png"))); // NOI18N
         addLecturerByGtoupButton.setContentAreaFilled(false);
         addLecturerByGtoupButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -1416,13 +1418,15 @@ public class AdminPages extends javax.swing.JFrame {
             }
         });
 
-        addLecturerButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icon/addLecturer.png"))); // NOI18N
+        addLecturerButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icon/adminAddLecturer.png"))); // NOI18N
         addLecturerButton.setContentAreaFilled(false);
         addLecturerButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 addLecturerButtonActionPerformed(evt);
             }
         });
+
+        jLabel8.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icon/adminSearch.png"))); // NOI18N
 
         javax.swing.GroupLayout lecturerLayout = new javax.swing.GroupLayout(lecturer);
         lecturer.setLayout(lecturerLayout);
@@ -1431,7 +1435,9 @@ public class AdminPages extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, lecturerLayout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(lecturePageSearchField, javax.swing.GroupLayout.PREFERRED_SIZE, 375, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(97, 97, 97)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jLabel8)
+                .addGap(107, 107, 107)
                 .addComponent(addLecturerButton)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(addLecturerByGtoupButton)
@@ -1457,7 +1463,9 @@ public class AdminPages extends javax.swing.JFrame {
                     .addGroup(lecturerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                         .addComponent(addLecturerButton, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGroup(lecturerLayout.createSequentialGroup()
-                            .addComponent(lecturePageSearchField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(lecturerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                .addComponent(lecturePageSearchField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(jLabel8))
                             .addGap(10, 10, 10))))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 285, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -1893,7 +1901,7 @@ public class AdminPages extends javax.swing.JFrame {
             intakeTable.getColumnModel().getColumn(3).setPreferredWidth(50);
         }
 
-        addIntakeButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icon/addIntake.png"))); // NOI18N
+        addIntakeButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icon/adminAddIntake.png"))); // NOI18N
         addIntakeButton.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 addIntakeButtonMouseClicked(evt);
@@ -1915,14 +1923,18 @@ public class AdminPages extends javax.swing.JFrame {
             }
         });
 
+        jLabel60.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icon/adminSearch.png"))); // NOI18N
+
         javax.swing.GroupLayout intakeLayout = new javax.swing.GroupLayout(intake);
         intake.setLayout(intakeLayout);
         intakeLayout.setHorizontalGroup(
             intakeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, intakeLayout.createSequentialGroup()
-                .addContainerGap(281, Short.MAX_VALUE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(intakePageSearchField, javax.swing.GroupLayout.PREFERRED_SIZE, 311, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(112, 112, 112)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jLabel60)
+                .addGap(93, 93, 93)
                 .addComponent(addIntakeButton)
                 .addGap(164, 164, 164))
             .addGroup(intakeLayout.createSequentialGroup()
@@ -1933,17 +1945,22 @@ public class AdminPages extends javax.swing.JFrame {
                     .addGroup(intakeLayout.createSequentialGroup()
                         .addGap(17, 17, 17)
                         .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 822, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(61, Short.MAX_VALUE))
         );
         intakeLayout.setVerticalGroup(
             intakeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(intakeLayout.createSequentialGroup()
                 .addGap(155, 155, 155)
-                .addComponent(jLabel38)
-                .addGap(31, 31, 31)
-                .addGroup(intakeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(addIntakeButton)
-                    .addComponent(intakePageSearchField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(intakeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(intakeLayout.createSequentialGroup()
+                        .addComponent(jLabel38)
+                        .addGap(31, 31, 31)
+                        .addGroup(intakeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(addIntakeButton)
+                            .addComponent(intakePageSearchField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(intakeLayout.createSequentialGroup()
+                        .addComponent(jLabel60)
+                        .addGap(10, 10, 10)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 300, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(121, Short.MAX_VALUE))
@@ -3019,6 +3036,20 @@ public class AdminPages extends javax.swing.JFrame {
 
         try {
             Map<String, Integer> studentCounts = Student.countStudentsInIntakes("student.txt");
+            
+             // Debugging: Print the contents of studentCounts map
+            System.out.println("Student counts per intake: " + studentCounts);
+
+            int existingCount = studentCounts.getOrDefault(intakeCode, 0);
+            System.out.println("Existing count for intake " + intakeCode + ": " + existingCount);
+
+             int newCount = studentsToRegister.size();
+            int totalCount = existingCount + newCount;
+
+            // Print the total number of students in the intake
+            System.out.println("Total number of students in the intake " + intakeCode + ": " + totalCount);
+
+        
             List<Student> groupedStudents = student.groupStudent(studentsToRegister, intakeCode, studentCounts);
 
             for (Student individual : groupedStudents) {
@@ -3032,13 +3063,14 @@ public class AdminPages extends javax.swing.JFrame {
             student.addStudent(studentRecords);
             student.createStudentAccount(userRecords);
 
+
             // Calculate the new group count
-            int existingCount = studentCounts.getOrDefault(intakeCode, 0);
-            System.out.println("Existing count " + existingCount);
-            int newCount = studentsToRegister.size();
-            System.out.println("Nw count " + newCount);
-            int totalCount = existingCount + newCount;
-            System.out.println("Total count " + totalCount);
+//            int existingCount = studentCounts.getOrDefault(intakeCode, 0);
+//            System.out.println("Existing student " + existingCount1);
+//            int newCount = studentsToRegister.size();
+//            System.out.println("Nw count " + newCount);
+//            int totalCount = existingCount + newCount;
+//            System.out.println("Total count " + totalCount);
                     
             int newGroupCount = (int) Math.ceil((double) totalCount / 20.0);
             System.out.println("New group count " + newGroupCount);
@@ -3307,8 +3339,10 @@ public class AdminPages extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel58;
     private javax.swing.JLabel jLabel59;
     private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel60;
     private javax.swing.JLabel jLabel67;
     private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;

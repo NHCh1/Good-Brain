@@ -89,7 +89,7 @@ public class User {
                 bw.newLine();
             }
             bw.close();
-            Icon icon = new ImageIcon(getClass().getResource("/Icon/success.png"));
+            Icon icon = new ImageIcon(getClass().getResource("/Icon/adminSuccess.png"));
             JOptionPane.showMessageDialog(null, "Update Success! ", "Notification", JOptionPane.INFORMATION_MESSAGE, icon);
         }
         catch (FileNotFoundException ex){
@@ -129,7 +129,7 @@ public class User {
 //            table.setRowCount(0);
 //            showUser();
 //
-//            Icon icon = new ImageIcon(getClass().getResource("/Icon/success.png"));
+//            Icon icon = new ImageIcon(getClass().getResource("/Icon/adminSuccess.png"));
 //            JOptionPane.showMessageDialog(null, "User has been removed.",
 //                    "Notification", JOptionPane.INFORMATION_MESSAGE, icon);
 //        } catch (IOException ex) {
