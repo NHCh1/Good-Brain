@@ -56,7 +56,7 @@ public class User {
             Scanner scanner = new Scanner(new File("user.txt"));
             while (scanner.hasNextLine()) {
                 String data = scanner.nextLine();
-                String[] credentials = data.split(",");
+                String[] credentials = data.split(";");
                 int role = Integer.parseInt(credentials[2]);
 
                 if (id.equals(credentials[0]) && password.equals(credentials[1])) {

@@ -13,20 +13,37 @@ L012;Stella Kim;870829-13-6981;60198763524;L012@staff.goodbrain.edu.my;Digital F
 L013;Leo Chang;940203-11-7134;60198751432;L013@staff.goodbrain.edu.my;Digital Marketing;Finance;-
 L014;Olivia Lee;950214-13-5896;60123450987;L014@staff.goodbrain.edu.my;Intelligent System;Banking;-
 L015;Jayden Yoo;880703-14-6758;60187654098;L015@staff.goodbrain.edu.my;Software Engineering;FinTech;-
+<<<<<<< Updated upstream
 L016;Chloe Song;910320-12-6342;60123459786;L016@staff.goodbrain.edu.my;Finance;Digital Forensic;-
 L017;Mason Choi;930408-11-6980;60198752436;L017@staff.goodbrain.edu.my;Intelligent Systems;Psychology;-
 L018;Grace Shin;860731-13-5879;60123457689;L018@staff.goodbrain.edu.my;Software Engineering;Cyber Security;-
 L019;Noah Kim;940908-14-6325;60187654890;L019@staff.goodbrain.edu.my;Cloud Engineering;Finance;-
 L020;Emma Park;880422-12-7654;60198764532;L020@staff.goodbrain.edu.my;Digital Marketing;Data Analytics;-
 L021;Daniel Ho;900615-11-5836;60123459087;L021@staff.goodbrain.edu.my;Psychology;;No
+=======
+L016;Chloe Song;910320-12-6342;60123459786;L016@staff.goodbrain.edu.my;Finance;Digital Forensics;-
+L017;Mason Choi;930408-11-6980;60198752436;L017@staff.goodbrain.edu.my;Intelligent System;Psychology;-
+L018;Grace Shin;860731-13-5879;60123457689;L018@staff.goodbrain.edu.my;Software Engineering;Cyber Security;-
+L019;Noah Kim;940908-14-6325;60187654890;L019@staff.goodbrain.edu.my;Cloud Engineering;Finance;-
+L020;Emma Park;880422-12-7654;60198764532;L020@staff.goodbrain.edu.my;Digital Marketing;Data Analytics;-
+L021;Daniel Ho;900615-11-5836;60123459087;L021@staff.goodbrain.edu.my;Psychology;-;No
+>>>>>>> Stashed changes
 L022;Mia Ryu;920509-14-7456;60198756321;L022@staff.goodbrain.edu.my;Cyber Security;Digital Marketing;-
 L023;Owen Lim;920730-13-6378;60123450987;L023@staff.goodbrain.edu.my;Data Analytics;Software Engineering;-
 L024;Harper Jung;890120-12-5897;60187654098;L024@staff.goodbrain.edu.my;Accounting;-;-
 L025;Aaron Lee;930421-14-6458;60198754236;L025@staff.goodbrain.edu.my;Finance;Cloud Engineering;-
 L026;Samuel Moon;930825-13-5378;60198750987;L026@staff.goodbrain.edu.my;Cyber Security;Digital Marketing;-
 L027;Avery Chang;890710-14-5897;60123454098;L027@staff.goodbrain.edu.my;Data Analytics;-;-
+<<<<<<< Updated upstream
 L029;Zoey Kim;880819-13-6981;60123452689;L029@staff.goodbrain.edu.my;Finance;Digital Forensic;Yes
 L030;Eva Ryu;930312-12-7654;60123464532;L030@staff.goodbrain.edu.my;Software Engineering;Cyber Security;-
 L031;Maegerret;840418-09-4442;60178442451;L031@staff.goodbrain.edu.my;Intelligent System;Digital Marketing;-
 L032;Lilyan Jung;890315-12-7456;60123456321;L032@staff.goodbrain.edu.my;Digital Marketing;Data Analytics;No
 L033;Logan Park;950707-13-5378;60198750987;L033@staff.goodbrain.edu.my;Psychology;Intelligent Systems;-
+=======
+L028;Zoey Kim;880819-13-6981;60123452689;L028@staff.goodbrain.edu.my;Engineering;Digital Forensics;Yes
+L029;Eva Ryu;930312-12-7654;60123464532;L029@staff.goodbrain.edu.my;Software Engineering;Banking;-
+L030;Maegerret;840418-09-4442;60178442451;L030@staff.goodbrain.edu.my;Intelligent System;Digital Marketing;-
+L031;Lilyan Jung;890315-12-7456;60123456321;L031@staff.goodbrain.edu.my;FinTech;Design;No
+L032;Logan Park;950707-13-5378;60198750987;L032@staff.goodbrain.edu.my;Business;Intelligent System;-
+>>>>>>> Stashed changes

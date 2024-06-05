@@ -16,9 +16,15 @@
   <Layout>
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
+<<<<<<< Updated upstream:src/TableController/PanelAction.form
           <Group type="102" alignment="0" attributes="0">
               <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
               <Component id="editButton" min="-2" pref="29" max="-2" attributes="0"/>
+=======
+          <Group type="102" attributes="0">
+              <EmptySpace max="32767" attributes="0"/>
+              <Component id="cmdEdit" min="-2" pref="21" max="-2" attributes="0"/>
+>>>>>>> Stashed changes:src/actionCell/panelAction.form
               <EmptySpace max="-2" attributes="0"/>
               <Component id="deleteButton" min="-2" pref="33" max="-2" attributes="0"/>
               <EmptySpace min="0" pref="0" max="-2" attributes="0"/>
@@ -27,11 +33,19 @@
     </DimensionLayout>
     <DimensionLayout dim="1">
       <Group type="103" groupAlignment="0" attributes="0">
+<<<<<<< Updated upstream:src/TableController/PanelAction.form
           <Group type="102" alignment="0" attributes="0">
               <EmptySpace min="0" pref="0" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
                   <Component id="editButton" max="32767" attributes="0"/>
                   <Component id="deleteButton" max="32767" attributes="0"/>
+=======
+          <Group type="102" attributes="0">
+              <EmptySpace max="32767" attributes="0"/>
+              <Group type="103" groupAlignment="1" max="-2" attributes="0">
+                  <Component id="cmdDelete" max="32767" attributes="0"/>
+                  <Component id="cmdEdit" max="32767" attributes="0"/>
+>>>>>>> Stashed changes:src/actionCell/panelAction.form
               </Group>
               <EmptySpace min="0" pref="0" max="-2" attributes="0"/>
           </Group>
@@ -42,14 +56,22 @@
     <Component class="TableController.ActionButton" name="editButton">
       <Properties>
         <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+<<<<<<< Updated upstream:src/TableController/PanelAction.form
           <Image iconType="3" name="/Icon/adminEdit.png"/>
+=======
+          <Image iconType="3" name="/Icon/pmDelete.png"/>
+>>>>>>> Stashed changes:src/actionCell/panelAction.form
         </Property>
       </Properties>
     </Component>
     <Component class="TableController.ActionButton" name="deleteButton">
       <Properties>
         <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+<<<<<<< Updated upstream:src/TableController/PanelAction.form
           <Image iconType="3" name="/Icon/adminDelete.png"/>
+=======
+          <Image iconType="3" name="/Icon/pmEdit.png"/>
+>>>>>>> Stashed changes:src/actionCell/panelAction.form
         </Property>
       </Properties>
     </Component>
