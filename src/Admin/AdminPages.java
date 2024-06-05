@@ -142,7 +142,7 @@ public class AdminPages extends javax.swing.JFrame {
 
                 //add the intake code from txt into combo box
                 Intake intakeClass = new Intake();
-                intakeClass.addIntakeIntoComboBox(newIntakeCodeComboBox);
+                intakeClass.addIntakeIntoComboBoxWithGroup(newIntakeCodeComboBox);
 
                 File imageFile = new File("src/Profile/" + studID + ".jpg");
 
@@ -173,12 +173,12 @@ public class AdminPages extends javax.swing.JFrame {
                     table.removeRow(row);
                     Student delete = new Student(id);
                     delete.deleteStudent();
-                    Icon icon = new ImageIcon(getClass().getResource("/Icon/success.png"));
+                    Icon icon = new ImageIcon(getClass().getResource("/Icon/adminSuccess.png"));
                     JOptionPane.showMessageDialog(null, "Student has been removed.", "Notification", JOptionPane.INFORMATION_MESSAGE, icon);
 
                     displayUserCount();
                 } else if (decision == JOptionPane.NO_OPTION) {
-                    Icon icon = new ImageIcon(getClass().getResource("/Icon/shield.png"));
+                    Icon icon = new ImageIcon(getClass().getResource("/Icon/adminShield.png"));
                     JOptionPane.showMessageDialog(null, "No changes has been made.", "Notification", JOptionPane.INFORMATION_MESSAGE, icon);
                 }
             }
@@ -238,11 +238,11 @@ public class AdminPages extends javax.swing.JFrame {
                     lecTable.removeRow(row);
                     Lecturer delete = new Lecturer(id);
                     delete.deleteLecturer();
-                    Icon icon = new ImageIcon(getClass().getResource("/Icon/success.png"));
+                    Icon icon = new ImageIcon(getClass().getResource("/Icon/adminSuccess.png"));
                     JOptionPane.showMessageDialog(null, "Lecturer has been removed.", "Notification", JOptionPane.INFORMATION_MESSAGE, icon);
                     displayUserCount();
                 } else if (decision == JOptionPane.NO_OPTION) {
-                    Icon icon = new ImageIcon(getClass().getResource("/Icon/shield.png"));
+                    Icon icon = new ImageIcon(getClass().getResource("/Icon/adminShield.png"));
                     JOptionPane.showMessageDialog(null, "No changes has been made.", "Notification",
                             JOptionPane.INFORMATION_MESSAGE, icon);
                 }
@@ -306,12 +306,12 @@ public class AdminPages extends javax.swing.JFrame {
                     usertbl.removeRow(row);
                     User delete = new User(id);
                     delete.deleteUser();
-                    Icon icon = new ImageIcon(getClass().getResource("/Icon/success.png"));
+                    Icon icon = new ImageIcon(getClass().getResource("/Icon/adminSuccess.png"));
                     JOptionPane.showMessageDialog(null, "User has been removed.", "Notification", JOptionPane.INFORMATION_MESSAGE, icon);
 
                     displayUserCount();
                 } else if (decision == JOptionPane.NO_OPTION) {
-                    Icon icon = new ImageIcon(getClass().getResource("/Icon/shield.png"));
+                    Icon icon = new ImageIcon(getClass().getResource("/Icon/adminShield.png"));
                     JOptionPane.showMessageDialog(null, "No changes has been made.", "Notification", JOptionPane.INFORMATION_MESSAGE, icon);
                 }
             }
@@ -348,9 +348,9 @@ public class AdminPages extends javax.swing.JFrame {
         String totalStudent = String.valueOf(fh.countTotalStudent());
         String totalIntake = String.valueOf(fh.countTotalIntake());
 
-        cardPanel1.setData(new CardModel(new ImageIcon(getClass().getResource("/Icon/lecturer.png")), "Lecturer", totalLecturer));
-        cardPanel2.setData(new CardModel(new ImageIcon(getClass().getResource("/Icon/student.png")), "Student", totalStudent));
-        cardPanel3.setData(new CardModel(new ImageIcon(getClass().getResource("/Icon/intake.png")), "Intake", totalIntake));
+        cardPanel1.setData(new CardModel(new ImageIcon(getClass().getResource("/Icon/adminHomeLecturer.png")), "Lecturer", totalLecturer));
+        cardPanel2.setData(new CardModel(new ImageIcon(getClass().getResource("/Icon/adminHomeStudent.png")), "Student", totalStudent));
+        cardPanel3.setData(new CardModel(new ImageIcon(getClass().getResource("/Icon/adminHomeIntake.png")), "Intake", totalIntake));
 
     }
 
@@ -493,6 +493,7 @@ public class AdminPages extends javax.swing.JFrame {
         lecturePageSearchField = new javax.swing.JTextField();
         addLecturerByGtoupButton = new javax.swing.JButton();
         addLecturerButton = new javax.swing.JButton();
+        jLabel8 = new javax.swing.JLabel();
         registerLecturer = new javax.swing.JPanel();
         jLabel24 = new javax.swing.JLabel();
         jLabel25 = new javax.swing.JLabel();
@@ -502,9 +503,6 @@ public class AdminPages extends javax.swing.JFrame {
         lcNameField = new javax.swing.JTextField();
         lecICField = new javax.swing.JTextField();
         lecContactField = new javax.swing.JTextField();
-        jLabel32 = new javax.swing.JLabel();
-        yesCheckBox = new javax.swing.JCheckBox();
-        noCheckBox = new javax.swing.JCheckBox();
         addLecturerBtn = new javax.swing.JButton();
         cancelButton2 = new javax.swing.JButton();
         lecMajorComboBox = new javax.swing.JComboBox<>();
@@ -549,6 +547,7 @@ public class AdminPages extends javax.swing.JFrame {
         intakeTable = new javax.swing.JTable();
         addIntakeButton = new javax.swing.JLabel();
         intakePageSearchField = new javax.swing.JTextField();
+        jLabel60 = new javax.swing.JLabel();
         addIntake = new javax.swing.JPanel();
         jLabel39 = new javax.swing.JLabel();
         jLabel40 = new javax.swing.JLabel();
@@ -841,26 +840,28 @@ public class AdminPages extends javax.swing.JFrame {
         dashboardLayout.setHorizontalGroup(
             dashboardLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(dashboardLayout.createSequentialGroup()
-                .addGap(51, 51, 51)
                 .addGroup(dashboardLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(dashboardLayout.createSequentialGroup()
-                        .addComponent(cardPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 221, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(31, 31, 31)
-                        .addComponent(cardPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, 221, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(32, 32, 32)
-                        .addComponent(cardPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, 221, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(51, 51, 51)
+                        .addGroup(dashboardLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(dashboardLayout.createSequentialGroup()
+                                .addComponent(cardPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 221, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(31, 31, 31)
+                                .addComponent(cardPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, 221, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(32, 32, 32)
+                                .addComponent(cardPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, 221, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(dashboardLayout.createSequentialGroup()
-                        .addGap(405, 405, 405)
-                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(384, 384, 384)
+                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(95, Short.MAX_VALUE))
         );
         dashboardLayout.setVerticalGroup(
             dashboardLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(dashboardLayout.createSequentialGroup()
-                .addGap(141, 141, 141)
+                .addContainerGap(136, Short.MAX_VALUE)
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(dashboardLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(cardPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(cardPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -898,9 +899,9 @@ public class AdminPages extends javax.swing.JFrame {
             }
         });
 
-        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icon/search.png"))); // NOI18N
+        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icon/adminSearch.png"))); // NOI18N
 
-        printNameListBtn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icon/printer.png"))); // NOI18N
+        printNameListBtn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icon/adminPrinter.png"))); // NOI18N
         printNameListBtn.setContentAreaFilled(false);
         printNameListBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -908,7 +909,7 @@ public class AdminPages extends javax.swing.JFrame {
             }
         });
 
-        addStudentButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icon/addstudent.png"))); // NOI18N
+        addStudentButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icon/adminAddstudent.png"))); // NOI18N
         addStudentButton.setContentAreaFilled(false);
         addStudentButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -946,7 +947,7 @@ public class AdminPages extends javax.swing.JFrame {
 
         studentTablePanel.add(studentScrollPane, java.awt.BorderLayout.CENTER);
 
-        addStudentByIntakeButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icon/addStudentGroup.png"))); // NOI18N
+        addStudentByIntakeButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icon/adminAddStudentGroup.png"))); // NOI18N
         addStudentByIntakeButton.setContentAreaFilled(false);
         addStudentByIntakeButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -967,8 +968,8 @@ public class AdminPages extends javax.swing.JFrame {
                 .addGroup(studentLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(studentTablePanel, javax.swing.GroupLayout.PREFERRED_SIZE, 794, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(studentLayout.createSequentialGroup()
-                        .addComponent(studentPageFilterBox, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(82, 82, 82)
+                        .addComponent(studentPageFilterBox, javax.swing.GroupLayout.PREFERRED_SIZE, 155, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(72, 72, 72)
                         .addComponent(studentPageSearchField, javax.swing.GroupLayout.PREFERRED_SIZE, 299, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jLabel2)
@@ -1078,13 +1079,17 @@ public class AdminPages extends javax.swing.JFrame {
                                             .addComponent(intakeCodeComboBox, javax.swing.GroupLayout.Alignment.LEADING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                             .addComponent(studentPicTextField, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 270, javax.swing.GroupLayout.PREFERRED_SIZE))
                                         .addGap(18, 18, 18)
-                                        .addComponent(uploadStudentPicBtn))))
-                            .addComponent(jLabel12))))
+                                        .addComponent(uploadStudentPicBtn)))))))
                 .addGap(183, 183, 183))
             .addGroup(registerStudentLayout.createSequentialGroup()
-                .addGap(351, 351, 351)
-                .addComponent(studentRegisterPic, javax.swing.GroupLayout.PREFERRED_SIZE, 172, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(342, Short.MAX_VALUE))
+                .addGroup(registerStudentLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(registerStudentLayout.createSequentialGroup()
+                        .addGap(351, 351, 351)
+                        .addComponent(studentRegisterPic, javax.swing.GroupLayout.PREFERRED_SIZE, 172, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(registerStudentLayout.createSequentialGroup()
+                        .addGap(301, 301, 301)
+                        .addComponent(jLabel12)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         registerStudentLayout.setVerticalGroup(
             registerStudentLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1165,23 +1170,24 @@ public class AdminPages extends javax.swing.JFrame {
         registerStudentByIntakeLayout.setHorizontalGroup(
             registerStudentByIntakeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(registerStudentByIntakeLayout.createSequentialGroup()
-                .addGap(45, 45, 45)
-                .addGroup(registerStudentByIntakeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                .addGroup(registerStudentByIntakeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(registerStudentByIntakeLayout.createSequentialGroup()
-                        .addComponent(jButton5)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(addStudentFromListBtn))
-                    .addGroup(registerStudentByIntakeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 783, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGroup(registerStudentByIntakeLayout.createSequentialGroup()
-                            .addComponent(intakeForGroupComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGap(18, 18, 18)
-                            .addComponent(loadStudentIntoTableButton))))
+                        .addGap(45, 45, 45)
+                        .addGroup(registerStudentByIntakeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(registerStudentByIntakeLayout.createSequentialGroup()
+                                .addComponent(jButton5)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(addStudentFromListBtn))
+                            .addGroup(registerStudentByIntakeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 783, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGroup(registerStudentByIntakeLayout.createSequentialGroup()
+                                    .addComponent(intakeForGroupComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGap(18, 18, 18)
+                                    .addComponent(loadStudentIntoTableButton)))))
+                    .addGroup(registerStudentByIntakeLayout.createSequentialGroup()
+                        .addGap(331, 331, 331)
+                        .addComponent(jLabel59)))
                 .addContainerGap(72, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, registerStudentByIntakeLayout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jLabel59)
-                .addGap(328, 328, 328))
         );
         registerStudentByIntakeLayout.setVerticalGroup(
             registerStudentByIntakeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1408,7 +1414,7 @@ public class AdminPages extends javax.swing.JFrame {
             }
         });
 
-        addLecturerByGtoupButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icon/addLecturerGroup.png"))); // NOI18N
+        addLecturerByGtoupButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icon/adminAddLecturerGroup.png"))); // NOI18N
         addLecturerByGtoupButton.setContentAreaFilled(false);
         addLecturerByGtoupButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -1416,13 +1422,15 @@ public class AdminPages extends javax.swing.JFrame {
             }
         });
 
-        addLecturerButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icon/addLecturer.png"))); // NOI18N
+        addLecturerButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icon/adminAddLecturer.png"))); // NOI18N
         addLecturerButton.setContentAreaFilled(false);
         addLecturerButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 addLecturerButtonActionPerformed(evt);
             }
         });
+
+        jLabel8.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icon/adminSearch.png"))); // NOI18N
 
         javax.swing.GroupLayout lecturerLayout = new javax.swing.GroupLayout(lecturer);
         lecturer.setLayout(lecturerLayout);
@@ -1431,7 +1439,9 @@ public class AdminPages extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, lecturerLayout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(lecturePageSearchField, javax.swing.GroupLayout.PREFERRED_SIZE, 375, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(97, 97, 97)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jLabel8)
+                .addGap(107, 107, 107)
                 .addComponent(addLecturerButton)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(addLecturerByGtoupButton)
@@ -1457,7 +1467,9 @@ public class AdminPages extends javax.swing.JFrame {
                     .addGroup(lecturerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                         .addComponent(addLecturerButton, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGroup(lecturerLayout.createSequentialGroup()
-                            .addComponent(lecturePageSearchField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(lecturerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(lecturePageSearchField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(jLabel8))
                             .addGap(10, 10, 10))))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 285, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -1482,15 +1494,6 @@ public class AdminPages extends javax.swing.JFrame {
 
         jLabel31.setFont(new java.awt.Font("Serif", 1, 14)); // NOI18N
         jLabel31.setText("Major Functional Area:");
-
-        jLabel32.setFont(new java.awt.Font("Serif", 1, 14)); // NOI18N
-        jLabel32.setText("Project Manager:");
-
-        yesNoGroup.add(yesCheckBox);
-        yesCheckBox.setText("Yes");
-
-        yesNoGroup.add(noCheckBox);
-        noCheckBox.setText("No");
 
         addLecturerBtn.setText("Confirm");
         addLecturerBtn.addActionListener(new java.awt.event.ActionListener() {
@@ -1541,7 +1544,6 @@ public class AdminPages extends javax.swing.JFrame {
                                     .addComponent(lcNameField, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addGap(48, 48, 48)
                                 .addGroup(registerLecturerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel32)
                                     .addComponent(jLabel31)
                                     .addComponent(jLabel50))
                                 .addGap(18, 18, 18))
@@ -1553,10 +1555,6 @@ public class AdminPages extends javax.swing.JFrame {
                             .addGroup(registerLecturerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                                 .addComponent(lecMajorComboBox, javax.swing.GroupLayout.Alignment.LEADING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(lecMinorComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(registerLecturerLayout.createSequentialGroup()
-                                .addComponent(yesCheckBox, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(noCheckBox, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(registerLecturerLayout.createSequentialGroup()
                                 .addComponent(updateLecturerPictureBtn)
                                 .addGap(18, 18, 18)
@@ -1584,9 +1582,7 @@ public class AdminPages extends javax.swing.JFrame {
                     .addGroup(registerLecturerLayout.createSequentialGroup()
                         .addComponent(jLabel31)
                         .addGap(23, 23, 23)
-                        .addComponent(jLabel50)
-                        .addGap(18, 18, 18)
-                        .addComponent(jLabel32))
+                        .addComponent(jLabel50))
                     .addGroup(registerLecturerLayout.createSequentialGroup()
                         .addComponent(jLabel25)
                         .addGap(18, 18, 18)
@@ -1603,16 +1599,12 @@ public class AdminPages extends javax.swing.JFrame {
                         .addGap(1, 1, 1)
                         .addComponent(lecMajorComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
-                        .addComponent(lecMinorComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addGroup(registerLecturerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(yesCheckBox)
-                            .addComponent(noCheckBox))))
+                        .addComponent(lecMinorComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(18, 18, 18)
                 .addGroup(registerLecturerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(addLecturerBtn)
                     .addComponent(cancelButton2))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(153, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("tab6", registerLecturer);
@@ -1893,7 +1885,7 @@ public class AdminPages extends javax.swing.JFrame {
             intakeTable.getColumnModel().getColumn(3).setPreferredWidth(50);
         }
 
-        addIntakeButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icon/addIntake.png"))); // NOI18N
+        addIntakeButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icon/adminAddIntake.png"))); // NOI18N
         addIntakeButton.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 addIntakeButtonMouseClicked(evt);
@@ -1915,14 +1907,18 @@ public class AdminPages extends javax.swing.JFrame {
             }
         });
 
+        jLabel60.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icon/adminSearch.png"))); // NOI18N
+
         javax.swing.GroupLayout intakeLayout = new javax.swing.GroupLayout(intake);
         intake.setLayout(intakeLayout);
         intakeLayout.setHorizontalGroup(
             intakeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, intakeLayout.createSequentialGroup()
-                .addContainerGap(281, Short.MAX_VALUE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(intakePageSearchField, javax.swing.GroupLayout.PREFERRED_SIZE, 311, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(112, 112, 112)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jLabel60)
+                .addGap(93, 93, 93)
                 .addComponent(addIntakeButton)
                 .addGap(164, 164, 164))
             .addGroup(intakeLayout.createSequentialGroup()
@@ -1933,20 +1929,24 @@ public class AdminPages extends javax.swing.JFrame {
                     .addGroup(intakeLayout.createSequentialGroup()
                         .addGap(17, 17, 17)
                         .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 822, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(61, Short.MAX_VALUE))
         );
         intakeLayout.setVerticalGroup(
             intakeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(intakeLayout.createSequentialGroup()
                 .addGap(155, 155, 155)
-                .addComponent(jLabel38)
-                .addGap(31, 31, 31)
-                .addGroup(intakeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(addIntakeButton)
-                    .addComponent(intakePageSearchField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(intakeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(intakeLayout.createSequentialGroup()
+                        .addComponent(jLabel38)
+                        .addGap(31, 31, 31)
+                        .addGroup(intakeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(addIntakeButton)
+                            .addComponent(intakePageSearchField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(intakeLayout.createSequentialGroup()
+                        .addComponent(jLabel60)
+                        .addGap(10, 10, 10)))
                 .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 300, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(121, Short.MAX_VALUE))
+                .addContainerGap(133, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("tab8", intake);
@@ -2502,8 +2502,8 @@ public class AdminPages extends javax.swing.JFrame {
     }//GEN-LAST:event_lecturePageSearchFieldFocusLost
 
     private void addCourseIntoComboBox() {
-        String[] area = {"", "Accounting", "Cloud Engineering", "Cyber Security", "Data Analytic", "Digital Forensic", "Digital Marketing",
-            "Finance", "Intelligent System", "Software Engineering", "Psychology"};
+        String[] area = {"", "Accounting", "Banking", "Business" , "Cloud Engineering", "Cyber Security", "Data Analytics", "Digital Forensic",
+            "Digital Marketing", "Engineering" , "Finance", "Fintech" , "Intelligent System", "Software Engineering", "Psychology"};
         for (String major : area) {
             lecMajorComboBox.addItem(major);
         }
@@ -2516,8 +2516,8 @@ public class AdminPages extends javax.swing.JFrame {
         lecNewMajorComboBox.removeAllItems();
         lecNewMinorComboBox.removeAllItems();
 
-        String[] area = {"", "Accounting", "Cloud Engineering", "Cyber Security", "Data Analytic", "Digital Forensic", "Digital Marketing",
-            "Finance", "Intelligent System", "Software Engineering", "Psychology"};
+        String[] area = {"", "Accounting", "Banking", "Business" , "Cloud Engineering", "Cyber Security", "Data Analytics", "Digital Forensic",
+            "Digital Marketing", "Engineering" , "Finance", "Fintech" , "Intelligent System", "Software Engineering", "Psychology"};
         for (String major : area) {
             lecNewMajorComboBox.addItem(major);
         }
@@ -2538,14 +2538,6 @@ public class AdminPages extends javax.swing.JFrame {
             minor = "-";
         }
 
-//        ButtonModel selectedYesNoButton = yesNoGroup.getSelection();
-        yesCheckBox.setActionCommand("Yes");
-        noCheckBox.setActionCommand("No");
-
-        ButtonModel selectedYesNoButton = yesNoGroup.getSelection();
-        String pm = selectedYesNoButton != null ? selectedYesNoButton.getActionCommand() : "";
-
-//        String pm = selectedYesNoButton.getActionCommand();
         Lecturer lc = new Lecturer(name, ic, contact);
         List<String> validationErrors = lc.lecturerValidation();
         if (!validationErrors.isEmpty()) {
@@ -2782,8 +2774,8 @@ public class AdminPages extends javax.swing.JFrame {
 
     private void uploadStudentPicBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_uploadStudentPicBtnActionPerformed
 //        openFileChooser.setCurrentDirectory(new File("image/"));
-        File downloadFolder = new File(System.getProperty("user.home"), "Downloads");
-        File profileFolder = new File(downloadFolder, "profile");
+//        File downloadFolder = new File(System.getProperty("user.home"), "Downloads");
+        File profileFolder = new File("src/Profile/");
         openFileChooser.setCurrentDirectory(profileFolder);
         int returnValue = openFileChooser.showOpenDialog(this);
         if (returnValue == JFileChooser.APPROVE_OPTION) {
@@ -2794,7 +2786,7 @@ public class AdminPages extends javax.swing.JFrame {
 
     private void uploadStudentNewProfileBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_uploadStudentNewProfileBtnActionPerformed
         File downloadFolder = new File(System.getProperty("user.home"), "Downloads");
-        File profileFolder = new File(downloadFolder, "profile");
+        File profileFolder = new File("src/Profile/");
         openFileChooser.setCurrentDirectory(profileFolder);
         int returnValue = openFileChooser.showOpenDialog(this);
         if (returnValue == JFileChooser.APPROVE_OPTION) {
@@ -2805,7 +2797,7 @@ public class AdminPages extends javax.swing.JFrame {
 
     private void updateLecturerPictureBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_updateLecturerPictureBtnActionPerformed
         File downloadFolder = new File(System.getProperty("user.home"), "Downloads");
-        File profileFolder = new File(downloadFolder, "profile");
+        File profileFolder = new File("src/Profile/");
         openFileChooser.setCurrentDirectory(profileFolder);
         int returnValue = openFileChooser.showOpenDialog(this);
         if (returnValue == JFileChooser.APPROVE_OPTION) {
@@ -2817,7 +2809,7 @@ public class AdminPages extends javax.swing.JFrame {
 
     private void uploadLecturerNewProfileBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_uploadLecturerNewProfileBtnActionPerformed
         File downloadFolder = new File(System.getProperty("user.home"), "Downloads");
-        File profileFolder = new File(downloadFolder, "profile");
+        File profileFolder = new File("src/Profile/");
         openFileChooser.setCurrentDirectory(profileFolder);
         int returnValue = openFileChooser.showOpenDialog(this);
         if (returnValue == JFileChooser.APPROVE_OPTION) {
@@ -2931,53 +2923,6 @@ public class AdminPages extends javax.swing.JFrame {
     }//GEN-LAST:event_addStudentByIntakeButtonActionPerformed
 
     private void addStudentFromListBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addStudentFromListBtnActionPerformed
-//        Student student = new Student();
-//        
-//        List<String[]> previousRecord = student.loadExistingRecords();
-//        List<String> studentRecords = new ArrayList<>();
-//        List<String> userRecords = new ArrayList<>();
-//        
-//        student.initializeLastStudentID();
-//        
-//        String intakeCode = (String) intakeForGroupComboBox.getSelectedItem();
-//        List<Student> studentsToRegister = new ArrayList<>();
-//    
-//        for (int i = 0; i < studentListTable.getRowCount(); i++) {
-//            String name = (String) studentListTable.getValueAt(i, 0);
-//            String ic = (String) studentListTable.getValueAt(i, 1);
-//            String contact = (String) studentListTable.getValueAt(i, 2);
-//
-//            if (isDuplicate(ic, contact, previousRecord, studentRecords)) {
-//                JOptionPane.showMessageDialog(this, "Duplicate data found!", "Error", JOptionPane.ERROR_MESSAGE);
-//                return;
-//            }
-//
-//            String studentID = student.createStudentIDForGroup();
-//            String email = student.createEmailForGroup(studentID);
-//            String password = student.createPasswordForGroup(ic, studentID);
-//            //add grouping here
-//            
-//            Student newStudent = new Student(studentID, name, ic, contact, email, intakeCode);
-//            newStudent.setPassword(password);
-//            studentsToRegister.add(newStudent);
-//        }
-//        
-//            List<Student> groupedStudents = student.groupStudent(studentsToRegister, intakeCode);
-//            for (Student individual : groupedStudents) {
-//                String record = String.join(";", individual.getId(), individual.getName(), individual.getIc(), individual.getContact(), individual.getEmail(), individual.getIntakeCode());
-//                studentRecords.add(record);
-//
-//                String userRecord = String.join(";", individual.getId(), individual.getPassword(), "3");
-//                userRecords.add(userRecord);
-//            }
-//            
-//        student.addStudent(studentRecords); 
-//        student.createStudentAccount(userRecords);
-//        Intake intake = new Intake();
-//        intake.updateIntake(intakeCode, groupedStudents.size() / 20 + 1);
-//        displayUserCount();
-//        displayStudentTable();
-//        jTabbedPane1.setSelectedIndex(1);
         Student student = new Student();
 
         List<String[]> previousRecord = student.loadExistingRecords();
@@ -3016,10 +2961,35 @@ public class AdminPages extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this, duplicatesMessage.toString(), "Error", JOptionPane.ERROR_MESSAGE);
             return;
         }
-
+        
+        String baseIntakeCode = intakeCode.split("\\(")[0]; 
+        
         try {
             Map<String, Integer> studentCounts = Student.countStudentsInIntakes("student.txt");
-            List<Student> groupedStudents = student.groupStudent(studentsToRegister, intakeCode, studentCounts);
+            Map<String, Integer> studentCountsInMainIntake = Student.countStudentsInMainIntake("student.txt");
+            
+            // Debugging: Print the contents of studentCounts map
+            System.out.println("Student counts per intake: " + studentCounts);
+
+            int existingCount = studentCountsInMainIntake.getOrDefault(intakeCode, 0);
+            System.out.println("Existing count for intake " + intakeCode + ": " + existingCount);
+
+            int newCount = studentsToRegister.size();
+            int totalCount = existingCount + newCount;
+
+            // Print the total number of students in the intake
+            System.out.println("Total number of students in the intake " + intakeCode + ": " + totalCount);
+
+            // Calculate the new group count
+            int newGroupCount = (int) Math.ceil((double) totalCount / 20.0);
+            System.out.println("New group count " + newGroupCount);
+
+        // Update intake with new group count
+        Intake intake = new Intake();
+        intake.updateIntake(intakeCode.split("\\(")[0], newGroupCount);
+
+        
+            List<Student> groupedStudents = student.groupStudent(studentsToRegister, intakeCode.split("\\(")[0], studentCounts);
 
             for (Student individual : groupedStudents) {
                 String record = String.join(";", individual.getId(), individual.getName(), individual.getIc(), individual.getContact(), individual.getEmail(), individual.getIntakeCode());
@@ -3031,21 +3001,6 @@ public class AdminPages extends javax.swing.JFrame {
 
             student.addStudent(studentRecords);
             student.createStudentAccount(userRecords);
-
-            // Calculate the new group count
-            int existingCount = studentCounts.getOrDefault(intakeCode, 0);
-            System.out.println("Existing count " + existingCount);
-            int newCount = studentsToRegister.size();
-            System.out.println("Nw count " + newCount);
-            int totalCount = existingCount + newCount;
-            System.out.println("Total count " + totalCount);
-                    
-            int newGroupCount = (int) Math.ceil((double) totalCount / 20.0);
-            System.out.println("New group count " + newGroupCount);
-            
-            // Update intake with new group count
-            Intake intake = new Intake();
-            intake.updateIntake(intakeCode, newGroupCount);
 
             displayUserCount();
             displayStudentTable();
@@ -3097,6 +3052,7 @@ public class AdminPages extends javax.swing.JFrame {
         List<String[]> previousRecord = lecturer.loadExistingRecords();
         List<String> lectureRecords = new ArrayList<>();
         List<String> userRecords = new ArrayList<>();
+        List<String> duplicateRecords = new ArrayList<>();  // To collect duplicate records
 
         lecturer.initializeLastLecturerID();
 
@@ -3109,20 +3065,29 @@ public class AdminPages extends javax.swing.JFrame {
 
             String duplicatedLecture = isDuplicate(ic, contact, previousRecord, lectureRecords);
             if (duplicatedLecture != null) {
-                JOptionPane.showMessageDialog(this, "Duplicate data found: " + duplicatedLecture, "Error", JOptionPane.ERROR_MESSAGE);
+                duplicateRecords.add(duplicatedLecture);
+            } else {
+                String lecturerID = lecturer.createLectureIDForGroup();
+                String email = lecturer.createEmailForGroup(lecturerID);
+                String password = lecturer.createPasswordForGroup(ic, lecturerID);
+                
+                String record = String.join(";", lecturerID, name, ic, contact, email, major, minor, "-");
+                lectureRecords.add(record);
+
+                String userRecord = String.join(";", lecturerID, password, "2");
+                userRecords.add(userRecord);
+            }
+        }
+            
+             if (!duplicateRecords.isEmpty()) {
+                StringBuilder duplicatesMessage = new StringBuilder("Duplicate data found:\n");
+                for (String record : duplicateRecords) {
+                    duplicatesMessage.append(record).append("\n");
+                }
+                JOptionPane.showMessageDialog(this, duplicatesMessage.toString(), "Error", JOptionPane.ERROR_MESSAGE);
                 return;
             }
-
-            String lecturerID = lecturer.createLectureIDForGroup();
-            String email = lecturer.createEmailForGroup(lecturerID);
-            String password = lecturer.createPasswordForGroup(ic, lecturerID);
-
-            String record = String.join(";", lecturerID, name, ic, contact, email, major, minor, "-");
-            lectureRecords.add(record);
-
-            String userRecord = String.join(";", lecturerID, password, "2");
-            userRecords.add(userRecord);
-        }
+        
         lecturer.addLecturer(lectureRecords);
         lecturer.createLectureAccount(userRecords);
 
@@ -3276,7 +3241,6 @@ public class AdminPages extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel30;
     private javax.swing.JLabel jLabel31;
-    private javax.swing.JLabel jLabel32;
     private javax.swing.JLabel jLabel33;
     private javax.swing.JLabel jLabel34;
     private javax.swing.JLabel jLabel35;
@@ -3307,8 +3271,10 @@ public class AdminPages extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel58;
     private javax.swing.JLabel jLabel59;
     private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel60;
     private javax.swing.JLabel jLabel67;
     private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
@@ -3348,7 +3314,6 @@ public class AdminPages extends javax.swing.JFrame {
     private javax.swing.JCheckBox newNoCheckBox;
     private javax.swing.JTextField newStudentProfileTextField;
     private javax.swing.JCheckBox newYesCheckBox;
-    private javax.swing.JCheckBox noCheckBox;
     private javax.swing.JButton printNameListBtn;
     private javax.swing.JPanel registerLecturer;
     private javax.swing.JPanel registerLecturerByGroup;
@@ -3387,7 +3352,6 @@ public class AdminPages extends javax.swing.JFrame {
     private javax.swing.JPanel userPage;
     private javax.swing.JTextField userPageSearchField;
     private javax.swing.JTable userTable;
-    private javax.swing.JCheckBox yesCheckBox;
     private javax.swing.ButtonGroup yesNoGroup;
     // End of variables declaration//GEN-END:variables
 }

@@ -205,21 +205,61 @@ public class Student {
 //    }
     
     
-    public List<Student> groupStudent(List<Student> students, String intakeCode, Map<String, Integer> studentCounts) {
+//    public List<Student> groupStudent(List<Student> students, String intakeCode, Map<String, Integer> studentCounts) {
+//        List<Student> groupedStudents = new ArrayList<>();
+//        int groupNumber = 1;
+//        int currentGroupSize = studentCounts.getOrDefault(intakeCode + "(" + groupNumber + ")", 0);
+//
+//        for (Student student : students) {
+//            if (currentGroupSize >= 20) {
+//                groupNumber++;
+//                currentGroupSize = 0;
+//            }
+//
+//            String newIntakeCode = intakeCode + "(" + groupNumber + ")";
+//            student.setIntakeCode(newIntakeCode);
+//            groupedStudents.add(student);
+//            currentGroupSize++;
+//        }
+//
+//        return groupedStudents;
+//    }
+    
+    public static List<Student> groupStudent(List<Student> students, String intakeCode, Map<String, Integer> studentCounts) {
         List<Student> groupedStudents = new ArrayList<>();
+
+        // Track the current group number and their sizes
+        Map<Integer, Integer> groupSizes = new HashMap<>();
+
+        // Identify existing groups and their sizes
         int groupNumber = 1;
-        int currentGroupSize = studentCounts.getOrDefault(intakeCode + "(" + groupNumber + ")", 0);
+        while (studentCounts.containsKey(intakeCode + "(" + groupNumber + ")")) {
+            groupSizes.put(groupNumber, studentCounts.get(intakeCode + "(" + groupNumber + ")"));
+            groupNumber++;
+        }
+
+        // Start assigning students to the existing groups first
+        int currentGroupNumber = 1;
+        int currentGroupSize = groupSizes.getOrDefault(currentGroupNumber, 0);
 
         for (Student student : students) {
-            if (currentGroupSize >= 20) {
-                groupNumber++;
-                currentGroupSize = 0;
+            while (currentGroupSize >= 20) {
+                currentGroupNumber++;
+                currentGroupSize = groupSizes.getOrDefault(currentGroupNumber, 0);
             }
 
-            String newIntakeCode = intakeCode + "(" + groupNumber + ")";
+            String newIntakeCode = intakeCode + "(" + currentGroupNumber + ")";
             student.setIntakeCode(newIntakeCode);
             groupedStudents.add(student);
             currentGroupSize++;
+
+            // Update the group size in the map
+            groupSizes.put(currentGroupNumber, currentGroupSize);
+        }
+
+        // Update the studentCounts map with the final group sizes
+        for (Map.Entry<Integer, Integer> entry : groupSizes.entrySet()) {
+            studentCounts.put(intakeCode + "(" + entry.getKey() + ")", entry.getValue());
         }
 
         return groupedStudents;
@@ -232,12 +272,28 @@ public class Student {
 
         while ((line = br.readLine()) != null) {
             String[] dataRow = line.split(";");
-            String intakeCode = dataRow[5];  // Assuming intake code is in the sixth column
+            String intakeCode = dataRow[5];  // Full intake code with group number
+            studentCountMap.put(intakeCode, studentCountMap.getOrDefault(intakeCode, 0) + 1);
+        }
+        br.close();
+//        System.out.println("Student counts per intake: " + studentCountMap);
+        return studentCountMap;
+    }
+    
+    public static Map<String, Integer> countStudentsInMainIntake(String studentFile) throws IOException {
+        Map<String, Integer> studentCountMap = new HashMap<>();
+        BufferedReader br = new BufferedReader(new FileReader(studentFile));
+        String line;
+
+        while ((line = br.readLine()) != null) {
+            String[] dataRow = line.split(";");
+            String intakeCodeWithGroup = dataRow[5];  // Full intake code with group number
+            String intakeCode = intakeCodeWithGroup.split("\\(")[0]; // Extract main intake code
 
             studentCountMap.put(intakeCode, studentCountMap.getOrDefault(intakeCode, 0) + 1);
         }
-
         br.close();
+//        System.out.println("Student counts per intake: " + studentCountMap);
         return studentCountMap;
     }
 
@@ -320,7 +376,7 @@ public class Student {
                 bw.write(data);
                 bw.newLine();
             }
-            Icon icon = new ImageIcon(getClass().getResource("/Icon/success.png"));
+            Icon icon = new ImageIcon(getClass().getResource("/Icon/adminSuccess.png"));
             JOptionPane.showMessageDialog(null, "Students has been added! ","Notification", JOptionPane.INFORMATION_MESSAGE, icon);
             }
         
@@ -409,7 +465,7 @@ public class Student {
             writer.write(studentID + ";" + name + ";" + ic + ";" + contact + ";" + email + ";" + intake + "\n");
             writer.close();
 
-            Icon icon = new ImageIcon(getClass().getResource("/Icon/success.png"));
+            Icon icon = new ImageIcon(getClass().getResource("/Icon/adminSuccess.png"));
             JOptionPane.showMessageDialog(null, "New student has been added! ", 
                                 "Notification", JOptionPane.INFORMATION_MESSAGE, icon);
         }
@@ -469,7 +525,7 @@ public class Student {
                 bw.newLine();
             }
             bw.close();
-            Icon icon = new ImageIcon(getClass().getResource("/Icon/success.png"));
+            Icon icon = new ImageIcon(getClass().getResource("/Icon/adminSuccess.png"));
             JOptionPane.showMessageDialog(null, "Update Success! ", "Notification", 
                                 JOptionPane.INFORMATION_MESSAGE, icon);
             

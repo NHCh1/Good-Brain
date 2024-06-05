@@ -135,6 +135,9 @@ public class Intake {
         else if(course.equals("Banking")){
             courseAbbr = "BK";
         }
+        else if(course.equals("Business")){
+            courseAbbr = "BN";
+        }
         else if(course.equals("Cloud Engineering")){
             courseAbbr = "CE";
         }
@@ -215,7 +218,7 @@ public class Intake {
                     intakeRegisterStartDate + ";" + intakeRegisterEndDate + ";" + intakeStartDate + ";" + intakeEndDate + "\n");
             writer.close();
 
-            Icon icon = new ImageIcon(getClass().getResource("/Icon/success.png"));
+            Icon icon = new ImageIcon(getClass().getResource("/Icon/adminSuccess.png"));
             JOptionPane.showMessageDialog(null, "New intake has been added! ", 
                                     "Notification", JOptionPane.INFORMATION_MESSAGE, icon);
             }
@@ -403,8 +406,12 @@ public class Intake {
             }
         }
 
-        // Add new intake lines for each new group
-        for (int i = highestGroupNumber + 1; i <= highestGroupNumber + newGroupCount; i++) {
+        // Calculate the actual number of new groups needed
+        int currentGroupCount = highestGroupNumber;
+        int totalGroupsNeeded = newGroupCount;
+
+        // Add new intake lines for each new group if necessary
+        for (int i = currentGroupCount + 1; i <= totalGroupsNeeded; i++) {
             String newIntakeCode = intakeCode + "(" + i + ")";
             String newIntakeLine = newIntakeCode + originalIntakeLine.substring(intakeCode.length());
             lines.add(newIntakeLine);

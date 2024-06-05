@@ -6,18 +6,6 @@ package Admin;
 
 import TableController.TableAlignment;
 import com.formdev.flatlaf.FlatLaf;
-//import java.awt.Graphics;
-//import java.awt.Graphics2D;
-//import java.awt.print.PageFormat;
-//import java.awt.print.Printable;
-//import java.awt.print.PrinterException;
-//import java.awt.print.PrinterJob;
-//import javax.swing.table.DefaultTableModel;
-//import TableController.TableAlignment;
-//import java.io.File;
-//import java.io.FileOutputStream;
-//import java.io.IOException;
-
 import com.itextpdf.text.*;
 import com.itextpdf.text.pdf.*;
 import javax.swing.*;
@@ -33,6 +21,7 @@ public class PrintNameList extends javax.swing.JFrame {
 
     public PrintNameList() {
         initComponents();
+        setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
     }
 
     public void showForm(Object[][] data, String intakeCode) {
@@ -179,134 +168,6 @@ public class PrintNameList extends javax.swing.JFrame {
             }
         }
     }
-    
-    
-//    private Object[][] data;
-//    private String intakeCode;
-//    
-//    private static final double A4_WIDTH_INCHES = 8.27;
-//    private static final double A4_HEIGHT_INCHES = 11.69;
-//
-//    public PrintNameList() {
-//        
-//    }
-//
-//    public void showForm(Object[][] data, String intakeCode){
-//        initComponents();
-//        this.data = data;
-//        this.intakeCode = intakeCode;
-//        System.out.println(data);
-//        populateTable();
-//        setVisible(true);
-//    }
-//    
-//    private void populateTable(){
-//        TableAlignment alignment = new TableAlignment();
-//        alignment.alignTable(nameListTable);
-//        
-//        intakeCodeLabel.setText(intakeCode);
-//        DefaultTableModel model = (DefaultTableModel) nameListTable.getModel();
-//        model.setRowCount(0);
-//        
-//        int studentCount = 0;
-//        int groupCount = 1;
-//        
-//        for (int i = 0; i < data.length; i++) {
-//            Object[] rowData = new Object[4];
-//            rowData[0] = ++studentCount; // No. column
-//            rowData[1] = data[i][1]; // Student Name column
-//            rowData[2] = data[i][0]; // Student ID column
-//            rowData[3] = "Group " + groupCount; // Group column
-//
-//            // Increment group number after every 10 students
-//            if (studentCount % 10 == 0) {
-//                groupCount++;
-//            }
-//            model.addRow(rowData);
-//        }
-//    }
-//    
-//    
-//        public void printPanel() {
-//        PrinterJob printer = PrinterJob.getPrinterJob();
-//        printer.setJobName(intakeCode);
-//
-//        printer.setPrintable(new Printable() {
-//            @Override
-//            public int print(Graphics gr, PageFormat pf, int pageNum) {
-//                pf.setOrientation(PageFormat.LANDSCAPE);
-//
-//                if (pageNum > 0) {
-//                    // Handle page numbers greater than 0
-//                    return Printable.NO_SUCH_PAGE;
-//                }
-//
-//                Graphics2D g2d = (Graphics2D) gr;
-//                g2d.translate(pf.getImageableX(), pf.getImageableY());
-//
-//                // Print the JPanel (nameListPanel) to fit the A4 size
-//                double scaleX = pf.getImageableWidth() / nameListPanel.getWidth();
-//                double scaleY = pf.getImageableHeight() / nameListPanel.getHeight();
-//                double scale = Math.min(scaleX, scaleY);
-//                g2d.scale(scale, scale);
-//                nameListPanel.print(g2d);
-//
-//
-//                // Save the printed content to a PDF file
-////                File folder = new File("C:/Users/User/Documents/NetBeansProjects/Good-Brain/NameList/" + intakeCode + ".pdf");
-//                File folder = new File("/src/NameList/" + intakeCode + ".pdf");
-//                if (!folder.exists()) {
-//                    folder.mkdir(); // Create the folder if it doesn't exist
-//                }
-//
-//                File file = new File(folder + intakeCode + ".pdf");
-//                try (FileOutputStream fos = new FileOutputStream(file)) {
-//                    fos.flush();
-//                } catch (IOException e) {
-//                    e.printStackTrace();
-//                }
-//
-//                return Printable.PAGE_EXISTS;
-//            }
-//        });
-//
-//            try {
-//                printer.print();
-//            } catch (PrinterException ex) {
-//                ex.printStackTrace();
-//            }
-//        }
-    
-//        public void printPanel() {
-//            try {
-//                // Create a new document
-//                Document document = new Document();
-//
-//                // Create a PDF writer instance
-//                String pdfFilePath = "C:/Users/User/Documents/NetBeansProjects/newAGH/NameList/" + intakeCode + ".pdf";
-//                PdfWriter.getInstance(document, new FileOutputStream(pdfFilePath));
-//
-//                // Open the document
-//                document.open();
-//
-//                // Add the JPanel (nameListPanel) to the PDF document
-//                ByteArrayOutputStream baos = new ByteArrayOutputStream();
-//                BufferedImage image = new BufferedImage(nameListPanel.getWidth(), nameListPanel.getHeight(), BufferedImage.TYPE_INT_RGB);
-//                Graphics2D g2d = image.createGraphics();
-//                nameListPanel.printAll(g2d);
-//                g2d.dispose();
-//                ImageIO.write(image, "png", baos);
-//                Image pdfImage = Image.getInstance(baos.toByteArray());
-//                document.add(pdfImage);
-//
-//                // Close the document
-//                document.close();
-//
-//                System.out.println("PDF created successfully at " + pdfFilePath);
-//            } catch (Exception e) {
-//                e.printStackTrace();
-//            }
-//        }
     
     /**
      * This method is called from within the constructor to initialize the form.
