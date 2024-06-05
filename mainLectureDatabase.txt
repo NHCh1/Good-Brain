@@ -1,7 +1,7 @@
 Ellie Shin;930522-14-5897;60123454098;Cyber Security;Digital Marketing
 Owen Yoo;900120-11-6458;60198754236;Data Analytics;Software Engineering
 Gabriella Song;900727-13-6981;60123452689;Accounting;Cloud Engineering
-Charles Kim;890629-14-6325;60187654890;Finance;Digital Forensic
+Charles Kim;890629-14-6325;60187654890;Finance;Digital Forensics
 Charlotte Choi;920515-12-7654;60123464532;Intelligent Systems;Psychology
 Dylan Lee;920420-13-5836;60187659087;Software Engineering;Cyber Security
 Emery Ho;930628-14-7456;60123456321;Cloud Engineering;Finance
@@ -9,10 +9,10 @@ Owen Park;880802-11-5378;60187650987;Digital Marketing;Data Analytics
 Harper Lim;940507-12-5897;60123454098;Psychology;Intelligent Systems
 Scarlett Chang;950423-13-6458;60187654236;Cyber Security;Digital Marketing
 Carter Yoon;910817-11-6981;60123452689;Data Analytics;Software Engineering
-Gavin Cox;760528-42-9667;60156789012;L024@lecturer.edu.my;Data Analytic;Psychology
-Hannah Ward;750407-46-0778;60167890123;L025@lecturer.edu.my;Digital Forensic;Finance
-Zara Khan;940225-34-5939;60161384729;L023@staff.goodbrain.edu.my;Finance;Banking
-Liam Lee;910112-33-6050;60181624593;L024@staff.goodbrain.edu.my;Cyber Security;Engineering
-Nora Wang;900520-37-7162;60152748364;L025@staff.goodbrain.edu.my;Psychology;Finance
-Luca Garcia;930805-30-8273;60143962571;L026@staff.goodbrain.edu.my;Cloud Engineering;Intelligent System
-Leah Lopez;920503-31-9384;60177639158;L027@staff.goodbrain.edu.my;Intelligent System;Software Engineering
+Gavin Cox;760528-42-9667;60156789012;Data Analytic;Psychology
+Hannah Ward;750407-46-0778;60167890123;Digital Forensics;Finance
+Zara Khan;940225-34-5939;60161384729;Finance;Banking
+Liam Lee;910112-33-6050;60181624593;Cyber Security;Engineering
+Nora Wang;900520-37-7162;60152748364;Psychology;Finance
+Luca Garcia;930805-30-8273;60143962571;Cloud Engineering;Intelligent System
+Leah Lopez;920503-31-9384;60177639158;Intelligent System;Software Engineering

@@ -450,7 +450,7 @@ public class Student {
             return "Contact Field is empty.";
         }
         if(!contact.matches("^60[0-9]{9,10}$")){
-            return "Contact number must be more than 11 or 12 digit.";
+            return "Contact number must start with '60' and more than 11 or 12 digit.";
         }
         return "";
     }
@@ -547,48 +547,3 @@ public class Student {
         }
     }
 }
-    
-//    public void deleteStudent() {
-//        int rowQty = table.getRowCount();
-//        int colQty = table.getColumnCount();
-//
-//        ArrayList<String> tableRows = new ArrayList<>();
-//        for (int i = 0; i < rowQty; i++) {
-//            StringBuilder rowBuilder = new StringBuilder();
-//
-//            for (int j = 0; j < colQty - 1; j++) {
-//                rowBuilder.append(table.getValueAt(i, j));
-//
-//                if (j != colQty - 2) {
-//                    rowBuilder.append(";");
-//                }
-//            }
-//            tableRows.add(rowBuilder.toString());
-//        }
-//
-//        try {
-//            BufferedWriter bw = new BufferedWriter(new FileWriter("student.txt"));
-//            for (String row : tableRows) {
-//                bw.write(row);
-//                bw.newLine();
-//            }
-//            bw.close();
-//
-//            FileHandler fh = new FileHandler();
-//            fh.deleteFromSpecificFile(studentID);
-//            fh.deleteFromUserFile(studentID);
-////            fh.deleteUserInformation(studentID);
-//
-//            table.setRowCount(0);
-//            showStudent();
-//
-//            Icon icon = new ImageIcon(getClass().getResource("/Icon/success.png"));
-//            JOptionPane.showMessageDialog(null, "Student has been removed.",
-//                    "Notification", JOptionPane.INFORMATION_MESSAGE, icon);
-//        } catch (IOException ex) {
-//            Logger.getLogger(AdminPages.class.getName()).log(Level.SEVERE, null, ex);
-//        }
-//    } 
-//}
-    
-   
