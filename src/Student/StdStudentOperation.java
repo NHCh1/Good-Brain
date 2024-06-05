@@ -69,7 +69,7 @@ public class StdStudentOperation {
                     String defaultProjectId = projectIDlist.get(0);
 //                    System.out.println("Student ID: " + studentID); 
 //                    System.out.println("Intake Code: " + intake);
-//                    System.out.println("Project ID List: ");
+//                    System.out.println("Project ID List: " + defaultProjectId);
 //                    for (int i = 0; i < projectIDlist.size(); i++) {
 //                        System.out.println(projectIDlist.get(i));
 //                    }

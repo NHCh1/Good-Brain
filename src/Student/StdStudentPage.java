@@ -28,7 +28,7 @@ import javax.swing.JOptionPane;
  * @author Nightinggale
  */
 public class StdStudentPage extends javax.swing.JFrame {
-    private final String studentId = "S001";
+    private final String studentId;
     private String selectedProjectId;
     public String getSelectedProjectId() {
         return selectedProjectId;
@@ -36,10 +36,34 @@ public class StdStudentPage extends javax.swing.JFrame {
     private StdProjectInfo project;
     /**
      * Creates new form student
+     * @param id
      * @throws java.io.IOException
      */
-    public StdStudentPage() throws IOException {
+    public StdStudentPage(String id) throws IOException {
+        this.studentId = id;
         initComponents();
+        
+        StdStudentInfo student = StdStudentOperation.readStudentRecord(id);
+        if (student != null) {
+            ArrayList<String> projectIDlist = student.getProjectIDlist();
+            System.out.println("Project ID List: " + projectIDlist);
+            // Create a DefaultComboBoxModel to hold the project IDs`
+            DefaultComboBoxModel<String> projectIdModel = new DefaultComboBoxModel<>();
+            // Add project IDs to the model
+            projectIdModel.addElement("Please select a project ID.");
+            for (String projectId : projectIDlist) {
+                projectIdModel.addElement(projectId);
+            }
+            // Set the model to the combo box
+            projectId.setModel(projectIdModel);
+            // Set default project page
+            projLab.setText("Please select a project ID.");
+            superLab.setText("Please select a project ID.");
+            secondLab.setText("Please select a project ID.");
+            dateLab.setText("Please select a project ID.");
+        }
+        
+        stdSetUserProfile1.setIcon(new ImageIcon("src/Profile/"+ studentId +".jpg"));
     }
 
 //    public void setVisible(boolean b) {
@@ -133,7 +157,7 @@ public class StdStudentPage extends javax.swing.JFrame {
         reloadBtn = new javax.swing.JButton();
         Logo = new javax.swing.JLabel();
         exit = new javax.swing.JLabel();
-        stdSetUserProfile1 = new StdSetUserProfile();
+        stdSetUserProfile1 = new avatar.ImageAvatar();
 
         jList1.setModel(new javax.swing.AbstractListModel<String>() {
             String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
@@ -703,18 +727,11 @@ public class StdStudentPage extends javax.swing.JFrame {
 
         Logo.setFont(new java.awt.Font("Arial Black", 1, 24)); // NOI18N
         Logo.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        Logo.setIcon(new javax.swing.ImageIcon("C:\\Users\\User\\Documents\\NetBeansProjects\\OodjAss\\Icon\\logo.png")); // NOI18N
         Logo.setText("GOODBRAIN");
         Logo.setIconTextGap(10);
 
         exit.setFont(new java.awt.Font("Arial Black", 0, 12)); // NOI18N
-        exit.setIcon(new javax.swing.ImageIcon("C:\\Users\\User\\Documents\\NetBeansProjects\\OodjAss\\Icon\\logout.png")); // NOI18N
         exit.setText("Exit");
-
-        stdSetUserProfile1.setIcon(new ImageIcon("Profile/"+studentId+".jpg"));
-        stdSetUserProfile1.setMaximumSize(new java.awt.Dimension(70, 70));
-        stdSetUserProfile1.setMinimumSize(new java.awt.Dimension(70, 70));
-        stdSetUserProfile1.setPreferredSize(new java.awt.Dimension(70, 70));
 
         javax.swing.GroupLayout HeaderLayout = new javax.swing.GroupLayout(Header);
         Header.setLayout(HeaderLayout);
@@ -723,9 +740,9 @@ public class StdStudentPage extends javax.swing.JFrame {
             .addGroup(HeaderLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(Logo, javax.swing.GroupLayout.PREFERRED_SIZE, 321, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 372, Short.MAX_VALUE)
-                .addComponent(stdSetUserProfile1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(35, 35, 35)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 367, Short.MAX_VALUE)
+                .addComponent(stdSetUserProfile1, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
                 .addGroup(HeaderLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(reloadBtn)
                     .addComponent(exit, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -733,21 +750,19 @@ public class StdStudentPage extends javax.swing.JFrame {
         );
         HeaderLayout.setVerticalGroup(
             HeaderLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(HeaderLayout.createSequentialGroup()
-                .addGroup(HeaderLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, HeaderLayout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(Logo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(HeaderLayout.createSequentialGroup()
-                        .addGap(12, 12, 12)
-                        .addGroup(HeaderLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(stdSetUserProfile1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(HeaderLayout.createSequentialGroup()
-                                .addComponent(reloadBtn)
-                                .addGap(18, 18, 18)
-                                .addComponent(exit)))
-                        .addGap(0, 12, Short.MAX_VALUE)))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, HeaderLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(Logo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
+            .addGroup(HeaderLayout.createSequentialGroup()
+                .addGap(12, 12, 12)
+                .addGroup(HeaderLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(stdSetUserProfile1, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(HeaderLayout.createSequentialGroup()
+                        .addComponent(reloadBtn)
+                        .addGap(18, 18, 18)
+                        .addComponent(exit)))
+                .addGap(20, 20, 20))
         );
 
         getContentPane().add(Header, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 900, 100));
@@ -1078,32 +1093,32 @@ public class StdStudentPage extends javax.swing.JFrame {
             java.util.logging.Logger.getLogger(StdStudentPage.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         // Create an instance of StdStudentPage
-        StdStudentPage studentPage = new StdStudentPage();
+//        StdStudentPage studentPage = new StdStudentPage();
         // Read Student ID and Intake Code
-        String studentId = "S001";
-        StdStudentInfo student = StdStudentOperation.readStudentRecord(studentId);
-        if (student != null) {
-            ArrayList<String> projectIDlist = student.getProjectIDlist();
-            System.out.println("Project ID List: " + projectIDlist);
-            // Create a DefaultComboBoxModel to hold the project IDs`
-            DefaultComboBoxModel<String> projectIdModel = new DefaultComboBoxModel<>();
-            // Add project IDs to the model
-            projectIdModel.addElement("Please select a project ID.");
-            for (String projectId : projectIDlist) {
-                projectIdModel.addElement(projectId);
-            }
-            // Set the model to the combo box
-            studentPage.projectId.setModel(projectIdModel);
-            // Set default project page
-            studentPage.projLab.setText("Please select a project ID.");
-            studentPage.superLab.setText("Please select a project ID.");
-            studentPage.secondLab.setText("Please select a project ID.");
-            studentPage.dateLab.setText("Please select a project ID.");
-        }
-        // Display the StdStudentPage
-        java.awt.EventQueue.invokeLater(() -> {
-            studentPage.setVisible(true);
-        });
+//        String studentId = this.studentId;
+//        StdStudentInfo student = StdStudentOperation.readStudentRecord(studentId);
+//        if (student != null) {
+//            ArrayList<String> projectIDlist = student.getProjectIDlist();
+//            System.out.println("Project ID List: " + projectIDlist);
+//            // Create a DefaultComboBoxModel to hold the project IDs`
+//            DefaultComboBoxModel<String> projectIdModel = new DefaultComboBoxModel<>();
+//            // Add project IDs to the model
+//            projectIdModel.addElement("Please select a project ID.");
+//            for (String projectId : projectIDlist) {
+//                projectIdModel.addElement(projectId);
+//            }
+//            // Set the model to the combo box
+//            studentPage.projectId.setModel(projectIdModel);
+//            // Set default project page
+//            studentPage.projLab.setText("Please select a project ID.");
+//            studentPage.superLab.setText("Please select a project ID.");
+//            studentPage.secondLab.setText("Please select a project ID.");
+//            studentPage.dateLab.setText("Please select a project ID.");
+//        }
+//        // Display the StdStudentPage
+//        java.awt.EventQueue.invokeLater(() -> {
+//            studentPage.setVisible(true);
+//        });
     }
 
 
@@ -1176,7 +1191,7 @@ public class StdStudentPage extends javax.swing.JFrame {
     private javax.swing.JLabel projectTab;
     private javax.swing.JButton reloadBtn;
     private javax.swing.JLabel secondLab;
-    private StdSetUserProfile stdSetUserProfile1;
+    private avatar.ImageAvatar stdSetUserProfile1;
     private javax.swing.JLabel subGradeLab;
     private javax.swing.JLabel subIdLab;
     private javax.swing.JLabel subNameLab;

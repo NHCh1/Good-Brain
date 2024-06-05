@@ -4,8 +4,14 @@
  */
 package MainProgram;
 
+import Admin.AdminPages;
+import Student.StdStudentPage;
+import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.Icon;
 import javax.swing.JOptionPane;
+import project_manager.pmHomePage;
 
 public class loginPage extends javax.swing.JFrame {
 
@@ -29,26 +35,34 @@ public class loginPage extends javax.swing.JFrame {
         idField = new javax.swing.JTextField();
         passwordField = new javax.swing.JPasswordField();
         jButton1 = new javax.swing.JButton();
+        jLabel4 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jPanel1.setBackground(new java.awt.Color(236, 236, 255));
+        jPanel1.setBackground(new java.awt.Color(209, 211, 199));
 
-        jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
-        jLabel1.setText("GoOdBrAiN");
+        jLabel1.setFont(new java.awt.Font("Bell MT", 1, 36)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(59, 67, 56));
+        jLabel1.setText("GOODBRAIN");
 
-        jLabel2.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jLabel2.setFont(new java.awt.Font("Bell MT", 1, 18)); // NOI18N
+        jLabel2.setForeground(new java.awt.Color(59, 67, 56));
         jLabel2.setText("USER ID:");
 
-        jLabel3.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jLabel3.setFont(new java.awt.Font("Bell MT", 1, 18)); // NOI18N
+        jLabel3.setForeground(new java.awt.Color(59, 67, 56));
         jLabel3.setText("PASSWORD:");
 
+        jButton1.setFont(new java.awt.Font("Bell MT", 1, 14)); // NOI18N
+        jButton1.setForeground(new java.awt.Color(59, 67, 56));
         jButton1.setText("Login");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);
             }
         });
+
+        jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icon/brainLogo.png"))); // NOI18N
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -57,7 +71,7 @@ public class loginPage extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(82, 82, 82)
+                        .addGap(79, 79, 79)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(jButton1)
                             .addGroup(jPanel1Layout.createSequentialGroup()
@@ -67,18 +81,23 @@ public class loginPage extends javax.swing.JFrame {
                                 .addGap(38, 38, 38)
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                     .addComponent(idField)
-                                    .addComponent(passwordField, javax.swing.GroupLayout.DEFAULT_SIZE, 185, Short.MAX_VALUE)))))
+                                    .addComponent(passwordField, javax.swing.GroupLayout.PREFERRED_SIZE, 185, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(175, 175, 175)
-                        .addComponent(jLabel1)))
-                .addContainerGap(108, Short.MAX_VALUE))
+                        .addGap(127, 127, 127)
+                        .addComponent(jLabel1))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(192, 192, 192)
+                        .addComponent(jLabel4)))
+                .addContainerGap(86, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(37, 37, 37)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jLabel4)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jLabel1)
-                .addGap(50, 50, 50)
+                .addGap(43, 43, 43)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
                     .addComponent(idField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -88,7 +107,7 @@ public class loginPage extends javax.swing.JFrame {
                     .addComponent(passwordField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(29, 29, 29)
                 .addComponent(jButton1)
-                .addContainerGap(115, Short.MAX_VALUE))
+                .addGap(42, 42, 42))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -103,6 +122,7 @@ public class loginPage extends javax.swing.JFrame {
         );
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
@@ -113,7 +133,11 @@ public class loginPage extends javax.swing.JFrame {
         int role = check.checkCredentials(id, password);
         
         if (role != -1){
-            showPage(role);
+            try {
+                showPage(role, id);
+            } catch (IOException ex) {
+                Logger.getLogger(loginPage.class.getName()).log(Level.SEVERE, null, ex);
+            }
         }
         else{
              JOptionPane.showMessageDialog(null, "Invalid user ID or password.", "Error",JOptionPane.ERROR_MESSAGE);
@@ -122,14 +146,14 @@ public class loginPage extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_jButton1ActionPerformed
 
-    private void showPage(int role){
-        Icon icon = new javax.swing.ImageIcon(getClass().getResource("/Icon/success.png"));
+    private void showPage(int role, String id) throws IOException{
+        Icon icon = new javax.swing.ImageIcon(getClass().getResource("/Icon/adminSuccess.png"));
         JOptionPane.showMessageDialog(null, "Log In Success!", "Notification", JOptionPane.INFORMATION_MESSAGE, icon);
         
         switch (role) {
             case 1:  
                 //call your own page
-                adminPage admin = new adminPage();
+                AdminPages admin = new AdminPages();
                 admin.setVisible(true);
                 this.dispose();
                 break;
@@ -139,12 +163,12 @@ public class loginPage extends javax.swing.JFrame {
                 this.dispose();
                 break;
             case 3:
-                studentPage student = new studentPage();
+                StdStudentPage student = new StdStudentPage(id);
                 student.setVisible(true);
                 this.dispose();
                 break;
             case 4:
-                projectManagerPage pm = new projectManagerPage();
+                pmHomePage pm = new pmHomePage(id);
                 pm.setVisible(true);
                 this.dispose();
                 break;
@@ -194,6 +218,7 @@ public class loginPage extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPasswordField passwordField;
     // End of variables declaration//GEN-END:variables
