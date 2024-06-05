@@ -42,9 +42,7 @@ import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableRowSorter;
 import TableController.TableAlignment;
 import TableController.TableGradientCell;
-import java.util.HashSet;
 import java.util.Map;
-import java.util.Set;
 
 public class AdminPages extends javax.swing.JFrame {
 
@@ -62,6 +60,7 @@ public class AdminPages extends javax.swing.JFrame {
         initComponents();
         displayUserCount();
 
+        setLogo.setIcon(new ImageIcon("src/Icon/brainLogo.png"));
         adminProfile.setIcon(new ImageIcon("src/Profile/A001.jpg"));
         //set gradient color to cell
 //        TableGradientCell tableGradient = new TableGradientCell(new Color(23,161,115), new Color(12,12,14));
@@ -92,26 +91,6 @@ public class AdminPages extends javax.swing.JFrame {
         chart.addData(new ModelChart("2023", new double[]{3500, 3200, 3000, 2150}));
         chart.addData(new ModelChart("2024", new double[]{1900, 2800, 3810, 2200}));
         chart.start();
-
-        originalSize = new Dimension(215, 110);
-        cardPanel1.setPreferredSize(originalSize);
-        // Create a Timer for zoom effect
-        zoomTimer = new Timer(20, new ActionListener() {
-            double scale = 0.8;
-
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                scale *= scaleFactor;
-                if (scale >= 1.05) { // Adjust the maximum scale as needed
-                    scale = 1.05;
-                    zoomTimer.stop(); // Stop the timer when maximum scale is reached
-                }
-                Dimension newSize = new Dimension((int) (originalSize.width * scale), (int) (originalSize.height * scale));
-                cardPanel1.setPreferredSize(newSize);
-                cardPanel1.revalidate(); // Ensure layout updates
-                cardPanel1.repaint(); // Repaint the panel
-            }
-        });
 
         openFileChooser = new JFileChooser();
         saveFileChooser = new JFileChooser();
@@ -411,6 +390,7 @@ public class AdminPages extends javax.swing.JFrame {
         jLabel6 = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
         adminProfile = new Admin.SetUserProfile();
+        setLogo = new Admin.SetUserProfile();
         menubar = new javax.swing.JPanel();
         menu1 = new javax.swing.JPanel();
         jLabel3 = new javax.swing.JLabel();
@@ -571,6 +551,7 @@ public class AdminPages extends javax.swing.JFrame {
         jScrollPane4 = new javax.swing.JScrollPane();
         userTable = new javax.swing.JTable();
         userPageSearchField = new javax.swing.JTextField();
+        jLabel32 = new javax.swing.JLabel();
         editUser = new javax.swing.JPanel();
         jLabel34 = new javax.swing.JLabel();
         jLabel52 = new javax.swing.JLabel();
@@ -607,7 +588,9 @@ public class AdminPages extends javax.swing.JFrame {
                 .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(806, Short.MAX_VALUE))
             .addGroup(headerLayout.createSequentialGroup()
-                .addGap(119, 119, 119)
+                .addGap(17, 17, 17)
+                .addComponent(setLogo, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
                 .addComponent(jLabel5)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jLabel6)
@@ -626,8 +609,11 @@ public class AdminPages extends javax.swing.JFrame {
                             .addComponent(jLabel5)))
                     .addGroup(headerLayout.createSequentialGroup()
                         .addContainerGap()
-                        .addComponent(adminProfile, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(89, 89, 89)
+                        .addComponent(adminProfile, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(headerLayout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(setLogo, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(82, 82, 82)
                 .addComponent(jLabel9, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
         );
@@ -744,7 +730,7 @@ public class AdminPages extends javax.swing.JFrame {
             .addGroup(menu4Layout.createSequentialGroup()
                 .addGap(31, 31, 31)
                 .addComponent(jLabel16)
-                .addContainerGap(36, Short.MAX_VALUE))
+                .addContainerGap(33, Short.MAX_VALUE))
         );
         menu4Layout.setVerticalGroup(
             menu4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -786,7 +772,7 @@ public class AdminPages extends javax.swing.JFrame {
         menubarLayout.setHorizontalGroup(
             menubarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, menubarLayout.createSequentialGroup()
-                .addContainerGap(204, Short.MAX_VALUE)
+                .addContainerGap(200, Short.MAX_VALUE)
                 .addComponent(menu1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(menu2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -796,9 +782,9 @@ public class AdminPages extends javax.swing.JFrame {
                 .addComponent(menu4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(menu5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(90, 90, 90)
+                .addGap(89, 89, 89)
                 .addComponent(exitLabel)
-                .addContainerGap())
+                .addGap(14, 14, 14))
         );
         menubarLayout.setVerticalGroup(
             menubarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -2120,6 +2106,8 @@ public class AdminPages extends javax.swing.JFrame {
             }
         });
 
+        jLabel32.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icon/adminSearch.png"))); // NOI18N
+
         javax.swing.GroupLayout userPageLayout = new javax.swing.GroupLayout(userPage);
         userPage.setLayout(userPageLayout);
         userPageLayout.setHorizontalGroup(
@@ -2134,7 +2122,9 @@ public class AdminPages extends javax.swing.JFrame {
                         .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 746, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(userPageLayout.createSequentialGroup()
                         .addGap(280, 280, 280)
-                        .addComponent(userPageSearchField, javax.swing.GroupLayout.PREFERRED_SIZE, 350, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(userPageSearchField, javax.swing.GroupLayout.PREFERRED_SIZE, 350, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jLabel32)))
                 .addContainerGap(98, Short.MAX_VALUE))
         );
         userPageLayout.setVerticalGroup(
@@ -2143,7 +2133,9 @@ public class AdminPages extends javax.swing.JFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jLabel11)
                 .addGap(32, 32, 32)
-                .addComponent(userPageSearchField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(userPageLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(userPageSearchField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel32))
                 .addGap(29, 29, 29)
                 .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 260, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(154, 154, 154))
@@ -2423,7 +2415,7 @@ public class AdminPages extends javax.swing.JFrame {
         icField.setText(null);
         contactField.setText(null);
         genderGroup.clearSelection();
-//        intakeCodeComboBox.removeAllItems();
+        intakeCodeComboBox.setSelectedIndex(0);
         studentRegisterPic.setIcon(null);
         studentPicTextField.setText(null);
     }
@@ -2866,17 +2858,6 @@ public class AdminPages extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_studentPageFilterBoxActionPerformed
 
-    private void cardPanel1MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_cardPanel1MouseEntered
-        zoomTimer.start();
-    }//GEN-LAST:event_cardPanel1MouseEntered
-
-    private void cardPanel1MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_cardPanel1MouseExited
-        zoomTimer.stop();
-        cardPanel1.setPreferredSize(originalSize);
-        cardPanel1.revalidate();
-        cardPanel1.repaint();
-    }//GEN-LAST:event_cardPanel1MouseExited
-
     private void addStudentButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addStudentButtonActionPerformed
         jTabbedPane1.setSelectedIndex(2);
         Intake intakeList = new Intake();
@@ -3240,6 +3221,7 @@ public class AdminPages extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel30;
     private javax.swing.JLabel jLabel31;
+    private javax.swing.JLabel jLabel32;
     private javax.swing.JLabel jLabel33;
     private javax.swing.JLabel jLabel34;
     private javax.swing.JLabel jLabel35;
@@ -3323,6 +3305,7 @@ public class AdminPages extends javax.swing.JFrame {
     private javax.swing.JLabel roleNoLabel;
     private javax.swing.JButton saveIntakeBtn;
     private Admin.SetUserProfile setLecturerRegisterImage;
+    private Admin.SetUserProfile setLogo;
     private javax.swing.JPanel student;
     private javax.swing.JLabel studentEmailLabel;
     private javax.swing.JLabel studentICLabel;

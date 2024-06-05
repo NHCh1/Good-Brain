@@ -161,7 +161,7 @@ public class Lecturer {
             return "Contact Field is empty.";
         }
         if(!contact.matches("^60[0-9]{9,10}$")){
-            return "Contact number must be more than 11 or 12 digit.";
+            return "Contact number must start with '60' and more than 11 or 12 digit.";
         }
         return "";
     }
