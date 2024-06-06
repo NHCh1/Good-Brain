@@ -5,6 +5,7 @@
 package presentation;
 
 import MainProgram.general_home;
+import project_manager.pmHomePage;
 import java.awt.Color;
 import java.awt.Component;
 import java.awt.Desktop;
@@ -36,6 +37,7 @@ import javax.swing.table.DefaultTableModel;
  * @author Owx
  */
 public class Lecturer extends javax.swing.JFrame {
+    
     DefaultTableModel Model;
     DefaultTableModel Report;
     DefaultTableModel Present;
@@ -44,26 +46,23 @@ public class Lecturer extends javax.swing.JFrame {
     private DefaultComboBoxModel<String> dataModel;
     private DefaultComboBoxModel<String> projectModel;
     
-     private DefaultComboBoxModel<String> hourBox;
+    private DefaultComboBoxModel<String> hourBox;
     private DefaultComboBoxModel<String> minuteBox;
     private final String logID;
     public String secID;
     public String selectedDate;
     public String selectedDateString;
-    
-    
-     
+    private pmHomePage pmHome;
 
     /**
      * Creates new form Lecturer
      */
-    public Lecturer(String logID) {
-        
-        initComponents();
+    public Lecturer(String logID) throws IOException {
         this.logID = logID;
+        initComponents();
         scheduleid.setText(logID);
         profileid.setText(logID);
-         lecid.setText(logID);
+        lecid.setText(logID);
         timetable1.setMonth(6);
         timetable1.setYear(2024);
         scheduleSC.setMonth(6);
@@ -122,10 +121,12 @@ public class Lecturer extends javax.swing.JFrame {
         projectcode.addItemListener((e) -> displayReportInfo());
 
         lecid.setEditable(false);
-       SecondMarker();
-       setProfile();
+        SecondMarker();
+        setProfile();
       
-      profile();
+        profile();
+       
+        pmHome = new pmHomePage(logID);
     }
     
     private void profile (){
@@ -160,8 +161,6 @@ public class Lecturer extends javax.swing.JFrame {
                 scfunctional.setText(parts[6]);
           }
         }
-        
-        
     }
 
   public void SecondMarker(){
@@ -202,11 +201,6 @@ public class Lecturer extends javax.swing.JFrame {
     }
     
     
-    
-    
-    
-    
-
     
     public void info (){
         String lecid = logID;
@@ -1588,6 +1582,7 @@ public class Lecturer extends javax.swing.JFrame {
         presentationbar = new javax.swing.JLabel();
         reportbar = new javax.swing.JLabel();
         timetable = new javax.swing.JLabel();
+        jButton1 = new javax.swing.JButton();
         jTabbedPane1 = new javax.swing.JTabbedPane();
         dashboard = new javax.swing.JPanel();
         jLabel39 = new javax.swing.JLabel();
@@ -1852,7 +1847,7 @@ public class Lecturer extends javax.swing.JFrame {
 
         getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 900, 100));
 
-        jPanel2.setBackground(new java.awt.Color(226, 228, 216));
+        jPanel2.setBackground(new java.awt.Color(172, 190, 174));
 
         dashboardbar.setFont(new java.awt.Font("Arial Black", 1, 12)); // NOI18N
         dashboardbar.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -1899,22 +1894,31 @@ public class Lecturer extends javax.swing.JFrame {
             }
         });
 
+        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icon/pmChangeToLec.png"))); // NOI18N
+        jButton1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jButton1MouseClicked(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(29, 29, 29)
+                .addGap(15, 15, 15)
+                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(53, 53, 53)
                 .addComponent(dashboardbar, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(108, 108, 108)
+                .addGap(72, 72, 72)
                 .addComponent(studentbar, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(88, 88, 88)
+                .addGap(61, 61, 61)
                 .addComponent(presentationbar, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(91, 91, 91)
+                .addGap(50, 50, 50)
                 .addComponent(reportbar, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 78, Short.MAX_VALUE)
+                .addGap(62, 62, 62)
                 .addComponent(timetable, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(46, 46, 46))
+                .addContainerGap(91, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1926,6 +1930,10 @@ public class Lecturer extends javax.swing.JFrame {
                     .addComponent(reportbar, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(timetable, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap())
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addGap(14, 14, 14)
+                .addComponent(jButton1)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         getContentPane().add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 100, 900, 50));
@@ -3235,7 +3243,7 @@ public class Lecturer extends javax.swing.JFrame {
             .addComponent(jLabel60, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel42, javax.swing.GroupLayout.DEFAULT_SIZE, 27, Short.MAX_VALUE)
+                .addComponent(jLabel42, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -3740,6 +3748,7 @@ public class Lecturer extends javax.swing.JFrame {
         getContentPane().add(jTabbedPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 120, 900, 480));
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void jLabel6MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel6MouseClicked
@@ -4587,6 +4596,16 @@ if (!isAssigned) {
         
     }//GEN-LAST:event_jPanel21MouseClicked
 
+    private void jButton1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton1MouseClicked
+        this.dispose();
+        try {
+            pmHome = new pmHomePage(logID);
+        } catch (IOException ex) {
+            Logger.getLogger(Lecturer.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        pmHome.setVisible(true);
+    }//GEN-LAST:event_jButton1MouseClicked
+
     /**
      * @param args the command line arguments
      */
@@ -4661,6 +4680,7 @@ if (!isAssigned) {
     private javax.swing.JComboBox<String> hour;
     private javax.swing.JTextField id;
     private javax.swing.JComboBox<String> intakecode;
+    private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton7;
     private javax.swing.JButton jButton9;
     private javax.swing.JLabel jLabel1;

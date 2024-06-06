@@ -218,15 +218,15 @@ public class StdStudentPage extends javax.swing.JFrame {
         MenubarLayout.setHorizontalGroup(
             MenubarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, MenubarLayout.createSequentialGroup()
-                .addContainerGap(235, Short.MAX_VALUE)
+                .addGap(105, 105, 105)
                 .addComponent(projectTab)
-                .addGap(91, 91, 91)
+                .addGap(111, 111, 111)
                 .addComponent(submissionTab)
-                .addGap(86, 86, 86)
+                .addGap(130, 130, 130)
                 .addComponent(presentationTab)
-                .addGap(85, 85, 85)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 125, Short.MAX_VALUE)
                 .addComponent(feedbackTab)
-                .addGap(88, 88, 88))
+                .addGap(104, 104, 104))
         );
         MenubarLayout.setVerticalGroup(
             MenubarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -577,6 +577,7 @@ public class StdStudentPage extends javax.swing.JFrame {
         });
 
         jLabel14.setFont(new java.awt.Font("Bell MT", 1, 18)); // NOI18N
+        jLabel14.setForeground(new java.awt.Color(59, 67, 56));
         jLabel14.setText("New Presentation Date");
 
         editDateLab.setFont(new java.awt.Font("Bell MT", 0, 18)); // NOI18N
@@ -687,7 +688,8 @@ public class StdStudentPage extends javax.swing.JFrame {
             }
         });
 
-        Logo.setFont(new java.awt.Font("Arial Black", 1, 24)); // NOI18N
+        Logo.setFont(new java.awt.Font("Bell MT", 1, 24)); // NOI18N
+        Logo.setForeground(new java.awt.Color(59, 67, 56));
         Logo.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         Logo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icon/logo.png"))); // NOI18N
         Logo.setText("GOODBRAIN");
@@ -737,6 +739,7 @@ public class StdStudentPage extends javax.swing.JFrame {
         getContentPane().add(Header, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 900, 100));
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void editSubmissionBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editSubmissionBtnActionPerformed

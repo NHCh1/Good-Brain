@@ -32,6 +32,7 @@ import javax.swing.JOptionPane;
 import javax.swing.RowFilter;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableRowSorter;
+import presentation.Lecturer;
 
 
 /**
@@ -52,6 +53,7 @@ public class pmHomePage extends javax.swing.JFrame {
     private Component previousPresentationComponent;
     private Component previous2Component;
     private pmHomePage homepage;
+    private Lecturer lec;
     private String pmID;
     private String selectedIntakeCode;
 //    private general_home generalHome;
@@ -105,6 +107,7 @@ public class pmHomePage extends javax.swing.JFrame {
         header h = new header();
         jPanel4.add(h);
         profileNav.setIcon(new ImageIcon("src/Profile/"+ id +".jpg"));
+        profileImage.setIcon(new ImageIcon("src/Profile/"+ id +".jpg"));
         
         pieChart1.clearData();
         int foundationCount = showPieData("student.txt", "GBF");
@@ -115,8 +118,6 @@ public class pmHomePage extends javax.swing.JFrame {
         pieChart1.addData(new ModelPieChart("Degree", degreeCount, Color.blue));
         int masterCount = showPieData("student.txt", "GBM");
         pieChart1.addData(new ModelPieChart("Master", masterCount, Color.green));
-//        int foundationCount = showPieData("student.txt", "GBD");
-//        showPieData("student.txt");
         
         pjInfo = new pmProjectInfo();
         intInfo = new pmIntakeInfo();
@@ -268,14 +269,7 @@ public class pmHomePage extends javax.swing.JFrame {
     }
     
     private int showPieData(String filename, String type) {
-//        String filename
         int Count = 0;
-//        int foundationCount = 0;
-//        int diplomaCount = 0;
-//        int degreeCount = 0;
-//        int masterCount = 0;
-//        List<String> intakePie = new ArrayList<>();
-//        Pattern pattern = Pattern.compile("GB[UFDM][0-9]+");
         try(BufferedReader br = new BufferedReader(new FileReader(filename))){
             String line;
             while((line = br.readLine()) != null){
@@ -352,7 +346,7 @@ public class pmHomePage extends javax.swing.JFrame {
         feedbackSearch = new javax.swing.JTextField();
         jLabel21 = new javax.swing.JLabel();
         jPanel12 = new javax.swing.JPanel();
-        imageAvatar1 = new avatar.ImageAvatar();
+        profileImage = new avatar.ImageAvatar();
         jLabel15 = new javax.swing.JLabel();
         jLabel16 = new javax.swing.JLabel();
         jLabel17 = new javax.swing.JLabel();
@@ -384,8 +378,18 @@ public class pmHomePage extends javax.swing.JFrame {
         jLabel1.setFont(new java.awt.Font("Bell MT", 1, 36)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(59, 67, 56));
         jLabel1.setText("GOODBRAIN");
+        jLabel1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabel1MouseClicked(evt);
+            }
+        });
 
-        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icon/brainLogo.png"))); // NOI18N
+        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icon/logo.png"))); // NOI18N
+        jLabel2.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabel2MouseClicked(evt);
+            }
+        });
 
         profileNav.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Profile/L001.jpg"))); // NOI18N
         profileNav.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -414,7 +418,7 @@ public class pmHomePage extends javax.swing.JFrame {
                     .addComponent(jLabel2)
                     .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                     .addComponent(jLabel1)
-                    .addContainerGap(676, Short.MAX_VALUE)))
+                    .addContainerGap(694, Short.MAX_VALUE)))
         );
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -434,12 +438,12 @@ public class pmHomePage extends javax.swing.JFrame {
                             .addComponent(jLabel1)
                             .addGap(14, 14, 14))
                         .addComponent(jLabel2, javax.swing.GroupLayout.Alignment.TRAILING))
-                    .addContainerGap(11, Short.MAX_VALUE)))
+                    .addContainerGap(29, Short.MAX_VALUE)))
         );
 
         getContentPane().add(jPanel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1030, 120));
 
-        jPanel1.setBackground(new java.awt.Color(226, 228, 216));
+        jPanel1.setBackground(new java.awt.Color(172, 190, 174));
         jPanel1.setPreferredSize(new java.awt.Dimension(1030, 50));
 
         jLabel3.setFont(new java.awt.Font("Bell MT", 1, 18)); // NOI18N
@@ -506,6 +510,11 @@ public class pmHomePage extends javax.swing.JFrame {
         });
 
         jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icon/pmChangeToLec.png"))); // NOI18N
+        jButton1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jButton1MouseClicked(evt);
+            }
+        });
 
         jLabel20.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icon/logout.png"))); // NOI18N
         jLabel20.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -520,12 +529,12 @@ public class pmHomePage extends javax.swing.JFrame {
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(32, 32, 32)
+                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(31, 31, 31)
                 .addComponent(jLabel11)
-                .addGap(45, 45, 45)
+                .addGap(51, 51, 51)
                 .addComponent(jLabel3)
-                .addGap(55, 55, 55)
+                .addGap(49, 49, 49)
                 .addComponent(jLabel5)
                 .addGap(61, 61, 61)
                 .addComponent(jLabel4)
@@ -550,10 +559,11 @@ public class pmHomePage extends javax.swing.JFrame {
                         .addComponent(jLabel20, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addContainerGap())
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addGap(0, 13, Short.MAX_VALUE)
+                        .addGap(0, 5, Short.MAX_VALUE)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 21, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(6, 6, 6)
+                                .addComponent(jButton1)
                                 .addContainerGap())
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1043,7 +1053,7 @@ public class pmHomePage extends javax.swing.JFrame {
             jPanel12Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel12Layout.createSequentialGroup()
                 .addContainerGap(182, Short.MAX_VALUE)
-                .addComponent(imageAvatar1, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(profileImage, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(128, 128, 128)
                 .addGroup(jPanel12Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(jPanel12Layout.createSequentialGroup()
@@ -1106,7 +1116,7 @@ public class pmHomePage extends javax.swing.JFrame {
                         .addGroup(jPanel12Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(profileMajor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel19)))
-                    .addComponent(imageAvatar1, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(profileImage, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(10, 10, 10)
                 .addGroup(jPanel12Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(profileMinor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -1123,6 +1133,24 @@ public class pmHomePage extends javax.swing.JFrame {
         jTabbedPane2.addTab("Profile", jPanel12);
 
         jPanel2.setBackground(new java.awt.Color(239, 240, 234));
+
+        customPanel1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                customPanel1MouseClicked(evt);
+            }
+        });
+
+        customPanel2.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                customPanel2MouseClicked(evt);
+            }
+        });
+
+        customPanel3.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                customPanel3MouseClicked(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -1382,10 +1410,52 @@ public class pmHomePage extends javax.swing.JFrame {
     }//GEN-LAST:event_jLabel11MouseClicked
 
     private void jLabel20MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel20MouseClicked
-        homepage.dispose();
-        general_home generalHome = new general_home();
-        generalHome.setVisible(true);
+        int a = JOptionPane.showConfirmDialog(null, "Are you sure to logout?", "Select", JOptionPane.YES_NO_OPTION);
+        if (a == 0) {
+            homepage.dispose();
+            general_home generalHome = new general_home();
+            generalHome.setVisible(true);
+        }
+        
     }//GEN-LAST:event_jLabel20MouseClicked
+
+    private void jButton1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton1MouseClicked
+        this.dispose();
+        try {
+            lec = new Lecturer(pmID);
+        } catch (IOException ex) {
+            Logger.getLogger(pmHomePage.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        lec.setVisible(true);
+    }//GEN-LAST:event_jButton1MouseClicked
+
+    private void jLabel2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel2MouseClicked
+        jTabbedPane2.setSelectedComponent(jPanel2);
+    }//GEN-LAST:event_jLabel2MouseClicked
+
+    private void jLabel1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel1MouseClicked
+        jTabbedPane2.setSelectedComponent(jPanel2);
+    }//GEN-LAST:event_jLabel1MouseClicked
+
+    private void customPanel1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_customPanel1MouseClicked
+        jTabbedPane2.setSelectedIndex(0);
+        func.clearTable(projectTable);
+        func.setTable("project.txt", projectTable);
+    }//GEN-LAST:event_customPanel1MouseClicked
+
+    private void customPanel2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_customPanel2MouseClicked
+        jTabbedPane2.setSelectedIndex(1);
+        func.clearTable(intakeTable);
+        func.setTable("intake.txt", intakeTable);
+    }//GEN-LAST:event_customPanel2MouseClicked
+
+    private void customPanel3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_customPanel3MouseClicked
+        stuInfo = new pmStudentInfo();
+        jTabbedPane2.setSelectedIndex(4);
+        func.clearTable(studentTable);
+        func.setTable("student.txt", studentTable);
+        populateIntakeComboBox("intake.txt", intakeFilter);
+    }//GEN-LAST:event_customPanel3MouseClicked
 
     /**
      * @param args the command line arguments
@@ -1417,7 +1487,6 @@ public class pmHomePage extends javax.swing.JFrame {
     private javax.swing.JButton editPmProfile;
     private javax.swing.JTextField feedbackSearch;
     private javax.swing.JTable feedbackTable;
-    private avatar.ImageAvatar imageAvatar1;
     private javax.swing.JTextField intSearch;
     private javax.swing.JComboBox<String> intakeFilter;
     private javax.swing.JTable intakeTable;
@@ -1470,6 +1539,7 @@ public class pmHomePage extends javax.swing.JFrame {
     private javax.swing.JTable presentationTable;
     private javax.swing.JTextField profileEmail;
     private javax.swing.JTextField profileIC;
+    private avatar.ImageAvatar profileImage;
     private javax.swing.JTextField profileMajor;
     private javax.swing.JTextField profileMinor;
     private javax.swing.JTextField profileName;
