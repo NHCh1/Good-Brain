@@ -69,14 +69,10 @@ public class schedule1 extends javax.swing.JPanel {
         while (calendar.get(Calendar.DAY_OF_WEEK) != Calendar.MONDAY) {
             calendar.add(Calendar.DATE, -1); // Move back one day until it's a Monday
         }
-        
-        
 
         ArrayList<String> scheduleList = test.getScheduleInfo();
         
-
         HashSet<String> uniqueDates = new HashSet<>();
-        
 
         // Process schedule information
         for (String line : scheduleList) {
@@ -107,12 +103,8 @@ public class schedule1 extends javax.swing.JPanel {
 
                     SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
                     String formattedDate = dateFormat.format(calendar.getTime());
-                    
-                    
 
                     if (uniqueDates.contains(formattedDate)) {
-                        
-
                         time1.setBackground(Color.decode("#769F85"));
                     } else {
                         time1.setBackground(Color.decode("#DFDFDF"));

@@ -1,6 +1,7 @@
 package Student;
 
 
+import MainProgram.general_home;
 import java.awt.Component;
 import java.awt.Desktop;
 import java.io.File;
@@ -137,9 +138,6 @@ public class StdStudentPage extends javax.swing.JFrame {
         jLabel19 = new javax.swing.JLabel();
         feedProjId = new javax.swing.JLabel();
         feedStuId = new javax.swing.JLabel();
-        jPanel6 = new javax.swing.JPanel();
-        jScrollPane6 = new javax.swing.JScrollPane();
-        jTable3 = new javax.swing.JTable();
         jPanel5 = new javax.swing.JPanel();
         editPreIdLab = new javax.swing.JLabel();
         editPreOriLab = new javax.swing.JLabel();
@@ -553,42 +551,6 @@ public class StdStudentPage extends javax.swing.JFrame {
 
         tabbedPane.addTab("Tab4", jPanel4);
 
-        jPanel6.setBackground(new java.awt.Color(239, 240, 234));
-
-        jTable3.setFont(new java.awt.Font("Courier New", 0, 24)); // NOI18N
-        jTable3.setForeground(new java.awt.Color(59, 67, 56));
-        jTable3.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-
-            },
-            new String [] {
-                "Project ID", "Submission ID", "Presentation ID", "Project Status", "Project Grade", "Supervisor Feedback", "Second Marker Feedback"
-            }
-        ));
-        jTable3.setMaximumSize(new java.awt.Dimension(800, 0));
-        jTable3.setMinimumSize(new java.awt.Dimension(800, 0));
-        jTable3.setPreferredSize(new java.awt.Dimension(800, 0));
-        jScrollPane6.setViewportView(jTable3);
-
-        javax.swing.GroupLayout jPanel6Layout = new javax.swing.GroupLayout(jPanel6);
-        jPanel6.setLayout(jPanel6Layout);
-        jPanel6Layout.setHorizontalGroup(
-            jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel6Layout.createSequentialGroup()
-                .addGap(51, 51, 51)
-                .addComponent(jScrollPane6, javax.swing.GroupLayout.PREFERRED_SIZE, 794, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(55, Short.MAX_VALUE))
-        );
-        jPanel6Layout.setVerticalGroup(
-            jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel6Layout.createSequentialGroup()
-                .addGap(45, 45, 45)
-                .addComponent(jScrollPane6, javax.swing.GroupLayout.PREFERRED_SIZE, 281, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(129, Short.MAX_VALUE))
-        );
-
-        tabbedPane.addTab("Tab6", jPanel6);
-
         jPanel5.setBackground(new java.awt.Color(239, 240, 234));
 
         editPreIdLab.setFont(new java.awt.Font("Bell MT", 1, 18)); // NOI18N
@@ -727,11 +689,18 @@ public class StdStudentPage extends javax.swing.JFrame {
 
         Logo.setFont(new java.awt.Font("Arial Black", 1, 24)); // NOI18N
         Logo.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        Logo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icon/logo.png"))); // NOI18N
         Logo.setText("GOODBRAIN");
         Logo.setIconTextGap(10);
 
         exit.setFont(new java.awt.Font("Arial Black", 0, 12)); // NOI18N
+        exit.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icon/logout.png"))); // NOI18N
         exit.setText("Exit");
+        exit.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                exitMouseClicked(evt);
+            }
+        });
 
         javax.swing.GroupLayout HeaderLayout = new javax.swing.GroupLayout(Header);
         Header.setLayout(HeaderLayout);
@@ -1011,6 +980,12 @@ public class StdStudentPage extends javax.swing.JFrame {
     private void userProfileComponentShown(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_userProfileComponentShown
 
     }//GEN-LAST:event_userProfileComponentShown
+
+    private void exitMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_exitMouseClicked
+        this.dispose();
+        general_home generalHome = new general_home();
+        generalHome.setVisible(true);
+    }//GEN-LAST:event_exitMouseClicked
    
     public void loadData(String studentId, String projectId, StdProjectInfo project) throws FileNotFoundException, IOException {
         if (project != null) {
@@ -1170,13 +1145,10 @@ public class StdStudentPage extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel5;
-    private javax.swing.JPanel jPanel6;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JScrollPane jScrollPane5;
-    private javax.swing.JScrollPane jScrollPane6;
-    private javax.swing.JTable jTable3;
     private com.toedter.calendar.JDateChooser newPreDate;
     private javax.swing.JComboBox<String> newPreHour;
     private javax.swing.JComboBox<String> newPreMinute;

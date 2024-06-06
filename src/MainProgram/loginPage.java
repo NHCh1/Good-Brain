@@ -11,6 +11,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.Icon;
 import javax.swing.JOptionPane;
+import presentation.Lecturer;
 import project_manager.pmHomePage;
 
 public class loginPage extends javax.swing.JFrame {
@@ -158,7 +159,7 @@ public class loginPage extends javax.swing.JFrame {
                 this.dispose();
                 break;
             case 2:
-                lecturerPage lecturer = new lecturerPage();
+                Lecturer lecturer = new Lecturer(id);
                 lecturer.setVisible(true);
                 this.dispose();
                 break;

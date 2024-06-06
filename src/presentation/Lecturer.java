@@ -4,6 +4,7 @@
  */
 package presentation;
 
+import MainProgram.general_home;
 import java.awt.Color;
 import java.awt.Component;
 import java.awt.Desktop;
@@ -128,11 +129,11 @@ public class Lecturer extends javax.swing.JFrame {
     }
     
     private void profile (){
-        String imagePath = "/Profile/" + logID + ".jpg";
-        URL imageURL = getClass().getResource(imagePath);
-        if (imageURL != null) {
-            profilepic.setIcon(new ImageIcon(imageURL));
-            lecimage.setIcon(new ImageIcon(imageURL));
+        String imagePath = "src/Profile/" + logID + ".jpg";
+//        URL imageURL = getClass().getResource(imagePath);
+        if (imagePath != null) {
+            profilepic.setIcon(new ImageIcon(imagePath));
+            lecimage.setIcon(new ImageIcon(imagePath));
         } else {
             System.err.println("Resource not found: " + imagePath);
             // Handle the error appropriately, e.g., display a default image or show an error message
@@ -183,18 +184,15 @@ public class Lecturer extends javax.swing.JFrame {
     }
 
     public void setSelectedDateString(String selectedDateString) {
- 
-        
-        
-                    if (selectedDateString != null) {
-                        String datenew = selectedDateString;
-                        
-                        JOptionPane.showMessageDialog(this, datenew);
-                        
+        if (selectedDateString != null) {
+            String datenew = selectedDateString;
 
-                    } else {
-                        System.err.println("No date selected");
-                    }
+            JOptionPane.showMessageDialog(this, datenew);
+
+
+        } else {
+            System.err.println("No date selected");
+        }
                 
     }
     
@@ -212,37 +210,33 @@ public class Lecturer extends javax.swing.JFrame {
     
     public void info (){
         String lecid = logID;
-    String lecId = logID.toLowerCase();
-    
-    int row = presentationtable.getSelectedRow();
-    String StuID = presentationtable.getValueAt(row, 1).toString();
-    
+        String lecId = logID.toLowerCase();
 
-    ArrayList<String> PresentationList = test.getPresentationInfo();
-    for (String line : PresentationList) {
-        String[] parts = line.split(";");
-        if (parts.length >=9 && StuID.equalsIgnoreCase(parts[1])){
-            String code = parts[2];
-             
-            if(parts.length >=9 && code.equals(parts[2])&& parts[6].equalsIgnoreCase(lecid) || parts[6].equalsIgnoreCase(lecId)) {
-            scapp.setEnabled(false); 
-             
-             supapp.setText("Accept");
-             
-             
-            break;
+        int row = presentationtable.getSelectedRow();
+        String StuID = presentationtable.getValueAt(row, 1).toString();
 
 
-        }
-            
-              
-        if ((parts.length >= 9) && code.equals(parts[2]) && (parts[8].equals(lecid) || parts[8].equalsIgnoreCase(lecId))) {
-            supapp.setEnabled(false);
-             
-             scapp.setText("Accept");
-             
-             break;
-        }
+        ArrayList<String> PresentationList = test.getPresentationInfo();
+        for (String line : PresentationList) {
+            String[] parts = line.split(";");
+            if (parts.length >=9 && StuID.equalsIgnoreCase(parts[1])){
+                String code = parts[2];
+
+                if(parts.length >=9 && code.equals(parts[2])&& parts[6].equalsIgnoreCase(lecid) || parts[6].equalsIgnoreCase(lecId)) {
+                scapp.setEnabled(false); 
+
+                supapp.setText("Accept");
+                break;
+            }
+
+
+            if ((parts.length >= 9) && code.equals(parts[2]) && (parts[8].equals(lecid) || parts[8].equalsIgnoreCase(lecId))) {
+                supapp.setEnabled(false);
+
+                 scapp.setText("Accept");
+
+                 break;
+            }
         }
         
       
@@ -251,103 +245,100 @@ public class Lecturer extends javax.swing.JFrame {
     }
     }
     
-      private void renew() {
-    ArrayList<String> PresentationList = test.getPresentationInfo();
-    String lecID = logID.toLowerCase();
-    String LecID = logID.toUpperCase();
-    int n = 0;
+    private void renew() {
+        ArrayList<String> PresentationList = test.getPresentationInfo();
+        String lecID = logID.toLowerCase();
+        String LecID = logID.toUpperCase();
+        int n = 0;
 
-    for (String line : PresentationList) {
-        String[] parts = line.split(";");
+        for (String line : PresentationList) {
+            String[] parts = line.split(";");
 
-        // Check if the status is "Pending" and "Approve"
-        if (parts.length >= 9 && ((lecID.equalsIgnoreCase(parts[6]) || LecID.equalsIgnoreCase(parts[6])) && parts[7].equalsIgnoreCase("Pending"))) {
-            n++;
-        }
+            // Check if the status is "Pending" and "Approve"
+            if (parts.length >= 9 && ((lecID.equalsIgnoreCase(parts[6]) || LecID.equalsIgnoreCase(parts[6])) && parts[7].equalsIgnoreCase("Pending"))) {
+                n++;
+            }
 
-        // Check if the supervisor's status is "Pending" and "Approve"
-        if (parts.length >= 9 && ((lecID.equalsIgnoreCase(parts[8]) || LecID.equalsIgnoreCase(parts[8])) && parts[9].equalsIgnoreCase("Pending") )) {
-            n++;
-        }
-    }
-
-    notification.setText(String.valueOf(n));
-   
-}
-
-    
-private void notification() {
-    ArrayList<String> PresentationList = test.getPresentationInfo();
-    String lecID = logID.toLowerCase();
-    String LecID = logID.toUpperCase();
-    int n = 0;
-
-    for (String line : PresentationList) {
-        String[] parts = line.split(";");
-
-        // Check if the status is "Pending" and "Approve"
-        if (parts.length >= 9 && ((lecID.equalsIgnoreCase(parts[6]) || LecID.equalsIgnoreCase(parts[6])) && parts[7].equalsIgnoreCase("Pending"))) {
-            n++;
-        }
-
-        // Check if the supervisor's status is "Pending" and "Approve"
-        if (parts.length >= 9 && ((lecID.equalsIgnoreCase(parts[8]) || LecID.equalsIgnoreCase(parts[8])) && parts[9].equalsIgnoreCase("Pending"))) {
-            n++;
-        }
-    }
-
-    notification.setText(String.valueOf(n));
-    
-}
-
-private void supervisee() {
-    ArrayList<String> ProjectList = test.getProjectInfo();
-    HashSet<String> uniqueIntakeCodes = new HashSet<>();
-    String lecID = logID.toLowerCase();
-    String LecID = logID.toUpperCase();
-    int n = 0;
-    String intake = "";
-
-    for (String line : ProjectList) {
-        String[] parts = line.split(";");
-
-        if (parts.length >= 5 && (lecID.equalsIgnoreCase(parts[3]) || LecID.equalsIgnoreCase(parts[3]))) {
-            intake = parts[2];
-            if (uniqueIntakeCodes.add(intake)){
-
-            ArrayList<String> StudentList = test.getStudentInfo();
-            for (String student : StudentList) {
-                String[] studentdata = student.split(";");
-                if (studentdata.length >= 4 && studentdata[3].equalsIgnoreCase(intake)) {
-                   
-                   
-                    n++;
-                    System.out.println(studentdata[0]);
-                } 
+            // Check if the supervisor's status is "Pending" and "Approve"
+            if (parts.length >= 9 && ((lecID.equalsIgnoreCase(parts[8]) || LecID.equalsIgnoreCase(parts[8])) && parts[9].equalsIgnoreCase("Pending") )) {
+                n++;
             }
         }
-        }
-        
-        if (parts.length >= 5 && lecID.equalsIgnoreCase(parts[4]) || LecID.equalsIgnoreCase(parts[4])) {
-            intake = parts[2];
-            
-             if (uniqueIntakeCodes.add(intake)){
 
-            ArrayList<String> StudentList = test.getStudentInfo();
-            for (String student : StudentList) {
-                String[] studentdata = student.split(";");
-                if (studentdata.length >= 4 && studentdata[3].equalsIgnoreCase(intake)) {
-                   
-                   
-                    n++;
-                    System.out.println(studentdata[0]);
-                } 
+        notification.setText(String.valueOf(n));
+
+    }
+
+    
+    private void notification() {
+        ArrayList<String> PresentationList = test.getPresentationInfo();
+        String lecID = logID.toLowerCase();
+        String LecID = logID.toUpperCase();
+        int n = 0;
+
+        for (String line : PresentationList) {
+            String[] parts = line.split(";");
+
+            // Check if the status is "Pending" and "Approve"
+            if (parts.length >= 9 && ((lecID.equalsIgnoreCase(parts[6]) || LecID.equalsIgnoreCase(parts[6])) && parts[7].equalsIgnoreCase("Pending"))) {
+                n++;
+            }
+
+            // Check if the supervisor's status is "Pending" and "Approve"
+            if (parts.length >= 9 && ((lecID.equalsIgnoreCase(parts[8]) || LecID.equalsIgnoreCase(parts[8])) && parts[9].equalsIgnoreCase("Pending"))) {
+                n++;
             }
         }
-            
-        }
 
-       
+        notification.setText(String.valueOf(n));
+
+    }
+
+    private void supervisee() {
+        ArrayList<String> ProjectList = test.getProjectInfo();
+        HashSet<String> uniqueIntakeCodes = new HashSet<>();
+        String lecID = logID.toLowerCase();
+        String LecID = logID.toUpperCase();
+        int n = 0;
+        String intake = "";
+
+        for (String line : ProjectList) {
+            String[] parts = line.split(";");
+
+            if (parts.length >= 5 && (lecID.equalsIgnoreCase(parts[3]) || LecID.equalsIgnoreCase(parts[3]))) {
+                intake = parts[2];
+                if (uniqueIntakeCodes.add(intake)){
+
+                ArrayList<String> StudentList = test.getStudentInfo();
+                for (String student : StudentList) {
+                    String[] studentdata = student.split(";");
+                    if (studentdata.length >= 4 && studentdata[3].equalsIgnoreCase(intake)) {
+
+
+                        n++;
+                        System.out.println(studentdata[0]);
+                    } 
+                }
+            }
+            }
+
+            if (parts.length >= 5 && lecID.equalsIgnoreCase(parts[4]) || LecID.equalsIgnoreCase(parts[4])) {
+                intake = parts[2];
+
+                 if (uniqueIntakeCodes.add(intake)){
+
+                ArrayList<String> StudentList = test.getStudentInfo();
+                for (String student : StudentList) {
+                    String[] studentdata = student.split(";");
+                    if (studentdata.length >= 4 && studentdata[3].equalsIgnoreCase(intake)) {
+
+
+                        n++;
+                        System.out.println(studentdata[0]);
+                    } 
+                }
+            }    
+        }
     }
 
     
@@ -358,97 +349,27 @@ private void supervisee() {
     
     
     private void approve() {
-    String lecid = logID;
-    String lecId = logID.toLowerCase();
-    
-    int row = Table.getSelectedRow();
-    //int row1 = presentationtable.getSelectedRow();
-    //String StuID1=presentationtable.getValueAt(row1, 1).toString();
-    String StuID = Table.getValueAt(row, 0).toString();
-    
+        String lecid = logID;
+        String lecId = logID.toLowerCase();
 
-    ArrayList<String> PresentationList = test.getPresentationInfo();
-    for (String line : PresentationList) {
-        String[] parts = line.split(";");
-        if (parts.length >=9 && StuID.equalsIgnoreCase(parts[1]) ){
-            String code = parts[2];
-             
-            if(parts.length >=9 && code.equals(parts[2])&& parts[6].equalsIgnoreCase(lecid) || parts[6].equalsIgnoreCase(lecId)) {
-            scapp.setEnabled(false); 
-             
-             supapp.setText("Accept");
-             
-             
-            break;
-
-
-        }
-            
-              
-        if ((parts.length >= 8) && code.equals(parts[2]) && (parts[8].equals(lecid) || parts[8].equalsIgnoreCase(lecId))) {
-            supapp.setEnabled(false);
-             
-             scapp.setText("Accept");
-             
-             break;
-        }
-        }
-        
-      
-        
-
-    }
-}
-
-
-  public void enable() {
-    String lecid = logID;
-    String lecId = logID.toLowerCase();
-   
-
-    // Get the selected row from Table
-    int row = Table.getSelectedRow();
-    if (row != -1) {
+        int row = Table.getSelectedRow();
+        //int row1 = presentationtable.getSelectedRow();
+        //String StuID1=presentationtable.getValueAt(row1, 1).toString();
         String StuID = Table.getValueAt(row, 0).toString();
-        
 
         ArrayList<String> PresentationList = test.getPresentationInfo();
         for (String line : PresentationList) {
             String[] parts = line.split(";");
-            if (parts.length >= 9 && StuID.equalsIgnoreCase(parts[1])) {
+            if (parts.length >=9 && StuID.equalsIgnoreCase(parts[1]) ){
                 String code = parts[2];
-              
-                if (parts.length >= 9 && code.equals(parts[2]) && parts[6].equalsIgnoreCase(lecid)) {
-                    scapp.setEnabled(false);
-                    supapp.setText("Accept");
-                    break;
-                }
-                if (parts.length >= 9 && code.equals(parts[2]) && parts[8].equalsIgnoreCase(lecid)) {
-                    supapp.setEnabled(false);
-                    scapp.setText("Accept");
-                    break;
-                }
-            }
-        }
-    } 
 
-    // Get the selected row from presentationtable
-    int row1 = presentationtable.getSelectedRow();
-    if (row1 != -1) {
-        String StuID1 = presentationtable.getValueAt(row1, 1).toString();
-    
-           ArrayList<String> PresentationList = test.getPresentationInfo();
-        for (String line : PresentationList) {
-            String[] parts = line.split(";");
-            if (parts.length >= 9 && StuID1.equalsIgnoreCase(parts[1])) {
-                String code = parts[2];
-                
-                if (parts.length >= 9 && code.equals(parts[2]) && parts[6].equalsIgnoreCase(lecid)) {
-                    scapp.setEnabled(false);
-                    supapp.setText("Accept");
-                    break;
+                if(parts.length >=9 && code.equals(parts[2])&& parts[6].equalsIgnoreCase(lecid) || parts[6].equalsIgnoreCase(lecId)) {
+                scapp.setEnabled(false); 
+
+                supapp.setText("Accept");
+                break;
                 }
-                if (parts.length >= 9 && code.equals(parts[2]) && parts[8].equalsIgnoreCase(lecid)) {
+                if ((parts.length >= 8) && code.equals(parts[2]) && (parts[8].equals(lecid) || parts[8].equalsIgnoreCase(lecId))) {
                     supapp.setEnabled(false);
                     scapp.setText("Accept");
                     break;
@@ -457,26 +378,80 @@ private void supervisee() {
         }
     }
 
-}
+
+    public void enable() {
+        String lecid = logID;
+        String lecId = logID.toLowerCase();
+
+        // Get the selected row from Table
+        int row = Table.getSelectedRow();
+
+        if (row != -1) {
+            String StuID = Table.getValueAt(row, 0).toString();
+
+            ArrayList<String> PresentationList = test.getPresentationInfo();
+            for (String line : PresentationList) {
+                String[] parts = line.split(";");
+                if (parts.length >= 9 && StuID.equalsIgnoreCase(parts[1])) {
+                    String code = parts[2];
+
+                    if (parts.length >= 9 && code.equals(parts[2]) && parts[6].equalsIgnoreCase(lecid)) {
+                        scapp.setEnabled(false);
+                        supapp.setText("Accept");
+                        break;
+                    }
+                    if (parts.length >= 9 && code.equals(parts[2]) && parts[8].equalsIgnoreCase(lecid)) {
+                        supapp.setEnabled(false);
+                        scapp.setText("Accept");
+                        break;
+                    }
+                }
+            }
+        } 
+
+        // Get the selected row from presentationtable
+        int row1 = presentationtable.getSelectedRow();
+        if (row1 != -1) {
+            String StuID1 = presentationtable.getValueAt(row1, 1).toString();
+
+            ArrayList<String> PresentationList = test.getPresentationInfo();
+            for (String line : PresentationList) {
+                String[] parts = line.split(";");
+                if (parts.length >= 9 && StuID1.equalsIgnoreCase(parts[1])) {
+                    String code = parts[2];
+
+                    if (parts.length >= 9 && code.equals(parts[2]) && parts[6].equalsIgnoreCase(lecid)) {
+                        scapp.setEnabled(false);
+                        supapp.setText("Accept");
+                        break;
+                    }
+                    if (parts.length >= 9 && code.equals(parts[2]) && parts[8].equalsIgnoreCase(lecid)) {
+                        supapp.setEnabled(false);
+                        scapp.setText("Accept");
+                        break;
+                    }
+                }
+            }
+        }
+    }
 
 
     private void generateReport(String StuID) {
         test test = new test(); // Instantiate the Test class
         test.generateReport(StuID); // Call the generateBill method
-
     }
     
-     private void calendar(String lecID) {
-         String lecId = logID;
+    private void calendar(String lecID) {
+        String lecId = logID;
          
         schedule schedule = new schedule(); 
         
         schedule.setDate(lecId); 
         schedule.refreshCalendar(lecId);
-
     }
-      private void calendar1(String lecID) {
-         String lecId = secID;
+     
+    private void calendar1(String lecID) {
+        String lecId = secID;
          
         schedule1 schedule1 = new schedule1(); 
         
@@ -493,23 +468,23 @@ private void supervisee() {
 
     }
 
-private void IntakeInfo() {
-    ArrayList<String> projectList = test.getProjectInfo();
-    String lecturerID = logID;
-    HashSet<String> uniqueIntakeCodes = new HashSet<>(); // Set to store unique intake codes
+    private void IntakeInfo() {
+        ArrayList<String> projectList = test.getProjectInfo();
+        String lecturerID = logID;
+        HashSet<String> uniqueIntakeCodes = new HashSet<>(); // Set to store unique intake codes
 
-    for (String line : projectList) {
-        String[] parts = line.split(";");
-        
-        if (parts.length >= 5 && 
-           (parts[3].equalsIgnoreCase(lecturerID) || parts[4].equalsIgnoreCase(lecturerID))) {
-            String intakeCode = parts[2];
-            if (uniqueIntakeCodes.add(intakeCode)) { // Adds intake code to set and checks if it was added
-                dataModel.addElement(intakeCode);
+        for (String line : projectList) {
+            String[] parts = line.split(";");
+
+            if (parts.length >= 5 && 
+               (parts[3].equalsIgnoreCase(lecturerID) || parts[4].equalsIgnoreCase(lecturerID))) {
+                String intakeCode = parts[2];
+                if (uniqueIntakeCodes.add(intakeCode)) { // Adds intake code to set and checks if it was added
+                    dataModel.addElement(intakeCode);
+                }
             }
         }
     }
-}
 
     
    
@@ -544,10 +519,10 @@ private void IntakeInfo() {
             }
         }
     }
-      private void Schedulerefresh(){
+    private void Schedulerefresh(){
         Cancel.setRowCount(0);
         
-       String lecID = logID.toLowerCase();
+        String lecID = logID.toLowerCase();
         String lecID1 = logID.toUpperCase();
         String approve = "Schedule";
         ArrayList<String> presentationList = test.getScheduleInfo();
@@ -560,11 +535,9 @@ private void IntakeInfo() {
                 // Check if the status is 'Approve' and either lecturer or coordinator matches lecID
                 if (parts[2].equalsIgnoreCase(approve) && parts[0].equalsIgnoreCase(lecID) || parts[0].equalsIgnoreCase(lecID1)) {
                    
-                    
                     String ID = parts[0];
                     String date = parts[1];
                     String status = parts[2];
-
                     String[] row = {ID, date, status};
                     Cancel.addRow(row);
                 }
@@ -590,10 +563,7 @@ private void IntakeInfo() {
             if(parts[1].equalsIgnoreCase(ProjectCode)){
                 Report.addRow(new Object[]{parts[0], parts[1], parts[2], parts[3], parts[4]});
             }
-
         }
-        
-
     }
               
 
@@ -611,8 +581,7 @@ private void IntakeInfo() {
             // Ensure we have at least 10 parts for correct indexing
             if (parts.length >= 9) {
                 // Check if the status is 'Approve' and either lecturer or coordinator matches lecID
-                if (
-                        (parts[6].equalsIgnoreCase(lecID) || parts[6].equals(lecid) || parts[8].equals(lecid) || parts[8].equalsIgnoreCase(lecID))) {
+                if ((parts[6].equalsIgnoreCase(lecID) || parts[6].equals(lecid) || parts[8].equals(lecid) || parts[8].equalsIgnoreCase(lecID))) {
 
                     String presentID = parts[0];
                     String stuID = parts[1];
@@ -635,7 +604,6 @@ private void IntakeInfo() {
 
                     String[] row = {presentID, stuID, projectCode, presentDate,time, id, acceptance};
                     Present.addRow(row);
-                   
                 }
             }
         }
@@ -754,47 +722,45 @@ private void IntakeInfo() {
         }
     }
 
-public void cancelDate() {
-    int row = canceltable.getSelectedRow();
-    if (row != -1) {
-        
-        String date = canceltable.getValueAt(row, 1).toString();
-        String lecid = logID.toLowerCase();
-        String lecid1 = logID.toUpperCase();
+    public void cancelDate() {
+        int row = canceltable.getSelectedRow();
+        if (row != -1) {
 
-        // Read the current presentation information from the file
-        ArrayList<String> presentationList = test.getScheduleInfo();
-        
-        // Update the presentation list with the canceled presentation
-        for (int i = 0; i < presentationList.size(); i++) {
-            String line = presentationList.get(i);
-            String[] parts = line.split(";");
-            
-            // Check if SCID, date, and lecturer ID match and update the status to "Cancel"
-            if ( parts[1].equalsIgnoreCase(date) && 
-                    (parts[0].equalsIgnoreCase(lecid) || parts[0].equalsIgnoreCase(lecid1))) {
-                parts[2] = "Cancel";
-                // Update the line in the presentation list
-                presentationList.set(i, String.join(";", parts));
-                 
-            }
-        }
-        System.out.println(presentationList);
-        // Define the file path
-        String file = "C:\\Users\\Owx\\Documents\\CYB Degree Y2\\NetBeansProjects\\Presentation\\src\\presentation\\schedule.txt";
+            String date = canceltable.getValueAt(row, 1).toString();
+            String lecid = logID.toLowerCase();
+            String lecid1 = logID.toUpperCase();
 
-        // Write the updated presentation information back to the file
-        try (BufferedWriter writer = new BufferedWriter(new FileWriter(file))) {
-            for (String updatedLine : presentationList) {
-                writer.write(updatedLine);
-                writer.newLine(); // Add newline after each line
+            // Read the current presentation information from the file
+            ArrayList<String> presentationList = test.getScheduleInfo();
+
+            // Update the presentation list with the canceled presentation
+            for (int i = 0; i < presentationList.size(); i++) {
+                String line = presentationList.get(i);
+                String[] parts = line.split(";");
+
+                // Check if SCID, date, and lecturer ID match and update the status to "Cancel"
+                if ( parts[1].equalsIgnoreCase(date) && 
+                        (parts[0].equalsIgnoreCase(lecid) || parts[0].equalsIgnoreCase(lecid1))) {
+                    parts[2] = "Cancel";
+                    // Update the line in the presentation list
+                    presentationList.set(i, String.join(";", parts));
+                }
             }
-        } catch (IOException ex) {
-            Logger.getLogger(test.class.getName()).log(Level.SEVERE, null, ex);
+            System.out.println(presentationList);
+            // Define the file path
+            String file = "schedule.txt";
+
+            // Write the updated presentation information back to the file
+            try (BufferedWriter writer = new BufferedWriter(new FileWriter(file))) {
+                for (String updatedLine : presentationList) {
+                    writer.write(updatedLine);
+                    writer.newLine(); // Add newline after each line
+                }
+            } catch (IOException ex) {
+                Logger.getLogger(test.class.getName()).log(Level.SEVERE, null, ex);
+            }
         }
     }
-    
-}
 
         
         
@@ -896,7 +862,7 @@ public void cancelDate() {
             
 
             // Define the file path
-            String file = "C:\\Users\\Owx\\Documents\\CYB Degree Y2\\NetBeansProjects\\Presentation\\src\\presentation\\presentation.txt";
+            String file = "presentation.txt";
 
             // Write the updated presentation information back to the file
             try (BufferedWriter writer = new BufferedWriter(new FileWriter(file))) {
@@ -960,7 +926,7 @@ public void cancelDate() {
                 
 
                 // Define the file path
-                String file1 = "C:\\Users\\Owx\\Documents\\CYB Degree Y2\\NetBeansProjects\\Presentation\\src\\presentation\\presentation.txt";
+                String file1 = "presentation.txt";
 
                 // Write the updated presentation information back to the file
                 try (BufferedWriter writer = new BufferedWriter(new FileWriter(file1))) {
@@ -973,8 +939,6 @@ public void cancelDate() {
                 }
 
             }
-
-        
     }
 
     public void showNewDatetry() {
@@ -1074,7 +1038,7 @@ public void cancelDate() {
                 }
             }
             // Define the file path
-            String file = "C:\\Users\\Owx\\Documents\\CYB Degree Y2\\NetBeansProjects\\Presentation\\src\\presentation\\presentation.txt";
+            String file = "presentation.txt";
 
             // Write the updated presentation information back to the file
             try (BufferedWriter writer = new BufferedWriter(new FileWriter(file))) {
@@ -1137,7 +1101,7 @@ public void cancelDate() {
             }
         }
         // Define the file path
-        String file1 = "C:\\Users\\Owx\\Documents\\CYB Degree Y2\\NetBeansProjects\\Presentation\\src\\presentation\\presentation.txt";
+        String file1 = "presentation.txt";
 
         // Write the updated presentation information back to the file
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(file1))) {
@@ -1159,13 +1123,10 @@ public void cancelDate() {
 
     public void fresh(){
         studentid.setText("");
-        
-        
     }
 
 
-       public ArrayList<String> showNewState() {
-
+    public ArrayList<String> showNewState() {
         String sunewState = supapp.getText();
         String scnewState = scapp.getText();
         String StuID = studentid.getText();
@@ -1184,7 +1145,7 @@ public void cancelDate() {
                 // No need to continue looping, as we have already found and updated the line
             }
         }
-        String file = "C:\\Users\\Owx\\Documents\\CYB Degree Y2\\NetBeansProjects\\Presentation\\src\\presentation\\presentation.txt\\";
+        String file = "presentation.txt";
         // Write the updated presentation information back to the file
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(file))) {
             for (String line : NewPresentationList) {
@@ -1199,48 +1160,44 @@ public void cancelDate() {
     }
     
     public void reloadass(){
-         String ass = id.getText();
-            ArrayList<String> ReportList = test.getReportInfo();
+        String ass = id.getText();
+        ArrayList<String> ReportList = test.getReportInfo();
 
-            for (String lines : ReportList) {
-                String[] parts = lines.split(";");
+        for (String lines : ReportList) {
+            String[] parts = lines.split(";");
 
-                if (parts.length >= 8 && parts[0].equals(ass)) {
-                    id.setText(parts[0]);
-                    code.setText(parts[1]);
-                    stuidtext.setText(parts[2]);
-                    status.setText(parts[3]);
-                    grade.setText(parts[4]);
-                    assname.setText(parts[5]);
-                    //assfile.setText(parts[6]);
-                    lfeedback.setText(parts[7]);
-                    scfeedback.setText(parts[8]);
-                }
-            }//System.o
+            if (parts.length >= 8 && parts[0].equals(ass)) {
+                id.setText(parts[0]);
+                code.setText(parts[1]);
+                stuidtext.setText(parts[2]);
+                status.setText(parts[3]);
+                grade.setText(parts[4]);
+                assname.setText(parts[5]);
+                //assfile.setText(parts[6]);
+                lfeedback.setText(parts[7]);
+                scfeedback.setText(parts[8]);
+            }
+        }
     }
     
-        
 
-       
-    
+    public void editAss() {
+        String lecid = logID.toUpperCase();
+        String fb = newfb.getText();
+        String grade = (String) newgrade.getSelectedItem();
+        String ID = id.getText();
+        String pc = code.getText();
+        String student = stuidtext.getText();
 
-   public void editAss() {
-    String lecid = logID.toUpperCase();
-    String fb = newfb.getText();
-    String grade = (String) newgrade.getSelectedItem();
-    String ID = id.getText();
-    String pc = code.getText();
-    String student = stuidtext.getText();
-    
-    ArrayList<String> ProjectList = test.getProjectInfo();
-    for (String lines : ProjectList) {
-        String[] parts = lines.split(";");
-        if (parts.length >= 5 && parts[0].equalsIgnoreCase(pc)) {
-            String lec = parts[3];
-            String sc = parts[4];
-            
-            ArrayList<String> updatedReportList = new ArrayList<>(); // Create a new list to hold updated lines
-    
+        ArrayList<String> ProjectList = test.getProjectInfo();
+        for (String lines : ProjectList) {
+            String[] parts = lines.split(";");
+            if (parts.length >= 5 && parts[0].equalsIgnoreCase(pc)) {
+                String lec = parts[3];
+                String sc = parts[4];
+
+                ArrayList<String> updatedReportList = new ArrayList<>(); // Create a new list to hold updated lines
+
                 ArrayList<String> ReportList = test.getReportInfo();
                 for (String line : ReportList) {
                     String[] part = line.split(";");
@@ -1257,7 +1214,7 @@ public void cancelDate() {
                     updatedReportList.add(updatedLine); // Add the updated line to the new list
                 }JOptionPane.showMessageDialog(this,  "Modification successfully.");
 
-                String file = "C:\\Users\\Owx\\Documents\\CYB Degree Y2\\NetBeansProjects\\Presentation\\src\\presentation\\submission.txt\\";
+                String file = "submission.txt";
                 // Write the updated presentation information back to the file
                 try (BufferedWriter writer = new BufferedWriter(new FileWriter(file))) {
                     for (String line : updatedReportList) {
@@ -1267,17 +1224,11 @@ public void cancelDate() {
                 } catch (IOException ex) {
                     Logger.getLogger(test.class.getName()).log(Level.SEVERE, null, ex);
                 }
-
             }
         }
     }
-
-
-            
-        
-      
     
-
+    
     public ArrayList<String> addSchedule() {
         // Retrieve the selected date from the JDateChooser
         Date selectedDate = newdate2.getDate();
@@ -1313,7 +1264,7 @@ public void cancelDate() {
         // Add the new schedule entry to the updated list
         updatedList.add(newschedule);
         // Define the file path
-        String file = "C:\\Users\\Owx\\Documents\\CYB Degree Y2\\NetBeansProjects\\Presentation\\src\\presentation\\schedule.txt";
+        String file = "schedule.txt";
 
         // Write the updated presentation information back to the file
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(file))) {
@@ -1324,86 +1275,78 @@ public void cancelDate() {
         } catch (IOException ex) {
             Logger.getLogger(test.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
         return updatedList;
 
     }
 
-        
-        
-
        
-
-
-   
-
     private void time() {
         // Populate hourBox with numbers from 1 to 24
         // Populate hourBox with numbers from 00 to 24
         for (int i = 9; i <= 17; i++) {
-        hourBox.addElement(String.format("%02d", i));
+            hourBox.addElement(String.format("%02d", i));
+        }
+
+        // Populate minuteBox with numbers from 00 to 59
+        for (int i = 0; i < 60; i++) {
+            minuteBox.addElement(String.format("%02d", i));
+        }
     }
-    
-    // Populate minuteBox with numbers from 00 to 59
-    for (int i = 0; i < 60; i++) {
-        minuteBox.addElement(String.format("%02d", i));
+
+    private void clean(){
+
+        String StuID = studentid.getText();
+        ArrayList<String> PresentationList = test.getPresentationInfo();
+        for (String lines : PresentationList) {
+            String[] parts = lines.split(";");
+
+            if (parts.length >= 9 && parts[1].equals(StuID)) {
+                codeproject.setText(parts[2]);
+                presentid.setText(parts[0]);
+                studapp.setText(parts[5]);
+                supapp.setText(parts[7]);
+                scapp.setText(parts[9]);
+                date.setText(parts[3]+" "+ parts[4]);
+
+                String lec=parts[6];
+                String sc=parts[8];
+                String pcode=parts[2];
+
+                ArrayList<String> StudentList = test.getStudentInfo();
+                for (String line : StudentList) {
+                    String[] student = line.split(";");
+                    if(student.length >= 4 && StuID.equalsIgnoreCase(student[0])){
+                        studentname.setText(student[1]);
+                        
+                        ArrayList<String> LecturerList = test.getLecturerInfo();
+
+                        for (String lecturer : LecturerList) {
+                            String[] lecture = lecturer.split(";");
+
+                            if(lecture.length>=1 && lec.equalsIgnoreCase(lecture[0])){
+                                supervisorname.setText(lecture[1]);
+                            }
+
+                            if (lecture.length >= 1 && sc.equalsIgnoreCase(lecture[0])) {
+                                scname.setText(lecture[1]);
+
+                                ArrayList<String> ProjectList = test.getProjectInfo();
+                                for (String project : ProjectList) {
+                                    String[] projectdata = project.split(";");
+
+                                    if(projectdata.length >=1 && pcode.equals(projectdata[0])){
+                                        projectname.setText(projectdata[1]);
+
+                                        break;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }                             
     }
-}
-
-private void clean(){
-    
-      String StuID = studentid.getText();
-      ArrayList<String> PresentationList = test.getPresentationInfo();
-            for (String lines : PresentationList) {
-                String[] parts = lines.split(";");
-
-                if (parts.length >= 9 && parts[1].equals(StuID)) {
-                    
-                    codeproject.setText(parts[2]);
-                    presentid.setText(parts[0]);
-                    studapp.setText(parts[5]);
-                    supapp.setText(parts[7]);
-                    scapp.setText(parts[9]);
-                    date.setText(parts[3]+" "+parts[4]);
-                   
-                    String lec=parts[6];
-                    String sc=parts[8];
-                    String pcode=parts[2];
-                    
-                    ArrayList<String> StudentList = test.getStudentInfo();
-                     for (String line : StudentList) {
-                         String[] student = line.split(";");
-                         if(student.length >= 4 && StuID.equalsIgnoreCase(student[0])){
-                             studentname.setText(student[1]);
-                             
-
-                             ArrayList<String> LecturerList = test.getLecturerInfo();
-                             
-                             for (String lecturer : LecturerList) {
-                                 String[] lecture = lecturer.split(";");
-                                 
-                                 if(lecture.length>=1 && lec.equalsIgnoreCase(lecture[0])){
-                                     supervisorname.setText(lecture[1]);
-                                      
-                                     
-                                 }
-
-                                 if (lecture.length >= 1 && sc.equalsIgnoreCase(lecture[0])) {
-                                     scname.setText(lecture[1]);
-
-                                     ArrayList<String> ProjectList = test.getProjectInfo();
-                                     for (String project : ProjectList) {
-                                         String[] projectdata = project.split(";");
-                                         
-                                         if(projectdata.length >=1 && pcode.equals(projectdata[0])){
-                                             projectname.setText(projectdata[1]);
-                                             
-                                             break;
-                                         }
-                                     
-                                     }}}}}}}                             
-
-}
   
   private static void setLecturerWelcome(String logID) {
        String lowerCaseID = logID.toLowerCase();
@@ -1420,7 +1363,6 @@ private void clean(){
                 break; // Exit the loop once the lecturer is found
             }
         }
-      
   }
 
     private void displayReportInfo() {
@@ -1442,7 +1384,7 @@ private void clean(){
         }
     }
     
-     private void showtime(){
+    private void showtime(){
         String monthName;
         int currentMonth = timetable1.getMonth();
          int currentMonth1 = scheduleSC.getMonth();
@@ -1493,9 +1435,8 @@ private void clean(){
         year.setText(String.valueOf(currentYear));
         month1.setText(monthName);
         year1.setText(String.valueOf(currentYear));
-        
-        
     }
+    
      private void showtime1(){
         String monthName;
         
@@ -1543,11 +1484,8 @@ private void clean(){
     }
         int currentYear = scheduleSC.getYear();
 
-       
         month1.setText(monthName);
         year1.setText(String.valueOf(currentYear));
-        
-        
     }
         private void showNextMonth1() {
          String lecid = secID;
@@ -1556,22 +1494,20 @@ private void clean(){
         int currentYear1 = scheduleSC.getYear();
 
        
-          if (currentMonth1 == 12) { // If it's December, move to January of the next year
+        if (currentMonth1 == 12) { // If it's December, move to January of the next year
             scheduleSC.setMonth(1);
             scheduleSC.setYear(currentYear1 + 1);
         } else { // Otherwise, just move to the next month
             scheduleSC.setMonth(currentMonth1 + 1);
         }
 
-       
         scheduleSC.refreshCalendar(lecid);
         showtime1();
-      
     }
     
     
-     private void showNextMonth() {
-         String lecid = logID;
+    private void showNextMonth() {
+        String lecid = logID;
         int currentMonth = timetable1.getMonth();
         int currentYear = timetable1.getYear();
         int currentMonth1 = scheduleSC.getMonth();
@@ -1583,7 +1519,8 @@ private void clean(){
         } else { // Otherwise, just move to the next month
             timetable1.setMonth(currentMonth + 1);
         }
-          if (currentMonth1 == 12) { // If it's December, move to January of the next year
+        
+        if (currentMonth1 == 12) { // If it's December, move to January of the next year
             scheduleSC.setMonth(1);
             scheduleSC.setYear(currentYear + 1);
         } else { // Otherwise, just move to the next month
@@ -1593,10 +1530,10 @@ private void clean(){
         timetable1.refreshCalendar(lecid);// Refresh the calendar to show the next month
         scheduleSC.refreshCalendar(lecid);
         showtime();
-      
     }
-       private void showPreviousMonth1() {
-          String stuid = secID;
+    
+    private void showPreviousMonth1() {
+        String stuid = secID;
        
         int currentMonth1 = scheduleSC.getMonth();
         int currentYear1 = scheduleSC.getYear();
@@ -1607,11 +1544,9 @@ private void clean(){
         } else { // Otherwise, just move to the previous month
             scheduleSC.setMonth(currentMonth1 - 1);
         }
-
      
         scheduleSC.refreshCalendar(stuid);
         showtime1();
-
     }
 
     private void showPreviousMonth() {
@@ -1630,7 +1565,6 @@ private void clean(){
         timetable1.refreshCalendar(stuid);
         timetable1.refreshCalendar(stuid);
         showtime();
-
     }
 
     /**
@@ -3812,7 +3746,10 @@ private void clean(){
         // TODO add your handling code here:
         int a = JOptionPane.showConfirmDialog(null, "Are you sure you want to logout from GoodBrain ?", "Select", JOptionPane.YES_NO_OPTION);
         if (a == 0) {
-            System.exit(0);
+//            System.exit(0);
+            this.dispose();
+            general_home generalHome = new general_home();
+            generalHome.setVisible(true);
         }
     }//GEN-LAST:event_jLabel6MouseClicked
 
@@ -4089,7 +4026,7 @@ if (!isAssigned) {
         // TODO add your handling code here:
         String stuID = stuidtext.getText();
         
-        String directoryPath = "C:\\Users\\Owx\\Documents\\CYB Degree Y2\\NetBeansProjects\\Presentation\\src\\Assessment\\"; // Replace with the actual path to the Assessment directory
+        String directoryPath = "src/Assessment/"; // Replace with the actual path to the Assessment directory
         String fileName = assname.getText(); // The base name of the file to open (without extension)
         
         openFileByName(directoryPath, fileName);
@@ -4578,7 +4515,7 @@ if (!isAssigned) {
                 List.set(i, updatedLine);
             }
 
-            String file = "C:\\Users\\Owx\\Documents\\CYB Degree Y2\\NetBeansProjects\\Presentation\\src\\presentation\\lecturer.txt\\";
+            String file = "lecturer.txt";
             // Write the updated presentation information back to the file
             try (BufferedWriter writer = new BufferedWriter(new FileWriter(file))) {
                 for (String lines : List) {

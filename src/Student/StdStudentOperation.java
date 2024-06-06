@@ -191,7 +191,7 @@ public class StdStudentOperation {
             e.printStackTrace();
         }
         // Save uploaded file
-        String subDirectory = "Submission/";
+        String subDirectory = "src/Submission/";
         File createDir = new File(subDirectory);
         if (!createDir.exists()) {
             if (createDir.mkdirs()) {

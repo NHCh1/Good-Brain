@@ -61,7 +61,7 @@ public class PrintNameList extends javax.swing.JFrame {
     public void generatePdf() {
         Document document = new Document(PageSize.A4.rotate());
         try {
-            String filePath = "C:/Users/User/Documents/NetBeansProjects/Good-Brain/src/NameList/" + intakeCode + ".pdf";
+            String filePath = "src/NameList/" + intakeCode + ".pdf";
             File folder = new File(filePath).getParentFile();
             if (!folder.exists()) {
                 folder.mkdirs(); // Create the folder if it doesn't exist

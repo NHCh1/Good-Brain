@@ -6,6 +6,7 @@ package Admin;
 
 import Swing.CardModel;
 import ChartFrame.ModelChart;
+import MainProgram.general_home;
 import com.formdev.flatlaf.FlatClientProperties;
 import com.formdev.flatlaf.FlatLaf;
 import com.formdev.flatlaf.FlatLightLaf;
@@ -56,6 +57,8 @@ public class AdminPages extends javax.swing.JFrame {
     private BufferedImage originalBI;
     private BufferedImage newBI;
 
+    private AdminPages adminpage;
+    
     public AdminPages() {
         initComponents();
         displayUserCount();
@@ -2297,7 +2300,10 @@ public class AdminPages extends javax.swing.JFrame {
     private void exitLabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_exitLabelMouseClicked
         int result = JOptionPane.showConfirmDialog(null, "Do you want to exit?", "Exit Confirmation", JOptionPane.YES_NO_OPTION);
         if (result == JOptionPane.YES_OPTION) {
-            System.exit(0);
+//            System.exit(0);
+            this.dispose();
+            general_home generalHome = new general_home();
+            generalHome.setVisible(true);
         } else if (result == JOptionPane.NO_OPTION) {
             JOptionPane.showMessageDialog(null, "You may continue with your work.", "Notification", JOptionPane.INFORMATION_MESSAGE);
         }

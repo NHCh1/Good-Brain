@@ -1,6 +1,3 @@
-Ellie Shin;930522-14-5897;60123454098;Cyber Security;Digital Marketing
-Owen Yoo;900120-11-6458;60198754236;Data Analytics;Software Engineering
-Gabriella Song;900727-13-6981;60123452689;Accounting;Cloud Engineering
 Charles Kim;890629-14-6325;60187654890;Finance;Digital Forensics
 Charlotte Choi;920515-12-7654;60123464532;Intelligent Systems;Psychology
 Dylan Lee;920420-13-5836;60187659087;Software Engineering;Cyber Security

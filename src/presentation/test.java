@@ -48,7 +48,7 @@ public class test {
     
     public static ArrayList<String> getLoginInfo(){
         
-     String file = "C:\\Users\\Owx\\Documents\\CYB Degree Y2\\NetBeansProjects\\Presentation\\src\\presentation\\user.txt\\";
+     String file = "user.txt";
         ArrayList<String> InfoList = new ArrayList<>();
         try {
             BufferedReader read = new BufferedReader(new FileReader(file));
@@ -85,10 +85,10 @@ public class test {
     
 
 public String collectData(String stuid) {
-    String fileLocate = "C:\\Users\\Owx\\Documents\\CYB Degree Y2\\NetBeansProjects\\Presentation\\src\\presentation\\submission.txt\\";
-    String studentFileLocate = "C:\\Users\\Owx\\Documents\\CYB Degree Y2\\NetBeansProjects\\Presentation\\src\\presentation\\Student.txt\\";
-    String LecFileLocate = "C:\\Users\\Owx\\Documents\\CYB Degree Y2\\NetBeansProjects\\Presentation\\src\\presentation\\lecturer.txt\\";
-    String ProjectFileLocate = "C:\\Users\\Owx\\Documents\\CYB Degree Y2\\NetBeansProjects\\Presentation\\src\\presentation\\project.txt\\";
+    String fileLocate = "submission.txt";
+    String studentFileLocate = "Student.txt";
+    String LecFileLocate = "lecturer.txt";
+    String ProjectFileLocate = "project.txt";
     
     File submissionFile = new File(fileLocate);
     File studentFile = new File(studentFileLocate);
@@ -203,7 +203,7 @@ public String collectData(String stuid) {
    
    
  void openReport(String stuid) {
-        String fileLocate = "C:\\Users\\Owx\\Documents\\CYB Degree Y2\\NetBeansProjects\\Presentation\\src\\Report\\"+stuid+" Assesment Report"+".pdf";
+        String fileLocate = "src/Report/"+stuid+" Assesment Report"+".pdf";
         File file = new File(fileLocate);
 
         if (file.exists()) {
@@ -227,14 +227,14 @@ public String collectData(String stuid) {
             String[]fields = report.split(";");
             
             
-            String file = "C:\\Users\\Owx\\Documents\\CYB Degree Y2\\NetBeansProjects\\Presentation\\src\\Report\\"+stuid+" Assesment Report"+".pdf" ;
+            String file = "src/Report/"+stuid+" Assesment Report"+".pdf" ;
             Document document = new Document() {};
            PdfWriter.getInstance(document, new FileOutputStream(file));
            document.open();
     
 
             // Add Image
-            String imagePath = "C:\\Users\\Owx\\Documents\\CYB Degree Y2\\NetBeansProjects\\Presentation\\src\\Icon\\LecReport.jpg\\";
+            String imagePath = "src/Icon/LecReport.jpg";
             // Load image
             Image img = Image.getInstance(imagePath);
             img.setAlignment(Image.ALIGN_CENTER);
@@ -371,7 +371,7 @@ public String collectData(String stuid) {
       
        public static ArrayList<String> getScheduleInfo(){
         
-     String file = "C:\\Users\\Owx\\Documents\\CYB Degree Y2\\NetBeansProjects\\Presentation\\src\\presentation\\schedule.txt\\";
+     String file = "schedule.txt";
         ArrayList<String> ScheduleList = new ArrayList<>();
         try {
             BufferedReader read = new BufferedReader(new FileReader(file));
@@ -409,7 +409,7 @@ public String collectData(String stuid) {
       
           public static ArrayList<String> getIntakeInfo(){
         
-     String file = "C:\\Users\\Owx\\Documents\\CYB Degree Y2\\NetBeansProjects\\Presentation\\src\\presentation\\intake.txt\\";
+     String file = "intake.txt";
         ArrayList<String> IntakeList = new ArrayList<>();
         try {
             BufferedReader read = new BufferedReader(new FileReader(file));
@@ -456,7 +456,7 @@ public String collectData(String stuid) {
            
     public static ArrayList<String> getPresentationInfo(){
         
-     String file = "C:\\Users\\Owx\\Documents\\CYB Degree Y2\\NetBeansProjects\\Presentation\\src\\presentation\\presentation.txt\\";
+     String file = "presentation.txt";
         ArrayList<String> PresentationList = new ArrayList<>();
         try {
             BufferedReader read = new BufferedReader(new FileReader(file));
@@ -498,7 +498,7 @@ public String collectData(String stuid) {
         
      public static ArrayList<String> getProjectInfo(){
         
-     String file = "C:\\Users\\Owx\\Documents\\CYB Degree Y2\\NetBeansProjects\\Presentation\\src\\presentation\\project.txt\\";
+     String file = "project.txt";
         ArrayList<String> ProjectList = new ArrayList<>();
         try {
             BufferedReader read = new BufferedReader(new FileReader(file));
@@ -537,7 +537,7 @@ public String collectData(String stuid) {
     
      public static ArrayList<String> getReportInfo(){
         
-     String file = "C:\\Users\\Owx\\Documents\\CYB Degree Y2\\NetBeansProjects\\Presentation\\src\\presentation\\submission.txt\\";
+     String file = "submission.txt";
         ArrayList<String> ReportList = new ArrayList<>();
         String stuid;
         try {
@@ -580,7 +580,7 @@ public String collectData(String stuid) {
     
     public static ArrayList<String> getStudentInfo(){
         
-     String file = "C:\\Users\\Owx\\Documents\\CYB Degree Y2\\NetBeansProjects\\Presentation\\src\\presentation\\Student.txt\\";
+     String file = "Student.txt";
         ArrayList<String> StudentList = new ArrayList<>();
         try {
             BufferedReader read = new BufferedReader(new FileReader(file));
@@ -617,7 +617,7 @@ public String collectData(String stuid) {
 
  public static ArrayList<String> getLecturerInfo(){
         
-     String file = "C:\\Users\\Owx\\Documents\\CYB Degree Y2\\NetBeansProjects\\Presentation\\src\\presentation\\lecturer.txt\\";
+     String file = "lecturer.txt";
         ArrayList<String> LecturerList = new ArrayList<>();
         try {
             BufferedReader read = new BufferedReader(new FileReader(file));

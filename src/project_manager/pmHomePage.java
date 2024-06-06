@@ -282,9 +282,7 @@ public class pmHomePage extends javax.swing.JFrame {
                 String[] parts = line.split(";");
                 if (parts.length >= 6){
                     String intakeCode = parts[5];
-//                    Matcher matcher = pattern.matcher(intakeCode);
                     if(intakeCode.startsWith(type)){
-//                        type = matcher.group(1);
                         Count++;
                     }
                 }
@@ -293,25 +291,8 @@ public class pmHomePage extends javax.swing.JFrame {
             e.printStackTrace();
         }
         return Count;
-//        pieChart1.addData(new ModelPieChart("Foundation",foundationCount,Color.red));
-//        pieChart1.addData(new ModelPieChart("Diploma",diplomaCount,Color.yellow));
-//        pieChart1.addData(new ModelPieChart("Degree",degreeCount,Color.blue));
-//        pieChart1.addData(new ModelPieChart("Master",masterCount,Color.green));
     }
-//    
-//    private void filterTableByIntake(String intakeID, JTable table) {
-//        DefaultTableModel model = (DefaultTableModel) table.getModel();
-//        TableRowSorter<DefaultTableModel> sorter = new TableRowSorter<>(model);
-//        table.setRowSorter(sorter);
-//
-//        if (intakeID == null || intakeID.trim().isEmpty()) {
-//            sorter.setRowFilter(null);
-//        } else {
-//            // Create a RowFilter that matches the intakeID
-//            sorter.setRowFilter(RowFilter.regexFilter("^" + intakeID + ".*", 0)); // Assuming intakeID is in the first column (index 0)
-//        }
-//    }
-   
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -1426,17 +1407,6 @@ public class pmHomePage extends javax.swing.JFrame {
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
             java.util.logging.Logger.getLogger(pmHomePage.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
-
-        /* Create and display the form */
-//        java.awt.EventQueue.invokeLater(new Runnable() {
-//            public void run() {
-//                try {
-//                    new pmHomePage("L003").setVisible(true);
-//                } catch (IOException ex) {
-//                    Logger.getLogger(pmHomePage.class.getName()).log(Level.SEVERE, null, ex);
-//                }
-//            }
-//        });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
