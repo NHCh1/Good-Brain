@@ -1512,16 +1512,16 @@
                   <Group type="102" attributes="0">
                       <EmptySpace min="-2" pref="75" max="-2" attributes="0"/>
                       <Component id="customPanel1" min="-2" pref="230" max="-2" attributes="0"/>
-                      <EmptySpace max="32767" attributes="0"/>
+                      <EmptySpace pref="95" max="32767" attributes="0"/>
                       <Component id="customPanel2" min="-2" pref="230" max="-2" attributes="0"/>
                       <EmptySpace min="-2" pref="89" max="-2" attributes="0"/>
                       <Component id="customPanel3" min="-2" pref="230" max="-2" attributes="0"/>
                       <EmptySpace min="-2" pref="81" max="-2" attributes="0"/>
                   </Group>
                   <Group type="102" alignment="0" attributes="0">
-                      <EmptySpace min="-2" pref="279" max="-2" attributes="0"/>
-                      <Component id="pieChart1" pref="431" max="32767" attributes="0"/>
-                      <EmptySpace min="-2" pref="320" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="298" max="-2" attributes="0"/>
+                      <Component id="pieChart1" min="-2" pref="412" max="-2" attributes="0"/>
+                      <EmptySpace max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -1534,20 +1534,14 @@
                           <Component id="customPanel3" max="32767" attributes="0"/>
                           <Component id="customPanel2" max="32767" attributes="0"/>
                       </Group>
-                      <EmptySpace type="separate" min="-2" max="-2" attributes="0"/>
-                      <Component id="pieChart1" pref="286" max="32767" attributes="0"/>
-                      <EmptySpace min="-2" pref="99" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="36" max="-2" attributes="0"/>
+                      <Component id="pieChart1" min="-2" pref="263" max="-2" attributes="0"/>
+                      <EmptySpace pref="104" max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
           </Layout>
           <SubComponents>
-            <Container class="javaswingdev.chart.PieChart" name="pieChart1">
-
-              <Layout class="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout">
-                <Property name="useNullLayout" type="boolean" value="true"/>
-              </Layout>
-            </Container>
             <Component class="card.CustomPanel" name="customPanel1">
               <Events>
                 <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="customPanel1MouseClicked"/>
@@ -1563,6 +1557,12 @@
                 <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="customPanel3MouseClicked"/>
               </Events>
             </Component>
+            <Container class="pieChart.PieChart" name="pieChart1">
+
+              <Layout class="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout">
+                <Property name="useNullLayout" type="boolean" value="true"/>
+              </Layout>
+            </Container>
           </SubComponents>
         </Container>
       </SubComponents>
