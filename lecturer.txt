@@ -30,6 +30,3 @@ L029;Eva Ryu;930312-12-7654;60123464532;L029@staff.goodbrain.edu.my;Software Eng
 L030;Maegerret;840418-09-4442;60178442451;L030@staff.goodbrain.edu.my;Intelligent System;Digital Marketing;-
 L031;Lilyan Jung;890315-12-7456;60123456321;L031@staff.goodbrain.edu.my;FinTech;Design;No
 L032;Logan Park;950707-13-5378;60198750987;L032@staff.goodbrain.edu.my;Business;Intelligent System;-
-L033;Ellie Shin;930522-14-5897;60123454098;L033@staff.goodbrain.edu.my;Cyber Security;Digital Marketing;-
-L034;Owen Yoo;900120-11-6458;60198754236;L034@staff.goodbrain.edu.my;Data Analytics;Software Engineering;-
-L035;Gabriella Song;900727-13-6981;60123452689;L035@staff.goodbrain.edu.my;Accounting;Cloud Engineering;-

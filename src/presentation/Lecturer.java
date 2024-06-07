@@ -694,7 +694,7 @@ public class Lecturer extends javax.swing.JFrame {
         };
 
         // Search for the file
-        File[] matchingFiles = dir.listFiles(filter);
+        File[] matchingFiles = dir.listFiles();
         if (matchingFiles != null && matchingFiles.length > 0) {
             File fileToOpen = matchingFiles[0];
             openFile(fileToOpen);

@@ -46,14 +46,18 @@ public class time1 extends JButton {
            public void mouseClicked(MouseEvent e) {
                 // Handle the click event here
                 if (selectedDate != null) {
-                    // Convert selected date to string
-                    setBackground(Color.decode("#E5DD80"));
-                    SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-                    selectedDateString = sdf.format(selectedDate);
-                    // Pass the selected date string to the main class method
-                    String logID="";
-                    Lecturer Lecturer = new Lecturer(logID);
-                    Lecturer.setSelectedDateString(selectedDateString);
+                    try {
+                        // Convert selected date to string
+                        setBackground(Color.decode("#E5DD80"));
+                        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+                        selectedDateString = sdf.format(selectedDate);
+                        // Pass the selected date string to the main class method
+                        String logID="";
+                        Lecturer Lecturer = new Lecturer(logID);
+                        Lecturer.setSelectedDateString(selectedDateString);
+                    } catch (IOException ex) {
+                        Logger.getLogger(time1.class.getName()).log(Level.SEVERE, null, ex);
+                    }
                     
 
                    
